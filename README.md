@@ -19,15 +19,12 @@ The core workflow involves generating attack simulations based on real-world inc
 
 ### Workflow Diagram
 
-```mermaid
-graph LR
     A[DFIR Report] -->|Script Generation|> B[ChatGPT: PowerShell Script]
     B -->|Execution|> C[Lab Environment]
     C -->|Artifact Acquisition|> D[KAPE: ZIP File]
     D -->|Timeline Creation|> E[Log2Timeline (Plaso): PLASO File]
     E -->|CSV Conversion|> F[CSV File]
     F -->|Noise Reduction|> G[Timeline_noise: CSV Timeline]
-```
 
 
 ### Benefits
