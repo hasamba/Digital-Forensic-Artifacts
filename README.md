@@ -9,7 +9,7 @@ The core workflow involves generating attack simulations based on real-world inc
 ### Methodology
 
 1. **Incident Report Acquisition:** Incident reports, primarily sourced from [The DFIR Report](https://thedfirreport.com/), are used as the basis for attack simulations.
-2. **Attack Simulation:** `ChatGPT` is used to generate `PowerShell` scripts that emulate the attack chains described in the incident reports.
+2. **Attack Simulation:** `Claude` is used to generate `PowerShell` scripts that emulate the attack chains described in the incident reports.
 3. **Lab Environment Execution:** The generated scripts are executed within a clean, isolated lab environment to ensure controlled artifact generation.
 4. **Artifact Acquisition:** After script execution, KAPE (Kroll Artifact Parser and Extractor) is used with the SANS Triage Compound configuration to acquire a broad range of relevant artifacts. The output is stored in a ZIP file for portability.
 5. **Timeline Generation:**
