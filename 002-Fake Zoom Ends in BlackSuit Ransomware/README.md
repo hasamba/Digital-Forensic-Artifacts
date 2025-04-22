@@ -1,4 +1,5 @@
 DFIR Report: https://thedfirreport.com/2025/03/31/fake-zoom-ends-in-blacksuit-ransomware/
+
 Artifacts: https://mega.nz/folder/tMk1GQIa#hQvprXBkJvzA8kLpq8fW6A
 
 
