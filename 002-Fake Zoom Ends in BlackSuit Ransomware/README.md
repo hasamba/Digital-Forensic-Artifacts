@@ -1,5 +1,10 @@
 DFIR Report: https://thedfirreport.com/2025/03/31/fake-zoom-ends-in-blacksuit-ransomware/
 
+Run with
+```powershell
+powershell.exe -ExecutionPolicy Bypass -File BlackSuit_Simulation.ps1
+```
+
 Claude (Sonnet 3.7) Prompt:
 ```
 Create a full-fidelity forensic simulation script for the [INSERT THREAT NAME] attack detailed in [INSERT REPORT SOURCE/URL]. The script must:
