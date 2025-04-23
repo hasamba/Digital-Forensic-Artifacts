@@ -1,8 +1,8 @@
-## Project: Automated DFIR Artifact Generation \& Timeline Analysis
+## Project: DFIR Artifact Generation \& Timeline Analysis
 
 ### Overview
 
-This project automates the creation of forensic artifacts from simulated attack scenarios, enabling efficient analysis and timeline reconstruction. As a digital forensics researcher, I am continuously seeking realistic attack data for analysis. This project leverages publicly available DFIR reports to create those scenarios.
+This project creates forensic artifacts from simulated attack scenarios, enabling efficient analysis and timeline reconstruction. As a digital forensics researcher, I am continuously seeking realistic attack data for analysis. This project leverages publicly available DFIR reports to create those scenarios.
 
 The core workflow involves generating attack simulations based on real-world incident reports, capturing forensic artifacts, and processing those artifacts into a consolidated timeline for analysis.
 
