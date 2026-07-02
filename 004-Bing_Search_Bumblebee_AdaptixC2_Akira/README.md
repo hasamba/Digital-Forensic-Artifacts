@@ -2,6 +2,8 @@
 
 Source report: [From Bing Search to Ransomware: Bumblebee and AdaptixC2 Deliver Akira](https://thedfirreport.com/2026/06/29/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira-3/) (The DFIR Report, June 29, 2026)
 
+Artifacts: https://mega.nz/folder/NINxlJwL#GbSw5u_1lRgg2qtKhbHBCA
+
 ## Attack chain simulated
 
 1. **Initial Access** - Bing SEO poisoning to `opmanager[.]pro` / `download-center[.]online` lookalike domains, trojanized `ManageEngine-OpManager.msi`.
