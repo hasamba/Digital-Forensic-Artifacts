@@ -17,6 +17,15 @@ A user executed a trojanized MSI masquerading as the Sysinternals RAMMap utility
 9. **Collection / Exfiltration** - sensitive data staged, then Rclone (real v1.73.5 binary) run with the exact reported flag set, copying to a local-remote sandbox standing in for Wasabi cloud storage.
 10. **Impact** - Defender disabled/excluded, VMs stopped, The Gentlemen ransomware (`gentlemen_locker.exe`) with real AES-256 encryption confined to a sandbox folder, ransom note, real Volume Shadow Copy deletion via WMI, decoy event-log clearing, and domain-wide propagation reproduced via a scheduled task standing in for the reported malicious GPO/SYSVOL/NETLOGON deployment mechanism.
 
+## Lab-safe alternative
+
+For a guarded version that preserves representative process, registry, staging, IOC, and impact artifacts without live C2, real credential access, security-control impairment, shadow-copy deletion, or user-data encryption, use:
+
+- [`Invoke-GentlemenEmulation.ps1`](Invoke-GentlemenEmulation.ps1)
+- [`README-LabSafe.md`](README-LabSafe.md)
+
+The guarded emulator requires `-ConfirmLab`, refuses domain controllers, pins every IOC-shaped request to `127.0.0.1`, records exact cleanup state, and uses the current `T1574.001` ATT&CK mapping for DLL side-loading.
+
 ## Usage
 
 ```powershell
