@@ -83,10 +83,15 @@ function Simulate-PrivilegeEscalation {
 
         # Reproduce the cmd.exe -> powershell.exe auto-elevate child tree SAFELY,
         # detached and NOT via ComputerDefaults.exe, so no console teardown occurs.
+        # Bounded with -PassThru + WaitForExit so it can never hang the run under a
+        # non-interactive/scheduled-task session (Out-Null piping could deadlock).
         $treeCmd = 'powershell -nop -w hidden -c "exit"'
         try {
-            Start-Process -FilePath "$env:SystemRoot\System32\cmd.exe" `
-                -ArgumentList "/c $treeCmd" -WindowStyle Hidden -ErrorAction SilentlyContinue | Out-Null
+            $tp = Start-Process -FilePath "$env:SystemRoot\System32\cmd.exe" `
+                -ArgumentList "/c $treeCmd" -WindowStyle Hidden -PassThru -ErrorAction SilentlyContinue
+            if ($tp) {
+                if (-not $tp.WaitForExit(4000)) { Stop-Process -Id $tp.Id -Force -ErrorAction SilentlyContinue }
+            }
         } catch {}
         Set-Content -Path "$($SimPaths.Logs)\uac_bypass.log" -Value @"
 UAC bypass technique (ms-settings handler hijack via ComputerDefaults.exe):
