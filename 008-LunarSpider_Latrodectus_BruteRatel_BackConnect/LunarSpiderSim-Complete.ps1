@@ -48,17 +48,31 @@ $simPaths = Initialize-SimulationEnvironment
 Write-Host "`n=== LUNAR SPIDER INTRUSION SIMULATION ===" -ForegroundColor Cyan
 Write-Host "Simulation root: $($simPaths.Root)`n" -ForegroundColor Cyan
 
-Simulate-InitialAccess          -SimPaths $simPaths ; Start-Sleep -Seconds 2
-Simulate-ExecutionAndInjection  -SimPaths $simPaths ; Start-Sleep -Seconds 2
-Simulate-Persistence            -SimPaths $simPaths ; Start-Sleep -Seconds 2
-Simulate-PrivilegeEscalation    -SimPaths $simPaths ; Start-Sleep -Seconds 2
-Simulate-DefenseEvasion         -SimPaths $simPaths ; Start-Sleep -Seconds 2
-Simulate-CredentialAccess       -SimPaths $simPaths -DumpRealLsass:$DumpRealLsass ; Start-Sleep -Seconds 2
-Simulate-Discovery              -SimPaths $simPaths ; Start-Sleep -Seconds 2
-Simulate-LateralMovement        -SimPaths $simPaths ; Start-Sleep -Seconds 2
-Simulate-CommandAndControl      -SimPaths $simPaths ; Start-Sleep -Seconds 2
-Simulate-Exfiltration           -SimPaths $simPaths ; Start-Sleep -Seconds 2
-Simulate-Impact                 -SimPaths $simPaths
+# Run each phase in isolation: a phase that throws (e.g. blocked by an EDR on a
+# monitored host) is logged and the simulation continues with the next phase,
+# instead of one failure aborting the whole chain / closing the console.
+function Invoke-Phase {
+    param([Parameter(Mandatory)][scriptblock]$Body, [string]$Name)
+    try {
+        & $Body
+    } catch {
+        Write-Host "  [!] Phase '$Name' error (continuing): $($_.Exception.Message)" -ForegroundColor Red
+        try { Write-SimEvent -EventId 9999 -Message "SIMULATION: phase '$Name' failed: $($_.Exception.Message)" } catch {}
+    }
+    Start-Sleep -Seconds 2
+}
+
+Invoke-Phase -Name "InitialAccess"       { Simulate-InitialAccess         -SimPaths $simPaths }
+Invoke-Phase -Name "ExecutionInjection"  { Simulate-ExecutionAndInjection -SimPaths $simPaths }
+Invoke-Phase -Name "Persistence"         { Simulate-Persistence           -SimPaths $simPaths }
+Invoke-Phase -Name "PrivilegeEscalation" { Simulate-PrivilegeEscalation   -SimPaths $simPaths }
+Invoke-Phase -Name "DefenseEvasion"      { Simulate-DefenseEvasion        -SimPaths $simPaths }
+Invoke-Phase -Name "CredentialAccess"    { Simulate-CredentialAccess      -SimPaths $simPaths -DumpRealLsass:$DumpRealLsass }
+Invoke-Phase -Name "Discovery"           { Simulate-Discovery             -SimPaths $simPaths }
+Invoke-Phase -Name "LateralMovement"     { Simulate-LateralMovement       -SimPaths $simPaths }
+Invoke-Phase -Name "CommandAndControl"   { Simulate-CommandAndControl     -SimPaths $simPaths }
+Invoke-Phase -Name "Exfiltration"        { Simulate-Exfiltration          -SimPaths $simPaths }
+Invoke-Phase -Name "Impact"              { Simulate-Impact                -SimPaths $simPaths }
 
 Write-Host "`n=== SIMULATION COMPLETE ===" -ForegroundColor Cyan
 Write-Host "Artifacts root: $($simPaths.Root)" -ForegroundColor Cyan

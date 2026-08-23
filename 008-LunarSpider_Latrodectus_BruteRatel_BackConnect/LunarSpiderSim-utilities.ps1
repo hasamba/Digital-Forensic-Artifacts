@@ -176,17 +176,37 @@ function Invoke-BenignRundll32 {
         rundll32.exe but pointed at an inert placeholder DLL that exports nothing.
         rundll32 exits immediately (no functional payload runs) yet the command
         line, parent/child relationship, and image-load telemetry are authentic.
+
+        The placeholder DLLs are not real PE images, so rundll32 would normally pop
+        a blocking "... is not a valid Win32 application" GUI dialog and wait for a
+        human to click OK. We launch it through a WerFault/error-mode-suppressed
+        child (SEM_FAILCRITICALERRORS | SEM_NOGPFAULTERRORBOX | SEM_NOOPENFILEERRORBOX)
+        so the process/command-line artifact is still created but NO modal dialog
+        appears and the run stays fully unattended.
     #>
     param(
         [Parameter(Mandatory)][string]$DllPath,
         [Parameter(Mandatory)][string]$ExportName
     )
     try {
-        Start-Process -FilePath "$env:SystemRoot\System32\rundll32.exe" `
-            -ArgumentList "`"$DllPath`",$ExportName" -WindowStyle Hidden -ErrorAction SilentlyContinue
-        Start-Sleep -Seconds 1
+        # Suppress the "not a valid Win32 application" modal for children we spawn.
+        # 0x8001 = SEM_FAILCRITICALERRORS(0x1) | SEM_NOOPENFILEERRORBOX(0x8000).
+        # Setting it in THIS process is inherited by the rundll32 child.
+        $sig = 'using System;using System.Runtime.InteropServices;public static class WinErrMode{[DllImport("kernel32.dll")]public static extern uint SetErrorMode(uint m);}'
+        if (-not ("WinErrMode" -as [type])) { Add-Type -TypeDefinition $sig -ErrorAction SilentlyContinue | Out-Null }
+        $prev = [WinErrMode]::SetErrorMode(0x8003)   # also SEM_NOGPFAULTERRORBOX(0x2)
+        try {
+            $p = Start-Process -FilePath "$env:SystemRoot\System32\rundll32.exe" `
+                -ArgumentList "`"$DllPath`",$ExportName" -WindowStyle Hidden -PassThru -ErrorAction SilentlyContinue
+            if ($p) {
+                if (-not $p.WaitForExit(3000)) { Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue }
+            }
+        } finally {
+            [WinErrMode]::SetErrorMode($prev) | Out-Null
+        }
+        # Belt-and-suspenders: dismiss any stray rundll32 error window that slipped through.
         Get-Process -Name "rundll32" -ErrorAction SilentlyContinue |
-            Where-Object { $_.StartTime -gt (Get-Date).AddSeconds(-5) } |
+            Where-Object { $_.StartTime -gt (Get-Date).AddSeconds(-6) } |
             Stop-Process -Force -ErrorAction SilentlyContinue
     } catch {}
 }
