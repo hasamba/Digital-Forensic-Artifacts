@@ -24,7 +24,8 @@
 #Requires -RunAsAdministrator
 
 param(
-    [switch]$DumpRealLsass  # See Phase 6 - leave OFF unless the VM is fully disposable
+    [switch]$DumpRealLsass,        # See Phase 6 - leave OFF unless the VM is fully disposable
+    [switch]$SkipDefenderDisable   # Leave Microsoft Defender enabled (default: disable it at start)
 )
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -44,6 +45,12 @@ $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 Confirm-Execution
 $logPath = Start-SimulationLogging
 $simPaths = Initialize-SimulationEnvironment
+
+# Disable Microsoft Defender up front so the chain detonates deterministically
+# (lab-only; T1562.001). Use -SkipDefenderDisable to leave Defender on.
+if (-not $SkipDefenderDisable) {
+    Disable-DefenderForSimulation -AddExclusions
+}
 
 Write-Host "`n=== LUNAR SPIDER INTRUSION SIMULATION ===" -ForegroundColor Cyan
 Write-Host "Simulation root: $($simPaths.Root)`n" -ForegroundColor Cyan
