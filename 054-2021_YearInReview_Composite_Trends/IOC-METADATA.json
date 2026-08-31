@@ -1,0 +1,26 @@
+{
+  "source": "https://thedfirreport.com/2022/03/07/2021-year-in-review/",
+  "published": "2022-03-07",
+  "handling": "Aggregate behavior metadata only. The article publishes no atomic file-hash list; no listed or referenced endpoint is contacted.",
+  "aggregateFacts": {
+    "publicCasesReviewed": 20,
+    "phishingCases": 16,
+    "persistenceCases": 14,
+    "securityToolImpairmentCases": 5,
+    "exfiltrationCases": 6,
+    "phishingMalwareFamilies": ["TrickBot", "Bazar", "IcedID", "Hancitor"],
+    "commonPostExploitationFramework": "Cobalt Strike",
+    "commonCobaltStrikeProfile": "jquery-3.3.1.min.js",
+    "commonSpawnAs": "rundll32.exe"
+  },
+  "persistence": ["scheduled tasks", "BITS jobs", "registry Run keys", "new users", "redundant Cobalt Strike beacons", "AnyDesk", "TeamViewer", "Splashtop", "Atera"],
+  "credentialAccess": ["Cobalt Strike/Mimikatz LSASS access", "ProcDump LSASS dump", "Task Manager LSASS dump", "ntdsutil NTDS.dit copy", "SAM/SECURITY/SYSTEM hive extraction"],
+  "discovery": ["net.exe", "nltest.exe", "systeminfo.exe", "ipconfig.exe", "whoami.exe", "AdFind", "Advanced IP Scanner", "KPortScan 3.0"],
+  "lateralMovement": ["Cobalt Strike", "Remote Desktop", "remote WMI", "PsExec"],
+  "exfiltration": ["Rclone", "FileZilla", "WinSCP", "Cobalt Strike download", "ufile.io in the referenced Diavol case"],
+  "reportedExamples": [
+    {"type": "ipv4", "value": "190.114.254.116", "context": "literal ping example in the discovery section; preserved as metadata only"},
+    {"type": "domain", "value": "ufile.io", "context": "upload destination in the referenced Diavol case; preserved as metadata only"}
+  ],
+  "atomicFileHashesPublished": 0
+}

@@ -1,0 +1,8 @@
+{
+  "scenarioId":"030-MSSQL_BruteForce_CobaltStrike_Tor2Mine_BlueSky",
+  "report":{"wordpressPostId":23963,"title":"SQL Brute Force Leads to BlueSky Ransomware","published":"2023-12-04","url":"https://thedfirreport.com/2023/12/04/sql-brute-force-leads-to-bluesky-ransomware/","internalCase":19208},
+  "entryPoint":"BlueSkySQLSim-Complete.ps1","cleanup":"Cleanup-BlueSkySQLSim.ps1","artifactRoot":"%PUBLIC%\\BlueSkySQLSim",
+  "phases":[{"order":1,"script":"BlueSkySQLSim-Phase1-MSSQL-Cobalt.ps1","name":"10,000 MSSQL failures, synthetic success, xp_cmdshell ancestry, Cobalt, and injection evidence"},{"order":2,"script":"BlueSkySQLSim-Phase2-Tor2Mine-Lateral.ps1","name":"Tor2Mine privilege branches, miner/driver, 16 tasks, AV/LSASS negatives, SMB discovery, and remote-service evidence"},{"order":3,"script":"BlueSkySQLSim-Phase3-Impact.ps1","name":"Minute-32 BlueSky drop, loopback SMB propagation markers, intact canaries, and ransom notes"}],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","realSqlAuthenticationOrXpCmdShell":false,"liveMalware":false,"processInjectionOrLsassAccess":false,"defenseImpairment":false,"servicesTasksRegistryOrDriver":false,"remoteMovementOrScanning":false,"mining":false,"encryption":false,"realUserData":false,"exfiltration":false,"separateCleanup":true},
+  "attackTechniques":["T1078","T1110","T1053.005","T1059.003","T1059.001","T1562.001","T1055","T1003.001","T1033","T1135","T1486","T1021.002","T1071.001","T1569.002","T1112","T1027","T1543.003","T1036.004"]
+}

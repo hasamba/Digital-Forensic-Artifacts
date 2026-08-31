@@ -1,0 +1,32 @@
+{
+  "scenarioId": "075-Bazar_Cobalt_AnchorDNS_5Day",
+  "report": {
+    "wordpressPostId": 2328,
+    "internalCase": 1017,
+    "title": "Bazar Drops the Anchor",
+    "published": "2021-03-08",
+    "url": "https://thedfirreport.com/2021/03/08/bazar-drops-the-anchor/"
+  },
+  "entryPoint": "BazarAnchorSim-Complete.ps1",
+  "cleanup": "Cleanup-BazarAnchorSim.ps1",
+  "artifactRoot": "%PUBLIC%\\BazarAnchorSim",
+  "timelineNote": "The generated five-day axis preserves the report's relative chronology: discovery within ten minutes, Cobalt and Anchor near one hour, DC movement at two hours, Get-DataInfo on day three, network scan at day four, and access cutoff on day five. Real DC execution is refused.",
+  "phases": [
+    {"order":1,"script":"BazarAnchorSim-Phase1-Entry-Domain.ps1","name":"DocuSign XLS, manual Bazar follow-on, WerFault injection, Cobalt and AnchorDNS, discovery, credential marker, and early domain movement"},
+    {"order":2,"script":"BazarAnchorSim-Phase2-Dwell-Collection.ps1","name":"Four-day C2 dwell, honey documents, assessed exfiltration, Get-DataInfo, Advanced IP Scanner, and public-IP checks"},
+    {"order":3,"script":"BazarAnchorSim-Phase3-Cutoff-NoRyuk.ps1","name":"Day-five access cutoff and explicit no-Ryuk outcome"}
+  ],
+  "techniques": ["T1566.002","T1059","T1204.002","T1053.005","T1204","T1055","T1071.004","T1043","T1071","T1041","T1021.002","T1482","T1087.002","T1018","T1082","T1003"],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only; proxy false; zero bytes",
+    "malwareMacroInjectionTaskOrDiscovery": false,
+    "credentialLsassUserDataOrExfiltration": false,
+    "remoteMovementSecurityChangeOrRansomwareImpact": false,
+    "generatedHostsAndHoneyDocumentsOnly": true,
+    "runtimeArtifactManifest": true,
+    "artifactsLeftForInvestigation": true,
+    "separateCleanup": true
+  }
+}

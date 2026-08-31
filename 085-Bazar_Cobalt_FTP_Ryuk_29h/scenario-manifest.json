@@ -1,0 +1,13 @@
+{
+  "scenarioId":"085-Bazar_Cobalt_FTP_Ryuk_29h",
+  "report":{"wordpressPostId":44067,"internalCase":1005,"title":"Ryuk's Return","published":"2020-10-08","url":"https://thedfirreport.com/2020/10/08/ryuks-return/"},
+  "entryPoint":"RyukReturnSim-Complete.ps1","cleanup":"Cleanup-RyukReturnSim.ps1","artifactRoot":"%PUBLIC%\\RyukReturnSim",
+  "timelineNote":"The exact 29-hour axis preserves day-one discovery, the quiet period, day-two discovery and FTP, movement around hour 28, backup targeting about an hour later, and the reported one-minute Ryuk transfer-to-execution interval. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"RyukReturnSim-Phase1-Day1-Bazar-Recon.ps1","name":"malspam Bazar entry, injection metadata, day-one Nltest/Net/Ping/AdFind, and C2"},
+    {"order":2,"script":"RyukReturnSim-Phase2-Day2-FTP-Cobalt.ps1","name":"day-two AdFind/Rubeus/PowerView/AD/AV discovery, FTP, failed WMI/service movement, DC Cobalt, and Defender marker"},
+    {"order":3,"script":"RyukReturnSim-Phase3-Ryuk-Impact.ps1","name":"backup-first SMB/RDP Ryuk deployment, wbadmin marker, pre-impact commands, and generated impact"}
+  ],
+  "techniques":["T1204","T1047","T1035","T1064","T1086","T1085","T1055","T1078","T1089","T1087","T1482","T1046","T1012","T1018","T1063","T1021","T1043","T1071","T1486"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","liveMalwareOrDownloads":false,"credentialOrDirectoryActions":false,"scannerWmiServiceSmbRdpFtpOrRemoteActions":false,"PowerShellDefenderWbadminOrSecurityChanges":false,"processServiceAclOrShadowActions":false,"userDataEncryption":false,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

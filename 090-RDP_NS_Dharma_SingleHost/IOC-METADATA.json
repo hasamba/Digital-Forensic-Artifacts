@@ -1,0 +1,12 @@
+{
+  "source":"https://thedfirreport.com/2020/06/16/the-little-ransomware-that-couldnt-dharma/","handling":"Metadata only. No sample is retrieved and the RDP source is never contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.","rdpSource":"217.138.202.116",
+  "files":[
+    {"name":"1pgp.exe","md5":"1ebb6bb49ac1077c5e7eba4d56f6a3a1","sha1":"1a37bb789c7bdda44330fd55aa292f5f76dada5d","sha256":"2f2e75affe9217c7211043936678fb1777e2db4a8f1986b8805ddb1e84e9e99b"},
+    {"name":"closeapps.bat","md5":"9b0d6df42f879ba969f82c7a0ab48bc6","sha1":"b5d6f94f270a02abedc7484dc7214d15d2cee99e","sha256":"e25245f98a23596e03e51535beb0f73c000de63e473580c4c26e7b8b01b4e593"},
+    {"name":"Everything.exe","md5":"8add121fa398ebf83e8b5db8f17b45e0","sha1":"c8107e5c5e20349a39d32f424668139a36e6cfd0","sha256":"35c4a6c1474eb870eec901cef823cc4931919a4e963c432ce9efbb30c2d8a413"},
+    {"name":"LogDelete.bat","md5":"fb9c610ba195f9b18a96b84c5e755df7","sha1":"5e4f2074850cce0eab4d6165807e86c88b5b8c0b","sha256":"e17ca6c764352c0a74e1e6b80278bb4395588df4bed64833b1b127ea2ca5c5fd"},
+    {"name":"NS.exe","md5":"597de376b1f80c06d501415dd973dcec","sha1":"629c9649ced38fd815124221b80c9d9c59a85e74","sha256":"f47e3555461472f23ab4766e4d5b6f6fd260e335a6abc31b860e569a720a5446"},
+    {"name":"Shadow.bat","md5":"df8394082a4e5b362bdcb17390f6676d","sha1":"5750248ff490ceec03d17ee9811ac70176f46614","sha256":"da3f155cfb98ce0add29a31162d23da7596da44ba2391389517fe1a2790da878"}
+  ],
+  "yara":["vssadmin_Shadow_bat","Network_Scanner_post_exploit_enumeration","Dharma_ransomware_1pgp","closeapps_bat","LogDelete_bat","Everything_seach_tool","Everything_search_tool_super"]
+}

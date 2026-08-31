@@ -1,0 +1,47 @@
+{
+  "source": "https://thedfirreport.com/2021/01/31/bazar-no-ryuk/",
+  "internalCase": 1013,
+  "handling": "Metadata only. No sample is retrieved and no IOC or .bazar domain is resolved or contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network": [
+    "https://juiceandfilm.com/salman/qqum.php",
+    "195.123.222.23",
+    "52.37.54.140",
+    "52.90.110.55",
+    "52.91.20.198",
+    "54.151.74.109",
+    "54.184.178.68",
+    "54.193.45.225",
+    "54.202.186.121",
+    "208.100.26.238"
+  ],
+  "cobaltTls": {
+    "primaryIp": "195.123.222.23",
+    "jarm": "07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1",
+    "ja3s": ["ae4edc6faf64d08308082ad26be60767","649d6810e8392f63dc311eecb6b7098b"],
+    "ja3": ["72a589da586844d7f0818ce684948eea","51c64c77e60f3980eea90869b68c58a8","613e01474d42ebe48ef52dff6a20f079","7dd50e112cd23734a310b90f6f44a7cd"],
+    "certificateSha1": "79979ae4cbaeae32d64ae50ef673d069e919c154",
+    "issuerOrganization": "jQuery",
+    "subjectCommonName": "jquery.com",
+    "subjectOrganization": "jQuery"
+  },
+  "otherCobaltTls": {
+    "ja3": "72a589da586844d7f0818ce684948eea",
+    "ja3s": "e35df3e00ca4ef31d42b34bebaa2f86e"
+  },
+  "files": [
+    {"name":"request_form_1609982042.xlsm","md5":"d50d1513573da2dcfb6b4bbc8d1a87c0","sha1":"5e272afe665f15e0421ec71d926f0c08a734d3a9","sha256":"571c32689719ba00f0d60918ae70a8edc185435ce3201413c75da1dbd269f88c"},
+    {"name":"M1E1626.exe","md5":"8a528ec7943727678bac5b9f1b74627a","sha1":"05cbef6bd0992e3532a3c597957f821140b61b94","sha256":"d362c83e5a6701f9ae70c16063d743ea9fe6983d0c2b9aa2c2accf2d8ba5cb38"},
+    {"name":"start.bat","md5":"0ab5c442d5a202c213f8a2fe2151fc3f","sha1":"a780085d758aa47bddd1e088390b3bcc0a3efc2e","sha256":"63de40c7382bbfe7639f51262544a3a62d0270d259e3423e24415c370dd77a60"},
+    {"name":"Get-DataInfo.ps1","md5":"8ea370c4c13ee94dcb827530d4cc807c","sha1":"aff6138088d5646748eeaa8a7ede1ff812c82c04","sha256":"6f5f3c8aa308819337a2f69d453ab2f6252491aa0ccc94a8364d0c3c10533173"},
+    {"name":"netscan.exe","md5":"16ef238bc49b230b9f17c5eadb7ca100","sha1":"a5c1e4203c740093c5184faf023911d8f12df96c","sha256":"ce6fc6cca035914a28bbc453ee3e8ef2b16a79afc01d8cb079c70c7aee0e693f"}
+  ],
+  "detections": {
+    "network": [
+      "ET INFO Observed DNS Query for EmerDNS TLD (.bazar)",
+      "ET TROJAN ABUSE.CH SSL Blacklist Malicious SSL certificate detected (Dridex/Trickbot CnC)",
+      "ETPRO TROJAN Observed Malicious SSL Cert (Cobalt Strike CnC)"
+    ],
+    "sigmaBehaviors": ["Cobalt Get-System service start","AdFind","encoded PowerShell","Trickbot-style recon","recon command burst","overpass/pass the hash"],
+    "yaraRules": ["bazar_start_bat","bazar_M1E1626","bazar_files_netscan"]
+  }
+}

@@ -1,113 +1,17 @@
-# ============================================================================
-# BLURRING THE LINES - PLAY / RANSOMHUB / DRAGONFORCE FULL INTRUSION SIM
-# ============================================================================
-# Source report: "Blurring the Lines: Intrusion Shows Connection with Three
-# Major Ransomware Gangs" - The DFIR Report, 2025-09-08
-#   https://thedfirreport.com/2025/09/08/blurring-the-lines-intrusion-shows-
-#   connection-with-three-major-ransomware-gangs/
-#
-# Runs the full attack chain end-to-end on a single host:
-#   1.  Initial Access       - trojanized EarthTime.exe -> cmd -> MSBuild ->
-#                              Pastebin config -> WakeWordEngine.dll (SectopRAT)
-#   2.  Execution/Injection  - SectopRAT into MSBuild, SystemBC (conhost.dll),
-#                              stealer (Steam/Discord/Telegram/wallets)
-#   3.  Persistence          - BITS -> QuickAgent2\ChromeAlt_dbg.exe, Startup
-#                              .lnk, local admin 'Admon'
-#   4.  Privilege Escalation - PsExec -s (PSEXESVC) -> SYSTEM SystemBC
-#   5.  Defense Evasion      - Defender policy off, GT_NET/ccs masquerade,
-#                              ExportData.db timestomp to 2037
-#   6.  Credential Access    - Veeam DB creds, DCSync (4662), LSASS (0x1410)
-#   7.  Discovery            - net/nltest, Grixba, NetScan, SharpHound, AdFind
-#   8.  Lateral Movement     - RDP over SystemBC proxy, Impacket wmiexec
-#   9.  Command and Control  - Betruger (Day 6) + SectopRAT/SystemBC/Betruger C2
-#   10. Collection/Exfil     - WinRAR, FS64.exe, WinSCP clear-text FTP
-#   11. Impact               - 3-gang attribution; NO ransomware by default
-#                              (prevented in the real case). -DeployRansomware
-#                              adds REAL sandbox-scoped encryption + note + VSS.
-#
-# REQUIREMENTS: Run as Administrator, on an isolated/disposable lab VM only.
-# ============================================================================
-
+#Requires -Version 5.1
 #Requires -RunAsAdministrator
-
-param(
-    [switch]$DumpRealLsass,        # See Phase 6 - leave OFF unless the VM is fully disposable
-    [switch]$SkipDefenderDisable,  # Leave Microsoft Defender enabled (default: disable it at start)
-    [switch]$DeployRansomware,     # Phase 11: also detonate REAL, sandbox-scoped encryption (real case: PREVENTED)
-    [ValidateSet('RansomHub','Play','DragonForce')]
-    [string]$RansomFamily = 'RansomHub'   # Which gang's extension + ransom note to emulate under -DeployRansomware
-)
-
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-. "$scriptDir\BlurringLinesSim-utilities.ps1"
-. "$scriptDir\BlurringLinesSim-Phase1-InitialAccess.ps1"
-. "$scriptDir\BlurringLinesSim-Phase2-Execution.ps1"
-. "$scriptDir\BlurringLinesSim-Phase3-Persistence.ps1"
-. "$scriptDir\BlurringLinesSim-Phase4-PrivilegeEscalation.ps1"
-. "$scriptDir\BlurringLinesSim-Phase5-DefenseEvasion.ps1"
-. "$scriptDir\BlurringLinesSim-Phase6-CredentialAccess.ps1"
-. "$scriptDir\BlurringLinesSim-Phase7-Discovery.ps1"
-. "$scriptDir\BlurringLinesSim-Phase8-LateralMovement.ps1"
-. "$scriptDir\BlurringLinesSim-Phase9-CommandAndControl.ps1"
-. "$scriptDir\BlurringLinesSim-Phase10-CollectionExfiltration.ps1"
-. "$scriptDir\BlurringLinesSim-Phase11-Impact.ps1"
-
-Confirm-Execution
-$logPath = Start-SimulationLogging
-$simPaths = Initialize-SimulationEnvironment
-
-# Disable Microsoft Defender up front so the chain detonates deterministically
-# (lab-only; T1562.001). Use -SkipDefenderDisable to leave Defender on.
-if (-not $SkipDefenderDisable) {
-    Disable-DefenderForSimulation -AddExclusions
+[CmdletBinding()]param([switch]$LabConfirmed)
+$config=[pscustomobject]@{
+ Id='009-Blurring_Lines_Play_RansomHub_DragonForce';RootName='BlurringLinesSim';Source='https://thedfirreport.com/2025/09/08/blurring-the-lines-intrusion-shows-connection-with-three-major-ransomware-gangs/';Title='Blurring the Lines: Intrusion Shows Connection With Three Major Ransomware Gangs';DurationMinutes=8640;TimelineNote='Generated six-day axis preserves day-one, day-two, and day-six ordering. Ransomware was not deployed in the report or this scenario.'
+ IOCs=[ordered]@{sectopRat='45.141.87.55:9000,15647';systemBC='149.28.101.219:443';betruger=@('80.78.28.149:80,443','504e1c95.host.njalla.net');exfil='144.202.61.209';staging='C:\Users\Public\Music';reportedAccount='Admon (credential retained only in source report metadata)';rdpHosts=@('DESCTOP-QPITRY','DESKTOP-A1HRTMJ','DESKTOP-PGD76HT','WIN-FLGU1CC210K')}
+ Files=@('cmd.exe','EarthTime.exe','MSBuild.exe','WakeWordEngine.dll','conhost.dll','ccs.exe','GT_NET.exe','GRB_NET.exe','SharpHound.exe','AdFind.exe','WinRAR.exe','PsExec.exe','WinSCP.exe','FS64.exe')|ForEach-Object{[pscustomobject]@{path="payload-canaries\$_";role='report-named stand-in';publishedHash='see source report'}}
+ Artifacts=@(
+  [pscustomobject]@{path='generated-persistence\QuickAgent2-BITS.json';content='{"reportedJob":"QuickAgent2","reportedFile":"ChromeAlt_dbg.exe","created":false}';purpose='BITS metadata'},[pscustomobject]@{path='generated-persistence\Admon-account.json';content='{"reportedAccount":"Admon","credentialStored":false,"created":false}';purpose='account metadata'},[pscustomobject]@{path='generated-hosts\DC-CANARY\Windows\NTDS\DCSync-marker.json';content='{"reportedTechnique":"DCSync","directoryAccess":false,"credentialsAccessed":0}';purpose='credential marker'},[pscustomobject]@{path='evidence\ExportData.db';content='GENERATED VEEAM-DATA CANARY; no credentials.';purpose='credential canary'},[pscustomobject]@{path='evidence\data.zip.marker';content='Generated archive marker; no host data collected.';purpose='collection marker'},[pscustomobject]@{path='evidence\prior-victim-netscan.xml';content='<generated-canary attribution="DragonForce" realVictimData="false" />';purpose='attribution artifact'},[pscustomobject]@{path='evidence\outcome.txt';content='Detection prevented ransomware. Realized impact represented: persistent access and exfiltration; bytes transferred: 0.';purpose='outcome'})
+ Commands=@(
+  [pscustomobject]@{file='payload-canaries\EarthTime.exe';reported='explorer.exe -> EarthTime.exe -> cmd.exe -> MSBuild.exe';parent='explorer.exe'},[pscustomobject]@{file='payload-canaries\MSBuild.exe';reported='MSBuild retrieves SectopRAT config from Pastebin';parent='cmd.exe'},[pscustomobject]@{file='payload-canaries\cmd.exe';reported='rundll32 WakeWordEngine.dll,Reset (SystemBC)';parent='MSBuild.exe'},[pscustomobject]@{file='payload-canaries\cmd.exe';reported='BITS QuickAgent2, Startup link, Admon account, PsExec -s, and DCSync';parent='operator'},[pscustomobject]@{file='payload-canaries\GT_NET.exe';reported='Grixba scanning with NetScan, SharpHound, and AdFind';parent='RDP session'},[pscustomobject]@{file='payload-canaries\WinRAR.exe';reported='WinRAR archives file-share data';parent='RDP session'},[pscustomobject]@{file='payload-canaries\WinSCP.exe';reported='WinSCP clear-text FTP to 144.202.61.209 for about 15 minutes';parent='RDP session'},[pscustomobject]@{file='payload-canaries\ccs.exe';reported='Betruger injects into 172 processes';parent='MSBuild.exe'},[pscustomobject]@{file='payload-canaries\cmd.exe';reported='Impacket wmiexec: WmiPrvSE.exe -> cmd.exe DC enumeration';parent='WmiPrvSE.exe'})
+ Network=@(
+  [pscustomobject]@{port=9000;target='45.141.87.55';role='SectopRAT'},[pscustomobject]@{port=15647;target='45.141.87.55';role='SectopRAT'},[pscustomobject]@{port=443;target='149.28.101.219';role='SystemBC'},[pscustomobject]@{port=443;target='80.78.28.149 / 504e1c95.host.njalla.net';role='Betruger'},[pscustomobject]@{port=21;target='144.202.61.209';role='FTP exfil'},[pscustomobject]@{port=3389;target='reported internal hosts via SystemBC';role='RDP marker'})
+ Timeline=@(
+  [pscustomobject]@{offset=0;phase='day-1-initial-access';event='EarthTime, MSBuild, SectopRAT, and SystemBC';details=@{downloads=0;injection=$false}},[pscustomobject]@{offset=360;phase='day-1-persistence-credential';event='BITS, Startup, Admon, PsExec, and DCSync metadata';details=@{systemChanges=0;credentialsAccessed=0}},[pscustomobject]@{offset=1440;phase='day-2-lateral-discovery';event='RDP, Grixba, NetScan, Veeam, SharpHound, and AdFind';details=@{remoteActions=0}},[pscustomobject]@{offset=1800;phase='day-2-exfiltration';event='WinRAR and 15-minute WinSCP FTP sequence';details=@{bytesTransferred=0}},[pscustomobject]@{offset=7200;phase='day-6-c2';event='Betruger and wmiexec sequence';details=@{processesInjected=0;remoteActions=0}},[pscustomobject]@{offset=8640;phase='outcome';event='three-gang attribution; ransomware prevented';details=@{filesEncrypted=0}})
 }
-
-Write-Host "`n=== BLURRING THE LINES INTRUSION SIMULATION ===" -ForegroundColor Cyan
-Write-Host "Simulation root: $($simPaths.Root)" -ForegroundColor Cyan
-Write-Host "Staging path:    $($simPaths.PublicMusic)`n" -ForegroundColor Cyan
-
-if ($DeployRansomware) {
-    Write-Host "[!!!] -DeployRansomware SET: Phase 11 will run REAL $RansomFamily AES-256 encryption," -ForegroundColor Red
-    Write-Host "      delete Volume Shadow Copies and change the wallpaper. Encryption is hard-scoped" -ForegroundColor Red
-    Write-Host "      to $($simPaths.VictimFiles) and $($simPaths.Staging) only. Snapshot the VM first.`n" -ForegroundColor Red
-}
-
-# Run each phase in isolation: a phase that throws (e.g. blocked by an EDR on a
-# monitored host) is logged and the simulation continues with the next phase,
-# instead of one failure aborting the whole chain / closing the console.
-function Invoke-Phase {
-    param([Parameter(Mandatory)][scriptblock]$Body, [string]$Name)
-    try {
-        & $Body
-    } catch {
-        Write-Host "  [!] Phase '$Name' error (continuing): $($_.Exception.Message)" -ForegroundColor Red
-        try { Write-SimEvent -EventId 9999 -Message "SIMULATION: phase '$Name' failed: $($_.Exception.Message)" } catch {}
-    }
-    Start-Sleep -Seconds 2
-}
-
-Invoke-Phase -Name "InitialAccess"          { Simulate-InitialAccess          -SimPaths $simPaths }
-Invoke-Phase -Name "Execution"              { Simulate-Execution              -SimPaths $simPaths }
-Invoke-Phase -Name "Persistence"            { Simulate-Persistence            -SimPaths $simPaths }
-Invoke-Phase -Name "PrivilegeEscalation"    { Simulate-PrivilegeEscalation    -SimPaths $simPaths }
-Invoke-Phase -Name "DefenseEvasion"         { Simulate-DefenseEvasion         -SimPaths $simPaths }
-Invoke-Phase -Name "CredentialAccess"       { Simulate-CredentialAccess       -SimPaths $simPaths -DumpRealLsass:$DumpRealLsass }
-Invoke-Phase -Name "Discovery"              { Simulate-Discovery              -SimPaths $simPaths }
-Invoke-Phase -Name "LateralMovement"        { Simulate-LateralMovement        -SimPaths $simPaths }
-Invoke-Phase -Name "CommandAndControl"      { Simulate-CommandAndControl      -SimPaths $simPaths }
-Invoke-Phase -Name "CollectionExfiltration" { Simulate-CollectionExfiltration -SimPaths $simPaths }
-Invoke-Phase -Name "Impact"                 { Simulate-Impact                 -SimPaths $simPaths -DeployRansomware:$DeployRansomware -RansomFamily $RansomFamily }
-
-Write-Host "`n=== SIMULATION COMPLETE ===" -ForegroundColor Cyan
-Write-Host "Artifacts root: $($simPaths.Root)" -ForegroundColor Cyan
-Write-Host "Staging path:   $($simPaths.PublicMusic)" -ForegroundColor Cyan
-Write-Host "Execution log:  $logPath" -ForegroundColor Cyan
-Write-Host "Impact summary: $($simPaths.VictimFiles)\_INTRUSION_IMPACT_SUMMARY.txt" -ForegroundColor Cyan
-Write-Host "Attribution:    $($simPaths.VictimFiles)\_THREE_GANG_ATTRIBUTION.txt" -ForegroundColor Cyan
-Write-Host "`nSuggested next steps for the analyst:" -ForegroundColor Green
-Write-Host " - Collect with KAPE (see 'kape command.bat' in the repo root)"
-Write-Host " - Review Sysmon/Security event logs, Prefetch, Amcache, MFT, USN journal"
-Write-Host " - Pull PCAP/Zeek if network capture was running during execution"
-Write-Host " - Cross-reference IOCs against the source DFIR report's Indicators section"
-
-Stop-Transcript | Out-Null
+. (Join-Path $PSScriptRoot '..\LabSafeScenarioCore.ps1');Invoke-DFIRLabScenario -Config $config -LabConfirmed:$LabConfirmed

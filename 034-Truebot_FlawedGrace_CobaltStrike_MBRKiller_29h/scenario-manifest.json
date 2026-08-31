@@ -1,0 +1,37 @@
+{
+  "scenarioId": "034-Truebot_FlawedGrace_CobaltStrike_MBRKiller_29h",
+  "report": {
+    "wordpressPostId": 18950,
+    "internalCase": 21619,
+    "title": "A Truly Graceful Wipe Out",
+    "published": "2023-06-12",
+    "url": "https://thedfirreport.com/2023/06/12/a-truly-graceful-wipe-out/"
+  },
+  "entryPoint": "GraceWipeSim-Complete.ps1",
+  "cleanup": "Cleanup-GraceWipeSim.ps1",
+  "artifactRoot": "%PUBLIC%\\GraceWipeSim",
+  "phases": [
+    { "order": 1, "script": "GraceWipeSim-Phase1-Truebot-FlawedGrace.ps1", "name": "404 TDS, Truebot, FlawedGrace/Cobalt ancestry, persistence, and failed tunneled RDP" },
+    { "order": 2, "script": "GraceWipeSim-Phase2-Credential-Lateral.ps1", "name": "Hive/LSASS credential negatives, discovery staging, atexec, WMI, and jump psexec" },
+    { "order": 3, "script": "GraceWipeSim-Phase3-Exfil-MBRKiller.ps1", "name": "Two exfiltration periods and unchanged MBR Killer disk-sector canaries at hour 29" }
+  ],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only",
+    "liveMalware": false,
+    "accountOrGroupModification": false,
+    "scheduledTaskRegistryOrServiceModification": false,
+    "securityControlModification": false,
+    "processInjectionOrCredentialAccess": false,
+    "directorySessionShareOrRemoteProcessQueries": false,
+    "remoteExecutionOrPropagation": false,
+    "realDataCollectionOrExfiltration": false,
+    "rawDiskAccessOrWipe": false,
+    "rebootOrImpairment": false,
+    "separateCleanup": true
+  },
+  "attackTechniques": [
+    "T1055", "T1561.002", "T1048", "T1036.005", "T1562.001", "T1140", "T1027.011", "T1027.010", "T1053.005", "T1059.001", "T1204.002", "T1071.001", "T1094", "T1033", "T1069.002", "T1069.001", "T1482", "T1057", "T1087.002", "T1083", "T1018", "T1518.001", "T1012", "T1021.002", "T1074.001", "T1003.001", "T1550.002", "T1078", "T1543.003", "T1003.002", "T1566.002"
+  ]
+}

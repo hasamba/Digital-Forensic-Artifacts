@@ -1,0 +1,23 @@
+{
+  "source":"https://thedfirreport.com/2023/05/22/icedid-macro-ends-in-nokoyawa-ransomware/",
+  "published":"2023-05-22",
+  "handling":"Investigation metadata only. No listed payload is retrieved or executed and no listed host is contacted.",
+  "networkIndicators":[
+    {"hostname":"simipimi.com","role":"IcedID Excel download URL"},{"hostname":"kicknocisd.com","address":"159.65.169.200","role":"IcedID C2"},
+    {"hostname":"guaracheza.pics","address":"45.66.248.119","port":443,"role":"IcedID C2"},{"hostname":"belliecow.wiki","address":"45.66.248.119","port":443,"role":"IcedID C2"},
+    {"hostname":"curabiebarristie.com","address":"198.244.180.66","port":443,"role":"IcedID C2"},{"hostname":"stayersa.art","address":"198.244.180.66","port":443,"role":"IcedID C2"},
+    {"address":"137.74.104.108","port":8080,"role":"IcedID BackConnect VNC"},{"hostname":"aicsoftware.com","address":"23.29.115.152","ports":[757,8080],"role":"Cobalt Strike"},
+    {"hostname":"iconnectgs.com","address":"50.3.132.232","port":8081,"role":"Cobalt Strike"},{"address":"5.8.18.242","port":443,"role":"Cobalt Strike"},
+    {"hostname":"dropmefiles.com","role":"Web transfer service visited on day six"},{"address":"45.61.139.126","role":"Off-network password-document canary open source"}
+  ],
+  "fingerprints":[{"value":"a0e9f5d64349fb13191bc781f81f42e1","type":"JA3","role":"IcedID/aicsoftware"},{"value":"ec74a5c51106f0419184d0dd08fb05bc","type":"JA3S","role":"IcedID"},{"value":"72a589da586844d7f0818ce684948eea","type":"JA3","role":"Cobalt Strike 5.8.18.242"},{"value":"f176ba63b4d68e576b5ba345bec2c7b7","type":"JA3S","role":"Cobalt Strike"}],
+  "files":[
+    {"name":"1.bat","md5":"b5db398832461be8d93fdbda120088aa","sha1":"b36748a27b8e68710701286106ad434c9afea6fa","sha256":"30a334da51d22b2fe6e33970df8d0f81396394de9d3a3c224751aacb2202b0db"},
+    {"name":"1.dll","md5":"9740f2b8aeacc180d32fc79c46333178","sha1":"c599c32d6674c01d65bff6c7710e94b6d1f36869","sha256":"d3db55cd5677b176eb837a536b53ed8c5eabbfd68f64b88dd083dc9ce9ffb64e"},
+    {"name":"4_202210250456866742.xls","md5":"d3032968085db665381d9cbd3569f330","sha1":"9230520c6dd215e2152bb2e56b2a5d6b45ae8e13","sha256":"eb84a283ff58906786d63ffe43a8ff2728584428f5f7d9972c664f63f8790113"},
+    {"name":"7030270","md5":"964c94b217d102e53a227bcbc94ae52e","sha1":"b846e89d0f56851696d50b5e64c6e758ddae3e6a","sha256":"091886c95ca946aedee24b7c751b5067c5ac875923caba4d3cc9d961efadb65d"},
+    {"name":"k.exe","md5":"40c9dc2897b6b348da88b23deb0d3952","sha1":"0f5457b123e60636623f585cc2bf2729f13a95d6","sha256":"7095beafff5837070a89407c1bf3c6acf8221ed786e0697f6c578d4c3de0efd6"},
+    {"name":"mstdc.exe","md5":"7dae150c1df0e01467be3a743775b646","sha1":"f309b61a8b005b5ce0a3fb58caaa798cfc95f5db","sha256":"3c19fee379b4882971834a3d38f3f8b86de560114274375560433778cd505748"},
+    {"name":"p.bat","md5":"385d21c0438f5b21920aa9eb894740d2","sha1":"5d2c17799dfc6717f89cd5f63951829aed038041","sha256":"e351ba5e50743215e8e99b5f260671ca8766886f69d84eabb83e99d55884bc2f"}
+  ]
+}

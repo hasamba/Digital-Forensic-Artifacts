@@ -1,0 +1,8 @@
+{
+  "scenarioId":"026-OneNote_IcedID_CobaltStrike_AnyDesk_Nokoyawa",
+  "report":{"wordpressPostId":30547,"title":"From OneNote to RansomNote: An Ice Cold Intrusion","published":"2024-04-01","url":"https://thedfirreport.com/2024/04/01/from-onenote-to-ransomnote-an-ice-cold-intrusion/"},
+  "entryPoint":"IceColdSim-Complete.ps1","cleanup":"Cleanup-IceColdSim.ps1","artifactRoot":"%PUBLIC%\\OneNoteIceColdSim",
+  "phases":[{"order":1,"script":"IceColdSim-Phase1-OneNoteIcedID.ps1","name":"OneNote lure, IcedID persistence, beacon-only dwell, and day-22 discovery"},{"order":2,"script":"IceColdSim-Phase2-HandsOnExfil.ps1","name":"Day-33 Cobalt Strike, AnyDesk, credential/discovery/lateral evidence, and FileZilla exfiltration"},{"order":3,"script":"IceColdSim-Phase3-NokoyawaImpact.ps1","name":"Two-server Nokoyawa debugging and impact canaries"}],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"credentialOrLsassAccess":false,"directoryOrShareAccess":false,"remoteExecutionOrRdp":false,"anyDeskOrFileZillaInstallation":false,"servicesTasksOrPolicies":false,"softwareOrBackupRemoval":false,"shadowCopies":false,"encryption":false,"separateCleanup":true},
+  "attackTechniques":["T1552.001","T1486","T1039","T1069.002","T1482","T1048","T1083","T1070","T1105","T1003.001","T1204.002","T1036.008","T1036","T1046","T1566","T1059.001","T1057","T1055","T1218.010","T1219","T1021.001","T1018","T1218.011","T1053.005","T1518.001","T1082","T1033","T1071.001","T1059.003","T1543.003"]
+}

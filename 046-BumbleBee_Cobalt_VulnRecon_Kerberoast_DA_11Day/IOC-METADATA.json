@@ -1,0 +1,26 @@
+{
+  "source":"https://thedfirreport.com/2022/08/08/bumblebee-roasts-its-way-to-domain-admin/",
+  "published":"2022-08-08",
+  "handling":"Investigation metadata only. No listed payload is retrieved or executed and no listed host is contacted.",
+  "networkIndicators":[
+    {"family":"BumbleBee","address":"142.91.3.109","port":443,"ja3":"c424870876f1f2ef0dd36e7e569de906","ja3s":"61be9ce3d068c08ff99a857f62352f9d","certificateSha1":"762877fffe265ce5c67a65010963446d57b745f2","issuerOrganization":"Internet Widgits Pty Ltd"},
+    {"family":"BumbleBee","address":"45.140.146.30","port":443,"ja3":"c424870876f1f2ef0dd36e7e569de906","ja3s":"61be9ce3d068c08ff99a857f62352f9d","certificateSha1":"762877fffe265ce5c67a65010963446d57b745f2","issuerOrganization":"Internet Widgits Pty Ltd"},
+    {"family":"Cobalt Strike main wab.exe","address":"45.153.243.142","hostname":"fuvataren.com","port":443,"getUri":"/rs.js","postUri":"/en","sleepMs":5000,"watermark":1580103814,"ja3":"a0e9f5d64349fb13191bc781f81f42e1","ja3s":"ae4edc6faf64d08308082ad26be60767"},
+    {"family":"Cobalt Strike PowerShell/day 11","address":"108.62.12.174","hostname":"dofixifa.com","port":443,"getUri":"/ro","postUri":"/styles","sleepMs":5000,"jitter":48,"ja3":"a0e9f5d64349fb13191bc781f81f42e1","ja3s":"ae4edc6faf64d08308082ad26be60767"},
+    {"family":"Cobalt Strike payload hosting","address":"104.243.33.50","port":80,"uri":"/a"},
+    {"family":"AnyDesk source","address":"108.177.235.25","clientId":"159889039"}
+  ],
+  "defaultCobaltNamedPipes":["\\postex_0dde","\\postex_3e9b","\\postex_4008","\\postex_4429","\\postex_55f8","\\postex_8248","\\postex_8c73","\\postex_972d","\\postex_fc2e"],
+  "files":[
+    {"name":"BC_invoice_Report_CORP_46.zip","md5":"5226b7138f4dd1dbb9f6953bd75a320b","sha1":"6c87ca630c294773ab760d88587667f26e0213a3","sha256":"c1b8e9d77a6aea4fc7bed4a2a48515aa32a3922859c9091cecf1b5f381a87127"},
+    {"name":"document.lnk","md5":"3466ffaf086a29b8132e9e10d7111492","sha1":"58739dc62eeac7374db9a8c07df7c7c36b550ce5","sha256":"90f489452b4fe3f15d509732b8df8cc86d4486ece9aa10cbd8ad942f7880075e"},
+    {"name":"namr.dll","md5":"f856d7e7d485a2fc5b38faddd8c6ee5c","sha1":"c68e4d5eaae99d6f0a51eec48ace79a4fede3c09","sha256":"2d67a6e6e7f95d3649d4740419f596981a149b500503cbc3fcbeb11684e55218"},
+    {"name":"wab.exe","md5":"c68437cc9ed6645726119c12fdcb33e7","sha1":"7a3db4b3359b60786fcbdaf0115191502fcded07","sha256":"1cf28902be615c721596a249ca85f479984ad85dc4b19a7ba96147e307e06381"},
+    {"name":"af.exe","md5":"9b02dd2a1a15e94922be3f85129083ac","sha1":"2cb6ff75b38a3f24f3b60a2742b6f4d6027f0f2a","sha256":"b1102ed4bca6dae6f2f498ade2f73f76af527fa803f0e0b46e100d4cf5150682"},
+    {"name":"VulnRecon.exe","md5":"5839b4013cf6e25568f13d3fc4120795","sha1":"d9832b46dd6f249191e9cbcfba2222c1702c499a","sha256":"eb4cba90938df28f6d8524be639ed7bd572217f550ef753b2f2d39271faddaef"},
+    {"name":"VulnRecon.dll","md5":"951d017ba31ecc6990c053225ee8f1e6","sha1":"a204f20b1c96c5b882949b93eb4ac20d4f9e4fdf","sha256":"a9e90587c54e68761be468181e56a5ba88bac10968ff7d8c0a1c01537158fbe8"},
+    {"name":"CommandLine.dll","md5":"3654f4e4c0858a9388c383b1225b8384","sha1":"974ffbfae36e9a41ac672f9793ce1bee18f2e670","sha256":"fa2b74bfc9359efba61ed7625d20f9afc11a7933ebc9653e8e9b1e44be39c455"},
+    {"name":"w.bat","md5":"bba3ff461eee305c7408e31e427f57e6","sha1":"3300c0c05b33691ecc04133885b7fc9513174746","sha256":"59198ffaf74b0e931a1cafe78e20ebf0b16f3a5a03bb4121230a0c44d7b963d2"},
+    {"name":"s.bat","md5":"4b78228c08538208686b0f55353fa3bf","sha1":"67707f863aa405a9b9a335704808c604845394bf","sha256":"5eb0b0829b9fe344bff08de80f55a21a26a53df7bd230d777114d3e7b64abd24"}
+  ]
+}

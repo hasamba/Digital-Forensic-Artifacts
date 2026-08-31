@@ -1,0 +1,32 @@
+{
+  "scenarioId": "077-Bazar_Cobalt_GetDataInfo_NoRyuk_4Day",
+  "report": {
+    "wordpressPostId": 2080,
+    "internalCase": 1013,
+    "title": "Bazar, No Ryuk?",
+    "published": "2021-01-31",
+    "url": "https://thedfirreport.com/2021/01/31/bazar-no-ryuk/"
+  },
+  "entryPoint": "BazarNoRyukSim-Complete.ps1",
+  "cleanup": "Cleanup-BazarNoRyukSim.ps1",
+  "artifactRoot": "%PUBLIC%\\BazarNoRyukSim",
+  "timelineNote": "The four-day axis preserves report day ordering. Day-four sub-hour offsets are illustrative where the report provides only approximate timing. Real DC execution is refused.",
+  "phases": [
+    {"order":1,"script":"BazarNoRyukSim-Phase1-Bazar-Dwell.ps1","name":"DocuSign XLSM, Bazar execution and Run-key marker, then day-two/day-three DNS and C2 dwell"},
+    {"order":2,"script":"BazarNoRyukSim-Phase2-Cobalt-Domain.ps1","name":"Day-four Cobalt execution, injection/Get-System, discovery, LSASS marker, four movement methods, and generated DC compromise"},
+    {"order":3,"script":"BazarNoRyukSim-Phase3-DataInfo-Cutoff.ps1","name":"AdFind and Get-DataInfo toolkit, access termination 15 minutes later, and no-Ryuk outcome"}
+  ],
+  "techniques": ["T1566.002","T1204","T1059","T1482","T1550.002","T1021.001","T1021.002","T1087.002","T1069.002","T1082","T1124","T1518.001","T1518","T1218.011","T1071.004","T1043","T1569.002","T1059.001","T1547.001"],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only; proxy false; zero bytes",
+    "malwareMacroRegistryPipeInjectionOrDiscovery": false,
+    "credentialLsassLdapOrPassTheHash": false,
+    "remoteMovementCollectionExfiltrationOrRansomware": false,
+    "generatedHostsOnly": true,
+    "runtimeArtifactManifest": true,
+    "artifactsLeftForInvestigation": true,
+    "separateCleanup": true
+  }
+}

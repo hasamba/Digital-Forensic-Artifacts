@@ -1,0 +1,17 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]param([switch]$LabConfirmed)
+. "$PSScriptRoot\NetWalkerHourSim-utilities.ps1";Assert-NWSafety -LabConfirmed:$LabConfirmed;$p=Initialize-NWEnvironment
+$roles=[ordered]@{'FS01-CANARY'='file server';'APP01-CANARY'='application server';'WS01-CANARY'='workstation';'WS02-CANARY'='workstation'}
+foreach($entry in $roles.GetEnumerator()){$null=New-NWHostTree -Name $entry.Key -Role $entry.Value}
+$psexec=Join-Path $p.Payloads 'psexec.exe';New-NWDecoy -Path $psexec -Role 'PsExec/NetWalker deployment stand-in'
+$reported='C:\psexec.exe @ip-list.txt -d cmd /c "(net use q: /delete /y & net use q: \\DomainController\DomainName /user:DomainName\administrator ThisWasThePassword & powershell -ExecutionPolicy ByPass -NoLogo -NoProfile -windowstyle hidden -NoExit -File q:\P100119.ps1)"'
+Invoke-NWDecoy -FilePath $psexec -Reported $reported -Parent 'RDP session on domain controller' -Label 'NO-REMOTE-EXECUTION'
+Write-NWJson -Path(Join-Path $p.Evidence 'psexec-deployment.json')-Object([ordered]@{reportedCommand=$reported;reportedCredentialToken='ThisWasThePassword (report-provided placeholder; never used)';reportedTargetList='ip-list.txt';reportedShare='\\DomainController\DomainName';reportedPayload='P100119.ps1';authenticationAttempts=0;validAccountsUsed=0;psexecServicesCreated=0;sharesMounted=0;PowerShellExecuted=$false;remoteCommands=0;remoteFilesWritten=0})-Purpose lateral-movement
+$records=New-Object System.Collections.Generic.List[object]
+foreach($entry in $roles.GetEnumerator()){$root=Join-Path $p.Hosts $entry.Key;Write-NWFile -Path(Join-Path $root 'C$\Finance\NETWALKER-README.txt')-Content "INERT NETWALKER NOTE CANARY for $($entry.Key). Reported demand: 50k USD within seven days, 100k after, negotiated to 35k; no payment instructions." -Purpose ransom-note-canary;Write-NWFile -Path(Join-Path $root 'C$\Finance\invoice.docx.NETWALKER-CANARY')-Content "INERT ENCRYPTION MARKER for generated host $($entry.Key). No file was encrypted." -Purpose encryption-canary;$records.Add([ordered]@{hostname=$entry.Key;role=$entry.Value;generatedTree=$root;markers=2;userFilesRead=0;userFilesChanged=0;filesEncrypted=0})}
+Write-NWJson -Path(Join-Path $p.Evidence 'impact-summary.json')-Object([ordered]@{reportedDuration='approximately one hour';reportedDemand='$50k within seven days, $100k after; negotiated to $35k';generatedHosts=$records;psexecServicesCreated=0;sharesMounted=0;PowerShellExecuted=$false;remoteCommands=0;userFilesChanged=0;filesEncrypted=0;generatedCanaryMarkers=8})-Purpose impact
+Invoke-NWLoopback -Port 445 -Target 'all online domain-joined systems via PsExec' -Role 'PsExec/SMB deployment marker'
+Add-NWTimeline 55 lateral-movement 'PsExec target-list, share mount, and PowerShell NetWalker command represented' @{servicesCreated=0;sharesMounted=0;PowerShellExecuted=$false}
+Add-NWTimeline 60 impact 'Approximate one-hour domain-wide NetWalker objective represented on generated hosts' @{filesEncrypted=0;generatedCanaryMarkers=8}
+Write-NWJson -Path(Join-Path $p.Evidence 'phase3-negative.json')-Object([ordered]@{authenticationAttempts=0;validAccountsUsed=0;psexecServicesCreated=0;sharesMounted=0;smbSessions=0;PowerShellExecuted=$false;remoteCommands=0;remoteFilesWritten=0;userFilesRead=0;userFilesChanged=0;filesEncrypted=0;securityControlsChanged=0;logsCleared=0;shadowCopiesDeleted=0;externalConnections=0;bytesTransferred=0})-Purpose safety

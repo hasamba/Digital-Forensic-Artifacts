@@ -1,0 +1,15 @@
+{
+  "scenarioId":"079-Trickbot_Cobalt_NTDS_Overpass_NoRyuk",
+  "report":{"wordpressPostId":1864,"internalCase":1012,"title":"Trickbot Still Alive and Well","published":"2021-01-11","url":"https://thedfirreport.com/2021/01/11/trickbot-still-alive-and-well/"},
+  "entryPoint":"TrickAliveSim-Complete.ps1",
+  "cleanup":"Cleanup-TrickAliveSim.ps1",
+  "artifactRoot":"%PUBLIC%\\TrickAliveSim",
+  "timelineNote":"A generated two-hour axis preserves the published sequence because the report gives no intrusion duration. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"TrickAliveSim-Phase1-Trickbot-Cobalt.ps1","name":"Unknown delivery assessment, manual Trickbot, wermgr injection, two Cobalt payloads, and C2"},
+    {"order":2,"script":"TrickAliveSim-Phase2-Credentials-Discovery.ps1","name":"GetSystem, LSASS and NTDS IFM markers, AdFind, Net, Nltest, BloodHound, and PowerView"},
+    {"order":3,"script":"TrickAliveSim-Phase3-Movement-Cutoff.ps1","name":"Registry PowerShell/service, SMB/WMI/ADMIN$, overpass-the-hash, backup pivot, cutoff, and no-Ryuk outcome"}
+  ],
+  "techniques":["T1204","T1550.002","T1021.002","T1055","T1003","T1087","T1087.002","T1069.002","T1482","T1018","T1021","T1047","T1059.001","T1059","T1043","T1571","T1071","T1041"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","malwareInjectionPipeRegistryOrDiscovery":false,"lsassNtdsCredentialHashOrTicketAccess":false,"remoteMovementExfiltrationOrRansomware":false,"generatedHostsOnly":true,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

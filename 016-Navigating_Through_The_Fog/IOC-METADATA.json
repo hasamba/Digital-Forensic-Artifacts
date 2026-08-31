@@ -1,0 +1,21 @@
+{
+  "source": "https://thedfirreport.com/2025/04/28/navigating-through-the-fog/",
+  "networkIndicatorsMetadataOnly": [
+    { "value": "194.48.154.79", "observedServices": ["HTTP open directory on 80", "Sliver team server on 31337"] },
+    { "value": "AS62240", "description": "Clouvider hosting ASN noted in the report" }
+  ],
+  "victimReferencesMetadataOnly": ["ouroverde.net.br", "fourlis.net"],
+  "reportedArtifacts": [
+    ".bash_history", ".nxc/", ".sliver/", ".sliver-client/", "20241121150831_Certipy.zip",
+    "any.ps1", "AnyDesk.exe", "Certipy/", "DonPAPI-1.0.0/", "noPac/", "orpheus/",
+    "Pachine/", "powercat.ps1", "sliver-client_linux", "sliver-server", "slv.bin",
+    "sonic_scan/", "sonic_scan.zip", "zer0dump/"
+  ],
+  "reportedCredentialOrAccessData": {
+    "sonicScanFields": ["target IP address", "username", "password", "domain name", "VPN software"],
+    "anyDeskPassword": "Admin#123",
+    "note": "The AnyDesk password is a public report indicator. Scenario data.txt contains generated credentials only."
+  },
+  "hashes": [],
+  "note": "The report did not publish a file-hash indicator table. No indicator is contacted and no live toolkit component is included."
+}

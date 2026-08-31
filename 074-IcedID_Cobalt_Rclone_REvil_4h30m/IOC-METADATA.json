@@ -1,0 +1,152 @@
+{
+  "source": "https://thedfirreport.com/2021/03/29/sodinokibi-aka-revil-ransomware/",
+  "internalCase": 1051,
+  "handling": "Investigation metadata only. No sample is retrieved, no IOC is resolved or contacted, and all runtime network attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "urls": [
+    "http://vpu03jivmm03qncgx.com/index.gif"
+  ],
+  "network": [
+    "45.86.163.78:80",
+    "45.86.163.78:443",
+    "45.86.163.78:8080",
+    "195.189.99.74:80",
+    "195.189.99.74:443",
+    "195.189.99.74:8080",
+    "206.189.10.247:80",
+    "161.35.109.168:443",
+    "45.147.160.5:443",
+    "smalleststores.com",
+    "cloudmetric.online",
+    "cikawemoret34.space",
+    "nomovee.website"
+  ],
+  "tlsAndProfiles": [
+    {
+      "role": "IcedID",
+      "endpoint": "161.35.109.168:443",
+      "ja3": "a0e9f5d64349fb13191bc781f81f42e1",
+      "ja3s": "ec74a5c51106f0419184d0dd08fb05bc",
+      "certificateSha1": "e0fce5ebfde7da0b93acdcdf0de856cc7bf25843",
+      "subjectCommonName": "localhost",
+      "issuerOrganization": "Internet Widgits Pty Ltd"
+    },
+    {
+      "role": "Cobalt Strike HTTP",
+      "endpoint": "45.86.163.78 / cloudmetric.online",
+      "ja3": "a0e9f5d64349fb13191bc781f81f42e1",
+      "ja3s": "ae4edc6faf64d08308082ad26be60767",
+      "certificateSha1": "b92c48711abaeb9915c40bb031ce148ea930acd3",
+      "paths": ["/jquery-3.2.2.min.js", "/jquery-3.2.2.full.js"],
+      "port": 80,
+      "pollingMs": 48963,
+      "jitter": 24,
+      "spawnTo": ["%windir%\\sysnative\\WUAUCLT.exe", "%windir%\\syswow64\\WUAUCLT.exe"]
+    },
+    {
+      "role": "Cobalt Strike HTTPS",
+      "endpoint": "195.189.99.74 / smalleststores.com",
+      "ja3": "72a589da586844d7f0818ce684948eea",
+      "ja3s": "ae4edc6faf64d08308082ad26be60767",
+      "certificateSha1": "14f479e3fd98216068fd1c0ae6c6f971f4acf9df",
+      "paths": ["/owa/", "/OWA/"],
+      "port": 443,
+      "pollingMs": 59713,
+      "jitter": 41,
+      "spawnTo": ["%windir%\\syswow64\\mstsc.exe", "%windir%\\system32\\calc.exe"]
+    }
+  ],
+  "files": [
+    {
+      "name": "skull-x64.dat",
+      "md5": "5c3a6978bb960d8fbccd117ddcc3ca10",
+      "sha1": "17424cfeb756e231bea6d1363151a83af142ba6f",
+      "sha256": "59a2a5fae1c51afbbf1bf8c6eb0a65cb2b8575794e3890f499f8935035e633fc",
+      "sourceNote": "The IOC table renders a malformed 63-character SHA-256; the report's YARA hash1 supplies this valid 64-character value."
+    },
+    {
+      "name": "Ciocca.dll",
+      "md5": "296f1098a3a8cfb7e07808ee08361495",
+      "sha1": "7d903f87fd305f1c93ec420848fd6e5aeb018d59",
+      "sha256": "b1b00f7b065e8c013e0c23c0f34707819e0d537dbe2e83d0d023a11a0ca6b388"
+    },
+    {
+      "name": "license.dat",
+      "md5": "6f208841cfd819c29a7cbc0a202bd7a3",
+      "sha1": "0febc376cc066bb668f1a80b969ed112da8e871c",
+      "sha256": "45b6349ee9d53278f350b59d4a2a28890bbe9f9de6565453db4c085bb5875865"
+    },
+    {
+      "name": "DomainName.dll",
+      "md5": "c8fab46c4fd61c5f138fb151638c35e1",
+      "sha1": "c4830cbf3a3044f6e50cd60127ff5681f8ee4bbf",
+      "sha256": "64076294e761cee0ce7d7cd28dae05f483a711eafe47f94fe881ac3980abfd8f"
+    },
+    {
+      "name": "DomainName.exe",
+      "md5": "af94ccb62f97700115a219c4b7626d22",
+      "sha1": "bb67edcfe4e5b6fe09ee96e5b8ace7a4cfe39eb7",
+      "sha256": "2896b38ec3f5f196a9d127dbda3f44c7c29c844f53ae5f209229d56fd6f2a59c"
+    },
+    {
+      "name": "svchost.exe (Rclone)",
+      "sha1": "fcfcf1e45e8d5cdca0450b8dc90754b68e8e4673",
+      "sha256": "538078ab6d80d7cf889af3e08f62c4e83358596f31ac8ae8fbc6326839a6bfe5"
+    },
+    {
+      "name": "AdFind.exe",
+      "sha1": "cb198869ca3c96af536869e71c54dd9d83afbee6",
+      "sha256": "56de41fa0a94fa7fff68f02712a698ba2f0a71afcecb217f6519bd5751baf3ed"
+    }
+  ],
+  "cobaltSamples": [
+    {
+      "profile": "cloudmetric-x64",
+      "md5": "28ceee1f8f529a80bd0ff5e52240e404",
+      "sha1": "deab6be62e9c9793f9874bbdec9ff0a3acb82ad8",
+      "sha256": "8d44894c09a2e30b40927f8951e01708d0a600813387c3c0872bcd6cb10a3e8c"
+    },
+    {
+      "profile": "cloudmetric-x86",
+      "md5": "bbc6592c67d233640a9ca0d0d915003c",
+      "sha1": "a30de5ca8a107fd69c8885a975224ea8ff261002",
+      "sha256": "11af3609884ad674a1c86f42ec27719094e935d357d73e574b75c787a0e8c0f1"
+    },
+    {
+      "profile": "smalleststores-x86",
+      "md5": "88365eb3d504f570f22d76f777ab2caf",
+      "sha1": "f42f2eea6cf88d30cfd6207182528be6ae2e504f",
+      "sha256": "4b25f708c506e0cc747344ee79ecda48d51f6c25c9cb45ceb420575458f56720"
+    },
+    {
+      "profile": "smalleststores-x64",
+      "md5": "27ca24a7f6d02539235d46e689e6e4ac",
+      "sha1": "6885d84c1843c41ff8197d7ab0c8e42e20a7ecaa",
+      "sha256": "e35c31ba3e10f59ae7ea9154e2c0f6f832fcff22b959f65b607d6ba0879ab641"
+    }
+  ],
+  "persistence": [
+    "wewouwquge_{A3112501-520A-8F32-871A-380B92917B3D}",
+    "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tree\\wewouwquge_{A3112501-520A-8F32-871A-380B92917B3D}",
+    "HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\*AstraZeneca",
+    "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\*franceisshit"
+  ],
+  "detections": {
+    "network": [
+      "ETPRO TROJAN Cobalt Strike Malleable C2 JQuery Custom Profile M2",
+      "ET DNS Query to a *.top domain",
+      "ET POLICY OpenSSL Demo CA - Internet Widgits Pty"
+    ],
+    "behaviors": [
+      "encoded PowerShell",
+      "recon command burst",
+      "rundll32 network connection",
+      "BITSAdmin download",
+      "AdFind execution",
+      "WMI execution",
+      "Office shell child",
+      "Sodinokibi RunOnce keys",
+      "svchost.exe command line containing copy"
+    ],
+    "yaraRules": ["Sodinokibi_032021", "icedid_032021_1", "icedid_032021_2"]
+  }
+}

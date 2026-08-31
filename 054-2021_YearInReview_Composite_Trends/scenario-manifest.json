@@ -1,0 +1,34 @@
+{
+  "scenarioId": "054-2021_YearInReview_Composite_Trends",
+  "report": {
+    "wordpressPostId": 5706,
+    "title": "2021 Year In Review",
+    "published": "2022-03-07",
+    "url": "https://thedfirreport.com/2022/03/07/2021-year-in-review/"
+  },
+  "scenarioType": "synthetic-aggregate-composite",
+  "provenanceWarning": "This report summarizes 20 public 2021 incidents. The generated lanes combine published aggregate trends for training and must not be interpreted as observed per-case correlations or one intrusion.",
+  "entryPoint": "Year2021Sim-Complete.ps1",
+  "cleanup": "Cleanup-Year2021Sim.ps1",
+  "artifactRoot": "%PUBLIC%\\YearReview2021Sim",
+  "phases": [
+    {"order": 1, "script": "Year2021Sim-Phase1-Access-C2.ps1", "name": "Twenty synthetic access lanes: 16 phishing, vulnerable-app/coinminer cases, initial brokers, and Cobalt Strike"},
+    {"order": 2, "script": "Year2021Sim-Phase2-Persistence-Credential-Discovery.ps1", "name": "Fourteen persistence lanes, five security-impairment markers, LSASS/NTDS/hive negatives, and rapid discovery"},
+    {"order": 3, "script": "Year2021Sim-Phase3-Movement-Exfil-Impact.ps1", "name": "RDP/WMI/PsExec movement, six exfiltration lanes, and intact ransomware/cryptominer outcomes"}
+  ],
+  "aggregateFacts": {"publicCasesReviewed": 20, "phishingCases": 16, "persistenceCases": 14, "securityToolImpairmentCases": 5, "exfiltrationCases": 6},
+  "techniquesInferredFromNarrative": ["T1566", "T1190", "T1053.005", "T1547.001", "T1505.003", "T1136.001", "T1219", "T1003.001", "T1003.002", "T1003.003", "T1055", "T1562.001", "T1082", "T1016", "T1033", "T1482", "T1087.002", "T1046", "T1021.001", "T1047", "T1569.002", "T1071.001", "T1041", "T1567.002", "T1486"],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only; proxy disabled; zero bytes transferred",
+    "liveMalwareExploitOrPhishing": false,
+    "persistenceAccountOrRMMChanges": false,
+    "securityControlOrProcessInjectionChanges": false,
+    "credentialLSASSNTDSOrHiveAccess": false,
+    "directoryShareScanOrRemoteAction": false,
+    "realCollectionArchiveOrExfiltration": false,
+    "cryptominingOrEncryption": false,
+    "separateCleanup": true
+  }
+}

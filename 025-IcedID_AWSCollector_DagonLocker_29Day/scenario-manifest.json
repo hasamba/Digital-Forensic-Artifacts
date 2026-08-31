@@ -1,0 +1,8 @@
+{
+  "scenarioId":"025-IcedID_AWSCollector_DagonLocker_29Day",
+  "report":{"wordpressPostId":32050,"title":"From IcedID to Dagon Locker Ransomware in 29 Days","published":"2024-04-29","url":"https://thedfirreport.com/2024/04/29/from-icedid-to-dagon-locker-ransomware-in-29-days/"},
+  "entryPoint":"DagonSim-Complete.ps1","cleanup":"Cleanup-DagonSim.ps1","artifactRoot":"%PUBLIC%\\IcedIDAWSDagonSim",
+  "phases":[{"order":1,"script":"DagonSim-Phase1-PhishIcedIDCobalt.ps1","name":"PrometheusTDS, IcedID, Cobalt Strike, and initial pivot"},{"order":2,"script":"DagonSim-Phase2-AWSCollectorPersistence.ps1","name":"AWSCollector, discovery, exfiltration, AnyDesk, GPO replica, and day-28 activity"},{"order":3,"script":"DagonSim-Phase3-LockerImpact.ps1","name":"Day-29 AWSCollector locker deployment and Dagon impact canaries"}],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"credentialAccess":false,"remoteExecutionOrPropagation":false,"directoryOrShareAccess":false,"accountsOrRemoteAccess":false,"realGpoOrSysvol":false,"securityToolsOrServices":false,"backupsShadowsOrBoot":false,"cloudOrTelegramRequests":false,"encryption":false,"separateCleanup":true},
+  "attackTechniques":["T1134","T1560.001","T1486","T1562.004","T1087.002","T1069.002","T1482","T1567.002","T1083","T1490","T1003.001","T1204.002","T1135","T1055","T1219","T1053.005","T1082","T1614.001","T1124","T1071.001","T1021.002","T1059.003","T1047","T1059.001","T1059.007","T1218.011","T1027.010","T1136.002","T1552.001","T1562.001","T1033","T1039","T1573","T1105","T1020","T1489"]
+}

@@ -1,0 +1,18 @@
+{
+  "source":"https://thedfirreport.com/2023/01/23/sharefinder-how-threat-actors-discover-file-shares/",
+  "published":"2023-01-23",
+  "handling":"The report publishes behavior and detection characteristics rather than case-specific atomic or computed indicators.",
+  "publishedNetworkIndicators":[],
+  "publishedFileHashes":[],
+  "behavioralIndicators":[
+    "Invoke-ShareFinder -CheckShareAccess",
+    "PowerShell Event IDs 4103 and 4104",
+    "Directory Service Event ID 1644 with a broad computer-object LDAP filter",
+    "Security Event ID 5145 from one source to many targets",
+    "SMB/445 queries for IPC$, C$, ADMIN$, Files, and SYSVOL in a short burst",
+    "Optional one-to-many ICMP echo requests",
+    "ExcludeStandard, Ping, Delay, and Jitter parameter variants"
+  ],
+  "publishedLoopbackExample":"http://127.0.0.1:10966/",
+  "note":"The loopback example is a Cobalt Strike internal proxy pattern, not an external IOC. Scenario network activity remains loopback-only."
+}

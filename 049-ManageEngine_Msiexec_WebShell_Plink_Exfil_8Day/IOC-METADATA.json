@@ -1,0 +1,21 @@
+{
+  "source":"https://thedfirreport.com/2022/06/06/will-the-real-msiexec-please-stand-up-exploit-leads-to-data-exfiltration/",
+  "published":"2022-06-06",
+  "handling":"Investigation metadata only. No listed payload is retrieved or executed and no listed address is contacted.",
+  "networkIndicators":[
+    {"role":"SSH reverse proxy and payload host","address":"23.81.246.84","portsReported":[443,433,49800],"banner":"SSH-2.0-8.49 FlowSsh: Bitvise SSH Server (WinSSHD) 8.49","fingerprint":"68:22:ef:82:8b:57:e4:62:37:86:61:bc:98:fc:53:35"},
+    {"role":"web-shell query","address":"5.239.37.78"},{"role":"web-shell query","address":"5.114.3.200"},{"role":"web-shell query","address":"5.113.111.4"},{"role":"web-shell query","address":"35.196.132.85"},
+    {"role":"ManageEngine exploit origin/Tor exit","address":"2.58.56.14"},{"role":"ManageEngine exploit origin/Tor exit","address":"185.220.101.76"},
+    {"role":"exfiltrated-document canary alert","address":"8.0.26.137"},{"role":"exfiltrated-document canary alert","address":"192.221.154.141","note":"Corrected address published 2022-06-06 15:55 UTC."}
+  ],
+  "exploitRequests":["POST /RestAPI/ImportTechnicians?step=1","GET /RestAPI/s247action?execute=s247AgentInstallationProcess&apikey=asdasd"],
+  "publishedPlinkUsername":"admin1",
+  "publishedPlinkPasswordHandling":"The public report contains a plaintext password; this scenario intentionally redacts it because no authentication occurs.",
+  "files":[
+    {"name":"fm2.jsp","md5":"05cee9b71bdd99c22dde19957a6169e7","sha1":"a188d7283c2b4744c4e91f18c59588c8471a2a86","sha256":"8703f52c56b3164ae0becfc5a81bfda600db9aa6d0f048767a9684671ad5899b"},
+    {"name":"FXS.bat","md5":"03cbb2227284c4842906d3576372e604","sha1":"8aeb24b51b339446cac2cb0a4c93ad98f709cf53","sha256":"6e5289df8be0403eda9f63f14c3b3c753a11e924e00484958166d03fcf922510"},
+    {"name":"ekern.exe","md5":"848f7edb825813aee4c09c7f2ec71d27","sha1":"4709827c7a95012ab970bf651ed5183083366c79","sha256":"828e81aa16b2851561fff6d3127663ea2d1d68571f06cbd732fdf5672086924d"},
+    {"name":"msiexec.exe","md5":"0be5d9235059cb4f8b16fe798e822444","sha1":"d18c88294c776815a5b1be0bd4508c9442b3877a","sha256":"4d8f797790019315b9fac5b72cbf693bceeeffc86dc6d97e9547c309d8cd9baf"},
+    {"name":"msiexec.exe (failed)","md5":"9872e0a47e2f44bf6e22e976f061dac0","sha1":"916952c5407233eec5c0176c0e04f88af9e63978","sha256":"c7862701ad23b631ef854570c67fc33331f6853dca65d4c3e825e2c3bb9b16ee"}
+  ]
+}

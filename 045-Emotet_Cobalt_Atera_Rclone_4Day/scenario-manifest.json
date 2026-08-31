@@ -1,0 +1,34 @@
+{
+  "scenarioId": "045-Emotet_Cobalt_Atera_Rclone_4Day",
+  "report": {
+    "wordpressPostId": 9606,
+    "internalCaseNumber": 14335,
+    "title": "Dead or Alive? An Emotet Story",
+    "published": "2022-09-12",
+    "url": "https://thedfirreport.com/2022/09/12/dead-or-alive-an-emotet-story/"
+  },
+  "entryPoint": "EmotetRcloneSim-Complete.ps1",
+  "cleanup": "Cleanup-EmotetRcloneSim.ps1",
+  "artifactRoot": "%PUBLIC%\\EmotetRcloneSim",
+  "timelineNote": "A generated 96-hour axis preserves the report's four-day chronology and relative milestones.",
+  "phases": [
+    {"order": 1, "script": "EmotetRcloneSim-Phase1-XLS-Emotet.ps1", "name": "ZIP/XLS Excel 4.0 macro, Emotet DLL, Run key, discovery, and email spreading"},
+    {"order": 2, "script": "EmotetRcloneSim-Phase2-Cobalt-Movement.ps1", "name": "Cobalt injection, discovery, Kerberoast, AdFind, Pass-the-Hash, PsExec, and LSASS evidence"},
+    {"order": 3, "script": "EmotetRcloneSim-Phase3-RMM-Rclone.ps1", "name": "Atera/Splashtop persistence, generated file shares, repeated Rclone-to-MEGA evidence, and eviction"}
+  ],
+  "techniques": ["T1055.001","T1559.001","T1059.001","T1218.010","T1550.002","T1069.002","T1087.002","T1482","T1204.002","T1021.002","T1570","T1055","T1567.002","T1055.003","T1018","T1082","T1071","T1135","T1558.003","T1003.001","T1547.001","T1566","T1566.001","T1219"],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only",
+    "liveMalwareOrMacros": false,
+    "registryPersistence": false,
+    "injectionCredentialOrTicketAccess": false,
+    "directoryShareOrRemoteActions": false,
+    "emailTransmission": false,
+    "RMMInstallation": false,
+    "realCollectionArchiveOrExfiltration": false,
+    "impact": false,
+    "separateCleanup": true
+  }
+}

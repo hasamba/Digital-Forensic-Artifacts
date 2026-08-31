@@ -1,0 +1,12 @@
+{
+  "scenarioId":"046-BumbleBee_Cobalt_VulnRecon_Kerberoast_DA_11Day",
+  "report":{"wordpressPostId":8740,"internalCaseNumber":13387,"title":"BumbleBee Roasts Its Way to Domain Admin","published":"2022-08-08","url":"https://thedfirreport.com/2022/08/08/bumblebee-roasts-its-way-to-domain-admin/"},
+  "entryPoint":"BumbleRoastSim-Complete.ps1","cleanup":"Cleanup-BumbleRoastSim.ps1","artifactRoot":"%PUBLIC%\\BumbleRoastSim","timelineNote":"A generated 264-hour axis preserves the report's 11-day dwell period and day 1, 2, 4, 7, and 11 activity clusters.",
+  "phases":[
+    {"order":1,"script":"BumbleRoastSim-Phase1-ISO-Cobalt-RDP.ps1","name":"ZIP/ISO/LNK BumbleBee, WMI Cobalt, discovery, RDP, AnyDesk, and first AdFind"},
+    {"order":2,"script":"BumbleRoastSim-Phase2-Recon-Credentials.ps1","name":"Day 2/4/7 VulnRecon, AdFind, remote ProcDump, tool-deletion evidence, AnyDesk, and Seatbelt"},
+    {"order":3,"script":"BumbleRoastSim-Phase3-Day11-DomainAdmin.ps1","name":"PowerShell Cobalt, Kerberoast, comsvcs MiniDump, ShareFinder, network lists, and service-account PsExec to DC"}
+  ],
+  "techniques":["T1566","T1204.002","T1059.003","T1059.001","T1055","T1070.004","T1003.001","T1558.003","T1087.002","T1482","T1570","T1021.001","T1078","T1219","T1105","T1071.001","T1569","T1021.002","T1518","T1016","T1018","T1057","T1553.005","T1036","T1218.011","T1069.002","T1047","T1110.001","T1135"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalwareOrISOMount":false,"downloadsOrInjection":false,"credentialOrTicketAccess":false,"passwordCracking":false,"accountServiceOrRemoteActions":false,"directoryShareOrHostQueries":false,"RMMInstallation":false,"fileDeletion":false,"impact":false,"separateCleanup":true}
+}

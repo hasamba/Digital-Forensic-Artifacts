@@ -1,0 +1,15 @@
+{
+  "scenarioId":"083-Bazar_Cobalt_Zerologon_Ryuk_3h",
+  "report":{"wordpressPostId":44069,"internalCase":1007,"title":"Ryuk Speed Run, 2 Hours to Ransom","published":"2020-11-05","url":"https://thedfirreport.com/2020/11/05/ryuk-speed-run-2-hours-to-ransom/"},
+  "entryPoint":"RyukSpeedSim-Complete.ps1",
+  "cleanup":"Cleanup-RyukSpeedSim.ps1",
+  "artifactRoot":"%PUBLIC%\\RyukSpeedSim",
+  "timelineNote":"The report's exact three-hour axis is preserved: Bazar domain recon in under five minutes, Cobalt within ten minutes, DC movement around one hour, Ryuk deployment around two hours, and domain-wide impact reported at three hours. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"RyukSpeedSim-Phase1-Bazar-Persistence.ps1","name":"phishing lure, Bazar execution, discovery, persistence, and first Cobalt channels"},
+    {"order":2,"script":"RyukSpeedSim-Phase2-Cobalt-Zerologon.ps1","name":"AdFind, Zerologon, Rubeus, injection metadata, DC movement, and FTP staging"},
+    {"order":3,"script":"RyukSpeedSim-Phase3-Ryuk-Impact.ps1","name":"RDP Ryuk deployment, pre-impact commands, server-first and workstation impact canaries"}
+  ],
+  "techniques":["T1566.002","T1059.001","T1059","T1204","T1055","T1068","T1482","T1069.002","T1087.002","T1018","T1021.002","T1021.001","T1560","T1048.003","T1071","T1043","T1486","T1553.002","T1569.002","T1053.005","T1547.001","T1558.003"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","liveMalwareOrDownloads":false,"credentialOrDirectoryActions":false,"remoteMovementOrChanges":false,"serviceTaskRegistryAclOrSecurityChanges":false,"userDataEncryption":false,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

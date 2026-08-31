@@ -1,0 +1,4 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]param([switch]$LabConfirmed)
+. "$PSScriptRoot\QbotMoveSim-utilities.ps1"; Assert-QbotMoveSimSafety -LabConfirmed:$LabConfirmed; $paths=Get-QbotMoveSimPaths; $expected=Join-Path $env:PUBLIC 'QbotMoveSim'; if($paths.Root-ne$expected){throw 'Cleanup root mismatch'}; if(-not(Test-Path -LiteralPath $paths.Root)){Write-Host 'Nothing to clean.';return}; if(-not(Test-Path -LiteralPath $paths.Owner)-or(Get-Content -LiteralPath $paths.Owner -Raw).Trim()-ne$script:QbotMoveSimId){throw 'Refusing cleanup of unowned root'}; if($PSCmdlet.ShouldProcess($paths.Root,'Remove scenario-owned artifact tree')){Remove-Item -LiteralPath $paths.Root -Recurse -Force;Write-Host "Removed scenario-owned artifacts: $($paths.Root)"}

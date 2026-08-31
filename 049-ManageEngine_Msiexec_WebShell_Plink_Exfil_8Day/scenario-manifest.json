@@ -1,0 +1,8 @@
+{
+  "scenarioId":"049-ManageEngine_Msiexec_WebShell_Plink_Exfil_8Day",
+  "report":{"wordpressPostId":7241,"internalCaseNumber":12993,"title":"Will the Real Msiexec Please Stand Up? Exploit Leads to Data Exfiltration","published":"2022-06-06","url":"https://thedfirreport.com/2022/06/06/will-the-real-msiexec-please-stand-up-exploit-leads-to-data-exfiltration/"},
+  "entryPoint":"MsiPlinkSim-Complete.ps1","cleanup":"Cleanup-MsiPlinkSim.ps1","artifactRoot":"%PUBLIC%\\MsiPlinkSim","timelineNote":"A generated 192-hour axis preserves day-seven LSASS dumping and following-day Plink/RDP activity while retaining the report's multi-day ordering.",
+  "phases":[{"order":1,"script":"MsiPlinkSim-Phase1-Exploit-WebShell.ps1","name":"Two-request CVE-2021-44077 exploit, failed/successful masqueraded msiexec, and fm2.jsp web shell"},{"order":2,"script":"MsiPlinkSim-Phase2-WDigest-LSASS-Discovery.ps1","name":"WDigest query/change, periodic session checks, web-shell discovery/browsing, and day-seven comsvcs LSASS dump"},{"order":3,"script":"MsiPlinkSim-Phase3-Plink-RDP-Exfil.ps1","name":"Day-eight renamed Plink reverse SSH, RDP to four systems, and selective database/certificate/document exfiltration"}],
+  "techniques":["T1190","T1572","T1012","T1003","T1087","T1057","T1021.001","T1059.001","T1047","T1070.004","T1078.002","T1112","T1036","T1505.003","T1567"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","exploitOrWebShell":false,"SYSTEMExecution":false,"registryOrWDigestChange":false,"credentialOrLSASSAccess":false,"downloadsOrTunnels":false,"remoteActions":false,"realFileCertificateOrDatabaseAccess":false,"exfiltration":false,"fileDeletion":false,"separateCleanup":true}
+}

@@ -1,0 +1,7 @@
+# 095 - RDP, XMRig, NSSM, and Neshta persistence
+
+Lab-safe companion to [Sqlserver, or the Miner in the Basement](https://thedfirreport.com/2020/04/20/sqlserver-or-the-miner-in-the-basement/). It preserves both RDP source IPs, the `C:\Windows\Fonts` staging path, `sqlsupdater` SFX/updater, `conhost.exe` NSSM helper, `install.bat`/`update.bat`, XMRig 5.1.0 masquerading as SQL Server 2.7.8.2, `sqlbrowsers`, `icacls`/`attrib` lockdown telemetry, competitor process/service actions, Neshta's `exefile` open-command hijack, the screenshot-published scheduled task set, competing-pool hosts sinkholes, five pool endpoints, the published wallet command, hashes, and the 1.32 XMR outcome.
+
+Run elevated with the standard lab gate via `.\SqlMinerBasementSim-Complete.ps1 -LabConfirmed`; artifacts remain under `%PUBLIC%\SqlMinerBasementSim`, and cleanup is separate. Executable-looking artifacts are fixed-echo signed `cmd.exe` decoys; services, tasks, registry, ACLs, attributes, and hosts entries exist only as generated records. No authentication, RDP, deletion, process kill, persistence registration, external pool traffic, CPU mining, or share submission occurs; real DCs are refused.
+
+Observed behavior maps to T1133, T1021.001, T1078, T1059.003, T1036.005, T1564.001, T1222.001, T1543.003, T1546.001, T1112, T1053.005, T1070.004, and T1496. These mappings are analyst inferences because the source provides no ATT&CK table.

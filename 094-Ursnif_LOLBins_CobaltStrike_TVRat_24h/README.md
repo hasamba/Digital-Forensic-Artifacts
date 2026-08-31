@@ -1,0 +1,7 @@
+# 094 - Ursnif via LOLBins, Cobalt Strike, and TVRat
+
+Lab-safe companion to [Ursnif via LOLbins](https://thedfirreport.com/2020/04/24/ursnif-via-lolbins/). It preserves conversation-hijack delivery, the Google Drive protected ZIP and JS, `wscript.exe` → `regsvr32.exe` loading of `XikFYehxR.txt`, Defender's disk-only detection, Ursnif/Tor/VNC C2 metadata, the screenshot-published registry module set and `mshta` → PowerShell → `csc.exe` ancestry, redirected discovery outputs, the approximate 24-hour delay, three Cobalt DLLs loaded through `rundll32`, the `Indexer` five-minute task, signed TeamViewer 8/TVRat files, Cobalt/TVRat communication takeover, all published hashes and IOCs, and the no-final-objective outcome.
+
+Run elevated with the standard lab gate via `.\UrsnifLolbinSim-Complete.ps1 -LabConfirmed`; artifacts remain under `%PUBLIC%\UrsnifLolbinSim`, and cleanup is separate. Executable-looking artifacts are fixed-echo signed `cmd.exe` decoys; the registry and scheduled task exist only as generated files. No email, download, script interpretation, DLL loading, registry/task change, Tor/VNC/TeamViewer remote access, external connection, security impairment, or final objective occurs; real DCs are refused.
+
+Observed behavior maps to T1566.002, T1204.002, T1059.007, T1218.010, T1055, T1112, T1218.005, T1059.001, T1027, T1016, T1082, T1057, T1518.001, T1090.003, T1219, T1105, T1218.011, T1053.005, and T1071.001. These mappings are analyst inferences because the source provides no ATT&CK table.

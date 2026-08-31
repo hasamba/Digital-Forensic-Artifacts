@@ -1,0 +1,9 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]param([switch]$LabConfirmed)
+. "$PSScriptRoot\DharmaSingleSim-utilities.ps1";Assert-DSSafety -LabConfirmed:$LabConfirmed;$p=Initialize-DSEnvironment
+$dharma=Join-Path $p.Payloads '1pgp.exe';New-DSDecoy -Path $dharma -Role 'Dharma/CrySiS payload stand-in' -PublishedSha256 '2f2e75affe9217c7211043936678fb1777e2db4a8f1986b8805ddb1e84e9e99b';Invoke-DSDecoy -FilePath $dharma -Reported '1pgp.exe executed and locked the single system' -Parent 'RDP operator session' -Label 'SYNTHETIC-DHARMA'
+Write-DSFile -Path(Join-Path $p.Host 'C$\Finance\ledger.xlsx.canary')-Content 'INERT GENERATED FINANCE DATA. This is not user data.' -Purpose generated-canary-data;Write-DSFile -Path(Join-Path $p.Host 'C$\Desktop\DHARMA-README.txt')-Content 'INERT SPARSE DHARMA RANSOM-NOTE CANARY. No payment instructions.' -Purpose ransom-note-canary;Write-DSFile -Path(Join-Path $p.Host 'C$\Finance\ledger.xlsx.DHARMA-CANARY')-Content 'INERT ENCRYPTION MARKER. No file was encrypted.' -Purpose encryption-canary
+Write-DSJson -Path(Join-Path $p.Evidence 'impact-and-movement.json')-Object([ordered]@{reportedFamily='Dharma/CrySiS based on PDB path';reportedContext='actor had Domain Administrator privileges';reportedLateralMovement='none attempted';generatedHost=$p.Host;remoteTargets=0;remoteSessions=0;remoteFilesWritten=0;userFilesRead=0;userFilesChanged=0;filesEncrypted=0;generatedCanaryMarkers=2})-Purpose outcome
+Add-DSTimeline 50 impact '1pgp Dharma execution represented on one generated host; no spread attempted' @{filesEncrypted=0;remoteTargets=0;generatedCanaryMarkers=2}
+Write-DSJson -Path(Join-Path $p.Evidence 'phase3-negative.json')-Object([ordered]@{remoteTargets=0;remoteSessions=0;remoteFilesWritten=0;startupFilesWritten=0;registryValuesWritten=0;userFilesRead=0;userFilesChanged=0;filesEncrypted=0;securityControlsChanged=0;logsCleared=0;shadowCopiesDeleted=0;externalConnections=0})-Purpose safety

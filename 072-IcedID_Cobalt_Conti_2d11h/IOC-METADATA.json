@@ -1,0 +1,17 @@
+{
+  "source": "https://thedfirreport.com/2021/05/12/conti-ransomware/",
+  "internalCase": 3584,
+  "handling": "Metadata only; no sample retrieved and no infrastructure contacted. The 192145.dll SHA-256 uses the 64-character value from the report's YARA metadata; the IOC table renders an extra leading 'f'.",
+  "fileSha256": [
+    {"name":"b52c0640957e5032b5160578f8cb99f9b066fde4f9431ee6869b2eea67338f28.dll.exe","sha256":"b52c0640957e5032b5160578f8cb99f9b066fde4f9431ee6869b2eea67338f28"},
+    {"name":"icju1.exe","sha256":"e54f38d06a4f11e1b92bb7454e70c949d3e1a4db83894db1ab76e9d64146ee06"},
+    {"name":"rate_x32.dat","sha256":"eb79168391e64160883b1b3839ed4045b4fd40da14d6eec5a93cfa9365503586"},
+    {"name":"192145.dll","sha256":"29bc338e63a62c24c301c04961084013816733dad446a29c20d4413c5c818af9"},
+    {"name":"reconstructed-conti_v3.dll","sha256":"8391dc3e087a5cecba74a638d50b771915831340ae3e027f0bb8217ad7ba4682"}
+  ],
+  "relatedContiReferenceSha256": "5c278c04bb19196dc8559d45b9728b3ba0c1bc5cdd20a766f56248e561c6f5a6",
+  "networkIocs": ["vaclicinni.xyz","thulleultinn.club","oxythuler.cyou","dictorecovery.cyou","expertulthima.club","68.183.20.194:80","159.89.140.116:443","83.97.20.160:443","dimentos.com","192.99.178.145:80","38.135.122.194:8080"],
+  "cobaltProfile": {"spawn":"runonce.exe","jitter":39,"pollingMs":62719,"httpPaths":["/r-arrow","/bg"],"httpsPaths":["/FAQ","/bg"],"postPath":"/btn_bg"},
+  "reportedMovement": {"service":"d8d6deb","dll":"192145.dll,StartW","proxyHostName":"mikespc","account":"nuuser"},
+  "detections": ["IcedID encoded binary/cookie","PE download","minimal headers","packed executable","OpenSSL demo CA","overpass-the-hash RC4 downgrade","ports 135/445/1434/1435 scan","GetSystem","recon","Defender disabled","PsExec","in-memory assembly","Rundll32 network","net user add"]
+}

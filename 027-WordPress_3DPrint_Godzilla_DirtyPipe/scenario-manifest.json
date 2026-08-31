@@ -1,0 +1,46 @@
+{
+  "scenarioId": "027-WordPress_3DPrint_Godzilla_DirtyPipe",
+  "report": {
+    "wordpressPostId": 28615,
+    "title": "Threat Brief: WordPress Plugin Exploit Leads to Godzilla Web Shell, Discovery & New CVE",
+    "published": "2024-03-04",
+    "url": "https://thedfirreport.com/2024/03/04/threat-brief-wordpress-exploit-leads-to-godzilla-web-shell-discovery-new-cve/",
+    "publicPdf": "https://thedfirreport.com/wp-content/uploads/2024/03/WordPress-Plugin-Exploit-Leads-to-Godzilla-Web-Shell-Discovery-New-CVE.pdf.pdf"
+  },
+  "entryPoint": "WordPressGodzillaSim-Complete.ps1",
+  "cleanup": "Cleanup-WordPressGodzillaSim.ps1",
+  "artifactRoot": "%PUBLIC%\\WordPressGodzillaSim",
+  "phases": [
+    {"order": 1, "script": "WordPressGodzillaSim-Phase1-ExploitWebShell.ps1", "name": "3DPrint Lite CVE-2021-4436 upload and inert Godzilla web-shell evidence"},
+    {"order": 2, "script": "WordPressGodzillaSim-Phase2-DiscoveryScripts.ps1", "name": "Apache-to-dash discovery, inert LinEnum, and failed MySQL evidence"},
+    {"order": 3, "script": "WordPressGodzillaSim-Phase3-DirtyPipeTimestomp.ps1", "name": "Failed Dirty Pipe attempts, generated-canary timestomp, and final troubleshooting"}
+  ],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only",
+    "liveMalwareOrPhpExecution": false,
+    "linuxCommandsOrShells": false,
+    "credentialOrShadowAccess": false,
+    "privilegeEscalation": false,
+    "remoteContact": false,
+    "artifactDeletionDuringScenario": false,
+    "timestompScope": "generated 123.php canary only",
+    "separateCleanup": true
+  },
+  "attackTechniques": [
+    {"id": "T1190", "name": "Exploit Public-Facing Application", "status": "observed in report"},
+    {"id": "T1505.003", "name": "Web Shell", "status": "observed in report"},
+    {"id": "T1059.004", "name": "Unix Shell", "status": "observed in report"},
+    {"id": "T1087", "name": "Account Discovery", "status": "derived from observed commands"},
+    {"id": "T1082", "name": "System Information Discovery", "status": "derived from observed commands"},
+    {"id": "T1016", "name": "System Network Configuration Discovery", "status": "derived from observed commands"},
+    {"id": "T1046", "name": "Network Service Discovery", "status": "derived from observed commands"},
+    {"id": "T1083", "name": "File and Directory Discovery", "status": "derived from observed commands"},
+    {"id": "T1518.001", "name": "Security Software Discovery", "status": "derived from UFW commands"},
+    {"id": "T1003.008", "name": "/etc/passwd and /etc/shadow", "status": "reported attempt; never performed by simulation"},
+    {"id": "T1105", "name": "Ingress Tool Transfer", "status": "derived from uploaded LinEnum and Dirty Pipe scripts"},
+    {"id": "T1068", "name": "Exploitation for Privilege Escalation", "status": "attempted unsuccessfully in report; never performed by simulation"},
+    {"id": "T1070.006", "name": "Timestomp", "status": "observed in report; simulation changes only its generated canary"}
+  ]
+}

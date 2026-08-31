@@ -1,0 +1,15 @@
+{
+  "scenarioId":"078-RDP_Mimikatz_AdvancedIPScanner_XMRig_2h",
+  "report":{"wordpressPostId":2043,"internalCase":1014,"title":"All That for a Coinminer?","published":"2021-01-18","url":"https://thedfirreport.com/2021/01/18/all-that-for-a-coinminer/"},
+  "entryPoint":"RdpMinerSim-Complete.ps1",
+  "cleanup":"Cleanup-RdpMinerSim.ps1",
+  "artifactRoot":"%PUBLIC%\\RdpMinerSim",
+  "timelineNote":"The two-hour axis preserves report ordering; prior-day brute force/account creation is represented at offset -1440 minutes. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"RdpMinerSim-Phase1-RDP-Account.ps1","name":"Prior-day brute force/account creation and valid-account RDP markers"},
+    {"order":2,"script":"RdpMinerSim-Phase2-Credentials-Discovery-RDP.ps1","name":"Mimikatz credentials/ticket export, discovery/scanner evidence, and generated-host RDP movement"},
+    {"order":3,"script":"RdpMinerSim-Phase3-XMRig-Logout.ps1","name":"svshost/XMRig/HideAll artifacts, pool markers, password-change marker, and logout"}
+  ],
+  "techniques":["T1059","T1136","T1003","T1133","T1061","T1564.001","T1087.001","T1046","T1021","T1496"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","authenticationAccountPasswordOrRdp":false,"credentialLsassTicketOrScan":false,"fileHidingMiningCpuOrPoolImpact":false,"generatedHostsAndCredentialsOnly":true,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

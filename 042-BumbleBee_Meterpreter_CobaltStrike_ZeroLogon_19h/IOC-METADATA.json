@@ -1,0 +1,17 @@
+{
+  "source":"https://thedfirreport.com/2022/11/14/bumblebee-zeros-in-on-meterpreter/","published":"2022-11-14","handling":"Investigation metadata only. No listed payload is retrieved or executed and no listed host is contacted.",
+  "lnkOrigin":{"machineId":"desktop-30fdj39","macAddress":"eb:33:6a:3b:d0:e3","creation":"2022-02-11T21:22:11"},
+  "networkIndicators":[
+    {"family":"BumbleBee","address":"45.153.243.93","port":443,"ja3":"0c9457ab6f0d6a14fc8a3d1d149547fb","ja3s":"61be9ce3d068c08ff99a857f62352f9d"},{"family":"BumbleBee","address":"213.232.235.199","port":443,"ja3":"0c9457ab6f0d6a14fc8a3d1d149547fb","ja3s":"61be9ce3d068c08ff99a857f62352f9d"},
+    {"family":"Cobalt Strike","hostname":"cevogesu.com","address":"172.93.201.12","port":443,"ja3":"a0e9f5d64349fb13191bc781f81f42e1","ja3s":"ae4edc6faf64d08308082ad26be60767"},{"family":"Cobalt Strike","hostname":"titojukus.com","address":"23.106.215.100","port":443,"ja3":"a0e9f5d64349fb13191bc781f81f42e1","ja3s":"ae4edc6faf64d08308082ad26be60767"},
+    {"family":"Meterpreter","hostname":"ec2-3-16-159-37.us-east-2.compute.amazonaws.com","address":"3.16.159.37","narrativePorts":[80,443],"atomicIndicatorPorts":[80,44],"note":"Report narrative says 80/443 while atomic section says 80/44; both preserved.","ja3":["ce5f3254611a8c095a3d821d44539877","a0e9f5d64349fb13191bc781f81f42e1"],"ja3s":"ec74a5c51106f0419184d0dd08fb05bc"}
+  ],
+  "cobaltPayloads":[{"architecture":"x64","md5":"ea2c1fa8668812852a77737c4f712ba2","sha1":"fa9597b87f78c667cc006aaa1c647d539aa9b827","sha256":"da3c4e2b7768d66ecb6c0e74c6d45e2bcfbc6203b76c7163909bd2061603cef5"},{"architecture":"x86","md5":"5d2a8724dbce65eefb7e74fbb0eceda9","sha1":"785b660537506501e695e46875b02260649b23f7","sha256":"f7bfde050c81d47d79febdb170f307f447e76253715859727beff889d2a91694"}],
+  "files":[
+    {"name":"documents.lnk","md5":"ee7ad5fe821fb9081380dbbf40c4f062","sha1":"38eef0cdaa8faa27c9e2cedeafcfe842e2e0e08e","sha256":"3c600328e1085dc73d672d068f3056e79e66bec7020be6ae907dd541201cd167"},
+    {"name":"mkl2n.dll","md5":"aeff99611babd41d79c3ba7930f00bc1","sha1":"fa3649b0472ba7fd9b31a22c904b2de4c008f540","sha256":"f7c1d064b95dc0b76c44764cd3ae7aeb21dd5b161e5d218e8d6e0a7107d869c1"},
+    {"name":"n23.dll","md5":"b3e68aebe05dc652ec65099e0e98b94e","sha1":"52d4c0cb9a93e7bc5f1e0c386dcca3e0ac41b966","sha256":"65a9b1bcde2c518bc25dd9a56fd13411558e7f24bbdbb8cb92106abbc5463ecf"},
+    {"name":"StolenImages_Evidence.iso","md5":"fbcaa31456f39f996950511705461639","sha1":"759688d1245aacd0ed067b0f0388786e911aaf28","sha256":"4bb67453a441f48c75d41f7dc56f8d58549ae94e7aeab48a7ffec8b78039e5cc"},
+    {"name":"wSaAHJzLLT.exe","md5":"bd5c8ea8c231bf2775b9c0ba3f7ea867","sha1":"ccc9e1559b877b04b1d0e7f8920a64b4e35136da","sha256":"df63149eec96575d66d90da697a50b7c47c3d7637e18d4df1c24155abacbc12e"}
+  ]
+}

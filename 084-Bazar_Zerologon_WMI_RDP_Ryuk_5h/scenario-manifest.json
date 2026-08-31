@@ -1,0 +1,15 @@
+{
+  "scenarioId":"084-Bazar_Zerologon_WMI_RDP_Ryuk_5h",
+  "report":{"wordpressPostId":1041,"internalCase":1006,"title":"Ryuk in 5 Hours","published":"2020-10-18","url":"https://thedfirreport.com/2020/10/18/ryuk-in-5-hours/"},
+  "entryPoint":"RyukFiveHourSim-Complete.ps1",
+  "cleanup":"Cleanup-RyukFiveHourSim.ps1",
+  "artifactRoot":"%PUBLIC%\\RyukFiveHourSim",
+  "timelineNote":"The exact five-hour axis is preserved: Zerologon before hour two, WMI/SMB and DC discovery, readiness at hour four, backup pivot at 4h10m, ransomware activity at roughly 4h30m, and completion at hour five. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"RyukFiveHourSim-Phase1-Bazar-Zerologon.ps1","name":"low-privileged Bazar entry, injection metadata, discovery, C2, and Zerologon marker"},
+    {"order":2,"script":"RyukFiveHourSim-Phase2-WMI-DC-Discovery.ps1","name":"SMB/WMI Cobalt deployment, named pipe, DLL proxy execution, GPO marker, DC/AD/AdFind discovery"},
+    {"order":3,"script":"RyukFiveHourSim-Phase3-RDP-Ryuk-Impact.ps1","name":"RDP backup-first Ryuk deployment and generated five-hour impact"}
+  ],
+  "techniques":["T1192","T1076","T1105","T1047","T1059","T1482","T1018","T1124","T1486","T1043","T1071","T1032","T1204","T1078","T1068","T1218","T1085","T1117"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","liveMalwareOrDownloads":false,"credentialOrDirectoryActions":false,"WmiSmbRdpOrRemoteChanges":false,"namedPipeDllGpoOrSysvolActions":false,"userDataEncryption":false,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

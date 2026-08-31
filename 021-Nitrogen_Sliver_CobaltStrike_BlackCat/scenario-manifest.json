@@ -1,0 +1,35 @@
+{
+  "scenarioId": "021-Nitrogen_Sliver_CobaltStrike_BlackCat",
+  "report": {
+    "wordpressPostId": 38756,
+    "title": "Nitrogen Campaign Drops Sliver and Ends With BlackCat Ransomware",
+    "published": "2024-09-30",
+    "url": "https://thedfirreport.com/2024/09/30/nitrogen-campaign-drops-sliver-and-ends-with-blackcat-ransomware/"
+  },
+  "entryPoint": "NitrogenSim-Complete.ps1",
+  "cleanup": "Cleanup-NitrogenSim.ps1",
+  "artifactRoot": "%PUBLIC%\\NitrogenBlackCatSim",
+  "phases": [
+    {"order":1,"script":"NitrogenSim-Phase1-InitialC2Persistence.ps1","name":"Nitrogen initial access, Sliver/Cobalt Strike, and persistence"},
+    {"order":2,"script":"NitrogenSim-Phase2-CredentialLateralExfil.ps1","name":"Credential evidence, discovery, lateral movement, and Restic exfiltration"},
+    {"order":3,"script":"NitrogenSim-Phase3-BlackCatImpact.ps1","name":"BlackCat deployment and impact canaries"}
+  ],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only",
+    "liveMalware": false,
+    "accountsOrDomain": false,
+    "credentialAccess": false,
+    "shadowCopies": false,
+    "remoteExecution": false,
+    "servicesTasksRegistryOrBoot": false,
+    "logClearing": false,
+    "reboot": false,
+    "encryption": false,
+    "separateCleanup": true
+  },
+  "attackTechniques": [
+    "T1098","T1070.001","T1486","T1039","T1574.002","T1069.002","T1482","T1189","T1055.001","T1027.013","T1048","T1105","T1490","T1570","T1087.001","T1069.001","T1003.001","T1204.002","T1036","T1036.005","T1135","T1059.001","T1055","T1059.006","T1021.001","T1018","T1562.009","T1053.005","T1569.002","T1021.002","T1071.001","T1059.003","T1047","T1547.004"
+  ]
+}

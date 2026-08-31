@@ -1,0 +1,17 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]param([switch]$LabConfirmed)
+. "$PSScriptRoot\ToolkitSim-utilities.ps1";Assert-ToolkitSafety -LabConfirmed:$LabConfirmed;$p=Initialize-ToolkitEnvironment;if(-not(Test-Path(Join-Path $p.Evidence 'infrastructure.json'))){throw'Run phase 1 first'}
+$families=@(
+@{names=@('atera_del.bat','atera_del2.bat');role='Atera uninstall/removal';hashes=@('ea7dec8fa52d2300350367691ae2fbea13dbd5bf80d6b43b05eedf197529aa77','512beb7dfa9fdbc8be7fbf59c7bec7911296f9e36c8a3d3b95e7aef4a88bf09c')},
+@{names=@('backup.bat','delbackup.bat');role='backup/catalog/shadow deletion and recovery impairment';hashes=@('beb5022543a1e12e1f8f5ffe5d520e5fc9cf623aea512cfb43ea2f8c2897420c','6cff22a3ea7c054075b9aded5933587bf997623183539e10e426d103d604f046')},
+@{names=@('clearlog.bat');role='event-log, recycle-bin, RDP-artifact clearing';hashes=@('09f91e90a1604a633c00d6039581f552603421356cb1edb62e085b32ff01b94e')},
+@{names=@('cmd.cmd','shadow.bat','shadowGuru.bat');role='UAC/RDP/NLA/accessibility backdoor, shares, security registry';hashes=@('4106ce787cf73d7f8215311a241f0e42426301a5a2078da9e3349afade2df684','87ab1707a553557b10fa721a32f053fbb40d11de6f692e96e067d03316fe530b','2bcd5702a7565952c44075ac6fb946c7780526640d1264f692c7664c02c68465')},
+@{names=@('def1.bat','defendermalwar.bat');role='Defender/UAC/ETW/tasks/Malwarebytes impairment';hashes=@('0e626e01d3ae7840aa486468f40138284ccbd70dfe336a6b5d4008d01eb79988','5b43428452a867ad61554d763c8f19ca4cd8af8c31194304785e9e45f9258441')},
+@{names=@('disable.bat','hyp.bat','z.bat','z1.bat');role='SQL/Exchange/Hyper-V/Firebird/security service and process impairment';hashes=@('fdc105ae79dff83f31777c6e047272c5b372251a3af49e20370e7ee9d1c70763','08d40a402b3754e52e4e86003bffddfdccbceefd335f53591f4cf715f8d30321','38283b775552da8981452941ea74191aa0d203edd3f61fb2dee7b0aea3514955','a668a98e57c03decf6ea76bb32f67f3f077ef2277e57f4117d44f4342977fddf')},
+@{names=@('LOGOFALL.bat','LOGOFALL1.bat');role='session discovery and logoff';hashes=@('03b3c37300bf9dcfaa4594e86841b70263324dda305484fb268b27deb09f936c','3691dbb1834db4eb8ef4c195d26779b87db267a56f2ebca6c146a53fb8adb9c0')},
+@{names=@('ON.bat');role='network-service enablement';hashes=@('b0056bef817408449470d3fa43e13cbc89cabdae795b1dc8cbe9905c5946f530')}
+)
+foreach($family in $families){for($i=0;$i-lt$family.names.Count;$i++){$n=$family.names[$i];$body="@echo off`r`nREM INERT CAPABILITY CANARY - DO NOT EXECUTE REPORTED ACTIONS`r`nREM Role: $($family.role)`r`nREM Reported SHA256: $($family.hashes[$i])`r`necho TOOLKIT-CANARY";Write-ToolkitFile(Join-Path $p.Batch $n)$body $family.role}}
+$danger=[ordered]@{mode='negative-execution capability matrix';reportedUtilities=@('msiexec','sc','taskkill','reg','wbadmin','wmic','vssadmin','bcdedit','diskshadow','wevtutil','net','netsh','logoff');outcomes=@{servicesChanged=0;processesKilled=0;securityToolsChanged=0;registryWrites=0;tasksChanged=0;backupsDeleted=0;shadowsDeleted=0;logsCleared=0;recycleBinChanged=0;RDPChanged=0;firewallChanged=0;sharesCreated=0;sessionsLoggedOff=0;bootChanged=0;filesSelfDeleted=0}}
+Write-ToolkitFile(Join-Path $p.Evidence 'batch-capability-matrix.json')($danger|ConvertTo-Json -Depth 8)'negative execution matrix';Add-ToolkitTimeline capabilities 'Recovered batch families created as inert REM/echo canaries' @{batchCanaries=18;executed=0;systemChanges=0;techniques=@('T1070.001','T1562.001','T1562.002','T1490','T1489','T1546.008','T1112')}

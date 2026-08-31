@@ -1,0 +1,14 @@
+{
+  "scenarioId":"039-ShareFinder_NetworkShare_Discovery_Profile",
+  "report":{"wordpressPostId":13900,"title":"ShareFinder: How Threat Actors Discover File Shares","published":"2023-01-23","url":"https://thedfirreport.com/2023/01/23/sharefinder-how-threat-actors-discover-file-shares/"},
+  "scenarioType":"synthetic-technique-and-detection-profile",
+  "provenanceWarning":"The source is a ShareFinder behavior and detection profile, not one intrusion. Generated chronology and hosts are synthetic training data.",
+  "entryPoint":"ShareFinderSim-Complete.ps1","cleanup":"Cleanup-ShareFinderSim.ps1","artifactRoot":"%PUBLIC%\\ShareFinderSim",
+  "phases":[
+    {"order":1,"script":"ShareFinderSim-Phase1-PowerShell.ps1","name":"Direct and Cobalt proxy command-line plus generated PowerShell 4103/4104 evidence"},
+    {"order":2,"script":"ShareFinderSim-Phase2-LDAP-SMB-ICMP.ps1","name":"Generated LDAP 1644, ICMP, SMB/445, and share tree-connect evidence"},
+    {"order":3,"script":"ShareFinderSim-Phase3-Detection.ps1","name":"Generated Security 5145 evidence, parameter variants, correlation, and outcome negatives"}
+  ],
+  "techniques":["T1059.001","T1018","T1135"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","PowerViewOrShareFinderCode":false,"LDAPQueries":false,"ICMPPackets":false,"remoteSMBConnections":false,"shareOrSysvolAccess":false,"realEventLogWrites":false,"collectionOrExfiltration":false,"impact":false,"separateCleanup":true}
+}

@@ -1,0 +1,18 @@
+{
+  "scenarioId":"026-OneNote_IcedID_CobaltStrike_AnyDesk_Nokoyawa",
+  "source":{"title":"From OneNote to RansomNote: An Ice Cold Intrusion","published":"2024-04-01","url":"https://thedfirreport.com/2024/04/01/from-onenote-to-ransomnote-an-ice-cold-intrusion/"},
+  "safeHandling":"Metadata only. Scripts never resolve or contact these indicators; attempts are rewritten to 127.0.0.1 with no proxy.",
+  "networkIndicators":[
+    {"role":"IcedID delivery","indicator":"mrassociattes.com / 174.138.188.6"},{"role":"IcedID primary C2","indicator":"aerilaponawki.com / 193.149.129.131:80"},{"role":"IcedID C2","indicator":"klindriverfor.com / 5.255.102.167:443"},{"role":"IcedID C2","indicator":"alishaskainz.com / 45.61.139.206 and 162.33.178.40:443"},{"role":"IcedID C2","indicator":"halicopnow.com / 5.255.105.55:443"},{"role":"Cobalt Strike","indicator":"msc-mvc-updates.com / 91.215.85.183"},{"role":"FileZilla SFTP","indicator":"45.155.204.5:22"},{"role":"AnyDesk","indicator":"152.89.196.49","clientId":485343132},{"role":"AnyDesk","indicator":"185.29.9.162","clientId":547283332}
+  ],
+  "files":[
+    {"name":"Contract_02_21_Copy#909.one","md5":"5f4d630ef00656726401b205ae4dc88f","sha1":"aa8f2d6d98aa535e05685076ca02f781c2aa6464","sha256":"9c337d27dab65fc3f4b88666338e13416f218ab75c4b5e37cc396241c225efe8"},
+    {"name":"COIm.jpg","md5":"d1da347e78bf043e2dc61638e946c3da","sha1":"d87a3c22771b1106a1a52d96df7b2944d93fa184","sha256":"1ab812f7d829444dc703eeb02ea0a955ec839d5e2a9b619d44ac09a91135cad1"},
+    {"name":"GET_ID.bat","md5":"a59a7916156c52f732b4c2e321facfe1","sha1":"8c949a7769d16c285347f650ef2eedac01dc1805","sha256":"eae2bce6341ff7059b9382bfa0e0daa337ea9948dd729c0c1e1ee9c11c1c0068"},
+    {"name":"INSTALL.ps1","md5":"b1f5e4774aa79f643350218df61e33f6","sha1":"f1e7994c6568f0182a60f64557c7793df5e550ed","sha256":"b378c2aa759625de2ad1be2c4045381d7474b82df7eb47842dc194bb9a134f76"},
+    {"name":"agaloz.dll","md5":"76a1f94ed6499b99d2cc500998846875","sha1":"ca14d61bcf038cda45199f54c7c452ad262a7c88","sha256":"d6127d614309acbf2a630fe3fb0fda8e4079dcf2045f91aa400d179751d425f7"},
+    {"name":"csrss.exe/Funa2.exe","md5":"f927cd4f40c7a6dad769a8f9af771a8c","sha1":"0fdfef7c9cc4305df81b006e898e1592aa822437","sha256":"06bbb36baf63bc5cb14d7f097745955a4854a62fa3acef4d80c61b4fa002c542"},
+    {"name":"svchost.exe (Nokoyawa)","md5":"8800e6f1501f69a0a04ce709e9fa251c","sha1":"72a1c9ea93d18309769d8be5cdb3daedf1cddcf5","sha256":"3c9f4145e310f616bd5e36ca177a3f370edc13cf2d54bb87fe99972ecf3f09b4"}
+  ],
+  "behavioralIndicators":{"campaignId":3329953471,"taskUri":"azigci_{C747FFDF-F0E2-113B-8DCA-0ECA4EBB92A2}","icedIdFiles":["Cadiak.dll","license.dat"],"cobaltPipes":["postex_*","postex_ssh_*","status_*","msagent_*","MSSE-*","*-server"],"cobaltUri":"/_/scs/mail-static/_js/","anyDeskPassword":"btc1000qwe123","fileZillaSsh":"ssh-2.0-filezilla_3.63.2.1","fileZillaHostKeyHash":"c561c2cdad206b6ed8469079e037e3f9","nokoyawaExtension":"NOKONOKO","note":"NOKONOKO-readme.txt"}
+}

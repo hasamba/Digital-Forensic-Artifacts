@@ -1,0 +1,16 @@
+{
+  "source":"https://thedfirreport.com/2020/08/03/dridex-from-word-to-domain-dominance/","sourceRecovery":"Complete original article read from Internet Archive capture 20200929173247 because the live page serves broken template content.","internalCase":1002,
+  "handling":"Metadata only. No sample or open-directory file is retrieved and no endpoint is contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":{"dridex":["2.58.16.87","144.168.239.42","216.52.109.40","88.129.221.43","104.131.103.128","54.39.34.24","192.99.103.228","64.118.8.15","2.80.178.251","75.170.61.45","199.66.90.63","88.129.223.244","209.74.126.2"],"ufo":["59.148.253.194:443","2.58.16.87:8443"],"empireC2":"194.99.22.145","empireDefaultPageSha256":"b8c892fbb49921529be6f6ce17685c31724f76959111b28f39e39dc299b8acaf"},
+  "files":[
+    {"name":"July2020_2485413825.doc","sha256":"e3589aa5d687e58ee97bda2c501bcba9d5e942fe929644602dd1645b3c7f0e94"},
+    {"name":"123.bin","md5":"3994131da9d08aa5ca8b4fc671d4c9db","sha1":"55fc3f8108e5a563ea00cd3abc9a5672d3d58ec5","sha256":"e88dfd4bef8c502ef2b711fd025aa321244dbca1eab80586b07187b3cf261de3"},
+    {"name":"ufo.exe","md5":"92cc8b22a89cc560963407b482443b76","sha1":"8b0c0b84222571a70ca65c0e3e8cf459c80406fc","sha256":"5761fd8b454c1121f80019ade53b0815bd0573dac89fe6ecd3198e7d756f1a3a"},
+    {"name":"marple.exe","md5":"850c08bf4fc0b063808016adb9446c78","sha1":"dee29e6c640fa27b04be486e429fce11fb942ccc","sha256":"cb81e371e2a4d3371e051b1f15674ce6cb94e257d28ddc1a5209bb56c71dd27a"},
+    {"name":"pse.bin","md5":"27304b246c7d5b4e149124d5f93c5b01","sha1":"e50d9e3bd91908e13a26b3e23edeaf577fb3a095"},
+    {"name":"rvhz1.dll","md5":"db91c4531aa46ce160a71b9c74c800bb","sha1":"cf45535c5d392bfd58fb385edb46798d64793d98","sha256":"076547c290c80627993690a9e6c15eeb2ac9b86a9a33af2d3dbaab135f1f43ab"},
+    {"name":"adfind.exe","md5":"df5ce1159ef2e257df92e1825d786d87","sha1":"a7e163eaa0fc2afb9c0d5ac6f79cb3e49919dd3c"},
+    {"name":"cannot_but_soft.xsl","sha256":"f4b75d4ddcd7b9ff5d7f867d44e4b7236c69e26807b2ca8296df1981aaf336f6","source":"report YARA metadata"}
+  ],
+  "detections":{"network":["ET POLICY PsExec service created","ET POLICY SMB2 executable transfer","ABUSE.CH Dridex SSL blacklist"],"sigma":["Empire Launcher","renamed PsExec","PsExec service start","Whoami execution","Invoke-Mimikatz","AdFind Recon"],"suricata":["PowerShell Empire download and beacon"],"yara":["dridex_yara_ufo","dridex_cannot_but_soft","dridex_yara_marple","dridex_yara_123","dridex_yara_rvhz1","_ufo_123_0"]}
+}

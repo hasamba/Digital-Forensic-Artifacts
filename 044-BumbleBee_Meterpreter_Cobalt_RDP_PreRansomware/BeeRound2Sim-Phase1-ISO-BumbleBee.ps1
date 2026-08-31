@@ -1,0 +1,7 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]param([switch]$LabConfirmed)
+. "$PSScriptRoot\BeeRound2Sim-utilities.ps1";Assert-BeeRound2Safety -LabConfirmed:$LabConfirmed;$p=Initialize-BeeRound2Environment
+Write-BeeRound2File(Join-Path $p.Lure 'document.iso')'INERT ISO-NAME CANARY. Not a disk image and never mounted.''ISO lure';Write-BeeRound2File(Join-Path $p.Lure 'documents.lnk')'INERT LNK-NAME CANARY. Source tracker metadata: user-pc / 9a:5b:d6:3e:47:ec.''LNK lure';Write-BeeRound2File(Join-Path $p.Lure 'tamirlan.dll')'INERT BUMBLEBEE DLL-NAME CANARY. Not a PE file.''BumbleBee canary'
+$loader=Join-Path $p.Beach 'rundll32.exe';New-BeeRound2Decoy $loader 'BumbleBee rundll32 stand-in';Invoke-BeeRound2Decoy $loader 'C:\Windows\System32\rundll32.exe tamirlan.dll,EdHVntqdWt' 'explorer.exe';foreach($t in @('154.56.0.221:443','64.44.101.250:443','103.175.16.117:443')){Invoke-BeeRound2Loopback 443 $t 'BumbleBee TLS marker'}
+Write-BeeRound2File(Join-Path $p.Evidence 'initial-execution-negative-record.json')(@{ISOMounted=$false;LNKExecuted=$false;BumbleBeeExecuted=$false;WMIProcessesCreated=0;processesInjected=0}|ConvertTo-Json)'initial safety record';Add-BeeRound2Timeline 0 initial-access 'ISO mount, documents.lnk user execution, and hidden tamirlan.dll represented' @{isoMounted=$false;techniques=@('T1553.005','T1204')};Add-BeeRound2Timeline .01 execution 'rundll32 tamirlan.dll,EdHVntqdWt and five-second BumbleBee C2 represented' @{malwareExecuted=$false;technique='T1218.011'}

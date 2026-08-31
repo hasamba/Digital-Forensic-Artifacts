@@ -1,0 +1,31 @@
+{
+  "scenarioId": "076-Laravel_Debug_SMTP_Cracker_Secrets",
+  "report": {
+    "wordpressPostId": 2293,
+    "title": "Laravel Apps Leaking Secrets",
+    "published": "2021-02-28",
+    "url": "https://thedfirreport.com/2021/02/28/laravel-debug-leaking-secrets/"
+  },
+  "entryPoint": "LaravelLeakSim-Complete.ps1",
+  "cleanup": "Cleanup-LaravelLeakSim.ps1",
+  "artifactRoot": "%PUBLIC%\\LaravelLeakSim",
+  "timelineNote": "A generated six-hour ordered axis is used because the report says only that the RDP activity occurred a few days before publication. Real DC execution is refused.",
+  "phases": [
+    {"order":1,"script":"LaravelLeakSim-Phase1-RDP-Python.ps1","name":"Valid-account RDP marker, Python 2.7, and four pip package-install commands"},
+    {"order":2,"script":"LaravelLeakSim-Phase2-Generated-Laravel.ps1","name":"smtp.py, generated targets, .env and debug-response probes, provider keyword search"},
+    {"order":3,"script":"LaravelLeakSim-Phase3-Results.ps1","name":"Results folder and provider-specific canary secret classification"}
+  ],
+  "techniques": ["T1078","T1059.006","T1064","T1204","T1061","T1059"],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only; proxy false; zero bytes",
+    "rdpAuthenticationAccountOrSoftwareInstall": false,
+    "externalScanWebRequestOrRealSecretAccess": false,
+    "credentialValidationProviderApiOrExfiltration": false,
+    "generatedTargetsAndSecretsOnly": true,
+    "runtimeArtifactManifest": true,
+    "artifactsLeftForInvestigation": true,
+    "separateCleanup": true
+  }
+}

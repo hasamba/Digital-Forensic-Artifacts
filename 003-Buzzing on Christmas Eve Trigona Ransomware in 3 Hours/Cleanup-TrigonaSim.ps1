@@ -1,0 +1,4 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding(SupportsShouldProcess,ConfirmImpact='High')]param([switch]$LabConfirmed)
+. (Join-Path $PSScriptRoot '..\LabSafeScenarioCore.ps1');Remove-DFIRLabScenario -Config ([pscustomobject]@{Id='003-Buzzing on Christmas Eve Trigona Ransomware in 3 Hours';RootName='TrigonaSim'}) -LabConfirmed:$LabConfirmed

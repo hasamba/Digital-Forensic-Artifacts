@@ -1,0 +1,28 @@
+{
+  "source": "https://thedfirreport.com/2025/07/14/kongtuke-filefix-leads-to-new-interlock-rat-variant/",
+  "handling": "Investigation metadata only. No sample is retrieved and all network attempts are forced to loopback.",
+  "configs": [
+    {
+      "reportedName": "config.cfg",
+      "scenarioName": "wefs.cfg",
+      "size": 27392,
+      "sha256": "28a9982cf2b4fc53a1545b6ed0d0c1788ca9369a847750f5652ffa0ca7f7b7d3"
+    },
+    {
+      "reportedName": "config.cfg",
+      "scenarioName": "wefs-alt.cfg",
+      "size": 28268,
+      "sha256": "8afd6c0636c5d70ac0622396268786190a428635e9cf28ab23add939377727b0"
+    }
+  ],
+  "initialCommandDomain": "deadly-programming-attorneys-our.trycloudflare.com",
+  "phpVariantDomains": [
+    "existed-bunch-balance-councils.trycloudflare.com",
+    "ferrari-rolling-facilities-lounge.trycloudflare.com",
+    "galleries-physicians-psp-wv.trycloudflare.com",
+    "evidence-deleted-procedure-bringing.trycloudflare.com",
+    "nowhere-locked-manor-hs.trycloudflare.com",
+    "ranked-accordingly-ab-hired.trycloudflare.com"
+  ],
+  "fallbackIps": ["64.95.12.71", "184.95.51.165"]
+}

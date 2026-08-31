@@ -1,0 +1,13 @@
+{
+  "scenarioId":"080-DefenderControl_RDP_SingleHost_Profile",
+  "report":{"wordpressPostId":1518,"internalCase":1011,"title":"Defender Control","published":"2020-12-13","url":"https://thedfirreport.com/2020/12/13/defender-control/"},
+  "entryPoint":"DefenderControlSim-Complete.ps1","cleanup":"Cleanup-DefenderControlSim.ps1","artifactRoot":"%PUBLIC%\\DefenderControlSim",
+  "timelineNote":"A generated 30-minute axis represents the report's minutes-later staging pattern; this is a tool profile, not a single fully timed intrusion. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"DefenderControlSim-Phase1-Context-Stage.ps1","name":"Exposed-RDP/single-host ransomware context, Defender block, and two-file staging"},
+    {"order":2,"script":"DefenderControlSim-Phase2-Disable-Markers.ps1","name":"GUI/CLI execution and registry, service-start, driver, and Local Policy markers"},
+    {"order":3,"script":"DefenderControlSim-Phase3-Analyst-State.ps1","name":"Reported Windows Security UI outcome and explicit unchanged safety state"}
+  ],
+  "techniques":["T1562.001"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"none","registryServiceDriverPolicyOrDefenderChange":false,"securityControlImpairment":false,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

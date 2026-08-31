@@ -1,0 +1,18 @@
+{
+  "source":"https://thedfirreport.com/2022/02/07/qbot-likes-to-move-it-move-it/","published":"2022-02-07","internalCaseNumber":7685,"handling":"Investigation metadata only. No payload is retrieved or executed and no listed address is contacted.",
+  "tls":{"ja3":["72a589da586844d7f0818ce684948eea","c35a61411ee5bdf666b4d64b05c29e64"],"ja3s":["7c02dbae662670040c7af9bd15fb7e2f"]},
+  "configuredPortCounts":{"443":88,"995":25,"2222":17,"2078":3,"465":2,"20":2,"993":1,"61201":1,"50010":1,"32100":1,"21":1,"1194":1},
+  "networkIndicators":["120.150.218.241:995","71.74.12.34:443","24.229.150.54:995","185.250.148.74:443","136.232.34.70:443","82.77.137.101:995","75.188.35.168:443","72.252.201.69:443","109.12.111.14:443","68.204.7.158:443","196.218.227.241:995","27.223.92.142:995","76.25.142.196:443","73.151.236.31:443","185.250.148.74:2222","173.21.10.71:2222","189.210.115.207:443","105.198.236.99:443","47.22.148.6:443","24.55.112.61:443","24.139.72.117:443","45.46.53.140:2222","92.59.35.196:2222","95.77.223.148:443","68.186.192.69:443","89.101.97.139:443","173.25.166.81:443","140.82.49.12:443"],
+  "hashReconstructionNote":"The rendered indicator table inserts spaces inside several digests. Values below remove only those rendering spaces; SHA-256 values also match the report's YARA metadata where a corresponding rule is present.",
+  "files":[
+    {"name":"ocrafh.html.dll","md5":"2897721785645ad5b2a8fb524ed650c0","sha1":"d836fa75f0682b4c393418231aefca97169d551e","sha256":"956ecb4afa437eafe56f958b34b6a78303ad626baee004715dc6634b7546bf85"},
+    {"name":"qbbwlwjmlmnaggd.dll","md5":"e0fafe1b4eb787444ed457dbf05895a4","sha1":"16b5b1494e211b74e97d9f35ff5a994f70411f2e","sha256":"9f6e3b0b18f994950b40076d1386b4da4ce0f1f973b129b32b363aac4a678631"},
+    {"name":"hyietnrfrx.uit","md5":"b6ed9b2819915c2b57d4c58e37c08ba4","sha1":"e9ff9b7e144bdad9d8955f4a328f7b6daa2b455e","sha256":"70a49561f39bb362a2ef79db15e326812912c17d6e6eb38ef40343a95409a19a"},
+    {"name":"znmxbx.evj","md5":"2a8cf6154e6a129ffd07a501bbc0b098","sha1":"304d8e812a8d988e21af8a865d8dd577dc6f3134","sha256":"e510566244a899d6a427c1648e680a2310c170a5f25aff53b15d8de52ca11767"},
+    {"name":"zsokarzi.xpq","md5":"43660d21bfa1431e0ee3426cd12ddf38","sha1":"5d3b7e0c05e65aa0dfc8b5e48142d782352e36be","sha256":"cbfc135bff84d63c4a0ccb5102cfa17d8c9bf297079f3b2f1371dafcbefea77c"},
+    {"name":"tuawktso.vbe","md5":"ad413cd422c1a0355163618683e936a0","sha1":"5fca07dfc68a13b3707636440d5c416e56149357","sha256":"1411250eb56c55e274fbcf0741bbd3b5c917167d153779c7d8041ab2627ef95f"},
+    {"name":"jtrbde.dll","md5":"5dd964c8d9025224eb658f96034babea","sha1":"6c526a28ed49b2ef83548e20a71610877e69d450","sha256":"3d913a4ba5c4f7810ec6b418d7a07b6207b60e740dde8aed3e2df9ddf1caab27","note":"The YARA appendix labels this digest as wmyvpa.sae; the indicator table labels it jtrbde.dll."},
+    {"name":"rzmulxiilw.dll","md5":"000df43b256cdc27bb22870919bb1dfa","sha1":"f94d5bf14dee6a6e8db957d49c259082dd82350b","sha256":"ca564c6702d5e653ed8421349f4d37795d944793a3dbd1bb3c5dbc5732f1b798"},
+    {"name":"ljncxcwmsg.gjf","md5":"88834d17d2cdce884a73e38638a4e0dd","sha1":"b5b264d00a7d6d6b3dd4965dbe2bd00e0823ba6c","sha256":"c789bb45cacf0de1720e707f9edd73b4ed0edc958b3ce2d8f0ad5d4a7596923a"}
+  ]
+}

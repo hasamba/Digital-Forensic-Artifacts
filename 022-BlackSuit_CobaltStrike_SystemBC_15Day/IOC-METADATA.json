@@ -1,0 +1,25 @@
+{
+  "scenarioId":"022-BlackSuit_CobaltStrike_SystemBC_15Day",
+  "source":{"title":"BlackSuit Ransomware","published":"2024-08-26","url":"https://thedfirreport.com/2024/08/26/blacksuit-ransomware/"},
+  "safeHandling":"Metadata only. Scripts never resolve or connect to these indicators; attempts are rewritten to 127.0.0.1 with proxy use disabled.",
+  "networkIndicators":[
+    {"role":"SystemBC C2","indicator":"137.220.61.94"},
+    {"role":"Cobalt Strike","indicator":"svchorst.com","historicalIPs":["104.21.76.140","172.67.196.25","15.197.130.221"]},
+    {"role":"Cobalt Strike","indicator":"as.regsvcast.com","historicalIP":"147.78.47.178"},
+    {"role":"Cobalt Strike","indicator":"zx.regsvcast.com","historicalIP":"147.78.47.178"},
+    {"role":"Cobalt Strike","indicator":"qw.regsvcast.com","historicalIP":"147.78.47.178"}
+  ],
+  "files":[
+    {"name":"RtWin64.exe","md5":"b5266cd35d1b3770b05ad6870c0c4bde","sha1":"2bb6c8b6461edc49e22f3d0c7dc45904b2ed8a2b","sha256":"55cde638e9bcc335c79c605a564419819abf5d569c128b95b005b2f48ccc43c1","imphash":"6015e6e85d0d93e60041fa68c6a89776"},
+    {"name":"7f02ab2.exe","sha256":"6c884e4a9962441155af0ac8e7eea4ac84b1a8e71faee0beafc4dd95c4e4753f"},
+    {"name":"7341ac3.exe","sha256":"a39dc30bd672b66dc400f4633dfa4bdd289b5e79909c2e25e9c08b44d99b8953"},
+    {"name":"61185c1.exe","sha256":"e92912153cf82e70d52203a1a5c996e68b7753818c831ac7415aedbe6f3f007d"},
+    {"name":"b7bcee8.exe","sha256":"27e300fa67828d8ffd72d0325c6957ff54d2dc6a060bbf6fc7aa5965513468e0"},
+    {"name":"e225857.exe","sha256":"f474241a5d082500be84a62f013bc2ac5cde7f18b50bf9bb127e52bf282fffbf"},
+    {"name":"ADFind.exe","md5":"9b02dd2a1a15e94922be3f85129083ac","sha1":"2cb6ff75b38a3f24f3b60a2742b6f4d6027f0f2a","sha256":"b1102ed4bca6dae6f2f498ade2f73f76af527fa803f0e0b46e100d4cf5150682"},
+    {"name":"SharpHound.exe","md5":"76a2363d509cc7174c4abee9a7d7ae68","sha1":"286588a50b9b128d07aa0f8851f2d7ee91dfa372","sha256":"3b873bc8c7ee12fe879ab175d439b5968c8803fbb92e414de39176e2371896b2"},
+    {"name":"socks32.exe","md5":"ed44877077716103973cbbebd531f38e","sha1":"ceb8c699a57193aa3be2a1766b03050cde3c738a","sha256":"9493b512d7d15510ebee5b300c55b67f9f2ff1dda64bddc99ba8ba5024113300"},
+    {"name":"qwe.exe","md5":"0bb61c0cff022e73b7c29dd6f1ccf0e2","sha1":"8dde03600a18a819b080a41effc24f42fa960a3e","sha256":"60dcbfb30802e7f4c37c9cdfc04ddb411060918d19e5b309a5be6b4a73c8b18a"}
+  ],
+  "behavioralIndicators":{"runValue":"socks5","systemBCNames":["SC.exe","socks32.exe"],"sharpHoundOutput":"C:\\Windows\\Temp\\Dogi","adfindPaths":["C:\\Perflogs\\adf","C:\\Windows\\System32"],"rdpClientHostnames":["DESKTOP-0MEMSEA","DESKTOP-BIFFSC7"],"smbPipe":"\\\\.\\pipe\\WkSvcPipeMgr_JORW2e","ransomwareFiles":["qwe.exe","123.txt","readme.blacksuit.txt"]}
+}

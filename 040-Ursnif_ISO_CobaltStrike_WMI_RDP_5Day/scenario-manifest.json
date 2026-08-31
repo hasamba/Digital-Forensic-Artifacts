@@ -1,0 +1,7 @@
+{
+  "scenarioId":"040-Ursnif_ISO_CobaltStrike_WMI_RDP_5Day","report":{"wordpressPostId":13485,"internalCaseNumber":17386,"title":"Unwrapping Ursnifs Gifts","published":"2023-01-09","url":"https://thedfirreport.com/2023/01/09/unwrapping-ursnifs-gifts/"},
+  "entryPoint":"UrsnifGiftSim-Complete.ps1","cleanup":"Cleanup-UrsnifGiftSim.ps1","artifactRoot":"%PUBLIC%\\UrsnifGiftSim","observedWindowHoursApproximate":120,
+  "phases":[{"order":1,"script":"UrsnifGiftSim-Phase1-ISO-Ursnif.ps1","name":"ISO/LNK, batch/JavaScript, renamed rundll32, registry-resident Ursnif, persistence, and automated discovery"},{"order":2,"script":"UrsnifGiftSim-Phase2-Cobalt-Credential-Discovery.ps1","name":"Day-four BITS/Cobalt transition, manual discovery, process-injection and LSASS-access evidence"},{"order":3,"script":"UrsnifGiftSim-Phase3-WMI-RDP-Outcome.ps1","name":"WMI/SMB movement, RMM and DC beacon artifacts, exfiltration, proxied RDP, and backup review"}],
+  "techniques":["T1218.005","T1059.005","T1027.004","T1197","T1555","T1003.001","T1082","T1057","T1482","T1553.005","T1204.002","T1124","T1033","T1018","T1021.001","T1047","T1087.002","T1055","T1055.004","T1547.001","T1219","T1071.001","T1570","T1041"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"isoMount":false,"registryChanges":false,"processInjection":false,"credentialOrLSASSAccess":false,"BITSOrDownloads":false,"directoryOrRemoteActions":false,"softwareInstall":false,"backupInteraction":false,"realCollectionOrExfiltration":false,"separateCleanup":true}
+}

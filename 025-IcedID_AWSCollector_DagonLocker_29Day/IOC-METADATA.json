@@ -1,0 +1,20 @@
+{
+  "scenarioId":"025-IcedID_AWSCollector_DagonLocker_29Day",
+  "source":{"title":"From IcedID to Dagon Locker Ransomware in 29 Days","published":"2024-04-29","url":"https://thedfirreport.com/2024/04/29/from-icedid-to-dagon-locker-ransomware-in-29-days/"},
+  "safeHandling":"Investigation metadata only. Scripts never resolve or contact these indicators; all socket attempts go to 127.0.0.1 without a proxy.",
+  "networkIndicators":{
+    "icedId":["143.110.245.38:443","159.89.124.188:443","188.114.97.7:443","151.236.9.176:443","159.223.95.82:443","194.58.68.187:443","87.251.67.168:443","151.236.9.166:443","rpgmagglader.com","ultrascihictur.com","oopscokir.com","restohalto.site","ewacootili.com","magiraptoy.com","fraktomaam.com","patricammote.com","moashraya.com"],
+    "cobaltStrike":["23.159.160.88","45.15.161.97","51.89.133.3","winupdate.us.to"],
+    "anyDeskRelatedVpn":["82.102.18.244","194.33.40.113"],
+    "certificatePivot":"108.62.123.147"
+  },
+  "files":[
+    {"name":"Document_Scan_468.js","md5":"0d8a41ec847391807acbd55cbd69338b","sha1":"5066e67f22bc342971b8958113696e6c838f6c58","sha256":"f6e5dbff14ef272ce07743887a16decbee2607f512ff2a9045415c8e0c05dbb4"},
+    {"name":"license.dat","md5":"bff696bb76ea1db900c694a9b57a954b","sha1":"ca10c09416a16416e510406a323bb97b0b0703ef","sha256":"332afc80371187881ef9a6f80e5c244b44af746b20342b8722f7b56b61604953"},
+    {"name":"Riadnc1.dll","md5":"a144aa7a0b98de3974c547e3a09f4fb2","sha1":"34c9702c66faadb4ce90980315b666be8ce35a13","sha256":"9da84133ed36960523e3c332189eca71ca42d847e2e79b78d182da8da4546830"},
+    {"name":"magni.w","md5":"7e9ef45d19332c22f1f3a316035dcb1b","sha1":"4e0222fd381d878650c9ebeb1bcbbfdfc34cabc5","sha256":"839cf7905dc3337bebe7f8ba127961e6cd40c52ec3a1e09084c9c1ccd202418e"},
+    {"name":"magni.w.bat","md5":"b3495023a3a664850e1e5e174c4b1b08","sha1":"38cd9f715584463b4fdecfbac421d24077e90243","sha256":"65edf9bc2c15ef125ff58ac597125b040c487640860d84eea93b9ef6b5bb8ca6"},
+    {"name":"update.dll","md5":"628685be0f42072d2b5150d4809e63fc","sha1":"437fe3b6fdc837b9ee47d74eb1956def2350ed7e","sha256":"a0191a300263167506b9b5d99575c4049a778d1a8ded71dcb8072e87f5f0bbcf"}
+  ],
+  "behavioralIndicators":{"icedIdExport":"scab","icedIdKey":"arabika752","cobaltExport":"HTVIyKUVoTzv","cobaltXorKey":35,"cobaltMagic":"MZARUH","anyDeskClientId":150937834,"account":"oldadministrator","namedPipe":"\\\\.\\pipe\\9090e9","gpoLogonScript":"C:\\Windows\\System32\\GroupPolicy\\User\\Scripts\\Logon\\test.bat","dagonFiles":["sysfunc.dll","sysfunc.cmd","sysfunc.dll.log"],"dagonExtension":".dagoned"}
+}

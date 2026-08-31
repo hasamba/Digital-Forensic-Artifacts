@@ -1,0 +1,15 @@
+{
+  "source":"https://thedfirreport.com/2020/08/31/netwalker-ransomware-in-1-hour/","internalCase":1003,
+  "handling":"Metadata only. No sample is retrieved, no reported RDP source or C2 is contacted, and no credential token is used. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":{"likelyRdpSource":"198.181.163.103","reportedRdpLoginIps":["184.58.243.205","173.239.199.73","176.126.85.39","198.181.163.103","141.98.81.191","93.179.69.154","173.232.146.37"],"cobaltC2":{"ip":"173.232.146.37","port":443,"certificate":"Cobalt Strike default certificate 146473198"}},
+  "files":[
+    {"name":"c37.ps1","md5":"8e030188e0d03654d5e7a7738a9d6a9a","sha1":"e0a37d0c26b351b789caffc8c90b968269982d","sha256":"5536be48e4eac81ad77aeade20b28ff8b72275832e6833f5e1b692eb99f312fd13"},
+    {"name":"c37.exe","md5":"531c0c5e943863b00c7157c05603113a","sha1":"caa18377e764a3a27c715b3d69ba2258ee4eb0b2","sha256":"4f7dd00a005caf046dd7e494fea25be2264974264d567edfc89122242b7c41bc"},
+    {"name":"adf.bat","md5":"96e1849976d90425e74f075ed6bf8c30","sha1":"1296a1f8887753ef87910b544727de76ce2adcc5","sha256":"e56d45628f0c2bda30ab235657704aac50a8433bdb4215c77a2e0f52f0f31a49"},
+    {"name":"mimikatz.exe","md5":"5af5e3426926e551ed3acc5bea45eac6","sha1":"e24a174fff19d873df0fa5eddd9ec534617ed9d7","sha256":"f743c0849d69b5ea2f7eaf28831c86c1536cc27ae470f20e49223cbdba9c677c"},
+    {"name":"pcr.bat","md5":"81c965ff526e7afd73c91543fee381a3","sha1":"b9b83b17fd6d89807dcab7772b1416fa90ca4b0e","sha256":"ae431797c551c20fe2f3fe1adc08a566edfabf45abbd924f0c8da06381ab6e48"},
+    {"name":"P100119.ps1","md5":"0d890fc8e761b764ba3a04af07197e20","sha1":"21c0ed7abaafbfd14c777aa370f397e4351654a6","sha256":"5ae06a8d117e876476832245039715825fbfbefc0d2463ab6c30295dd1d4afa6"},
+    {"name":"procdump64.exe","md5":"3b447099ca280dabd22d36f84ebfd3bb","sha1":"49fd831a738b21ee0a1b3b62cd15801abe8c32d5","sha256":"6a511d4178d6d2f98f8af34311d0e15dc8dc1c4b643e6943f056da6ce242e70d"}
+  ],
+  "detections":{"network":["ET POLICY PsExec service created"],"sigma":["PsExec Service Start","Suspicious Use of Procdump","Mimikatz Use","AdFind Recon"],"yara":["kiwi_passwords.yar for Mimikatz","embedded_win_api for procdump64.exe"]}
+}

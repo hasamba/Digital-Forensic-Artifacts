@@ -1,90 +1,18 @@
-# ============================================================================
-# ETHERRAT / TUKTUK / THE GENTLEMEN FULL INTRUSION SIMULATION
-# ============================================================================
-# Source report: "Flash Alert: EtherRat and TukTuk C2 End in The Gentleman
-# Ransomware" - https://thedfirreport.com/2026/05/11/
-#   flash-alert-etherrat-and-tuktuk-c2-end-in-the-gentleman-ransomware/
-#
-# Runs the full attack chain end-to-end on a single host:
-#   1. Initial Access        - trojanized RAMMap.msi -> msiexec -> cmd child
-#   2. Execution              - Node.js runtime + EtherRAT / EtherHiding C2
-#   3. Persistence            - HKCU Run key + GoTo Resolve RMM service
-#   4. Discovery               - system/domain profiling, AV enum, netscan
-#   5. Defense Evasion         - TukTuk DLL sideloading (Greenshot/SyncTrayzor/
-#                                docfx/Cake + log4net.dll), Arweave dead-drop
-#   6. Command and Control     - TukTuk SaaS channels (ClickHouse/Supabase/
-#                                Ably/Dropbox/GitHub) + GoTo Resolve
-#   7. Credential Access       - Kerberoasting, comsvcs.dll LSASS dump, NTDS
-#   8. Lateral Movement        - GoTo Resolve, RDP/SMB/WinRM, NetExec, resets
-#   9. Collection/Exfiltration - Rclone to Wasabi cloud storage
-#  10. Impact                  - The Gentlemen ransomware, VSS deletion, GPO
-#
-# REQUIREMENTS: Run as Administrator, on an isolated/disposable lab VM only.
-# ============================================================================
-
+#Requires -Version 5.1
 #Requires -RunAsAdministrator
-
-param(
-    [switch]$DumpRealLsass  # See GentlemanSim-Phase7-CredentialAccess.ps1 - leave OFF unless fully disposable lab
-)
-
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-. "$scriptDir\GentlemanSim-utilities.ps1"
-. "$scriptDir\GentlemanSim-Phase1-InitialAccess.ps1"
-. "$scriptDir\GentlemanSim-Phase2-Execution.ps1"
-. "$scriptDir\GentlemanSim-Phase3-Persistence.ps1"
-. "$scriptDir\GentlemanSim-Phase4-Discovery.ps1"
-. "$scriptDir\GentlemanSim-Phase5-DefenseEvasion.ps1"
-. "$scriptDir\GentlemanSim-Phase6-CommandAndControl.ps1"
-. "$scriptDir\GentlemanSim-Phase7-CredentialAccess.ps1"
-. "$scriptDir\GentlemanSim-Phase8-LateralMovement.ps1"
-. "$scriptDir\GentlemanSim-Phase9-Exfiltration.ps1"
-. "$scriptDir\GentlemanSim-Phase10-Impact.ps1"
-
-Confirm-Execution
-$logPath = Start-SimulationLogging
-$simPaths = Initialize-SimulationEnvironment
-
-Write-Host "`n=== ETHERRAT / TUKTUK / THE GENTLEMEN INTRUSION SIMULATION ===" -ForegroundColor Cyan
-Write-Host "Simulation root: $($simPaths.Root)`n" -ForegroundColor Cyan
-
-$initialAccess = Simulate-InitialAccess -SimPaths $simPaths
-Start-Sleep -Seconds 2
-
-$execution = Simulate-Execution -SimPaths $simPaths
-Start-Sleep -Seconds 2
-
-Simulate-Persistence -SimPaths $simPaths -NodeExe $execution.NodeExe -ConfigFile $execution.ConfigFile
-Start-Sleep -Seconds 2
-
-Simulate-Discovery -SimPaths $simPaths
-Start-Sleep -Seconds 2
-
-$defenseEvasion = Simulate-DefenseEvasion -SimPaths $simPaths
-Start-Sleep -Seconds 2
-
-Simulate-CommandAndControl -SimPaths $simPaths
-Start-Sleep -Seconds 2
-
-Simulate-CredentialAccess -SimPaths $simPaths -DumpRealLsass:$DumpRealLsass
-Start-Sleep -Seconds 2
-
-Simulate-LateralMovement -SimPaths $simPaths
-Start-Sleep -Seconds 2
-
-$exfil = Simulate-Exfiltration -SimPaths $simPaths
-Start-Sleep -Seconds 2
-
-Simulate-Impact -SimPaths $simPaths
-
-Write-Host "`n=== SIMULATION COMPLETE ===" -ForegroundColor Cyan
-Write-Host "Artifacts root: $($simPaths.Root)" -ForegroundColor Cyan
-Write-Host "Execution log: $logPath" -ForegroundColor Cyan
-Write-Host "Ransom note / encrypted files: $($simPaths.VictimFiles)" -ForegroundColor Cyan
-Write-Host "`nSuggested next steps for the analyst:" -ForegroundColor Green
-Write-Host " - Collect with KAPE (see 'kape command.bat' in the repo root)"
-Write-Host " - Review Sysmon/Security event logs, Prefetch, Amcache, MFT"
-Write-Host " - Pull PCAP/Zeek if network capture was running during execution"
-Write-Host " - Cross-reference IOCs against the source DFIR report's Indicators section"
-
-Stop-Transcript | Out-Null
+[CmdletBinding()]param([switch]$LabConfirmed)
+$config=[pscustomobject]@{
+ Id='005-EtherRat_TukTukC2_TheGentleman';RootName='GentlemanSim';Source='https://thedfirreport.com/2026/05/11/flash-alert-etherrat-and-tuktuk-c2-end-in-the-gentleman-ransomware/';Title='EtherRAT and TukTuk C2 End in The Gentlemen Ransomware';DurationMinutes=1440;TimelineNote='Generated 24-hour axis preserves report ordering without asserting unpublished timestamps.'
+ IOCs=[ordered]@{domains=@('1rpc.io','vefbdzzuaadnascpeqcn.supabase.co','k135neflez.westus3.azure.clickhouse.cloud','borjumaniya.store','gotoresolve.com','wasabisys.com');contracts=@('0xdf0b529043ef7a2bb9111bad26de624a326bacf9','0x5953f27F044779a3AFCd2BF56a4B712583Dd2E4e');arweaveDriveId='a6278417-39f4-407e-90bf-599f74726e66'}
+ Files=@(
+  [pscustomobject]@{path='payload-canaries\RAMMap.msi';role='trojanized MSI stand-in';publishedHash='d9487fdc097f770e5661f9e5dee130068cb179d33716abff1a21c8cb901f25a6'},[pscustomobject]@{path='payload-canaries\node.exe';role='EtherRAT runtime stand-in';publishedHash='none'},[pscustomobject]@{path='payload-canaries\Greenshot.exe';role='TukTuk sideload host';publishedHash='none'},[pscustomobject]@{path='payload-canaries\log4net.dll';role='TukTuk stand-in';publishedHash='19021e53b9929fdf4b7d0e0707434d56bb73c1a9b7403c8837b44d1c417198dc'},[pscustomobject]@{path='payload-canaries\smokymo.msi';role='GoTo Resolve installer stand-in';publishedHash='1795eacd2c58894ccdd6be8854fe6456c3b069a3a873432343b57b475b256aee'},[pscustomobject]@{path='payload-canaries\rclone.exe';role='exfiltration-tool stand-in';publishedHash='none'},[pscustomobject]@{path='payload-canaries\gentlemen_locker.exe';role='ransomware stand-in';publishedHash='see source report'},[pscustomobject]@{path='payload-canaries\cmd.exe';role='reported-command stand-in';publishedHash='none'})
+ Artifacts=@(
+  [pscustomobject]@{path='payload-canaries\MVnVmUYj.cmd';content='GENERATED INERT SCRIPT CANARY; never interpreted.';purpose='EtherRAT script canary'},[pscustomobject]@{path='payload-canaries\A7Pnj975bl.cfg';content='GENERATED C2 CONFIG CANARY.';purpose='EtherRAT config'},[pscustomobject]@{path='generated-persistence\Run-AppResolver.json';content='{"reportedKey":"HKCU Run AppResolver","created":false}';purpose='persistence metadata'},[pscustomobject]@{path='generated-hosts\DC-CANARY\SYSVOL\Gentlemen-GPO\deployment.json';content='{"reportedMechanism":"GPO scheduled task via SYSVOL/NETLOGON","gpoCreated":false,"remoteTargets":0}';purpose='GPO-shaped local canary'},[pscustomobject]@{path='generated-hosts\FILE-CANARY\Finance\budget.xlsx';content='GENERATED USER-DATA CANARY; remains intact.';purpose='impact canary'},[pscustomobject]@{path='generated-hosts\FILE-CANARY\Finance\budget.xlsx.gentlemen-marker';content='Sidecar only; original unchanged.';purpose='impact marker'},[pscustomobject]@{path='generated-hosts\FILE-CANARY\README-GENTLEMEN.txt';content='GENERATED NOTE CANARY. No data was encrypted.';purpose='ransom note'})
+ Commands=@(
+  [pscustomobject]@{file='payload-canaries\cmd.exe';reported='msiexec.exe -> cmd.exe /c start /min MVnVmUYj.cmd';parent='RAMMap.msi'},[pscustomobject]@{file='payload-canaries\node.exe';reported='conhost --headless node.exe A7Pnj975bl.cfg';parent='MVnVmUYj.cmd'},[pscustomobject]@{file='payload-canaries\Greenshot.exe';reported='Greenshot.exe side-loads log4net.dll (TukTuk)';parent='hands-on-keyboard'},[pscustomobject]@{file='payload-canaries\cmd.exe';reported='CmD.eXe /c tasklist | find lsass & rundll32 comsvcs.dll MiniDump';parent='TukTuk'},[pscustomobject]@{file='payload-canaries\cmd.exe';reported='nxc smb <targets> --ntds --users --groups';parent='operator'},[pscustomobject]@{file='payload-canaries\rclone.exe';reported='rclone copy staging wasabi:bucket using reported flags';parent='operator'},[pscustomobject]@{file='payload-canaries\gentlemen_locker.exe';reported='domain-wide GPO deployment from SYSVOL/NETLOGON';parent='reported scheduled task'})
+ Network=@(
+  [pscustomobject]@{port=443;target='1rpc.io and *.trycloudflare.com';role='EtherHiding/EtherRAT'},[pscustomobject]@{port=443;target='Supabase, ClickHouse, borjumaniya.store';role='TukTuk C2'},[pscustomobject]@{port=443;target='Arweave/Ably/Dropbox/GitHub Issues';role='unconfirmed fallback capability'},[pscustomobject]@{port=443;target='gotoresolve.com';role='RMM'},[pscustomobject]@{port=443;target='wasabisys.com';role='exfil'})
+ Timeline=@(
+  [pscustomobject]@{offset=0;phase='initial-access';event='RAMMap MSI and EtherRAT chain';details=@{downloads=0}},[pscustomobject]@{offset=180;phase='persistence-discovery';event='Run key and recon metadata';details=@{systemChanges=0}},[pscustomobject]@{offset=480;phase='c2';event='TukTuk sideload and SaaS channels';details=@{externalConnections=0}},[pscustomobject]@{offset=720;phase='credential-access-lateral';event='Kerberoast, LSASS, NTDS, NetExec, and GoTo Resolve represented';details=@{credentialsAccessed=0;remoteActions=0}},[pscustomobject]@{offset=1080;phase='exfiltration';event='Rclone to Wasabi represented';details=@{bytesTransferred=0}},[pscustomobject]@{offset=1440;phase='impact';event='Gentlemen GPO and ransomware markers';details=@{gpoCreated=$false;filesEncrypted=0;shadowCopiesDeleted=0}})
+}
+. (Join-Path $PSScriptRoot '..\LabSafeScenarioCore.ps1');Invoke-DFIRLabScenario -Config $config -LabConfirmed:$LabConfirmed

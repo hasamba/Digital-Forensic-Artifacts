@@ -1,0 +1,8 @@
+{
+  "scenarioId":"028-Gootloader_CobaltStrike_SystemBC_DomainControl",
+  "report":{"wordpressPostId":28305,"title":"SEO Poisoning to Domain Control: The Gootloader Saga Continues","published":"2024-02-26","url":"https://thedfirreport.com/2024/02/26/seo-poisoning-to-domain-control-the-gootloader-saga-continues/","internalCase":19530},
+  "entryPoint":"GootSagaSim-Complete.ps1","cleanup":"Cleanup-GootSagaSim.ps1","artifactRoot":"%PUBLIC%\\GootloaderSagaSim",
+  "phases":[{"order":1,"script":"GootSagaSim-Phase1-SEO-Gootloader.ps1","name":"SEO lure, Gootloader execution/persistence, rotating endpoints, and virtual registry stages"},{"order":2,"script":"GootSagaSim-Phase2-Cobalt-SystemBC.ps1","name":"Cobalt discovery, failed DC deployment, unsafe-action negatives, and SystemBC pivot"},{"order":3,"script":"GootSagaSim-Phase3-RDP-Collection.ps1","name":"Synthetic DC/backup RDP, scanning, document review, lull, and eviction"}],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"registryOrTaskPersistence":false,"processInjection":false,"credentialOrLsassAccess":false,"defenderOrFirewallChanges":false,"directoryOrShareQueries":false,"remoteServiceWmiWinRmOrRdp":false,"networkScanning":false,"realDataCollection":false,"exfiltration":false,"separateCleanup":true},
+  "attackTechniques":["T1189","T1204.002","T1059.007","T1053.005","T1059.001","T1112","T1027","T1055","T1055.012","T1057","T1082","T1087.002","T1069.002","T1018","T1046","T1135","T1003.001","T1134","T1548.002","T1562.001","T1021.002","T1047","T1543.003","T1021.001","T1021.006","T1090","T1547.001","T1219","T1005"]
+}

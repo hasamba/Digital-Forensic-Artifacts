@@ -1,0 +1,7 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]param([switch]$LabConfirmed)
+. "$PSScriptRoot\YearReviewSim-utilities.ps1";Assert-YearReviewSafety -LabConfirmed:$LabConfirmed;$p=Initialize-YearReviewEnvironment
+foreach($n in @('invoice.zip','invoice.iso','document.lnk','payload.dll','Follina-document.docx','Gootloader-search-result.js','ProxyShell-webshell.aspx','SupportCenterPlus-exploit.request','SQL-bruteforce.marker')){Write-YearReviewFile(Join-Path $p.Access $n)"INERT 2022 TREND CANARY: $n"'aggregate access canary'}
+$cmd=Join-Path $p.Access 'rundll32.exe';New-YearReviewDecoy $cmd 'aggregate execution stand-in';foreach($c in @('ISO/ZIP LNK -> DLL','PowerShell in-memory execution','WMI execution','one-shot remote service','rundll32 payload.dll,Export','regsvr32 /s payload.dll')){Invoke-YearReviewDecoy $cmd $c}
+$negative=@{malwareExecuted=$false;macrosExecuted=$false;isoMounted=$false;webShellCreated=$false;ProxyShellAttempted=$false;SupportCenterPlusExploitAttempted=$false;SqlBruteForceAttempted=$false};Write-YearReviewFile(Join-Path $p.Evidence 'access-execution-negative-record.json')($negative|ConvertTo-Json)'negative evidence';Add-YearReviewTimeline 0 initial-access 'Aggregate phishing, ISO/LNK, SEO poisoning, exploit, and SQL brute-force trends represented' @{singleObservedIncident=$false;downloads=0};Add-YearReviewTimeline 1 execution 'Aggregate PowerShell, WMI, service, rundll32, and regsvr32 trends represented' @{realExecution=$false}

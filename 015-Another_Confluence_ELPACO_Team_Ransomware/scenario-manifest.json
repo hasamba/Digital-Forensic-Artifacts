@@ -1,0 +1,37 @@
+{
+  "scenarioId": "015-Another_Confluence_ELPACO_Team_Ransomware",
+  "report": {
+    "wordpressPostId": 43853,
+    "title": "Another Confluence Bites the Dust: Falling to ELPACO-team Ransomware",
+    "published": "2025-05-19",
+    "url": "https://thedfirreport.com/2025/05/19/another-confluence-bites-the-dust-falling-to-elpaco-team-ransomware/"
+  },
+  "durationHours": 62,
+  "entryPoint": "ElpacoSim-Complete.ps1",
+  "cleanup": "Cleanup-ElpacoSim.ps1",
+  "artifactRoot": "%PUBLIC%\\ElpacoConfluenceSim",
+  "phases": [
+    { "order": 1, "script": "ElpacoSim-Phase1-ConfluenceMeterpreter.ps1", "name": "Confluence exploitation and Meterpreter" },
+    { "order": 2, "script": "ElpacoSim-Phase2-AnyDeskPrivilege.ps1", "name": "AnyDesk, accounts, and privilege escalation" },
+    { "order": 3, "script": "ElpacoSim-Phase3-CredentialDiscoveryLateral.ps1", "name": "Credential access, discovery, and lateral movement" },
+    { "order": 4, "script": "ElpacoSim-Phase4-ElpacoImpact.ps1", "name": "ELPACO/Mimic ransomware impact" }
+  ],
+  "safety": {
+    "confirmationEnvironmentVariable": "DFIR_LAB_CONFIRMATION=I_UNDERSTAND_THIS_IS_A_LAB",
+    "confirmationSwitch": "-LabConfirmed",
+    "refusesDomainControllers": true,
+    "networkScope": "127.0.0.1 only",
+    "liveMalware": false,
+    "realCredentialAccess": false,
+    "remoteExecution": false,
+    "securityControlModification": false,
+    "encryption": false,
+    "cleanupIsSeparate": true
+  },
+  "attackTechniques": [
+    "T1071", "T1136", "T1134.002", "T1486", "T1562.004", "T1562.001",
+    "T1068", "T1190", "T1105", "T1136.001", "T1003.001", "T1112",
+    "T1003.003", "T1059.001", "T1057", "T1012", "T1219", "T1021.001",
+    "T1018", "T1016", "T1059.003", "T1047", "T1543.003"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "014-Hide_Your_RDP_RansomHub_Deployment",
+  "title": "Hide Your RDP: Password Spray Leads to RansomHub Deployment",
+  "source": {
+    "publisher": "The DFIR Report",
+    "published": "2025-06-30",
+    "url": "https://thedfirreport.com/2025/06/30/hide-your-rdp-password-spray-leads-to-ransomhub-deployment/",
+    "wordpressPostId": 44656,
+    "reviewedInFull": true
+  },
+  "entryPoint": "RansomHubSim-Complete.ps1",
+  "cleanup": "Cleanup-RansomHubSim.ps1",
+  "phases": [
+    "01-InitialAccessDiscovery",
+    "02-CredentialPersistenceLateral",
+    "03-RcloneExfiltration",
+    "04-Impact"
+  ],
+  "safety": {
+    "explicitLabGate": true,
+    "domainControllerRefusal": true,
+    "liveMalware": false,
+    "realCredentialAccess": false,
+    "securityControlImpairment": false,
+    "remotePropagation": false,
+    "domainOrGpoModification": false,
+    "realIocConnections": false,
+    "networkDestination": "127.0.0.1",
+    "realPasswordSpray": false,
+    "lsassOrDcsyncAccess": false,
+    "rmmServicesInstalled": false,
+    "realExfiltration": false,
+    "vmShutdown": false,
+    "shadowCopyDeletion": false,
+    "eventLogClearing": false,
+    "symlinkPolicyModification": false,
+    "userDataEncryption": false,
+    "artifactsLeftForInvestigation": true,
+    "cleanupSeparateAndDeterministic": true
+  },
+  "iocMetadata": "IOC-METADATA.json",
+  "attackTechniques": [
+    "T1070.001", "T1486", "T1003.006", "T1087.002", "T1069.002", "T1482",
+    "T1048", "T1133", "T1083", "T1222", "T1070", "T1490", "T1570",
+    "T1087.001", "T1069.001", "T1003.001", "T1046", "T1110.003",
+    "T1059.001", "T1057", "T1219", "T1021.001", "T1018", "T1016",
+    "T1078", "T1059.005", "T1059.003", "T1543.003"
+  ]
+}

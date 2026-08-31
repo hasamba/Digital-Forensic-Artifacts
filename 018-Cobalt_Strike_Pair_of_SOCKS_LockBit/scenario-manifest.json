@@ -1,0 +1,8 @@
+{
+  "scenarioId":"018-Cobalt_Strike_Pair_of_SOCKS_LockBit",
+  "report":{"wordpressPostId":41604,"title":"Cobalt Strike and a Pair of SOCKS Lead to LockBit Ransomware","published":"2025-01-27","url":"https://thedfirreport.com/2025/01/27/cobalt-strike-and-a-pair-of-socks-lead-to-lockbit-ransomware/"},
+  "durationHours":239,"entryPoint":"CobaltSocksSim-Complete.ps1","cleanup":"Cleanup-CobaltSocksSim.ps1","artifactRoot":"%PUBLIC%\\CobaltSocksLockBitSim",
+  "phases":[{"order":1,"script":"CobaltSocksSim-Phase1-BeaconProxies.ps1","name":"Cobalt Strike, SystemBC, and GhostSOCKS"},{"order":2,"script":"CobaltSocksSim-Phase2-CredentialLateral.ps1","name":"Credential access, discovery, and lateral movement"},{"order":3,"script":"CobaltSocksSim-Phase3-Exfiltration.ps1","name":"FTP, MEGA, and second FTP exfiltration"},{"order":4,"script":"CobaltSocksSim-Phase4-LockBitImpact.ps1","name":"WMI, BITS, and PsExec LockBit deployment"}],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveTools":false,"credentials":false,"lsassOrNtds":false,"remoteExecution":false,"persistenceChanges":false,"securityControlChanges":false,"dataTransfer":false,"encryption":false,"separateCleanup":true},
+  "attackTechniques":["T1552.001","T1486","T1562.001","T1087.002","T1069.002","T1482","T1048","T1567.002","T1615","T1003.001","T1204.002","T1036","T1036.005","T1003.003","T1059.001","T1057","T1055","T1090","T1547.001","T1021.001","T1018","T1053.005","T1569.002","T1021.002","T1071.001","T1059.003","T1047","T1028"]
+}

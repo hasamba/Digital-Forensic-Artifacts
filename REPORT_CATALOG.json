@@ -1,0 +1,992 @@
+{
+  "schemaVersion": 1,
+  "generated": "2026-08-31",
+  "source": "https://thedfirreport.com/reports/",
+  "pagination": {
+    "pages": 17,
+    "postsPerPage": 6,
+    "totalIndexEntries": 97,
+    "totalReports": 96
+  },
+  "coverage": {
+    "dedicatedScenarios": 90,
+    "fullySafetyValidated": 82,
+    "remainingWithoutScenario": 6,
+    "legacyScenariosNeedingSafetyRemediation": 8,
+    "excludedNonReportEntries": 1,
+    "note": "001-APT29 is not sourced from this catalog. WordPress post 310 is a published lorem-ipsum placeholder, not a DFIR report, and is excluded from the 96-report denominator."
+  },
+  "reports": [
+    {
+      "catalogIndex": 1,
+      "indexPage": 1,
+      "wordpressPostId": 50572,
+      "published": "2026-08-24",
+      "title": "BengalSEO Part 1: Anatomy of the Operation",
+      "url": "https://thedfirreport.com/2026/08/24/bengalseo-part-1-anatomy-of-the-operation/",
+      "scenario": "010-BengalSEO_MayaBot_SEO_Poisoning",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 2,
+      "indexPage": 1,
+      "wordpressPostId": 50310,
+      "published": "2026-06-29",
+      "title": "From Bing Search to Ransomware: Bumblebee and AdaptixC2 Deliver Akira",
+      "url": "https://thedfirreport.com/2026/06/29/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira-3/",
+      "scenario": "004-Bing_Search_Bumblebee_AdaptixC2_Akira",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 3,
+      "indexPage": 1,
+      "wordpressPostId": 50191,
+      "published": "2026-05-11",
+      "title": "Flash Alert: EtherRat and TukTuk C2 End in The Gentleman Ransomware",
+      "url": "https://thedfirreport.com/2026/05/11/flash-alert-etherrat-and-tuktuk-c2-end-in-the-gentleman-ransomware/",
+      "scenario": "005-EtherRat_TukTukC2_TheGentleman",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 4,
+      "indexPage": 1,
+      "wordpressPostId": 50133,
+      "published": "2026-04-22",
+      "title": "Bissa Scanner Exposed: AI-Assisted Mass Exploitation and Credential Harvesting",
+      "url": "https://thedfirreport.com/2026/04/22/bissa-scanner-exposed-ai-assisted-mass-exploitation-and-credential-harvesting/",
+      "scenario": "006-Bissa_Scanner_AI_Mass_Exploitation",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 5,
+      "indexPage": 1,
+      "wordpressPostId": 49832,
+      "published": "2026-02-23",
+      "title": "Apache ActiveMQ Exploit Leads to LockBit Ransomware",
+      "url": "https://thedfirreport.com/2026/02/23/apache-activemq-exploit-leads-to-lockbit-ransomware/",
+      "scenario": "007-ActiveMQ_Exploit_LockBit",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 6,
+      "indexPage": 1,
+      "wordpressPostId": 49747,
+      "published": "2025-12-17",
+      "title": "Cat’s Got Your Files: Lynx Ransomware",
+      "url": "https://thedfirreport.com/2025/12/17/cats-got-your-files-lynx-ransomware/",
+      "scenario": "011-Cats_Got_Your_Files_Lynx_Ransomware",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 7,
+      "indexPage": 2,
+      "wordpressPostId": 48447,
+      "published": "2025-09-29",
+      "title": "From a Single Click: How Lunar Spider Enabled a Near Two-Month Intrusion",
+      "url": "https://thedfirreport.com/2025/09/29/from-a-single-click-how-lunar-spider-enabled-a-near-two-month-intrusion/",
+      "scenario": "008-LunarSpider_Latrodectus_BruteRatel_BackConnect",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 8,
+      "indexPage": 2,
+      "wordpressPostId": 47946,
+      "published": "2025-09-08",
+      "title": "Blurring the Lines: Intrusion Shows Connection With Three Major Ransomware Gangs",
+      "url": "https://thedfirreport.com/2025/09/08/blurring-the-lines-intrusion-shows-connection-with-three-major-ransomware-gangs/",
+      "scenario": "009-Blurring_Lines_Play_RansomHub_DragonForce",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 9,
+      "indexPage": 2,
+      "wordpressPostId": 49376,
+      "published": "2025-08-05",
+      "title": "Flash Alert: From Bing Search to Ransomware: Bumblebee and AdaptixC2 Deliver Akira",
+      "url": "https://thedfirreport.com/2025/08/05/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira-2/",
+      "scenario": "012-Flash_Alert_Bumblebee_AdaptixC2_Akira",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 10,
+      "indexPage": 2,
+      "wordpressPostId": 45286,
+      "published": "2025-07-14",
+      "title": "KongTuke FileFix Leads to New Interlock RAT Variant",
+      "url": "https://thedfirreport.com/2025/07/14/kongtuke-filefix-leads-to-new-interlock-rat-variant/",
+      "scenario": "013-KongTuke_FileFix_Interlock_RAT_PHP",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 11,
+      "indexPage": 2,
+      "wordpressPostId": 44656,
+      "published": "2025-06-30",
+      "title": "Hide Your RDP: Password Spray Leads to RansomHub Deployment",
+      "url": "https://thedfirreport.com/2025/06/30/hide-your-rdp-password-spray-leads-to-ransomhub-deployment/",
+      "scenario": "014-Hide_Your_RDP_RansomHub_Deployment",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 12,
+      "indexPage": 2,
+      "wordpressPostId": 43853,
+      "published": "2025-05-19",
+      "title": "Another Confluence Bites the Dust: Falling to ELPACO-team Ransomware",
+      "url": "https://thedfirreport.com/2025/05/19/another-confluence-bites-the-dust-falling-to-elpaco-team-ransomware/",
+      "scenario": "015-Another_Confluence_ELPACO_Team_Ransomware",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 13,
+      "indexPage": 3,
+      "wordpressPostId": 43393,
+      "published": "2025-04-28",
+      "title": "Navigating Through The Fog",
+      "url": "https://thedfirreport.com/2025/04/28/navigating-through-the-fog/",
+      "scenario": "016-Navigating_Through_The_Fog",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 14,
+      "indexPage": 3,
+      "wordpressPostId": 42828,
+      "published": "2025-03-31",
+      "title": "Fake Zoom Ends in BlackSuit Ransomware",
+      "url": "https://thedfirreport.com/2025/03/31/fake-zoom-ends-in-blacksuit-ransomware/",
+      "scenario": "002-Fake Zoom Ends in BlackSuit Ransomware",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 15,
+      "indexPage": 3,
+      "wordpressPostId": 42179,
+      "published": "2025-02-24",
+      "title": "Confluence Exploit Leads to LockBit Ransomware",
+      "url": "https://thedfirreport.com/2025/02/24/confluence-exploit-leads-to-lockbit-ransomware/",
+      "scenario": "017-Confluence_Exploit_LockBit_Ransomware",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 16,
+      "indexPage": 3,
+      "wordpressPostId": 41604,
+      "published": "2025-01-27",
+      "title": "Cobalt Strike and a Pair of SOCKS Lead to LockBit Ransomware",
+      "url": "https://thedfirreport.com/2025/01/27/cobalt-strike-and-a-pair-of-socks-lead-to-lockbit-ransomware/",
+      "scenario": "018-Cobalt_Strike_Pair_of_SOCKS_LockBit",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 17,
+      "indexPage": 3,
+      "wordpressPostId": 40696,
+      "published": "2024-12-02",
+      "title": "The Curious Case of an Egg-Cellent Resume",
+      "url": "https://thedfirreport.com/2024/12/02/the-curious-case-of-an-egg-cellent-resume/",
+      "scenario": "019-Egg_Cellent_Resume_MoreEggs_Pyramid",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 18,
+      "indexPage": 3,
+      "wordpressPostId": 39978,
+      "published": "2024-10-28",
+      "title": "Inside the Open Directory of the “You Dun” Threat Group",
+      "url": "https://thedfirreport.com/2024/10/28/inside-the-open-directory-of-the-you-dun-threat-group/",
+      "scenario": "020-You_Dun_Open_Directory_LockBit_Builder",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 19,
+      "indexPage": 4,
+      "wordpressPostId": 38756,
+      "published": "2024-09-30",
+      "title": "Nitrogen Campaign Drops Sliver and Ends With BlackCat Ransomware",
+      "url": "https://thedfirreport.com/2024/09/30/nitrogen-campaign-drops-sliver-and-ends-with-blackcat-ransomware/",
+      "scenario": "021-Nitrogen_Sliver_CobaltStrike_BlackCat",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 20,
+      "indexPage": 4,
+      "wordpressPostId": 37582,
+      "published": "2024-08-26",
+      "title": "BlackSuit Ransomware",
+      "url": "https://thedfirreport.com/2024/08/26/blacksuit-ransomware/",
+      "scenario": "022-BlackSuit_CobaltStrike_SystemBC_15Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 21,
+      "indexPage": 4,
+      "wordpressPostId": 37127,
+      "published": "2024-08-12",
+      "title": "Threat Actors' Toolkit: Leveraging Sliver, PoshC2 &#038; Batch Scripts",
+      "url": "https://thedfirreport.com/2024/08/12/threat-actors-toolkit-leveraging-sliver-poshc2-batch-scripts/",
+      "scenario": "023-Sliver_PoshC2_SystemBC_Batch_Toolkit",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 22,
+      "indexPage": 4,
+      "wordpressPostId": 34931,
+      "published": "2024-06-10",
+      "title": "IcedID Brings ScreenConnect and CSharp Streamer to ALPHV Ransomware Deployment",
+      "url": "https://thedfirreport.com/2024/06/10/icedid-brings-screenconnect-and-csharp-streamer-to-alphv-ransomware-deployment/",
+      "scenario": "024-IcedID_ScreenConnect_CSharpStreamer_ALPHV",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 23,
+      "indexPage": 4,
+      "wordpressPostId": 32050,
+      "published": "2024-04-29",
+      "title": "From IcedID to Dagon Locker Ransomware in 29 Days",
+      "url": "https://thedfirreport.com/2024/04/29/from-icedid-to-dagon-locker-ransomware-in-29-days/",
+      "scenario": "025-IcedID_AWSCollector_DagonLocker_29Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 24,
+      "indexPage": 4,
+      "wordpressPostId": 30547,
+      "published": "2024-04-01",
+      "title": "From OneNote to RansomNote: An Ice Cold Intrusion",
+      "url": "https://thedfirreport.com/2024/04/01/from-onenote-to-ransomnote-an-ice-cold-intrusion/",
+      "scenario": "026-OneNote_IcedID_CobaltStrike_AnyDesk_Nokoyawa",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 25,
+      "indexPage": 5,
+      "wordpressPostId": 28615,
+      "published": "2024-03-04",
+      "title": "Threat Brief: WordPress Plugin Exploit Leads to Godzilla Web Shell, Discovery &#038; New CVE",
+      "url": "https://thedfirreport.com/2024/03/04/threat-brief-wordpress-exploit-leads-to-godzilla-web-shell-discovery-new-cve/",
+      "scenario": "027-WordPress_3DPrint_Godzilla_DirtyPipe",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 26,
+      "indexPage": 5,
+      "wordpressPostId": 28305,
+      "published": "2024-02-26",
+      "title": "SEO Poisoning to Domain Control: The Gootloader Saga Continues",
+      "url": "https://thedfirreport.com/2024/02/26/seo-poisoning-to-domain-control-the-gootloader-saga-continues/",
+      "scenario": "028-Gootloader_CobaltStrike_SystemBC_DomainControl",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 27,
+      "indexPage": 5,
+      "wordpressPostId": 26140,
+      "published": "2024-01-29",
+      "title": "Buzzing on Christmas Eve: Trigona Ransomware in 3 Hours",
+      "url": "https://thedfirreport.com/2024/01/29/buzzing-on-christmas-eve-trigona-ransomware-in-3-hours/",
+      "scenario": "003-Buzzing on Christmas Eve Trigona Ransomware in 3 Hours",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 28,
+      "indexPage": 5,
+      "wordpressPostId": 24499,
+      "published": "2023-12-18",
+      "title": "Lets Open(Dir) Some Presents: An Analysis of a Persistent Actor’s Activity",
+      "url": "https://thedfirreport.com/2023/12/18/lets-opendir-some-presents-an-analysis-of-a-persistent-actors-activity/",
+      "scenario": "029-OpenDir_Persistent_Actor_Sliver_Metasploit",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 29,
+      "indexPage": 5,
+      "wordpressPostId": 23963,
+      "published": "2023-12-04",
+      "title": "SQL Brute Force Leads to BlueSky Ransomware",
+      "url": "https://thedfirreport.com/2023/12/04/sql-brute-force-leads-to-bluesky-ransomware/",
+      "scenario": "030-MSSQL_BruteForce_CobaltStrike_Tor2Mine_BlueSky",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 30,
+      "indexPage": 5,
+      "wordpressPostId": 22587,
+      "published": "2023-10-30",
+      "title": "NetSupport Intrusion Results in Domain Compromise",
+      "url": "https://thedfirreport.com/2023/10/30/netsupport-intrusion-results-in-domain-compromise/",
+      "scenario": "031-NetSupport_OpenSSH_Impacket_DomainCompromise",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 31,
+      "indexPage": 6,
+      "wordpressPostId": 21520,
+      "published": "2023-09-25",
+      "title": "From ScreenConnect to Hive Ransomware in 61 hours",
+      "url": "https://thedfirreport.com/2023/09/25/from-screenconnect-to-hive-ransomware-in-61-hours/",
+      "scenario": "032-ScreenConnect_Atera_Splashtop_Rclone_Hive_61h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 32,
+      "indexPage": 6,
+      "wordpressPostId": 20566,
+      "published": "2023-08-28",
+      "title": "HTML Smuggling Leads to Domain Wide Ransomware",
+      "url": "https://thedfirreport.com/2023/08/28/html-smuggling-leads-to-domain-wide-ransomware/",
+      "scenario": "033-HTMLSmuggling_IcedID_CobaltStrike_Nokoyawa_12h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 33,
+      "indexPage": 6,
+      "wordpressPostId": 18950,
+      "published": "2023-06-12",
+      "title": "A Truly Graceful Wipe Out",
+      "url": "https://thedfirreport.com/2023/06/12/a-truly-graceful-wipe-out/",
+      "scenario": "034-Truebot_FlawedGrace_CobaltStrike_MBRKiller_29h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 34,
+      "indexPage": 6,
+      "wordpressPostId": 18546,
+      "published": "2023-05-22",
+      "title": "IcedID Macro Ends in Nokoyawa Ransomware",
+      "url": "https://thedfirreport.com/2023/05/22/icedid-macro-ends-in-nokoyawa-ransomware/",
+      "scenario": "035-IcedID_Macro_CobaltStrike_Nokoyawa_148h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 35,
+      "indexPage": 6,
+      "wordpressPostId": 16873,
+      "published": "2023-04-03",
+      "title": "Malicious ISO File Leads to Domain Wide Ransomware",
+      "url": "https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/",
+      "scenario": "036-ISO_IcedID_CobaltStrike_Rclone_Quantum_78h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 36,
+      "indexPage": 6,
+      "wordpressPostId": 310,
+      "published": "2023-03-16",
+      "title": "From a Single Click: How Lunar Spider Enabled a Near Two-Month IntrusionDefault Post",
+      "url": "https://thedfirreport.com/2023/03/16/default-post/",
+      "scenario": null,
+      "status": "excluded-non-report",
+      "exclusionReason": "Public WordPress post 310 contains only generic lorem-ipsum template text and no DFIR intrusion report, indicators, or ATT&CK mapping."
+    },
+    {
+      "catalogIndex": 37,
+      "indexPage": 7,
+      "wordpressPostId": 15678,
+      "published": "2023-03-06",
+      "title": "2022 Year in Review",
+      "url": "https://thedfirreport.com/2023/03/06/2022-year-in-review/",
+      "scenario": "037-2022_YearInReview_Composite_Trends",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 38,
+      "indexPage": 7,
+      "wordpressPostId": 14465,
+      "published": "2023-02-06",
+      "title": "Collect, Exfiltrate, Sleep, Repeat",
+      "url": "https://thedfirreport.com/2023/02/06/collect-exfiltrate-sleep-repeat/",
+      "scenario": "038-TA452_PowerShell_AutoHotkey_Keylogger_9Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 39,
+      "indexPage": 7,
+      "wordpressPostId": 13900,
+      "published": "2023-01-23",
+      "title": "ShareFinder: How Threat Actors Discover File Shares",
+      "url": "https://thedfirreport.com/2023/01/23/sharefinder-how-threat-actors-discover-file-shares/",
+      "scenario": "039-ShareFinder_NetworkShare_Discovery_Profile",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 40,
+      "indexPage": 7,
+      "wordpressPostId": 13485,
+      "published": "2023-01-09",
+      "title": "Unwrapping Ursnifs Gifts",
+      "url": "https://thedfirreport.com/2023/01/09/unwrapping-ursnifs-gifts/",
+      "scenario": "040-Ursnif_ISO_CobaltStrike_WMI_RDP_5Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 41,
+      "indexPage": 7,
+      "wordpressPostId": 12483,
+      "published": "2022-11-28",
+      "title": "Emotet Strikes Again - LNK File Leads to Domain Wide Ransomware",
+      "url": "https://thedfirreport.com/2022/11/28/emotet-strikes-again-lnk-file-leads-to-domain-wide-ransomware/",
+      "scenario": "041-Emotet_CobaltStrike_RMM_Rclone_Quantum_154h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 42,
+      "indexPage": 7,
+      "wordpressPostId": 12208,
+      "published": "2022-11-14",
+      "title": "BumbleBee Zeros in on Meterpreter",
+      "url": "https://thedfirreport.com/2022/11/14/bumblebee-zeros-in-on-meterpreter/",
+      "scenario": "042-BumbleBee_Meterpreter_CobaltStrike_ZeroLogon_19h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 43,
+      "indexPage": 8,
+      "wordpressPostId": 11785,
+      "published": "2022-10-31",
+      "title": "Follina Exploit Leads to Domain Compromise",
+      "url": "https://thedfirreport.com/2022/10/31/follina-exploit-leads-to-domain-compromise/",
+      "scenario": "043-Follina_Qbot_Cobalt_RMM_Domain_2Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 44,
+      "indexPage": 8,
+      "wordpressPostId": 9991,
+      "published": "2022-09-26",
+      "title": "BumbleBee: Round Two",
+      "url": "https://thedfirreport.com/2022/09/26/bumblebee-round-two/",
+      "scenario": "044-BumbleBee_Meterpreter_Cobalt_RDP_PreRansomware",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 45,
+      "indexPage": 8,
+      "wordpressPostId": 9606,
+      "published": "2022-09-12",
+      "title": "Dead or Alive? An Emotet Story",
+      "url": "https://thedfirreport.com/2022/09/12/dead-or-alive-an-emotet-story/",
+      "scenario": "045-Emotet_Cobalt_Atera_Rclone_4Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 46,
+      "indexPage": 8,
+      "wordpressPostId": 8740,
+      "published": "2022-08-08",
+      "title": "BumbleBee Roasts Its Way to Domain Admin",
+      "url": "https://thedfirreport.com/2022/08/08/bumblebee-roasts-its-way-to-domain-admin/",
+      "scenario": "046-BumbleBee_Cobalt_VulnRecon_Kerberoast_DA_11Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 47,
+      "indexPage": 8,
+      "wordpressPostId": 8036,
+      "published": "2022-07-11",
+      "title": "SELECT XMRig FROM SQLServer",
+      "url": "https://thedfirreport.com/2022/07/11/select-xmrig-from-sqlserver/",
+      "scenario": "047-MSSQL_BruteForce_XMRig_WMI_Persistence",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 48,
+      "indexPage": 8,
+      "wordpressPostId": 7461,
+      "published": "2022-06-16",
+      "title": "SANS Ransomware Summit 2022, Can You Detect This?",
+      "url": "https://thedfirreport.com/2022/06/16/sans-ransomware-summit-2022-can-you-detect-this/",
+      "scenario": "048-SANS_Ransomware_Summit_Detection_Composite",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 49,
+      "indexPage": 9,
+      "wordpressPostId": 7241,
+      "published": "2022-06-06",
+      "title": "Will the Real Msiexec Please Stand Up? Exploit Leads to Data Exfiltration",
+      "url": "https://thedfirreport.com/2022/06/06/will-the-real-msiexec-please-stand-up-exploit-leads-to-data-exfiltration/",
+      "scenario": "049-ManageEngine_Msiexec_WebShell_Plink_Exfil_8Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 50,
+      "indexPage": 9,
+      "wordpressPostId": 6736,
+      "published": "2022-05-09",
+      "title": "SEO Poisoning - A Gootloader Story",
+      "url": "https://thedfirreport.com/2022/05/09/seo-poisoning-a-gootloader-story/",
+      "scenario": "050-Gootloader_Cobalt_SharpHound_LaZagne_RDP_2Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 51,
+      "indexPage": 9,
+      "wordpressPostId": 6455,
+      "published": "2022-04-25",
+      "title": "Quantum Ransomware",
+      "url": "https://thedfirreport.com/2022/04/25/quantum-ransomware/",
+      "scenario": "051-IcedID_Cobalt_RDP_WMI_PsExec_Quantum_3h44m",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 52,
+      "indexPage": 9,
+      "wordpressPostId": 6117,
+      "published": "2022-04-04",
+      "title": "Stolen Images Campaign Ends in Conti Ransomware",
+      "url": "https://thedfirreport.com/2022/04/04/stolen-images-campaign-ends-in-conti-ransomware/",
+      "scenario": "052-IcedID_Cobalt_Atera_Splashtop_Conti_19Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 53,
+      "indexPage": 9,
+      "wordpressPostId": 5981,
+      "published": "2022-03-21",
+      "title": "PHOSPHORUS Automates Initial Access Using ProxyShell",
+      "url": "https://thedfirreport.com/2022/03/21/phosphorus-automates-initial-access-using-proxyshell/",
+      "scenario": "053-ProxyShell_PHOSPHORUS_FRP_LSASS_3Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 54,
+      "indexPage": 9,
+      "wordpressPostId": 5706,
+      "published": "2022-03-07",
+      "title": "2021 Year In Review",
+      "url": "https://thedfirreport.com/2022/03/07/2021-year-in-review/",
+      "scenario": "054-2021_YearInReview_Composite_Trends",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 55,
+      "indexPage": 10,
+      "wordpressPostId": 5552,
+      "published": "2022-02-21",
+      "title": "Qbot and Zerologon Lead To Full Domain Compromise",
+      "url": "https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/",
+      "scenario": "055-Qbot_Zerologon_Cobalt_RDP_Exfil",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 56,
+      "indexPage": 10,
+      "wordpressPostId": 5449,
+      "published": "2022-02-07",
+      "title": "Qbot Likes to Move It, Move It",
+      "url": "https://thedfirreport.com/2022/02/07/qbot-likes-to-move-it-move-it/",
+      "scenario": "056-Qbot_Msra_Service_Spread_EmailBrowser",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 57,
+      "indexPage": 10,
+      "wordpressPostId": 5314,
+      "published": "2022-01-24",
+      "title": "Cobalt Strike, a Defender’s Guide - Part 2",
+      "url": "https://thedfirreport.com/2022/01/24/cobalt-strike-a-defenders-guide-part-2/",
+      "scenario": "057-CobaltStrike_DefendersGuide2_NetworkTelemetry",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 58,
+      "indexPage": 10,
+      "wordpressPostId": 4874,
+      "published": "2021-12-13",
+      "title": "Diavol Ransomware",
+      "url": "https://thedfirreport.com/2021/12/13/diavol-ransomware/",
+      "scenario": "058-Bazar_Cobalt_AnyDesk_FileZilla_Diavol_42h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 59,
+      "indexPage": 10,
+      "wordpressPostId": 4690,
+      "published": "2021-11-29",
+      "title": "CONTInuing the Bazar Ransomware Story",
+      "url": "https://thedfirreport.com/2021/11/29/continuing-the-bazar-ransomware-story/",
+      "scenario": "059-Bazar_Cobalt_Rclone_AnyDesk_Conti_5Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 60,
+      "indexPage": 10,
+      "wordpressPostId": 4551,
+      "published": "2021-11-15",
+      "title": "Exchange Exploit Leads to Domain Wide Ransomware",
+      "url": "https://thedfirreport.com/2021/11/15/exchange-exploit-leads-to-domain-wide-ransomware/",
+      "scenario": "060-ProxyShell_Plink_FRP_BitLocker_DiskCryptor_42h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 61,
+      "indexPage": 11,
+      "wordpressPostId": 4377,
+      "published": "2021-11-01",
+      "title": "From Zero to Domain Admin",
+      "url": "https://thedfirreport.com/2021/11/01/from-zero-to-domain-admin/",
+      "scenario": "061-Hancitor_Cobalt_Zerologon_ZeroToDA_2h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 62,
+      "indexPage": 11,
+      "wordpressPostId": 4275,
+      "published": "2021-10-18",
+      "title": "IcedID to XingLocker Ransomware in 24 hours",
+      "url": "https://thedfirreport.com/2021/10/18/icedid-to-xinglocker-ransomware-in-24-hours/",
+      "scenario": "062-IcedID_Cobalt_XingLocker_24h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 63,
+      "indexPage": 11,
+      "wordpressPostId": 4173,
+      "published": "2021-10-04",
+      "title": "BazarLoader and the Conti Leaks",
+      "url": "https://thedfirreport.com/2021/10/04/bazarloader-and-the-conti-leaks/",
+      "scenario": "063-Bazar_Cobalt_AnyDesk_IFM_Rclone_3Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 64,
+      "indexPage": 11,
+      "wordpressPostId": 4010,
+      "published": "2021-09-13",
+      "title": "BazarLoader to Conti Ransomware in 32 Hours",
+      "url": "https://thedfirreport.com/2021/09/13/bazarloader-to-conti-ransomware-in-32-hours/",
+      "scenario": "064-Bazar_Cobalt_WinSCP_Conti_32h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 65,
+      "indexPage": 11,
+      "wordpressPostId": 3529,
+      "published": "2021-08-29",
+      "title": "Cobalt Strike, a Defender's Guide",
+      "url": "https://thedfirreport.com/2021/08/29/cobalt-strike-a-defenders-guide/",
+      "scenario": "065-CobaltStrike_DefendersGuide1_Endpoint_Lateral",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 66,
+      "indexPage": 11,
+      "wordpressPostId": 3659,
+      "published": "2021-08-16",
+      "title": "Trickbot Leads Up to Fake 1Password Installation",
+      "url": "https://thedfirreport.com/2021/08/16/trickbot-leads-up-to-fake-1password-installation/",
+      "scenario": "066-Trickbot_Cobalt_Fake1Password_WDigest",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 67,
+      "indexPage": 12,
+      "wordpressPostId": 3571,
+      "published": "2021-08-01",
+      "title": "BazarCall to Conti Ransomware via Trickbot and Cobalt Strike",
+      "url": "https://thedfirreport.com/2021/08/01/bazarcall-to-conti-ransomware-via-trickbot-and-cobalt-strike/",
+      "scenario": "067-BazarCall_Trickbot_Cobalt_Conti_2Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 68,
+      "indexPage": 12,
+      "wordpressPostId": 3420,
+      "published": "2021-07-19",
+      "title": "IcedID and Cobalt Strike vs Antivirus",
+      "url": "https://thedfirreport.com/2021/07/19/icedid-and-cobalt-strike-vs-antivirus/",
+      "scenario": "068-IcedID_Cobalt_AV_11Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 69,
+      "indexPage": 12,
+      "wordpressPostId": 3259,
+      "published": "2021-06-28",
+      "title": "Hancitor Continues to Push Cobalt Strike",
+      "url": "https://thedfirreport.com/2021/06/28/hancitor-continues-to-push-cobalt-strike/",
+      "scenario": "069-Hancitor_Cobalt_SMB_Service_20m",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 70,
+      "indexPage": 12,
+      "wordpressPostId": 3189,
+      "published": "2021-06-20",
+      "title": "From Word to Lateral Movement in 1 Hour",
+      "url": "https://thedfirreport.com/2021/06/20/from-word-to-lateral-movement-in-1-hour/",
+      "scenario": "070-IcedID_Cobalt_SMB_RDP_1h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 71,
+      "indexPage": 12,
+      "wordpressPostId": 2865,
+      "published": "2021-06-03",
+      "title": "WebLogic RCE Leads to XMRig",
+      "url": "https://thedfirreport.com/2021/06/03/weblogic-rce-leads-to-xmrig/",
+      "scenario": "071-WebLogic_RCE_XMRig_2m",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 72,
+      "indexPage": 12,
+      "wordpressPostId": 2918,
+      "published": "2021-05-12",
+      "title": "Conti Ransomware",
+      "url": "https://thedfirreport.com/2021/05/12/conti-ransomware/",
+      "scenario": "072-IcedID_Cobalt_Conti_2d11h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 73,
+      "indexPage": 13,
+      "wordpressPostId": 2817,
+      "published": "2021-05-02",
+      "title": "Trickbot Brief: Creds and Beacons",
+      "url": "https://thedfirreport.com/2021/05/02/trickbot-brief-creds-and-beacons/",
+      "scenario": "073-Trickbot_Cobalt_LaZagne_WDigest",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 74,
+      "indexPage": 13,
+      "wordpressPostId": 2531,
+      "published": "2021-03-29",
+      "title": "Sodinokibi (aka REvil) Ransomware",
+      "url": "https://thedfirreport.com/2021/03/29/sodinokibi-aka-revil-ransomware/",
+      "scenario": "074-IcedID_Cobalt_Rclone_REvil_4h30m",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 75,
+      "indexPage": 13,
+      "wordpressPostId": 2328,
+      "published": "2021-03-08",
+      "title": "Bazar Drops the Anchor",
+      "url": "https://thedfirreport.com/2021/03/08/bazar-drops-the-anchor/",
+      "scenario": "075-Bazar_Cobalt_AnchorDNS_5Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 76,
+      "indexPage": 13,
+      "wordpressPostId": 2293,
+      "published": "2021-02-28",
+      "title": "Laravel Apps Leaking Secrets",
+      "url": "https://thedfirreport.com/2021/02/28/laravel-debug-leaking-secrets/",
+      "scenario": "076-Laravel_Debug_SMTP_Cracker_Secrets",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 77,
+      "indexPage": 13,
+      "wordpressPostId": 2080,
+      "published": "2021-01-31",
+      "title": "Bazar, No Ryuk?",
+      "url": "https://thedfirreport.com/2021/01/31/bazar-no-ryuk/",
+      "scenario": "077-Bazar_Cobalt_GetDataInfo_NoRyuk_4Day",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 78,
+      "indexPage": 13,
+      "wordpressPostId": 2043,
+      "published": "2021-01-18",
+      "title": "All That for a Coinminer?",
+      "url": "https://thedfirreport.com/2021/01/18/all-that-for-a-coinminer/",
+      "scenario": "078-RDP_Mimikatz_AdvancedIPScanner_XMRig_2h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 79,
+      "indexPage": 14,
+      "wordpressPostId": 1864,
+      "published": "2021-01-11",
+      "title": "Trickbot Still Alive and Well",
+      "url": "https://thedfirreport.com/2021/01/11/trickbot-still-alive-and-well/",
+      "scenario": "079-Trickbot_Cobalt_NTDS_Overpass_NoRyuk",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 80,
+      "indexPage": 14,
+      "wordpressPostId": 1518,
+      "published": "2020-12-13",
+      "title": "Defender Control",
+      "url": "https://thedfirreport.com/2020/12/13/defender-control/",
+      "scenario": "080-DefenderControl_RDP_SingleHost_Profile",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 81,
+      "indexPage": 14,
+      "wordpressPostId": 1257,
+      "published": "2020-11-23",
+      "title": "PYSA/Mespinoza Ransomware",
+      "url": "https://thedfirreport.com/2020/11/23/pysa-mespinoza-ransomware/",
+      "scenario": "081-RDP_Empire_Koadic_PYSA_8h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 82,
+      "indexPage": 14,
+      "wordpressPostId": 1211,
+      "published": "2020-11-12",
+      "title": "Cryptominers Exploiting WebLogic RCE CVE-2020-14882",
+      "url": "https://thedfirreport.com/2020/11/12/cryptominers-exploiting-weblogic-rce-cve-2020-14882/",
+      "scenario": "082-WebLogic_CVE2020_14882_XMRig_Sysupdate",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 83,
+      "indexPage": 14,
+      "wordpressPostId": 44069,
+      "published": "2020-11-05",
+      "title": "Ryuk Speed Run, 2 Hours to Ransom",
+      "url": "https://thedfirreport.com/2020/11/05/ryuk-speed-run-2-hours-to-ransom/",
+      "scenario": "083-Bazar_Cobalt_Zerologon_Ryuk_3h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 84,
+      "indexPage": 14,
+      "wordpressPostId": 1041,
+      "published": "2020-10-18",
+      "title": "Ryuk in 5 Hours",
+      "url": "https://thedfirreport.com/2020/10/18/ryuk-in-5-hours/",
+      "scenario": "084-Bazar_Zerologon_WMI_RDP_Ryuk_5h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 85,
+      "indexPage": 15,
+      "wordpressPostId": 44067,
+      "published": "2020-10-08",
+      "title": "Ryuk's Return",
+      "url": "https://thedfirreport.com/2020/10/08/ryuks-return/",
+      "scenario": "085-Bazar_Cobalt_FTP_Ryuk_29h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 86,
+      "indexPage": 15,
+      "wordpressPostId": 723,
+      "published": "2020-08-31",
+      "title": "NetWalker Ransomware in 1 Hour",
+      "url": "https://thedfirreport.com/2020/08/31/netwalker-ransomware-in-1-hour/",
+      "scenario": "086-RDP_Cobalt_ProcDump_Mimikatz_NetWalker_1h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 87,
+      "indexPage": 15,
+      "wordpressPostId": 605,
+      "published": "2020-08-03",
+      "title": "Dridex - From Word to Domain Dominance",
+      "url": "https://thedfirreport.com/2020/08/03/dridex-from-word-to-domain-dominance/",
+      "scenario": "087-Dridex_Empire_AdFind_PsExec_Domain",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 88,
+      "indexPage": 15,
+      "wordpressPostId": 44066,
+      "published": "2020-07-13",
+      "title": "Ransomware Again...But We Changed the RDP Port!?!?!",
+      "url": "https://thedfirreport.com/2020/07/13/ransomware-again-but-we-changed-the-rdp-port/",
+      "scenario": "088-Nonstandard_RDP_Scanner_Harma_17m",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 89,
+      "indexPage": 15,
+      "wordpressPostId": 448,
+      "published": "2020-06-21",
+      "title": "Snatch Ransomware",
+      "url": "https://thedfirreport.com/2020/06/21/snatch-ransomware/",
+      "scenario": "089-RDP_Tor_Meterpreter_Snatch_5h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 90,
+      "indexPage": 15,
+      "wordpressPostId": 435,
+      "published": "2020-06-16",
+      "title": "The Little Ransomware That Couldn’t (Dharma)",
+      "url": "https://thedfirreport.com/2020/06/16/the-little-ransomware-that-couldnt-dharma/",
+      "scenario": "090-RDP_NS_Dharma_SingleHost",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 91,
+      "indexPage": 16,
+      "wordpressPostId": 392,
+      "published": "2020-06-10",
+      "title": "Lockbit Ransomware, Why You No Spread?",
+      "url": "https://thedfirreport.com/2020/06/10/lockbit-ransomware-why-you-no-spread/",
+      "scenario": "091-RDP_Hakops15_LockBit_SingleHost",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 92,
+      "indexPage": 16,
+      "wordpressPostId": 357,
+      "published": "2020-05-08",
+      "title": "AdFind Recon",
+      "url": "https://thedfirreport.com/2020/05/08/adfind-recon/",
+      "scenario": "092-RDP_AdFind_LocalAdmin_Recon",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 93,
+      "indexPage": 16,
+      "wordpressPostId": 285,
+      "published": "2020-04-30",
+      "title": "Tricky Pyxie",
+      "url": "https://thedfirreport.com/2020/04/30/tricky-pyxie/",
+      "scenario": "093-TrickBot_CobaltStrike_PyXie_SharpHound",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 94,
+      "indexPage": 16,
+      "wordpressPostId": 204,
+      "published": "2020-04-24",
+      "title": "Ursnif via LOLbins",
+      "url": "https://thedfirreport.com/2020/04/24/ursnif-via-lolbins/",
+      "scenario": "094-Ursnif_LOLBins_CobaltStrike_TVRat_24h",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 95,
+      "indexPage": 16,
+      "wordpressPostId": 44065,
+      "published": "2020-04-20",
+      "title": "Sqlserver, or the Miner in the Basement",
+      "url": "https://thedfirreport.com/2020/04/20/sqlserver-or-the-miner-in-the-basement/",
+      "scenario": "095-RDP_XMRig_NSSM_Neshta_Persistence",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 96,
+      "indexPage": 16,
+      "wordpressPostId": 111,
+      "published": "2020-04-14",
+      "title": "Dharma Ransomware",
+      "url": "https://thedfirreport.com/2020/04/14/dharma-ransomware/",
+      "scenario": "096-RDP_DefenderControl_Mimikatz_Dharma_10m",
+      "status": "implemented-lab-safe"
+    },
+    {
+      "catalogIndex": 97,
+      "indexPage": 17,
+      "wordpressPostId": 44064,
+      "published": "2020-04-04",
+      "title": "GoGoogle Ransomware",
+      "url": "https://thedfirreport.com/2020/04/04/gogoogle-ransomware/",
+      "scenario": "097-RDP_CredentialToolkit_GoGoogle_1h",
+      "status": "implemented-lab-safe"
+    }
+  ]
+}

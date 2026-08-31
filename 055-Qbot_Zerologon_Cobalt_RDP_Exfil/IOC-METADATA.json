@@ -1,0 +1,20 @@
+{
+  "source": "https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/",
+  "published": "2022-02-21",
+  "internalCaseNumber": 8734,
+  "handling": "Investigation metadata only. No listed payload is retrieved or executed and no listed host is contacted.",
+  "networkIndicators": [
+    {"family": "Qbot", "address": "24.229.150.54", "port": 995, "domain": "avlhestito.us", "ja3": "c35a61411ee5bdf666b4d64b05c29e64", "ja3s": "7c02dbae662670040c7af9bd15fb7e2f", "certificateSha1": "25a6ef79489854eebba6bd10eec1f20a00adacce"},
+    {"family": "Qbot", "address": "41.228.22.180", "port": 443, "domain": "xrhm.info", "ja3": "c35a61411ee5bdf666b4d64b05c29e64", "ja3s": "7c02dbae662670040c7af9bd15fb7e2f", "certificateSha1": "9639a952e99a1e29c5dcb372012974c487db15d7"},
+    {"family": "Cobalt Strike", "address": "5.255.98.144", "ports": [8888, 443, 8080], "domain": "dxabt.com", "ja3": "0eecb7b1551fba4ec03851810d31743f", "ja3s": "ae4edc6faf64d08308082ad26be60767", "certificateSha1": "25febe6d0e8d485a94cf4684d77effbf47aa045c"},
+    {"family": "exfiltration confirmation", "address": "91.193.182.165", "context": "source of three canary-document open alerts"}
+  ],
+  "files": [
+    {"name": "initial Qbot DLL", "md5": "53510e20efb161d5b71c4ce2800c1a8d", "sha1": "2268178851d0d0debb9ab457d73af8a5e50af168", "sha256": "e2bc969424adc97345ac81194d316f58da38621aad3ca7ae27e40a8fae582987"},
+    {"name": "Qbot DLL extracted from registry", "md5": "312e52b4109741893f17bc524084100f", "sha1": "7ca650945223eab088f43fd472e3592be2ed9d32", "sha256": "4d3b10b338912e7e1cbade226a1e344b2b4aebc1aa2297ce495e27b2b0b5c92b"},
+    {"name": "cool.exe", "md5": "59e7f22d2c290336826700f05531bd30", "sha1": "3b2a0d2cb8993764a042e8e6a89cbbf8a29d47d1", "sha256Reported": "f63e17ff2d3cfe75cf3bb9cf644a2a00e50aaffe45c1adf2de02d5bd0ae35b0", "note": "The report labels this as SHA-256, but the printed value has 63 hexadecimal characters and is preserved without alteration."},
+    {"name": "Cobalt Strike x64 beacon", "md5": "30cc71d5b5d7778774c54486558690d3", "sha1": "5f36c6cffdbae0d631c8889b4d9bad1248f899b3", "sha256": "dec25fc2fe7e76fe191fbfdf48588c4325f52bfe2769fbc88a5614541c1075eb"},
+    {"name": "Cobalt Strike x86 beacon", "md5": "c1fd49c043894c1dff8bc02b17f8942c", "sha1": "e915f74be310b1687db6b290af2f78583a981512", "sha256": "a992d57b2f6164e599952ea3c245962824ad17166684ed45e987efe80ebe611f"}
+  ],
+  "cobaltStrikeConfig": {"domain": "dxabt.com", "getPath": "/case", "postPath": "/faq", "jitter": 79, "watermark": 426352781, "pollingMs": 53988, "spawnX86": "%windir%\\syswow64\\runonce.exe", "spawnX64": "%windir%\\sysnative\\runonce.exe", "namedPipe": "dce_3d"}
+}

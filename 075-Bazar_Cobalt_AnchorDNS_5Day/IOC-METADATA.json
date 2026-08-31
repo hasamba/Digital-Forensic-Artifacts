@@ -1,0 +1,89 @@
+{
+  "source": "https://thedfirreport.com/2021/03/08/bazar-drops-the-anchor/",
+  "internalCase": 1017,
+  "handling": "Metadata only. No sample is retrieved, no IOC is resolved or contacted, and all runtime network attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network": [
+    "54.176.158.165",
+    "54.193.234.163",
+    "54.241.149.90",
+    "208.100.26.238",
+    "63.251.235.71",
+    "34.210.71.206",
+    "195.123.217.45",
+    "gloomix.com",
+    "https://morrislibraryconsulting.com/favicam/gertnm.php",
+    "xyskencevli.com",
+    "sluaknhbsoe.com",
+    "checkip.amazonaws.com"
+  ],
+  "honeyDocumentAccess": {
+    "ip": "23.94.51.80",
+    "userAgent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; MSOffice 12)"
+  },
+  "tlsAndProfiles": [
+    {
+      "role": "Bazar TLS observation 1",
+      "endpoint": "34.210.71.206",
+      "certificateSha1": "ecc8db01a4a3173654a2f50644845cf6256e4f74",
+      "issuerOrganization": "Global Security",
+      "subjectCommonName": "example.com",
+      "ja3": "51c64c77e60f3980eea90869b68c58a8",
+      "ja3s": "e35df3e00ca4ef31d42b34bebaa2f86e"
+    },
+    {
+      "role": "Bazar TLS observation 2",
+      "endpoint": "34.210.71.206",
+      "certificateSha1": "0632210b8ba2a73c47a4335311a31108594831e2",
+      "issuerOrganization": "Amazon",
+      "subjectCommonName": "*.v.m2.uw2.app.chime.aws",
+      "ja3": "fc54e0d16d9764783542f0146a98b300",
+      "ja3s": "9e4af711131ebfb2a0cff53c4f2d64e6"
+    },
+    {
+      "role": "Cobalt Strike",
+      "endpoint": "195.123.217.45 / gloomix.com",
+      "certificateSha1": "3cbb96dea7d77a7d61107c53e3d0f5704354612e",
+      "jarm": "07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1",
+      "ports": [80,443],
+      "paths": ["/jquery-3.3.1.min.js","/jquery-3.3.2.min.js"],
+      "pollingMs": 45000,
+      "jitter": 37,
+      "spawnTo": ["%windir%\\syswow64\\dllhost.exe","%windir%\\sysnative\\dllhost.exe"],
+      "reportProxySetting": "Use IE settings; simulation always uses proxy=false"
+    },
+    {
+      "role": "AnchorDNS",
+      "domains": ["xyskencevli.com","sluaknhbsoe.com"],
+      "reportedPeriodMinutes": 2,
+      "reportedLastHope": 2
+    }
+  ],
+  "files": [
+    {"name":"request_form_1612805504.xls","md5":"58eaac6124749d0e93df6d05a4380c22","sha1":"7e14c560484cb7e8ae065224a7d4978b9939ef9a","sha256":"d9b13ef49c80375e0a8cf20b840b1e8283b35c1a1a6adcbb4173eb25490530e0"},
+    {"name":"~tmp01925d3f.exe","md5":"ef7047a0ca52ef7f4d20281b50207f71","sha1":"61d8f56452fd9df5952fac84f10ea8520ed5958c","sha256":"10ff83629d727df428af1f57c524e1eaddeefd608c5a317a5bfc13e2df87fb63"},
+    {"name":"anchorAsjuster_x64.exe","md5":"9fbc3d560d075f33a15aa67ae74ac6ef","sha1":"a298c6f5f8902fb581a1b5b922f95b362747f9a7","sha256":"3ab8a1ee10bd1b720e1c8a8795e78cdc09fec73a6bb91526c0ccd2dc2cfbc28d"},
+    {"name":"anchorDNS_x64.exe","md5":"7160ac4abb26f0ca4c1b6dfba44f8d36","sha1":"3820ff0d04a233745c79932b77eccfe743a81d34","sha256":"9fdbd76141ec43b6867f091a2dca503edb2a85e4b98a4500611f5fe484109513"},
+    {"name":"anchor_x64.exe","md5":"0be407690fd049ea640dfc64a80c7b2a","sha1":"c9c4ef9b8b39c584d554de8afeb2be6f5648aa6d","sha256":"ca72600f50c76029b6fb71f65423afc44e4e2d93257c3f95fb994adc602f3e1b"},
+    {"name":"14wfa5dfs.exe","md5":"9a16a348d3f4e7da3e8746667624115f","sha1":"bebdec590d2a2fffaecb970b73e3067294c9125b","sha256":"2065157b834e1116abdd5d67167c77c6348361e04a8085aa382909500f1bbe69"},
+    {"name":"extracted-cobalt-strike-beacon.exe","md5":"49dc44dfa14a76e139bf5efb4a78aca6","sha1":"a47fc79bc1f0da5d292a986acdbe9057d3dd15c9","sha256":"738018c61a8db247615c9a3290c26fbbc4e230d5fbe00c4312401b90813c340c"},
+    {"name":"Advanced_IP_Scanner_2.5.3850.exe","sha256":"722fff8f38197d1449df500ae31a95bb34a6ddaba56834b13eaaff2b0f9f1c8b","sourceNote":"Published in the report's YARA rule."}
+  ],
+  "pdbPaths": [
+    "z:\\d\\git\\anchordns.llvm\\bin\\x64\\release\\anchordns_x64.pdb",
+    "c:\\users\\hillary\\source\\repos\\gromyko\\release\\gromyko.pdb"
+  ],
+  "detections": {
+    "network": [
+      "ET INFO Observed DNS Query for EmerDNS TLD (.bazar)",
+      "ETPRO POLICY External IP Check (checkip.amazonaws.com)",
+      "ETPRO TROJAN Win32/TrickBot Anchor Variant Style External IP Check",
+      "ET SCAN Behavioral Unusual Port 445 traffic Potential Scan or Infection",
+      "ET SCAN Behavioral Unusual Port 139 traffic Potential Scan or Infection",
+      "ET TROJAN ABUSE.CH SSL Blacklist Malicious SSL certificate detected (Dridex/Trickbot CnC)",
+      "ETPRO POLICY Possibly Suspicious example.com SSL Cert",
+      "ET POLICY OpenSSL Demo CA - Internet Widgits Pty"
+    ],
+    "sigmaBehaviors": ["encoded PowerShell","Trickbot-style recon","recon command burst","DNS C2"],
+    "yaraRules": ["bazar_14wfa5dfs","cobalt_strike_tmp01925d3f","advanced_ip_scanner","anchor_x64","anchorDNS_x64","anchorAsjuster_x64"]
+  }
+}

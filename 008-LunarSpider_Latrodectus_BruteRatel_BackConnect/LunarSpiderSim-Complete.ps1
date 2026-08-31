@@ -1,94 +1,18 @@
-# ============================================================================
-# LUNAR SPIDER / LATRODECTUS / BRUTE RATEL / BACKCONNECT FULL INTRUSION SIM
-# ============================================================================
-# Source report: "From a Single Click: How Lunar Spider Enabled a Near-Two-Month
-# Intrusion" - https://thedfirreport.com/2025/09/29/
-#   from-a-single-click-how-lunar-spider-enabled-a-near-two-month-intrusion/
-#
-# Runs the full attack chain end-to-end on a single host:
-#   1.  Initial Access       - malvertising -> obfuscated W-9 JS -> MSI.msi
-#   2.  Execution/Injection  - Brute Ratel C4 -> Latrodectus (explorer) -> stealer
-#   3.  Persistence          - HKCU Run 'Update', SchedulerLsass task (lsassa.exe)
-#   4.  Privilege Escalation - runas (seclogon), UAC bypass (ms-settings)
-#   5.  Defense Evasion      - injection into sacrificial procs, tool deletion
-#   6.  Credential Access    - unattend.xml, LSASS dump, stealer, Veeam creds
-#   7.  Discovery            - net/nltest/WMIC, AdFind, rustscan/nmap
-#   8.  Lateral Movement     - WMIC, PsExec, Zerologon (zero.exe), RDP
-#   9.  Command and Control  - Latrodectus/BRC4/BackConnect/CobaltStrike/.NET beacons
-#   10. Collection/Exfil     - Rclone (sihosts.exe) -> FTP 45.135.232.3
-#   11. Impact               - NO ransomware; dwell + exfiltration marker
-#
-# REQUIREMENTS: Run as Administrator, on an isolated/disposable lab VM only.
-# ============================================================================
-
+#Requires -Version 5.1
 #Requires -RunAsAdministrator
-
-param(
-    [switch]$DumpRealLsass,        # See Phase 6 - leave OFF unless the VM is fully disposable
-    [switch]$SkipDefenderDisable   # Leave Microsoft Defender enabled (default: disable it at start)
-)
-
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-. "$scriptDir\LunarSpiderSim-utilities.ps1"
-. "$scriptDir\LunarSpiderSim-Phase1-InitialAccess.ps1"
-. "$scriptDir\LunarSpiderSim-Phase2-ExecutionInjection.ps1"
-. "$scriptDir\LunarSpiderSim-Phase3-Persistence.ps1"
-. "$scriptDir\LunarSpiderSim-Phase4-PrivilegeEscalation.ps1"
-. "$scriptDir\LunarSpiderSim-Phase5-DefenseEvasion.ps1"
-. "$scriptDir\LunarSpiderSim-Phase6-CredentialAccess.ps1"
-. "$scriptDir\LunarSpiderSim-Phase7-Discovery.ps1"
-. "$scriptDir\LunarSpiderSim-Phase8-LateralMovement.ps1"
-. "$scriptDir\LunarSpiderSim-Phase9-CommandAndControl.ps1"
-. "$scriptDir\LunarSpiderSim-Phase10-Exfiltration.ps1"
-. "$scriptDir\LunarSpiderSim-Phase11-Impact.ps1"
-
-Confirm-Execution
-$logPath = Start-SimulationLogging
-$simPaths = Initialize-SimulationEnvironment
-
-# Disable Microsoft Defender up front so the chain detonates deterministically
-# (lab-only; T1562.001). Use -SkipDefenderDisable to leave Defender on.
-if (-not $SkipDefenderDisable) {
-    Disable-DefenderForSimulation -AddExclusions
+[CmdletBinding()]param([switch]$LabConfirmed)
+$config=[pscustomobject]@{
+ Id='008-LunarSpider_Latrodectus_BruteRatel_BackConnect';RootName='LunarSpiderSim';Source='https://thedfirreport.com/2025/09/29/from-a-single-click-how-lunar-spider-enabled-a-near-two-month-intrusion/';Title='From a Single Click: How Lunar Spider Enabled a Near Two-Month Intrusion';DurationMinutes=86400;TimelineNote='Generated 60-day axis preserves report day ordering; no ransomware was observed or simulated.'
+ IOCs=[ordered]@{initial='91.194.11.64';latrodectus=@('workspacin.cloud','illoskanawer.com','grasmetral.com','jarkaairbo.com','scupolasta.store');bruteRatel=@('anikvan.com','erbolsan.com','samderat200.com','kasymdev.com');backConnect=@('193.168.143.196','185.93.221.12');cobalt=@('206.206.123.209:443','avtechupdate.com','45.129.199.214');dotnet=@('162.0.209.121','cloudmeri.com/comm.php');rejectedMetasploit='217.196.98.61:4444';ftp='45.135.232.3';operatorHost='VPS2DAY-32220LE'}
+ Files=@(
+  [pscustomobject]@{path='payload-canaries\cmd.exe';role='reported-command stand-in';publishedHash='none'},[pscustomobject]@{path='payload-canaries\upfilles.dll';role='BRC4 loader stand-in';publishedHash='MD5 ccb6d3cb020f56758622911ddd2f1fcb'},[pscustomobject]@{path='payload-canaries\wscadminui.dll';role='BRC4 replacement stand-in';publishedHash='MD5 d7bd590b6c660716277383aa23cb0aa9'},[pscustomobject]@{path='payload-canaries\sys.dll';role='Cobalt Strike stand-in';publishedHash='MD5 ad3c52316e0059c66bc1dd680cf9edad'},[pscustomobject]@{path='payload-canaries\cron801.dl_';role='Cobalt Strike stand-in';publishedHash='MD5 495363b0262b62dfc38d7bfb7b5541aa'},[pscustomobject]@{path='payload-canaries\system.dl_';role='Cobalt Strike stand-in';publishedHash='MD5 495363b0262b62dfc38d7bfb7b5541aa'},[pscustomobject]@{path='payload-canaries\lsassa.exe';role='.NET backdoor stand-in';publishedHash='MD5 50abc42faa70062e20cd5e2a2e2b6633'},[pscustomobject]@{path='payload-canaries\zero.exe';role='Zerologon stand-in';publishedHash='MD5 91889658f1c8e1462f06f019b842f109'},[pscustomobject]@{path='payload-canaries\rustscan.exe';role='scanner stand-in';publishedHash='MD5 9eaa8464110883a15115b68ffa1ecf7d'},[pscustomobject]@{path='payload-canaries\sihosts.exe';role='renamed Rclone stand-in';publishedHash='see source report'})
+ Artifacts=@(
+  [pscustomobject]@{path='payload-canaries\Form_W-9_Ver-i40_53b043910-86g91352u7972-6495q3.js';content='GENERATED OBFUSCATED-JS-SHAPED CANARY; never interpreted.';purpose='malvertising lure'},[pscustomobject]@{path='generated-persistence\Update-RunKey.json';content='{"reportedKey":"HKCU Run Update","created":false}';purpose='persistence metadata'},[pscustomobject]@{path='generated-persistence\SchedulerLsass.json';content='{"reportedTask":"SchedulerLsass","created":false}';purpose='scheduled-task metadata'},[pscustomobject]@{path='evidence\unattend.xml';content='<generated><credential>NOT-COLLECTED</credential></generated>';purpose='credential canary'},[pscustomobject]@{path='evidence\rclone.conf';content='[ftp]`r`nhost = 45.135.232.3`r`nuser = J0eBidenAbrabdy1aS3ha2Yeami`r`npass = GENERATED-NOT-A-CREDENTIAL';purpose='exfil metadata'},[pscustomobject]@{path='evidence\collection.zip.marker';content='Generated archive marker only; no host data collected.';purpose='collection marker'},[pscustomobject]@{path='evidence\outcome.txt';content='NO RANSOMWARE OBSERVED. Long-term access and exfiltration represented; bytes transferred: 0.';purpose='outcome'})
+ Commands=@(
+  [pscustomobject]@{file='payload-canaries\cmd.exe';reported='rundll32 upfilles.dll,stow; inject Latrodectus into explorer.exe';parent='MSI custom action'},[pscustomobject]@{file='payload-canaries\cmd.exe';reported='runas/gpupdate and ms-settings UAC bypass via ComputerDefaults.exe';parent='operator'},[pscustomobject]@{file='payload-canaries\cmd.exe';reported='LSASS access plus browser/Outlook stealer and Veeam-Get-Creds.ps1';parent='Latrodectus/Cobalt Strike'},[pscustomobject]@{file='payload-canaries\cmd.exe';reported='AdFind, DNS-zone enumeration, rustscan/nmap SMB sweeps';parent='operator'},[pscustomobject]@{file='payload-canaries\zero.exe';reported='zero.exe CVE-2020-1472 attempt x8 against DC';parent='operator'},[pscustomobject]@{file='payload-canaries\cmd.exe';reported='PsExec system.dl_ to DC, file share, and backup';parent='operator'},[pscustomobject]@{file='payload-canaries\sihosts.exe';reported='sihosts.exe copy staging ftp: using rclone.conf';parent='start.vbs -> run.bat'})
+ Network=@(
+  [pscustomobject]@{port=80;target='91.194.11.64';role='MSI staging'},[pscustomobject]@{port=443;target='Latrodectus and Brute Ratel domains';role='C2'},[pscustomobject]@{port=443;target='193.168.143.196 / 185.93.221.12';role='BackConnect'},[pscustomobject]@{port=443;target='206.206.123.209 / avtechupdate.com / 45.129.199.214';role='Cobalt Strike'},[pscustomobject]@{port=443;target='162.0.209.121 / cloudmeri.com';role='.NET backdoor'},[pscustomobject]@{port=4444;target='217.196.98.61';role='rejected Metasploit'},[pscustomobject]@{port=21;target='45.135.232.3';role='FTP exfil'})
+ Timeline=@(
+  [pscustomobject]@{offset=0;phase='initial-access';event='tax-form JS, MSI, BRC4, and Latrodectus';details=@{downloads=0;injection=$false}},[pscustomobject]@{offset=5760;phase='c2';event='day 4 Cobalt Strike payloads';details=@{externalConnections=0}},[pscustomobject]@{offset=28800;phase='collection-exfiltration';event='day 20 Rclone/FTP sequence';details=@{bytesTransferred=0}},[pscustomobject]@{offset=37440;phase='credential-access';event='day 26 Veeam credential command represented';details=@{credentialsAccessed=0}},[pscustomobject]@{offset=40320;phase='discovery-lateral';event='day 28 scanning, PsExec, WMIC, Zerologon, and RDP markers';details=@{targetsContacted=0}},[pscustomobject]@{offset=86400;phase='outcome';event='near-two-month access ended without ransomware';details=@{filesEncrypted=0}})
 }
-
-Write-Host "`n=== LUNAR SPIDER INTRUSION SIMULATION ===" -ForegroundColor Cyan
-Write-Host "Simulation root: $($simPaths.Root)`n" -ForegroundColor Cyan
-
-# Run each phase in isolation: a phase that throws (e.g. blocked by an EDR on a
-# monitored host) is logged and the simulation continues with the next phase,
-# instead of one failure aborting the whole chain / closing the console.
-function Invoke-Phase {
-    param([Parameter(Mandatory)][scriptblock]$Body, [string]$Name)
-    try {
-        & $Body
-    } catch {
-        Write-Host "  [!] Phase '$Name' error (continuing): $($_.Exception.Message)" -ForegroundColor Red
-        try { Write-SimEvent -EventId 9999 -Message "SIMULATION: phase '$Name' failed: $($_.Exception.Message)" } catch {}
-    }
-    Start-Sleep -Seconds 2
-}
-
-Invoke-Phase -Name "InitialAccess"       { Simulate-InitialAccess         -SimPaths $simPaths }
-Invoke-Phase -Name "ExecutionInjection"  { Simulate-ExecutionAndInjection -SimPaths $simPaths }
-Invoke-Phase -Name "Persistence"         { Simulate-Persistence           -SimPaths $simPaths }
-Invoke-Phase -Name "PrivilegeEscalation" { Simulate-PrivilegeEscalation   -SimPaths $simPaths }
-Invoke-Phase -Name "DefenseEvasion"      { Simulate-DefenseEvasion        -SimPaths $simPaths }
-Invoke-Phase -Name "CredentialAccess"    { Simulate-CredentialAccess      -SimPaths $simPaths -DumpRealLsass:$DumpRealLsass }
-Invoke-Phase -Name "Discovery"           { Simulate-Discovery             -SimPaths $simPaths }
-Invoke-Phase -Name "LateralMovement"     { Simulate-LateralMovement       -SimPaths $simPaths }
-Invoke-Phase -Name "CommandAndControl"   { Simulate-CommandAndControl     -SimPaths $simPaths }
-Invoke-Phase -Name "Exfiltration"        { Simulate-Exfiltration          -SimPaths $simPaths }
-Invoke-Phase -Name "Impact"              { Simulate-Impact                -SimPaths $simPaths }
-
-Write-Host "`n=== SIMULATION COMPLETE ===" -ForegroundColor Cyan
-Write-Host "Artifacts root: $($simPaths.Root)" -ForegroundColor Cyan
-Write-Host "Execution log:  $logPath" -ForegroundColor Cyan
-Write-Host "Impact summary: $($simPaths.VictimFiles)\_INTRUSION_IMPACT_SUMMARY.txt" -ForegroundColor Cyan
-Write-Host "`nSuggested next steps for the analyst:" -ForegroundColor Green
-Write-Host " - Collect with KAPE (see 'kape command.bat' in the repo root)"
-Write-Host " - Review Sysmon/Security event logs, Prefetch, Amcache, MFT, USN journal"
-Write-Host " - Pull PCAP/Zeek if network capture was running during execution"
-Write-Host " - Cross-reference IOCs against the source DFIR report's Indicators section"
-
-Stop-Transcript | Out-Null
+. (Join-Path $PSScriptRoot '..\LabSafeScenarioCore.ps1');Invoke-DFIRLabScenario -Config $config -LabConfirmed:$LabConfirmed

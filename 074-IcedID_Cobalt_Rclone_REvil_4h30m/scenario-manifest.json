@@ -1,0 +1,66 @@
+{
+  "scenarioId": "074-IcedID_Cobalt_Rclone_REvil_4h30m",
+  "report": {
+    "wordpressPostId": 2531,
+    "internalCase": 1051,
+    "title": "Sodinokibi (aka REvil) Ransomware",
+    "published": "2021-03-29",
+    "url": "https://thedfirreport.com/2021/03/29/sodinokibi-aka-revil-ransomware/"
+  },
+  "entryPoint": "IcedRevilSim-Complete.ps1",
+  "cleanup": "Cleanup-IcedRevilSim.ps1",
+  "artifactRoot": "%PUBLIC%\\IcedRevilSim",
+  "timelineNote": "The generated 270-minute axis preserves the report's relative chronology: Cobalt at 90 minutes, Rclone at 210, final objectives at 240, and domain-wide encryption complete at 270. Real DC execution is refused.",
+  "phases": [
+    {
+      "order": 1,
+      "script": "IcedRevilSim-Phase1-IcedID-Entry.ps1",
+      "name": "Malspam XLSM, IcedID execution and persistence, discovery, and C2"
+    },
+    {
+      "order": 2,
+      "script": "IcedRevilSim-Phase2-Cobalt-Domain.ps1",
+      "name": "Two Cobalt profiles, LDAP/BloodHound/AdFind, Exchange pivot, movement, RDP, credential, UAC, injection, and GPO markers"
+    },
+    {
+      "order": 3,
+      "script": "IcedRevilSim-Phase3-Rclone-REvil.ps1",
+      "name": "Rclone collection/exfiltration, BITS deployment, Safe Mode and RunOnce markers, DC DLL route, and generated-host impact"
+    }
+  ],
+  "techniques": [
+    "T1566.001",
+    "T1204",
+    "T1047",
+    "T1055",
+    "T1482",
+    "T1087.002",
+    "T1082",
+    "T1016",
+    "T1518.001",
+    "T1021.002",
+    "T1021.001",
+    "T1043",
+    "T1071",
+    "T1048.002",
+    "T1486",
+    "T1204.002",
+    "T1059",
+    "T1059.001",
+    "T1053.005",
+    "T1018",
+    "T1218.011"
+  ],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only; proxy false; zero bytes",
+    "malwareMacroInjectionTaskRegistryBootOrBits": false,
+    "credentialLsassLdapOrUserDataAccess": false,
+    "remoteMovementGpoSecurityImpairmentOrEncryption": false,
+    "generatedHostsAndSharesOnly": true,
+    "runtimeArtifactManifest": true,
+    "artifactsLeftForInvestigation": true,
+    "separateCleanup": true
+  }
+}

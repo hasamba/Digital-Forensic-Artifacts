@@ -1,0 +1,22 @@
+{
+  "source": "https://thedfirreport.com/2021/02/28/laravel-debug-leaking-secrets/",
+  "handling": "Metadata only. smtp.py is never retrieved or executed; the published source IP is never contacted. Runtime telemetry is forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "file": {
+    "name": "smtp.py",
+    "md5": "39e1ec2c704bcdb57034da4ac288446e",
+    "sha1": "352e9c78f08574adbaa0aaf49c19d5853bb4be36",
+    "sha256": "478290f801dafc9086810f857c123d74690920a4c44fb573cd01463c1b6fb432"
+  },
+  "network": [
+    {"type":"ip-src","value":"64.86.198.22","comment":"RDP unauthorized access using a valid local-administrator account; no brute-force attempts observed from this IP."}
+  ],
+  "reportedPython": {
+    "version": "2.7",
+    "pipModules": ["requests","colorama","bs4","tldextract"]
+  },
+  "providerKeywords": ["PayPal","AWS_KEY","SES_KEY","Twilio","sendgrid","office365","zoho","mailgun"],
+  "detections": [
+    "Web request to root/.env",
+    "POST data containing 0x[]:androxgh0st"
+  ]
+}

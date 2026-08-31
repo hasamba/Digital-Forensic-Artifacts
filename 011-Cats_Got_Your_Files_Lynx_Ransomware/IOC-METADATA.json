@@ -1,0 +1,34 @@
+{
+  "source": "https://thedfirreport.com/2025/12/17/cats-got-your-files-lynx-ransomware/",
+  "handling": "Investigation metadata only. No external IOC is contacted and no file is expected to match a malicious hash.",
+  "network": {
+    "rdpInitialAccess": "195.211.190.189",
+    "rdpFollowUp": "77.90.153.30",
+    "actorWorkstation": "DESKTOP-BUL6K1U",
+    "exfiltrationService": "temp.sh"
+  },
+  "files": {
+    "netscan.exe": {
+      "md5": "3073af95dfc18361caebccd69d0021a2",
+      "sha1": "efe8b9ff7ff93780c9162959a4c1e5ecf6e840a4",
+      "sha256": "517288e12c05a92e483e6d80b9136c19bc58c46851720680bb6d1b7016034c37"
+    },
+    "nxc.exe": {
+      "md5": "7532ff90145b8c59dc9440bf43dc87a5",
+      "sha1": "2b4b11d3ecffd82ed44db652cdd65733224f8e34",
+      "sha256": "6285d32a9491a0084da85a384a11e15e203badf67b1deed54155f02b7338b108"
+    },
+    "w.exe": {
+      "md5": "e2179046b86deca297ebf7398b95e438",
+      "sha1": "3e01df0155a539fe6d802ee9e9226d8c77fd96c9",
+      "sha256": "07b36c1660deb223749a8ac151676d8924bc13aa59e6712a3c14a2df5237264a"
+    }
+  },
+  "dfirSigmaRules": {
+    "8a0d153f-b4e4-4ea7-9335-892dfbe17221": "NetScan Share Enumeration Write Access Check",
+    "53ad7638-3862-49a2-9ddd-af7132f9e598": "Using Netscan for Post-Scanning Lateral Movement",
+    "b26feb0b-8891-4e66-b2e7-ec91dc045d58": "AnyDesk Network",
+    "d7838d77-3a28-45cd-bc0e-7b941b687a39": "HyperVisor Discovery Activity"
+  },
+  "yara": "MAL_RANSOM_INC_Aug24"
+}

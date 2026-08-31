@@ -1,0 +1,7 @@
+{
+  "scenarioId":"037-2022_YearInReview_Composite_Trends","report":{"wordpressPostId":15678,"title":"2022 Year in Review","published":"2023-03-06","url":"https://thedfirreport.com/2023/03/06/2022-year-in-review/"},
+  "scenarioType":"synthetic-aggregate-composite","provenanceWarning":"This report summarizes 13 public 2022 cases. The generated chronology combines trends for training and must not be interpreted as one observed intrusion.",
+  "entryPoint":"YearReviewSim-Complete.ps1","cleanup":"Cleanup-YearReviewSim.ps1","artifactRoot":"%PUBLIC%\\YearReview2022Sim",
+  "phases":[{"order":1,"script":"YearReviewSim-Phase1-Access-Execution.ps1","name":"Aggregate phishing/ISO/SEO/exploit access and PowerShell/WMI/DLL execution"},{"order":2,"script":"YearReviewSim-Phase2-Persistence-Credential-Discovery.ps1","name":"Aggregate task/run-key/remote-tool persistence, credential-access negatives, and discovery"},{"order":3,"script":"YearReviewSim-Phase3-Movement-Outcome.ps1","name":"Aggregate RDP/SMB movement, collection/exfiltration, and intact ransomware canaries"}],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"exploitOrPersistenceChange":false,"credentialAccess":false,"directoryShareOrRemoteAction":false,"realCollectionOrExfiltration":false,"encryption":false,"separateCleanup":true}
+}

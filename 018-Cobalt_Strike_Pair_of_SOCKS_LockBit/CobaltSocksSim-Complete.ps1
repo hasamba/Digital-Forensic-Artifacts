@@ -1,0 +1,4 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]param([Parameter(Mandatory)][switch]$LabConfirmed)
+$d=Split-Path -Parent $MyInvocation.MyCommand.Path;. (Join-Path $d 'CobaltSocksSim-utilities.ps1');. (Join-Path $d 'CobaltSocksSim-Phase1-BeaconProxies.ps1');. (Join-Path $d 'CobaltSocksSim-Phase2-CredentialLateral.ps1');. (Join-Path $d 'CobaltSocksSim-Phase3-Exfiltration.ps1');. (Join-Path $d 'CobaltSocksSim-Phase4-LockBitImpact.ps1');Assert-CobaltSocksSafety -LabConfirmed:$LabConfirmed;$p=Initialize-CobaltSocksEnvironment;Invoke-CobaltSocksBeaconProxies $p;Invoke-CobaltSocksCredentialLateral $p;Invoke-CobaltSocksExfiltration $p;Invoke-CobaltSocksImpact $p;Write-CobaltSocksSummary $p;Write-Host "Cobalt/SOCKS/LockBit simulation complete: $($p.Root)" -ForegroundColor Cyan

@@ -1,0 +1,26 @@
+{
+  "source":"https://thedfirreport.com/2021/01/18/all-that-for-a-coinminer/",
+  "internalCase":1014,
+  "handling":"Metadata only. No sample is retrieved and no source or mining IP is contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":[
+    {"value":"92.118.13.103","role":"initial RDP login"},
+    {"value":"54.38.67.132","role":"prior-day brute force/account creation"},
+    {"value":"5.122.15.138","role":"RDP login to another system"},
+    {"value":"104.140.201.42","role":"XMRig pool attempt"},
+    {"value":"104.142.244.186","role":"XMRig pool attempt"}
+  ],
+  "files":[
+    {"name":"svshost.exe","md5":"81a4bc7617cee5761fd883413a1a26d3","sha1":"f63b9e779dc48d49bb13ba0a2c31520d12cf2643","sha256":"ba94d5539a4ed65ac7a94a971dbb463a469f8671c767f515d271223078983442"},
+    {"name":"masscan.exe","md5":"c50f3b0b23dfe5c66561bb9297bf7bbc","sha1":"5f14241aea174608a7c85127fdad042d7382277d","sha256":"de903a297afc249bb7d68fef6c885a4c945d740a487fe3e9144a8499a7094131"},
+    {"name":"mimikatz.exe","md5":"624ce5a34d00abe90023ddfe54be9269","sha1":"0b557b7f5740d2de4f023591a8222b1c0eef7bd1","sha256":"99d8d56435e780352a8362dd5cb3857949c6ff5585e81b287527cd6e52a092c1"},
+    {"name":"XMRig CPU mine.exe","md5":"ab7bd2b83f10283b39ec8ea66d31429a","sha1":"d21c587aff0347360ef7248f27458718e82157fb","sha256":"a8b2e85b3e0f5de4b82a92b3ca56d2d889a30383a3f9283ae48aec879edd0376"}
+  ],
+  "reportedCommands":[
+    "attrib +h svshost.exe / XMRig CPU mine.exe / config.json / HideAll.bat / xmrig-notls.exe",
+    "net user %USERNAME% ehs.123",
+    "mimikatz log privilege::debug sekurlsa::logonpasswords sekurlsa::tickets /export exit",
+    "net accounts"
+  ],
+  "impactMetadata":{"walletAgeDays":"738+","estimatedRevenueUsd":5159,"reportedCpuImpact":"some CPU, not enough to cause issues"},
+  "detections":{"network":["ET POLICY Cryptocurrency Miner Checkin","ETPRO POLICY XMR CoinMiner Usage","ETPRO TROJAN CoinMiner Known Malicious Stratum Authline"],"sigmaBehaviors":["Mimikatz command line","Mimikatz keywords","attrib hiding files","Mimikatz ticket export"],"yaraRules":["miner_exe_svshost","mimikatz_1014","masscan_1014","XMRig_CPU_mine_1014"]}
+}

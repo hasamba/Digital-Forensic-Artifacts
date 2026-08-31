@@ -1,0 +1,8 @@
+{
+  "scenarioId":"036-ISO_IcedID_CobaltStrike_Rclone_Quantum_78h",
+  "report":{"wordpressPostId":16873,"internalCase":18041,"title":"Malicious ISO File Leads to Domain Wide Ransomware","published":"2023-04-03","url":"https://thedfirreport.com/2023/04/03/malicious-iso-file-leads-to-domain-wide-ransomware/"},
+  "entryPoint":"ISOQuantumSim-Complete.ps1","cleanup":"Cleanup-ISOQuantumSim.ps1","artifactRoot":"%PUBLIC%\\ISOQuantumSim",
+  "phases":[{"order":1,"script":"ISOQuantumSim-Phase1-ISO-IcedID.ps1","name":"Malspam ISO, documents LNK, hidden eyewear batch/easygoing DLL, IcedID task, and campaign C2"},{"order":2,"script":"ISOQuantumSim-Phase2-Cobalt-Domain.ps1","name":"Cobalt failures, ZeroLogon/DCSync/LSASS negatives, RSAT discovery, WMI/RDP, and three remote-access products"},{"order":3,"script":"ISOQuantumSim-Phase3-Rclone-Quantum.ps1","name":"Rclone-to-MEGA, Quantum target-list failures, mass-password-reset negative, PsExec, and intact impact canaries"}],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"isoMountOrDownloader":false,"taskExploitOrCredentialAccess":false,"domainControllerPasswordOrGpoChange":false,"securityControlModification":false,"remoteExecutionOrPropagation":false,"realCollectionOrExfiltration":false,"accountPasswordReset":false,"encryption":false,"separateCleanup":true},
+  "attackTechniques":["T1566.001","T1047","T1059.003","T1204.002","T1086","T1035","T1053.005","T1068","T1134","T1218.010","T1218.011","T1003.006","T1003.001","T1482","T1082","T1018","T1615","T1614.001","T1124","T1135","T1087.002","T1083","T1021.001","T1021.002","T1570","T1021.006","T1074.001","T1071.001","T1567.002","T1486","T1531","T1562.001","T1553.005","T1033"]
+}

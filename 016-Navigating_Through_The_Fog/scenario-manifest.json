@@ -1,0 +1,30 @@
+{
+  "scenarioId": "016-Navigating_Through_The_Fog",
+  "report": {
+    "wordpressPostId": 43393,
+    "title": "Navigating Through The Fog",
+    "published": "2025-04-28",
+    "url": "https://thedfirreport.com/2025/04/28/navigating-through-the-fog/"
+  },
+  "entryPoint": "FogToolkitSim-Complete.ps1",
+  "cleanup": "Cleanup-FogToolkitSim.ps1",
+  "artifactRoot": "%PUBLIC%\\FogOpenDirectorySim",
+  "phases": [
+    { "order": 1, "script": "FogToolkitSim-Phase1-OpenDirectoryInitialAccess.ps1", "name": "Open directory and SonicWall valid-account workflow" },
+    { "order": 2, "script": "FogToolkitSim-Phase2-AnyDeskLateral.ps1", "name": "AnyDesk persistence and NetExec lateral movement" },
+    { "order": 3, "script": "FogToolkitSim-Phase3-CredentialPrivilege.ps1", "name": "Credential access, AD CS, Kerberos, and AD exploitation tools" },
+    { "order": 4, "script": "FogToolkitSim-Phase4-SliverTunneling.ps1", "name": "Sliver, Proxychains, and Powercat C2/tunneling" }
+  ],
+  "safety": {
+    "labConfirmationGate": true,
+    "refusesDomainControllers": true,
+    "networkScope": "127.0.0.1 only",
+    "usesGeneratedCredentialsOnly": true,
+    "liveTools": false,
+    "adOrCredentialAccess": false,
+    "remoteSystems": false,
+    "ransomwareOrEncryption": false,
+    "cleanupIsSeparate": true
+  },
+  "attackTechniques": ["T1078", "T1133", "T1046", "T1021.002", "T1219", "T1543.003", "T1555", "T1555.003", "T1649", "T1558.003", "T1068", "T1090", "T1071.001", "T1572", "T1105", "T1059.001"]
+}

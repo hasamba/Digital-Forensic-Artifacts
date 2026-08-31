@@ -1,0 +1,19 @@
+{
+  "source":"https://thedfirreport.com/2020/10/08/ryuks-return/","internalCase":1005,
+  "handling":"Metadata only. No sample is retrieved and no IOC is contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":[
+    {"role":"Bazar C2","ip":"5.182.210.145","port":443,"certificateSha1":"ec4c07b83b6aa0bf6036b7f4929e83810f9646b0","certificateIssuer":"Global Security","certificateSubject":"example.com","ja3":"72a589da586844d7f0818ce684948eea","ja3s":"e35df3e00ca4ef31d42b34bebaa2f86e"},
+    {"role":"Cobalt Strike C2","domain":"martahzz.com","ip":"88.119.171.75","port":443,"certificateSha1":"ee92916b7e31852265eb1611c48f0a75c9051d4b","certificateOrganization":"lol","ja3":"a0e9f5d64349fb13191bc781f81f42e1","ja3s":"ae4edc6faf64d08308082ad26be60767"},
+    {"role":"Cobalt Strike C2","domain":"nomadfunclub.com","ip":"107.173.58.183","port":443,"certificateSha1":"e2132ca429aef3fa351fe15b2c257657375bdc35","certificateOrganization":"lol","ja3":"a0e9f5d64349fb13191bc781f81f42e1","ja3s":"ae4edc6faf64d08308082ad26be60767"},
+    {"role":"vsftpd exfiltration","ip":"45.141.84.120","port":21},
+    {"role":"Bazar DNS indicator","domainSuffix":".bazar"}
+  ],
+  "files":[
+    {"name":"Document-Preview.exe","md5":"40b17d4ca83f079cf6b2b09d7a7fd839","sha1":"090e82a47b32dc94d71d4c84a3a76d2480589b00","sha256":"85ef348d39610c1d5f58e2524c0e929ec815a9fbe1f5924cdef7a0c05e58e5ad","sha512":"c5af8f6ae345f453442a3bbe8189c42ad3c7d4d89231607f78a1b6f24173679e38ac08d26294f46de98358b0aa560f33be5708becd2a632f6657c9bbbbc0d995"},
+    {"name":"fx16_multi_for_crypt_x86.exe","md5":"fc9f8bf3fcae4bf65150bff296b5e271","sha1":"308261d2539dba9814aa28c458970beb00cc2864","sha256":"f7998c8b083b31e8b0e8eaf197f6db65b100d44d94700e0780e81c7d54eefcf5","sha512":"4f60d3a0ca16242a3916675f93d16ee29f423d46deef81cad6da32c325d261cf204e94baf958383305dd3df33900d913676fd104c70a4c46ca2f18642e64bd5e"},
+    {"name":"arti64.dll","md5":"fc646e042c545be6f7e5bdcb3ecf64c7","sha1":"b5cdf571944f889e4369329aa01376e2204c01f0","sha256":"f22449c01f8233ea7c85a49f2b6b5fedd304fca5c0e58176bafda9218873c2dd","sha512":"8ddc48f4c5db09fc60053554487708fa5226e253edb64ace9e6fa0c3ea370df1bfd8e994cab0822feac494d71d7d730926738c902b3788efb5f6719c5d2da9e2"},
+    {"name":"P64.exe","md5":"9ff18f7a19e06b602e19b9e0aca3ad84","sha1":"bcbb5bbc55b4f44397c34e9fca2017587e69219b","sha256":"9d8cbb2bf4801276de2143ccd64a7d0f66263809a90bea0b664282a15d121d9e","sha512":"157b06e75a3977e80866058111768508c643ccea681cf324d770865b3b1d354e233088b2391020f2e988f650344e263e8b9b0fcbc8c70a381ec98fa2eb256bac"},
+    {"name":"adf.bat","md5":"b94bb0ae5a8a029ba2fbb47d055e22bd","sha1":"035940bd120a72e2da1b6b7bb8b4efab46232761","sha256":"f6a377ba145a5503b5eb942d17645502eddf3a619d26a7b60df80a345917aaa2","sha512":"a8e5b535711268a0b82988259fbedc0211e0e55b5bf2d16ddcc21dae82f0312e178faee1b39ebec7fba5db4e36d9ad9618eae5c3a39a3536fff254eb0945c5dc"}
+  ],
+  "detections":{"network":["EmerDNS .bazar","suspicious example.com SSL certificate","ABUSE.CH malicious SSL certificate","Cobalt Strike malicious SSL certificate","Feodo Tracker C2","SVCCTL","SMB DLL/executable/temp transfer","RunDll over SMB","SMB IPC$","MS17-010 probe","command shell over SMB"],"sigma":["suspicious PowerShell parameter variation","suspicious WMI execution","Windows Defender disabled","Ryuk ransomware","PowerShell base64 shellcode","shadow-copy deletion","suspicious net execution","suspicious whoami","domain trust discovery","whoami as SYSTEM","AdFind Recon"],"yara":["ryuk_exes_P64","ryuk_exes_arti64","ryuk_fx16_multi_for_crypt_x86","ryuk_Document_Preview"]}
+}

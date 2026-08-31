@@ -1,0 +1,20 @@
+{
+  "source":"https://thedfirreport.com/2021/01/11/trickbot-still-alive-and-well/",
+  "internalCase":1012,
+  "handling":"Metadata only. No sample is retrieved and no IOC is resolved or contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":{
+    "trickbot":["41.243.29.182:449","196.45.140.146:449","103.87.25.220:443","103.98.129.222:449","103.87.25.220:449","103.65.196.44:449","103.65.195.95:449","103.61.101.11:449","103.61.100.131:449","103.150.68.124:449","103.137.81.206:449","103.126.185.7:449","103.112.145.58:449","103.110.53.174:449","102.164.208.48:449","102.164.208.44:449"],
+    "cobalt":["195.123.213.82:443","88.119.174.135:356","htpdomrtx.com"]
+  },
+  "cobaltTls":[
+    {"endpoint":"195.123.213.82:443","ja3s":["ae4edc6faf64d08308082ad26be60767"],"ja3":["51c64c77e60f3980eea90869b68c58a8","72a589da586844d7f0818ce684948eea"],"certificateSha1":"40556e74384ff5649552c60b88c3f402d90c0c01","issuer":"jQuery","subject":"jquery.com","jarm":"07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1"},
+    {"endpoint":"88.119.174.135:356 / htpdomrtx.com","ja3s":["ae4edc6faf64d08308082ad26be60767","649d6810e8392f63dc311eecb6b7098b"],"ja3":["a0e9f5d64349fb13191bc781f81f42e1","649d6810e8392f63dc311eecb6b7098b"],"certificateSha1":"1b94f1b4f2e1257389c3e4847203c2d872420d05","subject":"htpdomrtx.com","jarm":"07d14d16d21d21d07c42d41d00041d24a458a375eef0c576d23a7bab9a9fb1"}
+  ],
+  "files":[
+    {"name":"kpsiwn.exe","md5":"4103d97c7cad79f050901aace0d9fbe0","sha1":"dead0bd2345e9769b5545f4ff628e5c59fb5ef9e","sha256":"e410123bde6a317cadcaf1fa3502301b7aad6f528d59b6b60c97be077ef5da00"},
+    {"name":"TSE588C.exe","md5":"7e8af0acdc11b434ab2f1b6aae336027","sha1":"f8ceedecd74b161a7ea743a49e36120f48bb8c09","sha256":"32c13df5d411bf5a114e2021bbe9ffa5062ed1db91075a55fe4182b3728d62fe"},
+    {"name":"TSE28DF.exe","md5":"c51ff408d6f9f78ab6fd41dbea1a9c01","sha1":"78188c006079cc3edb1ea37c8d1b2638da6bec40","sha256":"65282e01d57bbc75f24629be9de126f2033957bd8fe2f16ca2a12d9b30220b47"},
+    {"name":"12.bat","md5":"49ada65eb7a29b03c5aeda0a43417f2b","sha1":"b47818f7094b57a4042c04678a067553ef477318","sha256":"b1deb8819c7659f3948a84032101cc61cad3801ee14d8df78e9e01b9c9d832d6"}
+  ],
+  "detections":{"network":["Observed malicious Cobalt Strike SSL certificate","OpenSSL Demo CA - Internet Widgits Pty","Trickbot-style SSL certificate","possible external IP lookup ipinfo.io","unusual port 135 scan","overpass-the-hash RC4 downgrade"],"sigmaBehaviors":["encoded PowerShell","Trickbot recon","AdFind","Cobalt GetSystem","WMI execution","ntdsutil","overpass-the-hash","recon commands"],"yaraRules":["cobalt_strike_TSE588C","trickbot_kpsiwn","cobalt_strike_TSE28DF"]}
+}

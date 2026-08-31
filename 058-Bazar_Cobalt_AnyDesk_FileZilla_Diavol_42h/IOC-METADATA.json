@@ -1,0 +1,125 @@
+{
+  "source": "https://thedfirreport.com/2021/12/13/diavol-ransomware/",
+  "published": "2021-12-13",
+  "internalCaseNumber": 8099,
+  "handling": "Investigation metadata only. No payload is retrieved or executed and no endpoint is contacted.",
+  "networkIndicators": [
+    {
+      "family": "Bazar",
+      "values": [
+        "turkcell.info",
+        "159.223.31.75",
+        "206.189.49.239"
+      ]
+    },
+    {
+      "family": "Cobalt Strike",
+      "values": [
+        "23.81.246.32",
+        "gawocag.com",
+        "108.62.141.87",
+        "hiduwu.com"
+      ]
+    },
+    {
+      "family": "SFTP exfiltration",
+      "values": [
+        "192.52.167.210",
+        "23.152.0.22"
+      ]
+    },
+    {
+      "family": "RMM access",
+      "values": [
+        "23.106.215.31",
+        "client-id 903491377"
+      ]
+    },
+    {
+      "family": "cloud exfiltration",
+      "values": [
+        "ufile.io"
+      ]
+    }
+  ],
+  "tls": {
+    "bazar": {
+      "ja3": "72a589da586844d7f0818ce684948eea",
+      "ja3s": "3f48aac872b1dbe54fa3547535ec9d43"
+    },
+    "cobalt": {
+      "ja3": "a0e9f5d64349fb13191bc781f81f42e1",
+      "ja3s": "ae4edc6faf64d08308082ad26be60767"
+    }
+  },
+  "hashReconstructionNote": "The rendered indicator table inserts spaces inside several digests. The well-formed SHA-256 values below remove only those spaces; YARA metadata confirms Documents.lnk, SharedFiles.dll, uvvfvnnswte.dll, tmp.dll, and Rubeus.exe.",
+  "files": [
+    {
+      "name": "Documents.lnk",
+      "sha256": "e87f9f378590b95de1b1ef2aaab84e1d00f210fd6aaf5025d815f33096c9d162"
+    },
+    {
+      "name": "SharedFiles.dll",
+      "sha256": "c17e71c7ae15fdb02a4e22df4f50fb44215211755effd6e3fc56e7f3e586b299"
+    },
+    {
+      "name": "uvvfvnnswte.dll",
+      "sha256": "5551fb5702220dfc05e0811b7c91e149c21ec01e8ca210d1602e32dece1e464d"
+    },
+    {
+      "name": "tmp.dll",
+      "sha256": "493a1fbe833c419b37bb345f6f193517d5d9fd2577f09cc74b48b49d7d732a54"
+    },
+    {
+      "name": "AdFind.exe",
+      "sha256": "b1102ed4bca6dae6f2f498ade2f73f76af527fa803f0e0b46e100d4cf5150682"
+    },
+    {
+      "name": "Rubeus.exe",
+      "sha256": "0e09068581f6ed53d15d34fff9940dfc7ad224e3ce38ac8d1ca1057aee3e3feb"
+    },
+    {
+      "name": "fodhelper_reg_hashes.bat",
+      "sha256": "9809bc0bea9bbfe31d47210391b124a724288b061d44dee5edc5e2582e36b271"
+    },
+    {
+      "name": "MSSQLUDPScanner.exe",
+      "sha256": "bc88ae2c3353ee858a0dcdcd087bcd55f3c7eab0c702f7b295d2836565073730"
+    },
+    {
+      "name": "veeam1.cs.exe",
+      "sha256": "07f4a329f280d2896e1211ea79c73132be3a44e6c88819dea194e582bac18b3d"
+    },
+    {
+      "name": "AnyDesk.exe",
+      "sha256": "4a9dde3979c2343c024c6eeeddff7639be301826dd637c006074e04a1e4e9fe7"
+    },
+    {
+      "name": "FileZillaPortable.exe",
+      "sha256Reported": "3c53ccee435994cd8125be4ba09cd47dd64a3ffac00cce49327851541c50620",
+      "note": "The report labels this value SHA-256, but after removing the rendered separator it has 63 hexadecimal characters; no complete value appears in the YARA appendix."
+    },
+    {
+      "name": "new-documents-2005.iso",
+      "sha256": "1de1336e311ba4ab44828420b4f876d173634670c0b240c6cca5babb1d8b0723",
+      "source": "YARA appendix"
+    },
+    {
+      "name": "Cobalt x64 beacon",
+      "sha256": "0cb20cf74f9c5896442c82f875e9221cae606ffa124e53d013b8d13b6988f8cc"
+    },
+    {
+      "name": "Cobalt x86 beacon",
+      "sha256": "b08ae2fec4c0c64113947c14d9ab6f4a3e61a9d60e182b59e20b5b3606df8569"
+    }
+  ],
+  "diavolExecutableHashPublished": false,
+  "cobaltConfig": {
+    "server": "gawocag.com,/nd",
+    "postPath": "/sm",
+    "jitter": 10,
+    "pollingMs": 5000,
+    "watermark": 1580103814,
+    "spawn": "rundll32.exe"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "source":"https://thedfirreport.com/2020/06/21/snatch-ransomware/","handling":"Metadata only. No sample is retrieved and no endpoint is contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":{"c2":"91.229.77.161","rdpAccessIps":["193.70.12.240","178.162.209.135"],"cplXenYaraEmbeddedIp":"91.229.77.71","note":"The report narrative/config uses .161 while the published YARA string is .71; both are preserved."},
+  "files":[
+    {"name":"safe.exe","md5":"2bbff2111232d73a93cd435300d0a07e","sha1":"b93d633d379052f0a15b0f9c7094829461a86dbb","sha256":"3160b4308dd9434ebb99e5747ec90d63722a640d329384b1ed536b59352dace6"},
+    {"name":"x3.exe","md5":"1422dae0330c713935d50773680fcb39","sha1":"d5a0c796032eda2fe20d1f39bae3fbc4e6407e8c","sha256":"b9e4299239880961a88875e1265db0ec62a8c4ad6baf7a5de6f02ff4c31fcdb1"},
+    {"name":"cplXen.exe","md5":"c9a728aa3f5b6f48b68df4bb66b41a5c","sha1":"90035ab418033b39d584c7bc609cab1664460069","sha256":"c305b75a4333c7fca9d1d71b660530cc98197b171856bf433e4e8f3af0424b11"},
+    {"name":"116EBE27202905AFFB94F5C1597D511ABCB5B381411431956A03E47B388582BF.bat","md5":"1f7b17cacb0263b84cf3e9d4a5429ef9","sha1":"14b2948a28d16c05fa7237dd8823592a735ef43f","sha256":"116ebe27202905affb94f5c1597d511abcb5b381411431956a03e47b388582bf"},
+    {"name":"2155A029A024A2FFA4EFF9108AC15C7DB527CA1C8F89CCFD94CC3A70B77CFC57.bat","md5":"6d9d31414ee2c175255b092440377a88","sha1":"c24aee8fa0a81a82fe73bf60e0282b1038d6ea80","sha256":"2155a029a024a2ffa4eff9108ac15c7db527ca1c8f89ccfd94cc3a70b77cfc57"},
+    {"name":"3295F5029F9C9549A584FA13BC6C25520B4FF9A4B2FEB1D9E935CC9E4E0F0924.bat","md5":"3d33a19bb489dd5857b515882b43de12","sha1":"0882f2e72f1ca4410fe8ae0fa1138800c3d1561d","sha256":"3295f5029f9c9549a584fa13bc6c25520b4ff9a4b2feb1d9e935cc9e4e0f0924"},
+    {"name":"251427C578EAA814F07037FBE6E388B3BC86ED3800D7887C9D24E7B94176E30D.bat","md5":"3e36d3dc132e3a076539acc9fcd5535c","sha1":"89be35c19a65b9e6f7a277e1a9f66ab76d024378","sha256":"251427c578eaa814f07037fbe6e388b3bc86ed3800d7887c9d24e7b94176e30d"},
+    {"name":"6C9D8C577DDDF9CC480F330617E263A6EE4461651B4DEC1F7215BDA77DF911E7.bat","md5":"54fe4d49d7b4471104c897f187e07f91","sha1":"18f963dbee830e64828991d26a06d058326c1ddb","sha256":"6c9d8c577dddf9cc480f330617e263a6ee4461651b4dec1f7215bda77df911e7"},
+    {"name":"A80C7FE1F88CF24AD4C55910A9F2189F1EEDAD25D7D0FD53DBFE6BDD68912A84.bat","md5":"891708936393b69c212b97604a982fed","sha1":"5b86cf095fe515b590d18b2e976d9e544c43f6ca","sha256":"a80c7fe1f88cf24ad4c55910a9f2189f1eedad25d7d0fd53dbfe6bdd68912a84"},
+    {"name":"WmiPrvSystemES.exe","sha256":"0cd166b12f8d0f4b620a5819995bbcc2d15385117799fafbc76efd8c1e906662","source":"report YARA metadata"},
+    {"name":"WmiPrvSystem.exe","sha256":"97bc0e2add9be985aeb5c0b4ca654a6a9e6fca6a6bf712dc26fc454b773212b7","source":"report YARA metadata"}
+  ],
+  "yara":["snatch_ransomware_x3_loader","snatch_ransomware_safe_go_ransomware","snatch_ransomware_cplXen","WmiPrvSystemES_TOR_exe","WmiPrvSystem_utorrent_exe"]
+}

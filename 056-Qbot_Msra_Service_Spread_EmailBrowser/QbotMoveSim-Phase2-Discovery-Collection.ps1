@@ -1,0 +1,11 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]param([switch]$LabConfirmed)
+. "$PSScriptRoot\QbotMoveSim-utilities.ps1"; Assert-QbotMoveSimSafety -LabConfirmed:$LabConfirmed; $paths=Initialize-QbotMoveSimEnvironment
+$tool=Join-Path $paths.Payloads 'esentutl.exe'; New-QbotMoveSimDecoy $tool 'discovery/browser collection stand-in'
+foreach($command in @('whoami /all','arp -a','cmd /c set','net view /all','ipconfig /all','nslookup -querytype=ALL -timeout=10 _ldap._tcp.dc._msdcs.REDACTED','route print','net share','net1 localgroup','net localgroup','netstat -nao','esentutl.exe /r V01 /l<WebCache> /s<WebCache> /d<WebCache>')){Invoke-QbotMoveSimDecoy $tool $command 'Qbot-injected msra.exe'}
+foreach($pathName in @('Users_Username_EmailStorage_ComputerHostname-Username_TimeStamp','systemprofile_EmailStorage_ComputerHostname-Username_TimeStamp')){Write-QbotMoveSimFile(Join-Path $paths.Collection $pathName)'GENERATED EMAIL-STORAGE CANARY. Contains no messages, addresses, attachments, or mailbox data.''email collection canary'}
+Write-QbotMoveSimFile(Join-Path $paths.Collection 'WebCacheV01.dat')'GENERATED WEB-CACHE CANARY. Contains no browser history, cookies, credentials, or user data.''browser collection canary'
+Write-QbotMoveSimFile(Join-Path $paths.Evidence 'reported-deletion.json')(@{reportedCommands=@('rmdir /S /Q C:\Users\REDACTED\EmailStorage_*','rmdir /S /Q C:\Windows\system32\config\systemprofile\EmailStorage_*');commandsExecuted=0;artifactsDeleted=0;reason='Artifacts intentionally remain for investigation; cleanup is separate.'}|ConvertTo-Json)'reported deletion evidence'
+Write-QbotMoveSimFile(Join-Path $paths.Evidence 'discovery-collection-negative-record.json')(@{discoveryCommandsExecuted=0;directoryOrShareQueries=0;networkRequests=0;emailsAccessed=0;browserDataAccessed=0;realFilesCollected=0;filesDeleted=0;bytesExfiltrated=0}|ConvertTo-Json)'phase safety record'
+Add-QbotMoveSimTimeline .2 discovery 'Native discovery sequence represented on beachhead and later workstation lanes' @{commandsExecuted=0}; Add-QbotMoveSimTimeline .5 collection 'EmailStorage and IE/Edge WebCache collection represented at minute 30' @{emailsAccessed=0;browserDataAccessed=0}; Add-QbotMoveSimTimeline .55 defense-evasion 'Post-exfiltration EmailStorage deletion represented without deleting evidence' @{filesDeleted=0}

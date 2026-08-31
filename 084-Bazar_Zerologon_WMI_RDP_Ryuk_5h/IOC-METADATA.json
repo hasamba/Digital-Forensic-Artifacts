@@ -1,0 +1,20 @@
+{
+  "source":"https://thedfirreport.com/2020/10/18/ryuk-in-5-hours/",
+  "internalCase":1006,
+  "handling":"Metadata only. No sample is retrieved and no IOC is contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":[
+    {"role":"Bazar C2","domain":"cstr3.com","ip":"3.137.182.114","port":443},
+    {"role":"servisses Cobalt Strike C2","domain":"havemosts.com","ip":"88.119.171.94","port":443,"certificateSha1":"8677d85e5169ace208072eb0dc6c109e258070a6","certificateOrganization":"lol","ja3":"57f3642b4e37e28f5cbe3020c9331b4c","ja3s":"e35df3e00ca4ef31d42b34bebaa2f86e"},
+    {"role":"SQL.dll Cobalt Strike C2","domain":"quwasd.com","ip":"5.2.64.174","port":443,"certificateSha1":"36d568f9be2a34e1763d8978e5624dfcae0297ad","certificateOrganization":"lol","ja3":"a0e9f5d64349fb13191bc781f81f42e1","ja3s":"ae4edc6faf64d08308082ad26be60767"}
+  ],
+  "files":[
+    {"name":"Report_Print.exe","sha256":"23ac461f9b5128841cafabb4282432252ea7b57874595cf6fe8457fc1ac65007","source":"report YARA metadata"},
+    {"name":"servisses.exe","md5":"d971827d974effedaeaf7d62b619b1dd","sha1":"c3a846eb04e2fe765e56fa15a0d5c1eb650ccba3","sha256":"1d8b7faf5f290465cc742e07abca78fac419135b191071cc77912263cd1dde1d"},
+    {"name":"socks64.dll","md5":"890206f0c506366d480e02fc9fed988a","sha1":"ba1542d9b55fff21bda9495ed884404b0436cff2","sha256":"feb8c2bcb71da02dbbeecb999869e053cf96af8cce6f9705cadca4338133d3b5"},
+    {"name":"SQL.dll","md5":"3785d87f6995b4b95d9b55f8d2556237","sha1":"9b44a8f0bb2d65fb19e7ca7bbd85b36c176f3d60","sha256":"d67461ba45a4edf3b2a69b3e64303fda8130bd1fc7a1173f35c1fe67b40c9639"},
+    {"name":"arti64.dll","md5":"3785d87f6995b4b95d9b55f8d2556237","sha1":"9b44a8f0bb2d65fb19e7ca7bbd85b36c176f3d60","sha256":"d67461ba45a4edf3b2a69b3e64303fda8130bd1fc7a1173f35c1fe67b40c9639"},
+    {"name":"xxx.exe","md5":"5b8b66ddbbf1fd67211e9a4bf78c1700","sha1":"cdb042dd8e9dc17f677c991b386f4cd242f2628d","sha256":"ccde47a0d315dcd4740fccfe8e8110fbb1fd85bb305734fec409f52051790c98"},
+    {"name":"servisses-procdump.exe","sha256":"387894a0b404c67e722799308b12ff2be31d2e8ce798aa53d971f0c13805d54d","source":"report YARA metadata only; no credential-dumping behavior represented"}
+  ],
+  "detections":{"network":["GPL NETBIOS SMB-DS IPC$ share access","ET POLICY SMB2 NT Create AndX Request For a DLL File - Possible Lateral Movement","ET POLICY SMB2 NT Create AndX Request For an Executable File"],"sigma":["Ryuk ransomware","suspicious PowerShell parameter variation","suspicious WMI execution","domain trust discovery","suspicious net execution","AdFind Recon"],"yara":["ryuk_1006_servisses_procdump","ryuk_1006_files_socks64","ryuk_1006_Report_Print","ryuk_1006_files_xxx","ryuk_1006_servisses","ryuk_1006_files_SQL"]}
+}

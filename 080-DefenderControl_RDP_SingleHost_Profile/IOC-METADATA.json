@@ -1,0 +1,9 @@
+{
+  "source":"https://thedfirreport.com/2020/12/13/defender-control/","internalCase":1011,"version":"1.6","releaseDate":"2020-10-12","handling":"Metadata only. Neither published file is retrieved; the executable is a signed cmd.exe decoy and the INI is a new inert canary.",
+  "files":[
+    {"name":"DefenderControl.exe","md5":"3a24a7b7c1ba74a5afa50f88ba81d550","sha1":"5da4de1dbba55774891497297396fd2e5c306cf5","sha256":"a201f7f81277e28c0bdd680427b979aee70e42e8a98c67f11e7c83d02f8fe7ae","vhash":"085046655d157220b02002300a66z1410043ze2za0030e039z","authentihash":"93c6e1f59f79d000ebad4873c57e716394e359526e241445e0c75d4494b03be2","imphash":"aaaa8913c89c8aa4a5d93f06853894da","richPeHeaderHash":"09983e500a3e996337593d644224f769","ssdeep":"12288:baWzgMg7v3qnCi3ErQohh0F4JCJ8lnydQ79QudhzYOejoiQv2ju8S0c/J:uaHMv6CDrjRnydQu+ejMZ1R","tlsh":"T14005C012B3D680B6D99378B5297BE32BEB3575194327C4C7A7E02F729F111409B3A3A1"},
+    {"name":"DefenderControl.ini","md5":"4416f7bea63b8af85f5590a3bdf6261b","sha1":"549b43af5454b32848f500dcbea39acc49be0498","sha256":"84caed9ee666f5004481e2b6e3233f37adf8106f6d821085caa4dcbd1221b876","ssdeep":"384:J9VBz+Kj3ehWYn/qmt4yJbo3nBaY+BvroUVB5j1vIdo7apRVWpIpClFG:J5BOhJ/nRCaYczoUM6apHd","tlsh":"T15233001A46EA621AF2F35B10E6F01F734B36BD95687C904C0ED55E8C18E0E609562FFB"}
+  ],
+  "reportedArtifacts":["HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware DWORD 1","HKLM\\System\\CurrentControlSet\\Services\\WinDefend\\Start DWORD 3","Defender driver unload","Local Group Policy: Turn off Microsoft Defender Antivirus"],
+  "yaraRules":["DefenderControl_Executable","DefenderControl_Config_File"]
+}

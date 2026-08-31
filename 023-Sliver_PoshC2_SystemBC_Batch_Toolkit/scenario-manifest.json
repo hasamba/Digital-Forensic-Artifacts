@@ -1,0 +1,8 @@
+{
+  "scenarioId":"023-Sliver_PoshC2_SystemBC_Batch_Toolkit",
+  "report":{"wordpressPostId":37127,"title":"Threat Actors' Toolkit: Leveraging Sliver, PoshC2 & Batch Scripts","published":"2024-08-12","url":"https://thedfirreport.com/2024/08/12/threat-actors-toolkit-leveraging-sliver-poshc2-batch-scripts/"},
+  "entryPoint":"ToolkitSim-Complete.ps1","cleanup":"Cleanup-ToolkitSim.ps1","artifactRoot":"%PUBLIC%\\SliverPoshC2ToolkitSim",
+  "phases":[{"order":1,"script":"ToolkitSim-Phase1-OpenDirectoryInventory.ps1","name":"Open-directory infrastructure and inventory"},{"order":2,"script":"ToolkitSim-Phase2-BatchCapabilities.ps1","name":"Inert batch capability reconstruction"},{"order":3,"script":"ToolkitSim-Phase3-C2RemoteAccess.ps1","name":"PoshC2, Sliver, SystemBC, Ngrok, Atera, and account evidence"}],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"publicDirectoryAccess":false,"accountsRDPFirewallOrShares":false,"servicesProcessesOrSecurityTools":false,"registryTasksBootOrAccessibility":false,"backupsShadowsOrLogs":false,"tunnelingOrRemoteAccessInstallation":false,"separateCleanup":true},
+  "attackTechniques":["T1546.008","T1531","T1071","T1573.002","T1070.001","T1140","T1562.001","T1562.002","T1573","T1490","T1112","T1059.001","T1090","T1059.006","T1547.001","T1219","T1489","T1033","T1071.001","T1059.003"]
+}

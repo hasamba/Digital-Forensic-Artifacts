@@ -1,0 +1,14 @@
+{
+  "scenarioId":"087-Dridex_Empire_AdFind_PsExec_Domain",
+  "report":{"wordpressPostId":605,"internalCase":1002,"title":"Dridex - From Word to Domain Dominance","published":"2020-08-03","url":"https://thedfirreport.com/2020/08/03/dridex-from-word-to-domain-dominance/","archiveCapture":"20200929173247"},
+  "entryPoint":"DridexDomainSim-Complete.ps1","cleanup":"Cleanup-DridexDomainSim.ps1","artifactRoot":"%PUBLIC%\\DridexDomainSim",
+  "timelineNote":"A generated eight-hour axis preserves relative ordering because the report provides hours/minutes relationships but no total duration. The observed chain ends with failed credential dumping and persistent Dridex access; no hypothesized ransomware is simulated. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"DridexDomainSim-Phase1-Word-Dridex.ps1","name":"Word/Dridex entry, scheduled-task and Run-key markers, C2, and J10B9 Empire transition"},
+    {"order":2,"script":"DridexDomainSim-Phase2-Empire-Discovery.ps1","name":"Empire, AdFind, identity discovery, synthetic output, and Dridex-channel exfiltration"},
+    {"order":3,"script":"DridexDomainSim-Phase3-PsExec-Spread.ps1","name":"open-directory tools, WMI attempts, renamed PsExec/ufo propagation, failed credential dumping, and no final objective"}
+  ],
+  "techniques":["T1566.001","T1204.002","T1053.005","T1547.001","T1218.011","T1059.001","T1071.001","T1018","T1482","T1087.002","T1041","T1047","T1021.002","T1569.002","T1105","T1003"],
+  "techniqueMappingNote":"Inferred from observed behavior because the report uses the Unified Kill Chain rather than an ATT&CK table.",
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","liveMalwareMacroDownloadTaskOrRegistryChanges":false,"directoryCredentialOrLsassActions":false,"WmiDefenderSmbPsExecServiceOrRemoteActions":false,"hypothesizedRansomwareSimulated":false,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

@@ -1,0 +1,12 @@
+{
+  "scenarioId":"022-BlackSuit_CobaltStrike_SystemBC_15Day",
+  "report":{"wordpressPostId":37582,"title":"BlackSuit Ransomware","published":"2024-08-26","url":"https://thedfirreport.com/2024/08/26/blacksuit-ransomware/"},
+  "entryPoint":"BlackSuitSim-Complete.ps1","cleanup":"Cleanup-BlackSuitSim.ps1","artifactRoot":"%PUBLIC%\\BlackSuit15DaySim",
+  "phases":[
+    {"order":1,"script":"BlackSuitSim-Phase1-BeaconCredentialDiscovery.ps1","name":"Cobalt Strike, credential evidence, and discovery"},
+    {"order":2,"script":"BlackSuitSim-Phase2-LateralSystemBCC2.ps1","name":"Lateral movement, SystemBC persistence, and C2 changes"},
+    {"order":3,"script":"BlackSuitSim-Phase3-CollectionBlackSuit.ps1","name":"Final collection and BlackSuit impact canaries"}
+  ],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"credentialOrKerberosAccess":false,"directoryQueries":false,"remoteExecution":false,"servicesTasksOrRegistry":false,"tunneling":false,"GPOChanges":false,"shadowCopies":false,"encryption":false,"separateCleanup":true},
+  "attackTechniques":["T1548","T1560","T1558.004","T1486","T1069.002","T1482","T1490","T1558.003","T1003.001","T1204.002","T1112","T1059.001","T1055","T1090","T1547.001","T1021.001","T1018","T1518.001","T1569.002","T1021.002","T1518","T1082","T1071.001","T1059.003","T1550.002"]
+}

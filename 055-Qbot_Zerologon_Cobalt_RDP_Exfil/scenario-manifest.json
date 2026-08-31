@@ -1,0 +1,15 @@
+{
+  "scenarioId": "055-Qbot_Zerologon_Cobalt_RDP_Exfil",
+  "report": {"wordpressPostId": 5552, "internalCaseNumber": 8734, "title": "Qbot and Zerologon Lead To Full Domain Compromise", "published": "2022-02-21", "url": "https://thedfirreport.com/2022/02/21/qbot-and-zerologon-lead-to-full-domain-compromise/"},
+  "entryPoint": "ZeroQbotSim-Complete.ps1",
+  "cleanup": "Cleanup-ZeroQbotSim.ps1",
+  "artifactRoot": "%PUBLIC%\\ZeroQbotSim",
+  "timelineNote": "An 18-hour generated axis preserves first Qbot activity at minute five, Zerologon at minute 30, multi-host pivoting, the file-server beacon at 17:35, and the 17:52-18:00 exfiltration window without asserting an unreported absolute start time.",
+  "phases": [
+    {"order": 1, "script": "ZeroQbotSim-Phase1-Qbot-Persistence.ps1", "name": "Initial Qbot DLL, five-minute discovery, Pvoeooxf/Yerqbqokc registry data, 30-minute task, second DLL, process hollowing, and Qbot C2"},
+    {"order": 2, "script": "ZeroQbotSim-Phase2-Zerologon-Discovery.ps1", "name": "Minute-30 cool.exe Zerologon, DC password/hash/repair sequence, over-pass-the-hash, renamed AdFind, WMI security discovery, and ping"},
+    {"order": 3, "script": "ZeroQbotSim-Phase3-Pivot-Exfil.ps1", "name": "Cobalt service beacons, RDP changes/logons, dce_3d SMB pipe, generated document canaries, and encrypted-C2 exfiltration markers"}
+  ],
+  "techniques": ["T1068", "T1569.002", "T1135", "T1550.002", "T1059.001", "T1059.003", "T1027", "T1053.005", "T1055", "T1018", "T1482", "T1069.002", "T1033", "T1021", "T1087.001", "T1518.001"],
+  "safety": {"labGate": true, "domainControllerRefusal": true, "network": "127.0.0.1 only; proxy disabled; zero bytes transferred", "liveMalwareRegistryOrTaskChanges": false, "processInjectionOrExploit": false, "dcPasswordHashCredentialOrKerberosAccess": false, "directoryShareWmiOrPingQueries": false, "serviceRdpPipeOrRemoteActions": false, "realCollectionOrExfiltration": false, "separateCleanup": true}
+}

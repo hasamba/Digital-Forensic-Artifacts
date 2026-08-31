@@ -1,0 +1,9 @@
+{
+  "source":"https://thedfirreport.com/2020/07/13/ransomware-again-but-we-changed-the-rdp-port/","internalCase":1001,
+  "handling":"Metadata only. No sample is retrieved and the RDP source is never contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":{"rdpSource":"212.102.45.98","reportedListener":"nonstandard RDP port; number not published"},
+  "files":[
+    {"name":"BPY6A7_payload.exe","md5":"56452e0839ef830c904182992aa11691","sha1":"e94e21979565c2372fc2745f18eec3c64d9cc2da","sha256":"23a3dfe1493dcda00a3d9a00210793553b629bd77f30c39974c8e1ab0ea51c6f","reportedPersistence":"C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp\\BPY6A7_payload.exe"},
+    {"name":"5-NS new.exe","md5":"597de376b1f80c06d501415dd973dcec","sha1":"629c9649ced38fd815124221b80c9d9c59a85e74","sha256":"f47e3555461472f23ab4766e4d5b6f6fd260e335a6abc31b860e569a720a5446"}
+  ]
+}

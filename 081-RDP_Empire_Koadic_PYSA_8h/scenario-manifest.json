@@ -1,0 +1,13 @@
+{
+  "scenarioId":"081-RDP_Empire_Koadic_PYSA_8h",
+  "report":{"wordpressPostId":1257,"internalCase":1010,"title":"PYSA/Mespinoza Ransomware","published":"2020-11-23","url":"https://thedfirreport.com/2020/11/23/pysa-mespinoza-ransomware/"},
+  "entryPoint":"PysaSim-Complete.ps1","cleanup":"Cleanup-PysaSim.ps1","artifactRoot":"%PUBLIC%\\PysaSim",
+  "timelineNote":"The generated 480-minute axis preserves the report's eight-hour chronology; post-ransom canary callbacks appear outside that window. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"PysaSim-Phase1-RDP-Empire.ps1","name":"Three Tor RDP handoffs, valid DA, minute-three DC pivot, and Empire fallback"},
+    {"order":2,"script":"PysaSim-Phase2-Koadic-Credentials-Movement.ps1","name":"Koadic MSHTA/task, credential checklist, security-control markers, discovery, RDP/PsExec/Remoting"},
+    {"order":3,"script":"PysaSim-Phase3-Exfil-PYSA.ps1","name":"Canary-document exfiltration evidence, p.ps1/svchost staging, generated impact, and ransom demand"}
+  ],
+  "techniques":["T1133","T1078","T1061","T1218.005","T1059.001","T1087.001","T1018","T1083","T1482","T1087","T1053.005","T1570","T1021.002","T1021.001","T1003","T1003.001","T1057","T1071","T1041","T1486","T1218.011"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","authenticationRdpMalwareTaskOrSecurityChange":false,"credentialNtdsShadowBackupLsaOrRemoteAccess":false,"userDataExfiltrationEncryptionOrImpairment":false,"generatedHostsHoneyAndImpactOnly":true,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

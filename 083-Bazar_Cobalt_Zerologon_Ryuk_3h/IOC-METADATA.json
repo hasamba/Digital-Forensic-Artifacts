@@ -1,0 +1,27 @@
+{
+  "source":"https://thedfirreport.com/2020/11/05/ryuk-speed-run-2-hours-to-ransom/",
+  "internalCase":1007,
+  "handling":"Metadata only. No sample is retrieved and no IOC is contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":[
+    {"role":"Bazar C2","domain":"dghns.xyz","ip":"34.222.33.48","port":443,"certificateSha1":"0ebbb84f04fe7afe2fb65958fcbd05f82ec61ef8","certificateIssuer":"Let's Encrypt","ja3":"9e10692f1b7f78228b2d4e424db3a98c","ja3s":"2b33c1374db4ddf06942f92373c0b54b"},
+    {"role":"suspected Cobalt Strike C2","domain":"checktodrivers.com","ip":"45.153.240.240","port":443,"certificateSha1":"ac67f2b1b05abdf49f23980ea98cfd8c0f56b258","certificateOrganization":"lol","ja3":"37f463bf4616ecd445d4a1937da06e19","ja3s":"ae4edc6faf64d08308082ad26be60767"},
+    {"role":"Cobalt Strike C2","domain":"topservicebooster.com","ip":"108.62.12.121","port":443,"certificateSha1":"35ef11c8a52cb944371bcffd2750793169f7daa9","certificateOrganization":"lol","ja3":"2c14bfb3f8a2067fbc88d8345e9f97f3","ja3s":"649d6810e8392f63dc311eecb6b7098b"},
+    {"role":"pagefilerpqy C2","domain":"chaseltd.top","ip":"161.117.191.245","port":80,"url":"http://chaseltd.top/gate.php"},
+    {"role":"FTP exfiltration","ip":"5.2.70.149","port":21}
+  ],
+  "files":[
+    {"name":"Report-Review20-10.exe.exe","md5":"8d35e058f5631c80b00dd695511878e3","sha1":"8103299196efabec8ec0fc1d25f1332241b93220","sha256":"0d468fc1b02bbc7c3050c67e0a80b580c69abd8eea5f8dad06c7d7ff396f7789"},
+    {"name":"Firefox.exe","md5":"114057ad47a297e4092131386932456e","sha1":"c9882d860e685869fcd8e997622d37d1ab43bcd6","sha256":"3fc65b7e7967353f340ead51617558a23f14447ab91d974268f53ab0c17052e0"},
+    {"name":"pagefilerpqy.exe","md5":"9b45c64d56523e21a268f8deb5cfa680","sha1":"0a3f3bd9ae705af63779e8ca2be55d0db1253521","sha256":"a4468c28e4830acf526209c0da25536ff0f682a0239ced1983a08d1ddd476963"},
+    {"name":"pagefileU6Gl.sys","md5":"7f1de29e6da19d22b51c68001e7e0e54","sha1":"40f7c01f4189510031adccd9c604a128adaf9b00","sha256":"13671077b66a29874a2578b5240319092ef2a1043228e433e9b006b5e53e7513"},
+    {"name":"pagefilerpqy.sys","md5":"92cc227532d17e56e07902b254dfad10","sha1":"8ee51caaa2c2f4ee2e5b4b7ef5a89db7df1068d7","sha256":"8241649609f88ccd2a0a5b233a07a538ec313ff6adf695aa44a969dbca39f67d"},
+    {"name":"AdFind.exe","md5":"b3447ef9400d7f3f87ad24f89874f91a","sha1":"75e3782ef880aa6eb9df135c3b3f23eece9a2af3","sha256":"68d0f5659cf3cc1cf53519e1be482ca9a63f2deebdcd2cb7ee12515adc6db0a7"},
+    {"name":"PL64.exe","md5":"c64266fd6142af402b1c7539be0ad02f","sha1":"3f0471775bb22695f0ed112582c058a63dac0f07","sha256":"a7514209db9d9c7c51927308d4f0b491464e11391af3c6ae31cb87d91fac995d"},
+    {"name":"fx2-12_multi_for_crypt_x86.exe","md5":"fa24b3608c7f556424ec17c2265da994","sha1":"357fbf27a30748812ce5aa3b298451c2eef88e6f","sha256":"34007d53a8e64bf1dbbeace9e4878fb209878e6a6843251895d4dc9c2699056e"}
+  ],
+  "detections":{
+    "network":["ET ID 2025194 Let's Encrypt suspicious .xyz","ET ID 2023882 suspicious .top","EmerDNS .bazar","SVCCTL service-control traffic"],
+    "sigma":["Ryuk ransomware behavior","suspicious PowerShell parameter variation","domain trust discovery","suspicious net execution","AdFind reconnaissance"],
+    "yara":["ryuk_1007_fx2_12_multi_for_crypt_x86","ryuk3_1007_pagefilerpqy","ryuk3_1007_Firefox","ryuk3_1007_PL64","ryuk3_1007_pagefilerpqy_Firefox_0"]
+  }
+}

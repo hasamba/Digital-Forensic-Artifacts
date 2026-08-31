@@ -1,0 +1,76 @@
+#Requires -Version 5.1
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+$script:RRId = '085-Bazar_Cobalt_FTP_Ryuk_29h'
+$script:RRUrl = 'https://thedfirreport.com/2020/10/08/ryuks-return/'
+$script:RRAnchor = (Get-Date).ToUniversalTime().AddMinutes(-1740)
+
+function Get-RRPaths {
+    $root = Join-Path $env:PUBLIC 'RyukReturnSim'
+    [ordered]@{Root=$root;Payloads=Join-Path $root 'payload-canaries';Evidence=Join-Path $root 'evidence';Hosts=Join-Path $root 'generated-hosts';Staging=Join-Path $root 'staging';Manifest=Join-Path $root 'artifact-manifest.jsonl';Timeline=Join-Path $root 'evidence\exercise-timeline.jsonl';Summary=Join-Path $root 'operator-summary.txt';Owner=Join-Path $root '.RyukReturnSim.owner'}
+}
+function Assert-RRSafety {
+    param([switch]$LabConfirmed)
+    if ($env:OS -ne 'Windows_NT') { throw 'Windows only' }
+    if (-not $LabConfirmed -or $env:DFIR_LAB_CONFIRMATION -ne 'I_UNDERSTAND_THIS_IS_A_LAB') { throw 'Lab gate refused' }
+    $system=Get-CimInstance Win32_ComputerSystem -ErrorAction Stop
+    if ([int]$system.DomainRole -in 4,5 -or (Get-Service NTDS -ErrorAction SilentlyContinue)) { throw 'Domain-controller refusal' }
+}
+function Add-RRManifest {
+    param([string]$Type,[string]$Path,[string]$Action,[hashtable]$Details=@{})
+    $p=Get-RRPaths
+    [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:RRId;type=$Type;path=$Path;action=$Action;details=$Details}|ConvertTo-Json -Depth 12 -Compress|Add-Content -LiteralPath $p.Manifest -Encoding UTF8
+}
+function Initialize-RREnvironment {
+    $p=Get-RRPaths
+    if(Test-Path -LiteralPath $p.Root){if(-not(Test-Path -LiteralPath $p.Owner)-or(Get-Content -LiteralPath $p.Owner -Raw).Trim()-ne$script:RRId){throw 'Refusing unowned root'}}
+    foreach($directory in @($p.Root,$p.Payloads,$p.Evidence,$p.Hosts,$p.Staging)){New-Item -Path $directory -ItemType Directory -Force|Out-Null}
+    Set-Content -LiteralPath $p.Owner -Value $script:RRId -Encoding ASCII
+    if(-not(Test-Path -LiteralPath $p.Manifest)){New-Item -Path $p.Manifest -ItemType File -Force|Out-Null}
+    Add-RRManifest directory $p.Root created-or-reused @{cleanup='separate owned-root cleanup'}
+    $p
+}
+function Write-RRFile {
+    param([string]$Path,[AllowEmptyString()][string]$Content,[string]$Purpose='artifact')
+    $directory=Split-Path -Parent $Path
+    if(-not(Test-Path -LiteralPath $directory)){New-Item -Path $directory -ItemType Directory -Force|Out-Null}
+    Set-Content -LiteralPath $Path -Value $Content -Encoding UTF8
+    Add-RRManifest file $Path created @{purpose=$Purpose;sha256=(Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash}
+}
+function Write-RRJson {param([string]$Path,[object]$Object,[string]$Purpose='evidence');Write-RRFile -Path $Path -Content($Object|ConvertTo-Json -Depth 12)-Purpose $Purpose}
+function New-RRDecoy {
+    param([string]$Path,[string]$Role,[string]$PublishedSha256='')
+    New-Item -Path(Split-Path -Parent $Path)-ItemType Directory -Force|Out-Null
+    Copy-Item -LiteralPath(Join-Path $env:SystemRoot 'System32\cmd.exe')-Destination $Path -Force
+    Add-RRManifest executable-decoy $Path copied-signed-cmd @{role=$Role;actualSha256=(Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash;publishedSha256=$PublishedSha256;hashMatchExpected=$false}
+}
+function Invoke-RRDecoy {
+    param([string]$FilePath,[string]$Reported,[string]$Parent,[string]$Label='RYUK-RETURN-CANARY')
+    $arguments=@('/d','/v:off','/c','echo',$Label)
+    $process=Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $null=$process.ExitCode
+    Add-RRManifest process $FilePath executed-signed-decoy @{reportedCommandLine=$Reported;reportedParent=$Parent;actualArguments=($arguments-join' ');reportedOnly=$true}
+}
+function Invoke-RRLoopback {
+    param([int]$Port,[string]$Target,[string]$Role)
+    $client=New-Object Net.Sockets.TcpClient
+    try{$pending=$client.BeginConnect('127.0.0.1',$Port,$null,$null);$null=$pending.AsyncWaitHandle.WaitOne(500)}catch{}finally{$client.Dispose()}
+    Add-RRManifest network "127.0.0.1:$Port" loopback-only @{reportedTarget=$Target;role=$Role;remote=$false;proxy=$false;bytesTransferred=0}
+}
+function Add-RRTimeline {
+    param([double]$Minutes,[string]$Phase,[string]$Event,[hashtable]$Details=@{})
+    $p=Get-RRPaths
+    [ordered]@{timestampUtc=$script:RRAnchor.AddMinutes($Minutes).ToString('o');offsetMinutes=$Minutes;phase=$Phase;event=$Event;details=$Details}|ConvertTo-Json -Depth 12 -Compress|Add-Content -LiteralPath $p.Timeline -Encoding UTF8
+}
+function New-RRHostTree {
+    param([string]$Name,[string]$Role)
+    $p=Get-RRPaths;$hostRoot=Join-Path $p.Hosts $Name
+    foreach($directory in @('C$\Finance','C$\Operations','C$\PerfLogs','ADMIN$')){New-Item -Path(Join-Path $hostRoot $directory)-ItemType Directory -Force|Out-Null}
+    Write-RRJson -Path(Join-Path $hostRoot 'host-profile.json')-Object([ordered]@{hostname=$Name;role=$Role;generated=$true;remoteSystem=$false})-Purpose generated-host
+    Write-RRFile -Path(Join-Path $hostRoot 'C$\Finance\forecast.xlsx.canary')-Content "INERT GENERATED DATA FOR $Name. This is not user data." -Purpose generated-canary-data
+    $hostRoot
+}
+function Write-RRSummary {
+    param($Paths)
+    Write-RRFile -Path $Paths.Summary -Content "RyukReturnSim complete.`nSource: $script:RRUrl`nInternal case: 1005`nThe exact 29-hour axis is preserved, including day-one and day-two discovery, movement around hour 28, and one minute between reported backup-server Ryuk transfer and execution.`nArtifacts remain; cleanup is separate.`nNo malware, external connection, credential/ticket access, MS17-010 probe, WMI/service/SMB/RDP action, Defender change, remote mount, wbadmin action, process/service termination, ACL change, or encryption occurred." -Purpose summary
+}

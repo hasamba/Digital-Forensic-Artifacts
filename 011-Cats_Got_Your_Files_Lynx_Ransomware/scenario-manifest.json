@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "011-Cats_Got_Your_Files_Lynx_Ransomware",
+  "title": "Cat's Got Your Files: Lynx Ransomware",
+  "source": {
+    "publisher": "The DFIR Report",
+    "published": "2025-12-17",
+    "url": "https://thedfirreport.com/2025/12/17/cats-got-your-files-lynx-ransomware/",
+    "wordpressPostId": 49747,
+    "reviewedInFull": true
+  },
+  "entryPoint": "LynxSim-Complete.ps1",
+  "cleanup": "Cleanup-LynxSim.ps1",
+  "phases": [
+    "01-InitialAccessDiscovery",
+    "02-PersistenceLateralMovement",
+    "03-CollectionExfiltration",
+    "04-Impact"
+  ],
+  "safety": {
+    "explicitLabGate": true,
+    "domainControllerRefusal": true,
+    "liveMalware": false,
+    "realCredentialAccess": false,
+    "securityControlImpairment": false,
+    "remotePropagation": false,
+    "domainOrGpoModification": false,
+    "realIocConnections": false,
+    "networkDestination": "127.0.0.1",
+    "proxyBypassRequired": true,
+    "realBackupDeletion": false,
+    "shadowCopyDeletion": false,
+    "userDataEncryption": false,
+    "artifactsLeftForInvestigation": true,
+    "cleanupSeparateAndDeterministic": true
+  },
+  "reportedHashes": "IOC-METADATA.json",
+  "attackTechniques": [
+    "T1098.007", "T1560.001", "T1486", "T1136.002", "T1567", "T1133",
+    "T1490", "T1087.001", "T1046", "T1135", "T1059.001", "T1012",
+    "T1219", "T1021.001", "T1018", "T1082", "T1016", "T1078",
+    "T1059.003", "T1543.003"
+  ]
+}

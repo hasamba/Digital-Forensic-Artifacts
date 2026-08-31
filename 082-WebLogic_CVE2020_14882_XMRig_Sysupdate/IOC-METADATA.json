@@ -1,0 +1,11 @@
+{
+  "source":"https://thedfirreport.com/2020/11/12/cryptominers-exploiting-weblogic-rce-cve-2020-14882/","internalCase":1009,"cve":"CVE-2020-14882","handling":"Metadata only. No sample is retrieved and no exploit, payload, or mining endpoint is contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":{"payloadHost":"95.142.39.135","exploitSources":["212.8.247.179","95.214.11.231","95.215.108.217"],"minerPools":["178.128.242.134:443","45.136.244.146:3333","185.92.222.223:443","37.59.44.193:3333","94.23.23.52:3333","104.140.244.186:3333"]},
+  "files":[
+    {"name":"xmrig.exe","md5":"57f0fdec4d919db0bd4576dc84aec752","sha1":"82e6af04eadb5fac25fbb89dc6f020da0f4b6dca","sha256":"5e5b5171a95955ecb0fa8f9f1ba66f313165044cc1978a447673c0ac17859170"},
+    {"name":"1.ps1","md5":"70000d52dc3ad153464dc41891c10439","sha1":"9bd2bc3f87d4c9d029a4e6391358f776e86ad2d5","sha256":"58bb90f11070a114442c4fa1cbbccefadcdf954510ae2b8d91c9b22b1a8a42d5"},
+    {"name":"wbw.xml","md5":"fe0f332ed847a25a18cd63dfdaf69908","sha1":"67ff54a71dfc5b817fbc6e62c6c30e9a30219fb9","sha256":"c8fd12490f9251080803a68e26a1bdb1919811334ec54ab194645bd516adf1c1"},
+    {"name":"config.json","md5":"2d9a06afe4263530b900aa1c96a84665","sha1":"0c86e66105645700b08d33e793362de41d0b1878","sha256":"6be51ca6e829c4033d74feff743bcc0d3dc26cb13f687fe6c0d2f6169a8197b2"}
+  ],
+  "detections":{"network":["Cryptocurrency Miner Checkin","Dotted Quad Host PS1 Request","Double Encoded Characters in URI","Suspicious POST to Dotted Quad with Fake Browser","PowerShell Downloader with Start-Process Inbound","PowerShell Hidden Window Command"],"sigmaBehaviors":["specific suspicious PowerShell invocation"],"yaraRules":["sig_1008_miner_xmrig","sig_1008_miner_1_pwsh"]}
+}

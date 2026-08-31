@@ -1,0 +1,13 @@
+{
+  "source":"https://thedfirreport.com/2020/11/23/pysa-mespinoza-ransomware/","internalCase":1010,"handling":"Metadata only. No sample is retrieved and no Tor, Empire, or Koadic endpoint is contacted. Runtime attempts are forced to 127.0.0.1 with proxy=false and bytesTransferred=0.",
+  "network":{"rdpTorExits":["198.96.155.3","23.129.64.190","185.220.100.240"],"koadic":["http://45.147.231.210:9999/8k6Mq","http://45.147.231.210:9999/VtgyT","45.147.231.210:9999"],"empire":["194.36.190.74:443","https://194.36.190.74"]},
+  "empireTls":{"certificateSha1":"b820c2dbb6b8f40f61a5c0274089e630cddb055e","ja3":"5e12c14bda47ac941fc4e8e80d0e536f","ja3s":"0eec924176fb005dfa419c80ab72d27c"},
+  "files":[
+    {"name":"svchost.exe","md5":"bd395971a7eb344673de513a15c16098","sha1":"1db448b0f1adf39874d6ea6b245b9623849f48e5","sha256":"df0cd6a8a67385ba67f9017a78d6582db422a137160176c2c5c3640b482b4a6c"},
+    {"name":"p.ps1 variant 1","md5":"2df8d3581274a364c6bf8859c9bdc034","sha1":"8af4bfcef0f3fefae3f33b86815a6f940b64f4b7","sha256":"eb1d0acd250d32e16fbfb04204501211ba2a80e34b7ec6260440b7d563410def"},
+    {"name":"p.ps1 variant 2","md5":"1da1f49900268fa7d783feda8849e496","sha1":"72f2352eab5cb0357bdf5950c1d0374a19cfdf99","sha256":"0ab8f14e2c1e6f7c4dfa3d697d935d4fbef3605e15fd0d489d39b7f82c84ba7e"},
+    {"name":"XEKFGUIQQB.hta","md5":"5266daf58dd34076e447474c7dce09b2","sha1":"b0197a53a56939d3d9006df448bc46ef599bac31","sha256":"81e0d5945ab7374caf2353f8d019873c88728a6c289884a723321b8a21df3c77"}
+  ],
+  "impact":{"reportedDemandBtc":5,"reportedDemandUsd":88000,"reportedStart":"around 7.5 hours","reportedScope":"all systems"},
+  "detections":{"network":["Koadic CnC checkin","Koadic command execution","unusual 445/139/135 scans","outbound MSSQL non-standard port","NMAP SIP OPTIONS scan","Metasploit Bind_API construct","SNMP public access","outbound SSH scan"],"sigmaBehaviors":["Koadic","mshta spawning shell","whoami","local/system owner discovery","suspicious scheduled task","Empire launcher","VSS/NTDS activity"],"yaraRules":["mespinoza_svchost"]}
+}

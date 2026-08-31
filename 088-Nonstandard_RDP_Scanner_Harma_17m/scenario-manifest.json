@@ -1,0 +1,13 @@
+{
+  "scenarioId":"088-Nonstandard_RDP_Scanner_Harma_17m",
+  "report":{"wordpressPostId":44066,"internalCase":1001,"title":"Ransomware Again...But We Changed the RDP Port!?!?!","published":"2020-07-13","url":"https://thedfirreport.com/2020/07/13/ransomware-again-but-we-changed-the-rdp-port/"},
+  "entryPoint":"Harma17Sim-Complete.ps1","cleanup":"Cleanup-Harma17Sim.ps1","artifactRoot":"%PUBLIC%\\Harma17Sim",
+  "timelineNote":"The exact 17-minute UTC timeline is preserved from 07:00 entry to 07:17 second-host Harma execution. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"Harma17Sim-Phase1-Entry-Scanner.ps1","name":"nonstandard-port RDP entry, Task Manager, and Network Scanner"},
+    {"order":2,"script":"Harma17Sim-Phase2-DC-Pivot.ps1","name":"RDP to generated DC representation, Task Manager, and Network Scanner"},
+    {"order":3,"script":"Harma17Sim-Phase3-Harma-Impact.ps1","name":"Harma payload and Startup markers on generated DC and entry host"}
+  ],
+  "techniques":["T1133","T1135","T1486","T1078"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","authenticationRdpScannerOrRemoteActions":false,"liveMalwareOrStartupChanges":false,"userDataEncryption":false,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

@@ -1,0 +1,9 @@
+{
+  "scenarioId":"089-RDP_Tor_Meterpreter_Snatch_5h",
+  "report":{"wordpressPostId":448,"title":"Snatch Ransomware","published":"2020-06-21","url":"https://thedfirreport.com/2020/06/21/snatch-ransomware/"},
+  "entryPoint":"SnatchFiveSim-Complete.ps1","cleanup":"Cleanup-SnatchFiveSim.ps1","artifactRoot":"%PUBLIC%\\SnatchFiveSim",
+  "timelineNote":"The exact 05:15 and 07:53 observations plus 30-minute, 45-minute, and 15-minute relationships yield a 280-minute under-five-hour axis. Real DC execution is refused.",
+  "phases":[{"order":1,"script":"SnatchFiveSim-Phase1-RDP-DC-Tor.ps1","name":"DA RDP entry, discovery, DC pivot, Tor RDP tunnel and Go tool markers"},{"order":2,"script":"SnatchFiveSim-Phase2-C2-Persistence-NTDS.ps1","name":"cplXen C2, named-pipe metadata, x3 task persistence, and Ditsnap/NTDS marker"},{"order":3,"script":"SnatchFiveSim-Phase3-Safe-Impact.ps1","name":"backup-first manual RDP, Defender/service/safe-mode/reboot markers, and generated Snatch impact"}],
+  "techniques":["T1110","T1078","T1021.001","T1016","T1033","T1090.003","T1071.001","T1053.005","T1003.003","T1562.001","T1543.003","T1529","T1486"],"techniqueMappingNote":"Inferred from observed behavior because the report does not publish ATT&CK IDs.",
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","authenticationRdpTorTunnelShellPipeOrTaskActions":false,"snapshotNtdsOrCredentialActions":false,"DefenderServiceBootShutdownOrRemoteActions":false,"userDataEncryption":false,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

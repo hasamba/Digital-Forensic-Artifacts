@@ -1,0 +1,15 @@
+{
+  "source":"https://thedfirreport.com/2024/10/28/inside-the-open-directory-of-the-you-dun-threat-group/",
+  "networkIndicatorsMetadataOnly":["43.228.89.245","43.228.89.246","43.228.89.247","43.228.89.248","103.228.108.247","115.126.107.244","163.53.216.157","116.212.120.32","101.36.124.183","fgfg.bcfnwg.cc:60000"],
+  "fingerprints":{"openDirectorySshSha256":"1192d660e36e9b6f671a22a1ed1adb50f752ca986885ecfffdbbf3967e8ff9c1","viperDefaultCertificateSha256":"4de3278507c89d2242a12c20b74878e3f84970c463a924771f156a3da7d7b5a1"},
+  "files":[
+    {"name":"红队版.zip","sha256":"b94d9412764529f264433c39b6043d43b96e824d016f40a5a38e26771374171f","sha1":"56bd833178c08baedb0a6f51c957a0cc8e6f9298","md5":"8c4d6f6c6db273d79a7c46b623e515e3"},
+    {"name":"xray_linux_amd64","sha256":"6e3c5f8444040e5982da9990cbb9d0ce66b7272a3e6804139e7cbe3083459035"},
+    {"name":"YeNoenXSQB.exe","reportedSha265Typo":"fa301a12655598b9266a8315ac7f48da4f79ed4ea39273e57ac08b8c66b6fced"},
+    {"name":"f8x","reportedSha265Typo":"206ac51c01604267c04f0966cdc685fd9ade42dd8d0698df639b06a0ed19377f"},
+    {"name":"LB3.exe","reportedSha265Typo":"07104f9be906e62be7539e4f81d980dddb480d64dce204c199a2afe5a0bc3367","sha1":"f8ccc2503052eceebd5311a8b74dc197a4e9f68a","md5":"c8033ec30b55a46ce7daf9d7d9b6b596"}
+  ],
+  "toolkitFamilies":["WebLogicScan","Vulmap","Xray","dirsearch","sqlmap","seeyon_exp","weaver","Cobalt Strike","CrossC2-GithubBot","TaoWu","Ladon/Landon","Viper","f8x","CDK","traitor","LockBit 3 builder"],
+  "adversaryMetadata":{"names":["You Dun","Dark Cloud Shield Technical Team"],"administrator":"EVA / @YD099","telegramReferences":["You_Dun","You_Dun888","juxingchuhai"]},
+  "note":"The report also publishes a large TaoWu/Ladon MD5 inventory. Scenario tool files are inert filename canaries; the source report remains the canonical complete hash table. No IOC is contacted."
+}

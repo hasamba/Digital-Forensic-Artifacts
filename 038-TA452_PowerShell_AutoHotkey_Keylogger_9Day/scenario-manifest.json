@@ -1,0 +1,16 @@
+{
+  "scenarioId":"038-TA452_PowerShell_AutoHotkey_Keylogger_9Day",
+  "report":{"wordpressPostId":14465,"internalCaseNumber":17333,"title":"Collect, Exfiltrate, Sleep, Repeat","published":"2023-02-06","url":"https://thedfirreport.com/2023/02/06/collect-exfiltrate-sleep-repeat/"},
+  "attribution":{"assessment":"likely","actorNames":["OilRig","TA452","APT34","Helix Kitten"],"basis":"Report assessment based on tooling, network signatures, and operating hours."},
+  "entryPoint":"OilKeySim-Complete.ps1",
+  "cleanup":"Cleanup-OilKeySim.ps1",
+  "artifactRoot":"%PUBLIC%\\OilKeySim",
+  "observedWindowHours":216,
+  "phases":[
+    {"order":1,"script":"OilKeySim-Phase1-Docm-PowerShell.ps1","name":"DOCM lure, PowerShell implant, task evidence, AES-CBC C2 markers, and discovery telemetry"},
+    {"order":2,"script":"OilKeySim-Phase2-Keylogger-Collection.ps1","name":"AutoHotkey keylogger stack, logon-task evidence, and generated keypress canaries"},
+    {"order":3,"script":"OilKeySim-Phase3-Repeat-Exfil.ps1","name":"CAB/screenshot-name canaries and day 6/7/9 loopback exfiltration markers"}
+  ],
+  "techniques":["T1059.001","T1204.002","T1087.002","T1082","T1057","T1033","T1049","T1053.005","T1113","T1056.001","T1573.001","T1560.001","T1518.001","T1083","T1124","T1007","T1112"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"scheduledTaskChanges":false,"keyboardOrClipboardCapture":false,"registryChanges":false,"realDiscoveryOrCollection":false,"realScreenshot":false,"realArchiveOrExfiltration":false,"proxyUse":false,"destructiveImpact":false,"separateCleanup":true}
+}

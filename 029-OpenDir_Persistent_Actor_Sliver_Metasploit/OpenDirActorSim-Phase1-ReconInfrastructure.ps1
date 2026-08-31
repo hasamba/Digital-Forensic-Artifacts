@@ -1,0 +1,12 @@
+#Requires -Version 5.1
+#Requires -RunAsAdministrator
+[CmdletBinding()]param([switch]$LabConfirmed)
+. "$PSScriptRoot\OpenDirActorSim-utilities.ps1";Assert-OpenDirSafety -LabConfirmed:$LabConfirmed;$p=Initialize-OpenDirEnvironment
+$shell=Join-Path $p.Frameworks 'bash.exe';New-OpenDirDecoy $shell 'signed echo-only stand-in for actor bash history'
+$history=@('echo "AS4758" | httpx --status-code --tech-detect','httpx AS142501 --status-code --tech-detect -o 142501','nuclei -l sept24.txt -o sept24_op.txt -s critical,high','nuclei -l rac_drdo_il_govnet -o output -s critical,high','torify nuclei -l large_scope -o large_scope -as','subfinder -dL drones -o drone_op -silent','shodan search vuln=CVE-2022-42475','amass enum using open technical databases')
+Write-OpenDirFile(Join-Path $p.History 'recon-bash-history.txt')($history-join"`n")'reported reconnaissance history';foreach($c in $history){Invoke-OpenDirDecoy $shell $c}
+foreach($name in @('government-and-defense.txt','finance-and-crypto.txt','telecommunications.txt','education.txt','security-companies.txt','media-and-political.txt','escort-services.txt')){Write-OpenDirFile(Join-Path $p.Targets $name)"GENERATED TARGET-CATEGORY CANARY: $name`nNo domains, routable addresses, or real organizations are included."'synthetic target list'}
+Write-OpenDirFile(Join-Path $p.Outputs 'nuclei-critical-findings.json')(@(@{target='lab-web-01.invalid';finding='CVE-CANARY-0001';severity='critical';scanned=$false},@{target='lab-vpn-01.invalid';finding='CVE-CANARY-0002';severity='high';scanned=$false})|ConvertTo-Json)'synthetic scan output'
+$infra=[ordered]@{sliverEndpoints=@('192.169.6.122','104.200.67.3','apicalls.net');domains=@('smilevolume.com','apicalls.net');knownHosts=@('166.62.10.138','146.88.26.221','202.70.80.119','103.248.61.184','43.230.203.164','104.200.67.3');proxy='103.174.104.51';sshFingerprint='d2:da:76:47:70:80:c2:ba:9d:7a:62:36:60:d6:a1:58';contacted=$false};Write-OpenDirFile(Join-Path $p.Evidence 'actor-infrastructure.json')($infra|ConvertTo-Json -Depth 5)'infrastructure metadata';foreach($t in @('192.169.6.122:31337 Sliver','104.200.67.3 Sliver','apicalls.net Sliver')){Invoke-OpenDirLoopback 443 $t 'C2 marker'}
+Add-OpenDirTimeline 0 reconnaissance 'Earliest recovered Sliver implant record and actor infrastructure represented' @{date='2022-08-12';remoteContact=$false}
+Add-OpenDirTimeline 370 reconnaissance 'Government, defense, finance, telecom, education, and security-sector scanning histories represented' @{targetsScanned=0;techniques=@('T1595.001','T1595.002','T1595.003','T1596')}

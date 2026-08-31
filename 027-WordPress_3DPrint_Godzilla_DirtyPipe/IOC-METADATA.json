@@ -1,0 +1,33 @@
+{
+  "scenarioId": "027-WordPress_3DPrint_Godzilla_DirtyPipe",
+  "source": {
+    "title": "Threat Brief: WordPress Plugin Exploit Leads to Godzilla Web Shell, Discovery & New CVE",
+    "published": "2024-03-04",
+    "url": "https://thedfirreport.com/2024/03/04/threat-brief-wordpress-exploit-leads-to-godzilla-web-shell-discovery-new-cve/"
+  },
+  "safeHandling": "Metadata only. Scripts never resolve or contact reported IPs; network markers connect only to 127.0.0.1 with proxy disabled and zero bytes transferred.",
+  "networkIndicators": [
+    {"indicator": "167.179.108.182", "role": "plugin exploit source and final-hour web-shell operator"},
+    {"indicator": "185.151.146.112", "role": "initial web-shell operator"}
+  ],
+  "httpIndicators": {
+    "pluginEndpoint": "/wp-admin/admin-ajax.php?action=p3dlite_handle_upload",
+    "webShellPath": "/wp-content/uploads/p3d/123.php",
+    "exploitUserAgent": "python-requests/2.22.0",
+    "webShellUserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0"
+  },
+  "files": [
+    {"name": "123.php", "role": "reported Godzilla PHP web shell", "publishedHashes": "not present in public PDF"},
+    {"name": "1.sh", "role": "reported LinEnum copy", "publishedHashes": "not present in public PDF"},
+    {"name": "Dirty-Pipe.sh", "role": "reported r1is/CVE-2022-0847 copy", "publishedHashes": "not present in public PDF"}
+  ],
+  "webShellFingerprints": {
+    "password": "7980@",
+    "payloadName": "payload",
+    "key": "2501c71a070a8bb",
+    "family": "Godzilla",
+    "note": "Investigation metadata only; no PHP implementation is included."
+  },
+  "publicReportHashAvailability": "No MD5, SHA1, or SHA256 values were published in the public six-page PDF.",
+  "customerEvent": {"id": 27236, "uuid": "fe12e833-6f0c-45c9-97d6-83337ea6c5d3"}
+}

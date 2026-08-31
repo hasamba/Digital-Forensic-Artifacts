@@ -1,0 +1,46 @@
+{
+  "scenarioId": "021-Nitrogen_Sliver_CobaltStrike_BlackCat",
+  "source": {
+    "title": "Nitrogen Campaign Drops Sliver and Ends With BlackCat Ransomware",
+    "published": "2024-09-30",
+    "url": "https://thedfirreport.com/2024/09/30/nitrogen-campaign-drops-sliver-and-ends-with-blackcat-ransomware/"
+  },
+  "safeHandling": "Investigation metadata only. Scripts never resolve or connect to these addresses; representative attempts are rewritten to 127.0.0.1 with proxy use disabled.",
+  "networkIndicators": [
+    {"role":"Sliver C2","indicator":"194.49.94.18:8443"},
+    {"role":"Sliver C2","indicator":"194.169.175.134:8443"},
+    {"role":"Cobalt Strike C2","indicator":"91.92.250.60:443"},
+    {"role":"Cobalt Strike C2","indicator":"91.92.250.65:443"},
+    {"role":"payload staging","indicator":"91.92.245.26:443"},
+    {"role":"Restic exfiltration","indicator":"195.123.226.84:8000"}
+  ],
+  "tlsFingerprints": {
+    "ja3": "72a589da586844d7f0818ce684948eea",
+    "ja3s": "f176ba63b4d68e576b5ba345bec2c7b7"
+  },
+  "files": [
+    {"name":"Version.zip","md5":"DBF5F56998705C37076B6CAE5D0BFB4D","sha1":"E6AB3C595AC703AFD94618D1CA1B8EBCE623B21F","sha256":"5DC8B08C7E1B11ABF2B6B311CD7E411DB16A7C3827879C6F93BD0DAC7A71D321"},
+    {"name":"wo14.py","sha256":"726F038C13E4C90976811B462E6D21E10E05F7C11E35331D314C546D91FA6D21"},
+    {"name":"worksliv.py","sha256":"5F7D438945306BF8A7F35CAB0E2ACC80CDC9295A57798D8165EF6D8B86FBB38D"},
+    {"name":"slv.py","sha256":"4EF1009923FC12C2A3127C929E0AA4515C9F4D068737389AFB3464C28CCF5925"},
+    {"name":"work.aes","sha256":"4EE4E1E2CEDF59A802C01FAE9CCFCFDE3E84764C72E7D95B97992ADDD6EDF527"},
+    {"name":"data.aes","sha256":"3298629DE0489C12E451152E787D294753515855DBF1CE80BFCDED584A84AC62"},
+    {"name":"service_probes","sha256":"B3B1FF7E3D1D4F438E40208464CEBFB641B434F5BF5CF18B7CEC2D189F52C1B6"},
+    {"name":"UpdateEG.bat","sha256":"39EC2834494F384028AD17296F70ED6608808084EF403714CFBC1BFBBED263D4"},
+    {"name":"python311.dll","sha256":"9514035FEA8000A664799E369AE6D3AF6ABFE8E5CDA23CDAFBEDE83051692E63"},
+    {"name":"example.exe","sha256":"25172A046821BD04E74C15DC180572288C67FDFF474BDB5EB11B76DCE1B3DAD3"},
+    {"name":"2-REDACTED-51.exe","sha256":"5FAC60F1E97B6EAAE18EBD8B49B912C86233CF77637590F36AA319651582D3C4"},
+    {"name":"domain_name.exe","sha256":"D15CAB3901E9A10AF772A0A1BDBF35B357EE121413D4CF542D96819DC4471158"}
+  ],
+  "behavioralIndicators": {
+    "directories": ["%AppData%\\Notepad", "%PUBLIC%\\Downloads"],
+    "taskNames": ["OneDrive Security Task-S-1-5-21-REDACTED", "UpdateEdge"],
+    "batchFiles": ["UpdateEdge.bat", "upedge.bat", "up.bat", "1.bat"],
+    "serviceGuid": "15991160457623399845550968347370640942",
+    "resticContentType": "application/vnd.x.restic.rest.v2",
+    "cobaltStrikeGet": "/broadcast",
+    "cobaltStrikePost": "/1/events/com.amazon.csm.csa.prod",
+    "cobaltStrikeWatermark": 587247372,
+    "reportedAesKey": "we3p2v5t85"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "scenarioId": "010-BengalSEO_MayaBot_SEO_Poisoning",
+  "title": "BengalSEO Part 1: Anatomy of the Operation",
+  "source": {
+    "publisher": "The DFIR Report",
+    "published": "2026-08-24",
+    "url": "https://thedfirreport.com/2026/08/24/bengalseo-part-1-anatomy-of-the-operation/",
+    "wordpressPostId": 50572,
+    "reviewedInFull": true
+  },
+  "entryPoint": "BengalSEOSim-Complete.ps1",
+  "cleanup": "Cleanup-BengalSEOSim.ps1",
+  "phases": [
+    "01-LureAndTDS",
+    "02-PayloadDelivery",
+    "03-MayaBotAndScam"
+  ],
+  "safety": {
+    "explicitLabGate": true,
+    "domainControllerRefusal": true,
+    "liveMalware": false,
+    "realCredentialAccess": false,
+    "securityControlImpairment": false,
+    "remotePropagation": false,
+    "realIocConnections": false,
+    "networkDestination": "127.0.0.1",
+    "proxyBypassRequired": true,
+    "artifactsLeftForInvestigation": true,
+    "cleanupSeparateAndDeterministic": true
+  },
+  "keyIocMetadata": {
+    "tracking": ["stats.us3.org", "us3.my"],
+    "redirectors": ["link72.com", "ts.remdos.com", "tx.newredir.com", "to.ghredir.com", "tx.platdir.com", "q82.net", "pre.im", "url90.com", "flosyr.com"],
+    "payloadLanding": ["ustechnio.com", "tax.dll.lat", "u320.my", "reficon.pro", "pltechoo.pro"],
+    "mayaBotC2": ["cus.cam", "dll.lat", "us99.org"],
+    "fullAppendix": "IOC-METADATA.md"
+  },
+  "attackTechniques": [
+    "T1583.001",
+    "T1583.006",
+    "T1608.001",
+    "T1608.005",
+    "T1204.002",
+    "T1059.007",
+    "T1036.007",
+    "T1105",
+    "T1071.001"
+  ]
+}

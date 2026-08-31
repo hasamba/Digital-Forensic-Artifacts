@@ -1,0 +1,13 @@
+{
+  "scenarioId":"082-WebLogic_CVE2020_14882_XMRig_Sysupdate",
+  "report":{"wordpressPostId":1211,"internalCase":1009,"title":"Cryptominers Exploiting WebLogic RCE CVE-2020-14882","published":"2020-11-12","url":"https://thedfirreport.com/2020/11/12/cryptominers-exploiting-weblogic-rce-cve-2020-14882/"},
+  "entryPoint":"WebLogicMinerSim-Complete.ps1","cleanup":"Cleanup-WebLogicMinerSim.ps1","artifactRoot":"%PUBLIC%\\WebLogicMinerSim",
+  "timelineNote":"A generated 30-minute axis preserves the report's sequence because no incident duration is published. Real DC execution is refused.",
+  "phases":[
+    {"order":1,"script":"WebLogicMinerSim-Phase1-Exploit-XML.ps1","name":"CVE-2020-14882 images-path exploit, wbw.xml, and PowerShell 1.ps1 retrieval"},
+    {"order":2,"script":"WebLogicMinerSim-Phase2-Stage-Task.ps1","name":"XMRig/config staging, sysupdate masquerading, miner check, and 30-minute update task"},
+    {"order":3,"script":"WebLogicMinerSim-Phase3-Miner-Impact.ps1","name":"Six pool endpoints and 100-percent CPU impact marker"}
+  ],
+  "techniques":["T1190","T1059","T1053.005","T1496","T1036"],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only; proxy false; zero bytes","exploitDownloadPowerShellOrTask":false,"minerCpuProcessOrExternalImpact":false,"runtimeArtifactManifest":true,"artifactsLeftForInvestigation":true,"separateCleanup":true}
+}

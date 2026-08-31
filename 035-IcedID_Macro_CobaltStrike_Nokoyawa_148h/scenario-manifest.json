@@ -1,0 +1,14 @@
+{
+  "scenarioId":"035-IcedID_Macro_CobaltStrike_Nokoyawa_148h",
+  "report":{"wordpressPostId":18546,"internalCase":18190,"title":"IcedID Macro Ends in Nokoyawa Ransomware","published":"2023-05-22","url":"https://thedfirreport.com/2023/05/22/icedid-macro-ends-in-nokoyawa-ransomware/"},
+  "entryPoint":"MacroNokoSim-Complete.ps1",
+  "cleanup":"Cleanup-MacroNokoSim.ps1",
+  "artifactRoot":"%PUBLIC%\\MacroNokoSim",
+  "phases":[
+    {"order":1,"script":"MacroNokoSim-Phase1-Excel-IcedID.ps1","name":"Excel/VBA lure, numeric IcedID payload, calc.exe ancestry, hourly task, and campaign 3298576311 C2"},
+    {"order":2,"script":"MacroNokoSim-Phase2-Cobalt-Discovery.ps1","name":"Cobalt/VNC, GetSystem/LSASS negatives, six-day discovery, WinRM/WMI/RDP, collection, and password-file evidence"},
+    {"order":3,"script":"MacroNokoSim-Phase3-Nokoyawa.ps1","name":"RDP staging, 1.bat-6.bat, renamed mstdc PsExec, and intact AWAYOKON canaries at hour 148"}
+  ],
+  "safety":{"labGate":true,"domainControllerRefusal":true,"network":"127.0.0.1 only","liveMalware":false,"macroOrDownloader":false,"scheduledTask":false,"processInjectionOrCredentialAccess":false,"directoryShareScanOrRemoteSession":false,"remoteExecutionOrPropagation":false,"realCollectionOrExfiltration":false,"shadowDeletion":false,"encryption":false,"separateCleanup":true},
+  "attackTechniques":["T1134.001","T1087.001","T1087.002","T1071.001","T1059.003","T1059.001","T1059.005","T1486","T1482","T1083","T1070.004","T1036.003","T1566.001","T1055","T1021.001","T1021.002","T1018","T1053.005","T1218.011","T1016","T1078","T1047","T1552.001","T1204.002","T1021.006","T1041","T1560.001","T1105","T1102","T1003.001","T1219"]
+}
