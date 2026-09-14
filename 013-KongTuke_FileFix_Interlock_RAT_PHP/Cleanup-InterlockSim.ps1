@@ -15,7 +15,14 @@ $actualRoot = [IO.Path]::GetFullPath($paths.Root)
 if ($actualRoot -ne $expectedRoot) { throw "Cleanup root safety check failed: $actualRoot" }
 
 $expectedRun = Get-InterlockExpectedRunCommand
-$currentRun = Get-ItemPropertyValue -LiteralPath $paths.RunKey -Name $script:InterlockRunValue -ErrorAction SilentlyContinue
+$currentRun = $null
+if (Test-Path -LiteralPath $paths.RunKey) {
+    $runProperties = Get-ItemProperty -LiteralPath $paths.RunKey -ErrorAction Stop
+    $runProperty = $runProperties.PSObject.Properties[$script:InterlockRunValue]
+    if ($null -ne $runProperty) {
+        $currentRun = $runProperty.Value
+    }
+}
 if ($null -ne $currentRun) {
     if ($currentRun -eq $expectedRun) {
         if ($PSCmdlet.ShouldProcess("$($paths.RunKey)\$script:InterlockRunValue", 'Remove Interlock canary Run value')) {
