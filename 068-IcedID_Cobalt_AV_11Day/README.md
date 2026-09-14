@@ -5,7 +5,6 @@ Lab-safe companion to The DFIR Report's [IcedID and Cobalt Strike vs Antivirus](
 All executables are signed `cmd.exe` decoys with fixed benign arguments. No malware, script, task, injection, UAC/service/security change, credentials, LSASS, AD/WMI query, authentication, remote movement, external C2, or impact occurs. DC evidence is generated only and real DCs are refused; network attempts are loopback-only with zero bytes.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\IcedAVSim-Complete.ps1 -LabConfirmed
 ```
 

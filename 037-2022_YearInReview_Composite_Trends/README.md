@@ -7,7 +7,6 @@ This source is an aggregate of 13 public cases, not one intrusion. The scripts t
 The mandatory gate refuses domain controllers. No malware, exploit, task, run key, WMI subscription, web shell, account, credential/LSASS/Kerberos access, directory/share query, remote action, real collection, exfiltration, or encryption occurs. Network markers terminate on loopback and generated originals remain intact.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\YearReviewSim-Complete.ps1 -LabConfirmed
 ```
 

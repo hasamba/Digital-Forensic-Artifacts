@@ -5,7 +5,6 @@ Lab-safe companion to The DFIR Report's [Ryuk Speed Run, 2 Hours to Ransom](http
 Run elevated on a disposable Windows member workstation or member server—not a domain controller:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\RyukSpeedSim-Complete.ps1 -LabConfirmed
 ```
 

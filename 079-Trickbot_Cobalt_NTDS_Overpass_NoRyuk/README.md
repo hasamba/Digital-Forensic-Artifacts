@@ -5,7 +5,6 @@ Lab-safe companion to The DFIR Report's [Trickbot Still Alive and Well](https://
 Run elevated on a disposable Windows member workstation or member server—not a domain controller:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\TrickAliveSim-Complete.ps1 -LabConfirmed
 ```
 

@@ -19,7 +19,7 @@ The report describes an Interlock RAT campaign, not a completed ransomware incid
 
 ## Safety controls
 
-- Requires both `-LabConfirmed` and `DFIR_LAB_CONFIRMATION=I_UNDERSTAND_THIS_IS_A_LAB`.
+- Requires the single explicit `-LabConfirmed` switch; no environment variable is needed.
 - Refuses systems with domain-controller roles or an `NTDS` service.
 - Refuses an existing non-scenario `%APPDATA%\php` directory or pre-existing canary Run value.
 - Copies no PHP runtime and contains no executable PHP, live malware, shellcode, downloader, or attacker command.
@@ -33,7 +33,6 @@ The report describes an Interlock RAT campaign, not a completed ransomware incid
 From an elevated Windows PowerShell 5.1 or later console on a disposable lab VM:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\InterlockSim-Complete.ps1 -LabConfirmed
 ```
 

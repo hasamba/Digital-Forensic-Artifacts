@@ -35,7 +35,6 @@ Reported malicious hashes are retained as metadata. The signed decoys intentiona
 From an elevated Windows PowerShell 5.1 or later console on a disposable investigation VM:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\LynxSim-Complete.ps1 -LabConfirmed
 ```
 

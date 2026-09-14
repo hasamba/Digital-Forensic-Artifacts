@@ -7,7 +7,6 @@ The generated two-hour chronology preserves the FeedProxy/Word macro Hancitor ch
 All scripts and DLLs are inert text; executable names are signed `cmd.exe` copies with fixed benign arguments. Published hashes remain metadata and network attempts are loopback-only. No macro/download, malware, injection, scan or AD query, share access, remote transfer/service, shellcode/compiler, Zerologon, machine-password reset, NTLM/credential access, DC action, ICMP sweep, or impact occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\ZeroDASim-Complete.ps1 -LabConfirmed
 ```
 

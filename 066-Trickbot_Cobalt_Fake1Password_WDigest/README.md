@@ -9,7 +9,6 @@ The report does not state a complete incident duration, so the six-hour exercise
 No malware is included. Executable names are signed `cmd.exe` decoys run with fixed benign arguments; published hashes remain metadata and deliberately do not match those decoys. No macro, injection, task, registry change, LSASS access, credential collection, AD/WMI query, remote execution, named pipe, shellcode, external IOC connection, exfiltration, or impact occurs. Network attempts are loopback-only with proxy disabled and zero bytes transferred. DC-related evidence exists only beneath generated canary paths, while real domain-controller execution is refused.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\TrickPassSim-Complete.ps1 -LabConfirmed
 ```
 

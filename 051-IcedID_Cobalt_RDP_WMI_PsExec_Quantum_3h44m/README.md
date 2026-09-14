@@ -7,7 +7,6 @@ The 224-minute timeline preserves `docs_invoice_173.iso`, `document.lnk`, `dar.d
 The final phase creates generated host folders, untouched source canaries, inert `ttsel.exe`/`mstdc.exe` names, ransom-note canaries, and extension markers. It never encrypts or modifies the generated source files. The mandatory gate refuses domain controllers; no malware, credential access, remote authentication/action, share copy, ransomware execution, shadow/log/security change, IOC contact, or exfiltration occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\QuantumFastSim-Complete.ps1 -LabConfirmed
 ```
 

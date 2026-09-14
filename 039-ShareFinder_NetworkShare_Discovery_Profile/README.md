@@ -7,7 +7,6 @@ This source is a technique and detection profile rather than one intrusion, so t
 The mandatory gate refuses domain controllers. The exercise does not contain or run PowerView/ShareFinder code, query LDAP, send ICMP, connect to remote SMB, enumerate or access shares, touch `SYSVOL`, or write real Windows event logs. Documentation-range addresses and generated hostnames appear only in evidence files; all socket markers terminate at `127.0.0.1` with zero bytes transferred.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\ShareFinderSim-Complete.ps1 -LabConfirmed
 ```
 

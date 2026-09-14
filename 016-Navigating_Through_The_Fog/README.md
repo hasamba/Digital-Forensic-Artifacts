@@ -32,7 +32,6 @@ This report analyzes a threat-actor open directory discovered at `194.48.154.79:
 From an elevated Windows PowerShell 5.1 or later session on a disposable VM:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\FogToolkitSim-Complete.ps1 -LabConfirmed
 ```
 

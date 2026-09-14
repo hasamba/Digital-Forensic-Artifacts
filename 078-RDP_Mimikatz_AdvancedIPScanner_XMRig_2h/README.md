@@ -5,7 +5,6 @@ Lab-safe companion to The DFIR Report's [All That for a Coinminer?](https://thed
 Run from an elevated PowerShell prompt on a disposable Windows member workstation or member server—not a domain controller:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\RdpMinerSim-Complete.ps1 -LabConfirmed
 ```
 

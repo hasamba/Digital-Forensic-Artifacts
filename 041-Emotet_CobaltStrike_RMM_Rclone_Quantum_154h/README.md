@@ -7,7 +7,6 @@ The scripts preserve the 154-hour/eight-day sequence: malspam `K-1 06.13.2022.ln
 The mandatory gate refuses domain controllers. No live payload, email, registry/service change, exploit, injection, LSASS/credential access, directory/share query, remote action, RMM install, real collection/exfiltration, security impairment, or encryption occurs. All socket markers are loopback-only with zero bytes; generated originals remain intact beside `.Quantum.marker` files. The report's 60-character `rclone.exe` SHA-256 and its narrative/atomic `96.125.171.16` versus `.165` discrepancy are preserved explicitly.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\EmotetQuantumSim-Complete.ps1 -LabConfirmed
 ```
 

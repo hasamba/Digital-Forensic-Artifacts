@@ -7,7 +7,6 @@ The scripts retain the report's just-over-12-hour sequence: HTML-smuggled passwo
 The lab gate and domain-controller refusal are mandatory. No HTML payload downloads, ISO mounts, malware/task/injection/LSASS access, directory or session credential query, RDP, scan, WMIC/PsExec/service, shadow deletion, or encryption occurs. All network markers use loopback; impact markers sit beside intact generated originals.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\SmuggleNokoSim-Complete.ps1 -LabConfirmed
 ```
 

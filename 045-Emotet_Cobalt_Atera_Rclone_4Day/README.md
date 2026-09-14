@@ -7,7 +7,6 @@ The four-day scenario preserves the `info_1805.xls` Excel 4.0 lure, macro downlo
 The mandatory lab gate refuses domain controllers. Payload and installer names are inert canaries; executable decoys are copies of signed `cmd.exe`. No macro, malware, registry write, injection, credential or ticket access, directory/share query, remote action, SMTP transmission, RMM installation, real collection, cloud access, or impact occurs. Every network marker targets `127.0.0.1`, disables proxy use by design, and records zero bytes transferred.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\EmotetRcloneSim-Complete.ps1 -LabConfirmed
 ```
 

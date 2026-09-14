@@ -17,7 +17,7 @@ The report does not disclose MayaBot's full host behavior in Part 1. This scenar
 
 ## Safety controls
 
-- Requires both the `-LabConfirmed` switch and the exact process environment variable `DFIR_LAB_CONFIRMATION=I_UNDERSTAND_THIS_IS_A_LAB`.
+- Requires the single explicit `-LabConfirmed` switch; no environment variable is needed.
 - Refuses Windows systems with `Win32_ComputerSystem.DomainRole` 4 or 5, or an `NTDS` service.
 - Downloads nothing and contains no malware.
 - Never resolves or connects to a report IOC: hostname-bearing requests are pinned to `127.0.0.1`, use proxy bypass, and time out in two seconds.
@@ -29,7 +29,6 @@ The report does not disclose MayaBot's full host behavior in Part 1. This scenar
 From Windows PowerShell 5.1 or later:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\BengalSEOSim-Complete.ps1 -LabConfirmed
 ```
 

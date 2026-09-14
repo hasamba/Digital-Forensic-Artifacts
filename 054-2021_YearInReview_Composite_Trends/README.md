@@ -7,7 +7,6 @@ This source aggregates 20 public incidents rather than documenting one intrusion
 All executable names are signed `cmd.exe` copies whose executed arguments are fixed benign text; reported command lines remain telemetry metadata. Network attempts terminate on `127.0.0.1` with no proxy and zero bytes transferred. No phishing, exploit, malware, persistence, credential access, directory/share query, scan, remote action, data collection, exfiltration, mining, or encryption occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\Year2021Sim-Complete.ps1 -LabConfirmed
 ```
 

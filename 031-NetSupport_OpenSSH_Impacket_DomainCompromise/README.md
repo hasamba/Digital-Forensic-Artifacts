@@ -7,7 +7,6 @@ The scripts preserve the eight-day sequence: JavaScript/PowerShell NetSupport de
 The explicit lab gate and domain-controller refusal are mandatory. No RMM or malware runs, no registry/task/service/account/firewall/Defender changes occur, no SSH tunnel opens, no remote host or SYSVOL is queried, no WMI/RDP/SMB movement occurs, no NTDS/LSASS/real event/document is read, and nothing is exfiltrated. All commands are escaped echo telemetry; all connections are literal loopback with zero bytes.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\NetSupportDomainSim-Complete.ps1 -LabConfirmed
 ```
 

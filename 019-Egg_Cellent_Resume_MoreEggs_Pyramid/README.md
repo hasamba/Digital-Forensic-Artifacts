@@ -29,7 +29,6 @@ Lab-safe PowerShell adversary emulation based on The DFIR Report's [The Curious 
 From elevated Windows PowerShell 5.1 or later on a disposable VM:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\EggResumeSim-Complete.ps1 -LabConfirmed
 ```
 

@@ -41,8 +41,8 @@ function Get-AkiraFlashTimeline {
 function Assert-AkiraFlashLabSafety {
     param([switch]$LabConfirmed)
     if ($env:OS -ne 'Windows_NT') { throw 'AkiraFlashSim only runs on Windows.' }
-    if (-not $LabConfirmed -or $env:DFIR_LAB_CONFIRMATION -ne 'I_UNDERSTAND_THIS_IS_A_LAB') {
-        throw 'Lab gate refused execution. Set DFIR_LAB_CONFIRMATION=I_UNDERSTAND_THIS_IS_A_LAB and pass -LabConfirmed.'
+    if (-not $LabConfirmed) {
+        throw 'Lab gate refused execution. Pass -LabConfirmed to confirm this is a dedicated lab.'
     }
     $computerSystem = Get-CimInstance -ClassName Win32_ComputerSystem -ErrorAction Stop
     if ([int]$computerSystem.DomainRole -in 4, 5) { throw 'Domain-controller refusal: this scenario must not run on a domain controller.' }

@@ -7,7 +7,6 @@ The scenario preserves the nine-day chronology and investigation pivots: `Apply 
 The mandatory gate refuses domain controllers. No live payload is retrieved or run; no task, keyboard hook, registry value, screenshot, discovery query, real archive, cleanup command, or exfiltration occurs. Executable telemetry uses signed `cmd.exe` copies with safely echoed reported command lines. All network markers connect only to `127.0.0.1`, disable proxy semantics, and transfer zero bytes. Published hashes are metadata; the report's 57-character `Script.ps1` SHA-256 value is preserved and explicitly marked malformed.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\OilKeySim-Complete.ps1 -LabConfirmed
 ```
 

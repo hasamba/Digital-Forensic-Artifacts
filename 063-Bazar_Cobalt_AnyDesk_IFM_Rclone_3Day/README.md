@@ -7,7 +7,6 @@ The generated three-day chronology preserves the assessed macro-document vector,
 All tools and scripts are inert text or signed `cmd.exe` decoys with fixed benign arguments. Network attempts are loopback-only. Generated IFM, pwdump, user, and staged document artifacts contain no real credentials or data. No malware, injection, LSASS/NTDS access, account change, RDP/remote action, AnyDesk, scan/query, real collection, cloud access, exfiltration, ransomware, or encryption occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\LeakBazarSim-Complete.ps1 -LabConfirmed
 ```
 

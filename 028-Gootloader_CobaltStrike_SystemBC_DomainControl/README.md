@@ -16,7 +16,6 @@ It follows the SEO-poisoned “Implied Employment Agreement” lure, Gootloader 
 The explicit lab gate and domain-controller refusal are mandatory. The scenario never registers a task or run key, writes the registry, loads malware, injects a process, accesses LSASS or credentials, changes Defender/firewall/RDP settings, creates a service, queries AD or shares, moves remotely, scans a network, tunnels SOCKS/RDP, or exfiltrates data. Reported commands are escaped echo-only strings run by signed `cmd.exe` copies; all socket attempts use `127.0.0.1` and transfer zero bytes.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\GootSagaSim-Complete.ps1 -LabConfirmed
 ```
 

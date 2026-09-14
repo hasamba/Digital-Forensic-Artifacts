@@ -7,7 +7,6 @@ The generated 42-hour chronology preserves the OneDrive ZIP/ISO/LNK Bazar chain,
 The gate refuses domain controllers. Executable names are signed `cmd.exe` copies with fixed benign arguments; reported commands are metadata. No download, mount, malware, persistence/RMM, credential access, scan, remote action, collection, exfiltration, shadow-copy deletion, boot/service change, ransomware execution, or encryption occurs. The report does not publish a Diavol executable hash; metadata states that explicitly.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\DiavolSim-Complete.ps1 -LabConfirmed
 ```
 

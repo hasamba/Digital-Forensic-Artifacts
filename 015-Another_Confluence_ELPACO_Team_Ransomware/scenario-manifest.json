@@ -17,7 +17,6 @@
     { "order": 4, "script": "ElpacoSim-Phase4-ElpacoImpact.ps1", "name": "ELPACO/Mimic ransomware impact" }
   ],
   "safety": {
-    "confirmationEnvironmentVariable": "DFIR_LAB_CONFIRMATION=I_UNDERSTAND_THIS_IS_A_LAB",
     "confirmationSwitch": "-LabConfirmed",
     "refusesDomainControllers": true,
     "networkScope": "127.0.0.1 only",

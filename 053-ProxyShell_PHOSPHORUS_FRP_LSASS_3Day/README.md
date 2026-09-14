@@ -7,7 +7,6 @@ The generated 72-hour chronology preserves two nearly identical automated bursts
 All dangerous actions are representations. Web shells are inert text, executable names are signed `cmd.exe` copies, reported command lines are manifest metadata while executed arguments are fixed benign text, and every network attempt is forced to `127.0.0.1` with no proxy and zero transferred bytes. No Exchange cmdlet, mailbox operation, task, account, group, password, firewall, service, registry, Defender, credential, LSASS, archive, exfiltration, or ransomware action occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\PhosphorusSim-Complete.ps1 -LabConfirmed
 ```
 

@@ -7,7 +7,6 @@ The generated 24-hour chronology preserves phishing-origin IcedID, `ikaqkk.dll`,
 Scripts and DLLs are inert text; executable names are signed `cmd.exe` copies with fixed benign arguments. Published hashes are metadata and all network attempts are loopback-only. No malware, scheduled task/service, injection, LSASS access, remote action, security/backup impairment, AD/share query, scanning, collection/exfiltration, ransomware, or encryption occurs. The report observed no overt exfiltration, which is retained as a negative finding.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\XingSim-Complete.ps1 -LabConfirmed
 ```
 

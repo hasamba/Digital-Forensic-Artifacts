@@ -32,7 +32,6 @@ The runtime `sixty-two-hour-timeline.jsonl` and backdated files preserve the rep
 Use an elevated Windows PowerShell 5.1 or later session on a disposable lab VM:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\ElpacoSim-Complete.ps1 -LabConfirmed
 ```
 

@@ -37,7 +37,6 @@ The runtime `six-day-timeline.jsonl` and backdated files preserve these clusters
 Use an elevated Windows PowerShell 5.1 or later session on a disposable lab VM:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\RansomHubSim-Complete.ps1 -LabConfirmed
 ```
 

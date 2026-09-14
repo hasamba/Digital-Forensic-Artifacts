@@ -7,7 +7,6 @@ The scripts retain the 19-hour sequence: DMCA contact-form lure, Google-hosted Z
 The mandatory gate refuses domain controllers. No live payload, ISO mount, injection, UAC bypass, getsystem, process/hive/credential access, ZeroLogon traffic, password/account change, pass-the-hash, directory/share query, SMB copy, remote service, authentication impairment, or deletion occurs. Executable telemetry uses signed `cmd.exe` stand-ins and network markers remain loopback-only. The report's Meterpreter port discrepancy—80/443 in narrative versus 80/44 in atomic indicators—is preserved explicitly.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\BeeMeterSim-Complete.ps1 -LabConfirmed
 ```
 

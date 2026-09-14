@@ -5,7 +5,6 @@ Lab-safe companion to The DFIR Report's [Hancitor Continues to Push Cobalt Strik
 Executable names are signed `cmd.exe` decoys with fixed benign arguments. No malware, macro, injection, scan, share, credential, service, remote execution, self-deletion, external C2, or impact occurs. Network attempts use loopback only and transfer zero bytes. Generated DC evidence is canary-only and real DC execution is refused.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\Hancitor20Sim-Complete.ps1 -LabConfirmed
 ```
 

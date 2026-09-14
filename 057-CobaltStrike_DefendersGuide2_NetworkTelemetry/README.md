@@ -7,7 +7,6 @@ This is a defensive synthetic telemetry lab, not a reconstruction of one intrusi
 No Cobalt Strike payload or team server is created. No CDN, SOCKS listener, RDP session, DNS query, SMB connection, named pipe, remote scan, JARM probe, real PCAP, IOC contact, or data transfer occurs. The only socket attempts terminate on `127.0.0.1`, with proxy use disabled and zero bytes transferred.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\CSNetGuideSim-Complete.ps1 -LabConfirmed
 ```
 

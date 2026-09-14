@@ -7,7 +7,6 @@ The generated 42-hour chronology preserves three ProxyShell web shells across th
 Web shells are inert text and executable names are signed `cmd.exe` copies with fixed benign arguments. Reported commands and normalized hashes are investigation metadata. Network attempts are loopback-only with proxy use disabled. No Exchange/mailbox action, account/group change, task/service, remote action, scan, RDP/WMI, LSASS access, security/log impairment, configuration/boot/reboot change, driver, BitLocker, DiskCryptor, deletion, or encryption occurs. Generated originals remain intact beside impact markers.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\ProxyEncryptSim-Complete.ps1 -LabConfirmed
 ```
 

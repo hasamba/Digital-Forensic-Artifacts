@@ -7,7 +7,6 @@ The scripts retain the roughly 148-hour sequence: an Italian-targeted Excel/VBA 
 The lab gate and domain-controller refusal are mandatory. No macro, download, malware, task, injection, credential access, directory/share/scan operation, remote session, WMI/PsExec action, real collection, exfiltration, shadow deletion, or encryption occurs. Reported network traffic is represented only by loopback attempts; generated originals remain intact beside marker files.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\MacroNokoSim-Complete.ps1 -LabConfirmed
 ```
 

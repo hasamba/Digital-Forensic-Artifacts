@@ -7,7 +7,6 @@ This source is a detection companion assembled from multiple investigations, not
 The mandatory gate refuses domain controllers. Every executable decoy is a signed `cmd.exe` copy, every socket marker is loopback-only with zero bytes, and all privileged, credential, directory, remote, collection, security-control, deletion, shadow-copy, encryption, and impact behaviors are negative records.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\SummitDetectSim-Complete.ps1 -LabConfirmed
 ```
 

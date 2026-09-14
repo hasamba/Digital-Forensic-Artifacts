@@ -7,7 +7,6 @@ The scenario preserves the 61-hour multi-RMM chronology, Cobalt and Metasploit c
 The explicit lab gate and domain-controller refusal are mandatory. No RMM or malware installs, process injection, LSASS access, remote movement, scan, exfiltration, password change, encryption, recovery impairment, GPO, SYSVOL, or NETLOGON change occurs. All connections use loopback; impact markers sit beside intact generated originals.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\Hive61Sim-Complete.ps1 -LabConfirmed
 ```
 

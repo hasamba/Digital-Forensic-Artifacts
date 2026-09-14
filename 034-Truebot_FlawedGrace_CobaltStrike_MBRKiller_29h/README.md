@@ -7,7 +7,6 @@ The scripts retain the observed 29-hour sequence: a 404 TDS link and fake Adobe 
 The lab gate and domain-controller refusal are mandatory. No payload is downloaded; no reported IOC is contacted; no account, group, task, registry, service, Defender setting, process memory, registry hive, LSASS memory, remote host, share, or physical drive is changed or accessed. Exfiltration and C2 attempts terminate on loopback. Wiper evidence uses identical generated 512-byte sector files and never requests a reboot.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\GraceWipeSim-Complete.ps1 -LabConfirmed
 ```
 

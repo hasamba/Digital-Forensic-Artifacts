@@ -20,7 +20,6 @@ The scenario requires explicit lab confirmation and refuses domain controllers. 
 ## Run and cleanup
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\ToolkitSim-Complete.ps1 -LabConfirmed
 ```
 

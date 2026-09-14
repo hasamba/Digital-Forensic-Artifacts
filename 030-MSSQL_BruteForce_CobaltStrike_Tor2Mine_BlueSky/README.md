@@ -7,7 +7,6 @@ The scenario retains the report's 32-minute sequence: 10,000 MSSQL `sa` authenti
 It requires explicit lab confirmation and refuses domain controllers. It never authenticates to SQL, enables `xp_cmdshell`, downloads malware, injects winlogon, accesses LSASS, changes AV, loads a driver, creates tasks/services, scans or moves remotely, mines cryptocurrency, encrypts files, or accesses real user data. BlueSky creates `.bluesky` marker files beside intact generated originals and connects only to loopback.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\BlueSkySQLSim-Complete.ps1 -LabConfirmed
 ```
 

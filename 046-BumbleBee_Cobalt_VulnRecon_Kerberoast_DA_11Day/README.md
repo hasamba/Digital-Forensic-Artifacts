@@ -7,7 +7,6 @@ The generated 11-day timeline preserves the password-protected ZIP/ISO and `docu
 The mandatory gate refuses domain controllers. No ISO is mounted; no malware is retrieved or executed; no injection, credential access, Kerberos request or password cracking, remote login/service/share operation, RMM install, tool deletion, or impact occurs. Executable decoys are signed `cmd.exe` copies, and all socket markers target loopback with zero bytes transferred.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\BumbleRoastSim-Complete.ps1 -LabConfirmed
 ```
 

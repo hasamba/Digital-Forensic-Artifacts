@@ -7,7 +7,6 @@ The generated 32-hour chronology preserves the assessed zipped-JavaScript email 
 All tools are inert text or signed `cmd.exe` decoys with fixed benign arguments. Network attempts are loopback-only and generated staged files contain no sensitive data. No malware, authentication/PTH, injection, LSASS access, remote action, query, WinSCP installation, real collection/exfiltration, TOR access, ransomware, C$ mount, propagation, or encryption occurs. Generated originals remain intact beside markers and sanitized notes.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\WinContiSim-Complete.ps1 -LabConfirmed
 ```
 

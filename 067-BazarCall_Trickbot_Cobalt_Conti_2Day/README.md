@@ -7,7 +7,6 @@ The scenario preserves the report's two-day chronology: an XLSB lure; renamed Ce
 No malware or shellcode is included. Executable names are signed `cmd.exe` decoys with fixed benign arguments, and published hashes deliberately remain metadata. No macro, injection, security-control change, credential/LSASS/NTDS access, AD/WMI query, named-pipe/token action, authentication, remote copy/execution, real share, external C2, real exfiltration, or user-data encryption occurs. DC evidence lives only in a generated host tree; execution on a real domain controller is refused. Network attempts are loopback-only, proxy-free, and transfer zero bytes.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\BazarContiSim-Complete.ps1 -LabConfirmed
 ```
 

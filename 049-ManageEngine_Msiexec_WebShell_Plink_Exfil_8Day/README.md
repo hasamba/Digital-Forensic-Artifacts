@@ -7,7 +7,6 @@ The eight-day timeline preserves the two CVE-2021-44077 requests from different 
 The mandatory gate refuses domain controllers. No exploit request, web shell, SYSTEM execution, WDigest/registry change, credential access, download, SSH/RDP tunnel, remote session, real file/certificate/database access, deletion, or exfiltration occurs. Executable decoys are signed `cmd.exe` copies and every socket marker targets loopback with zero bytes transferred. The plaintext Plink password published by the source is intentionally redacted from scenario execution evidence.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\MsiPlinkSim-Complete.ps1 -LabConfirmed
 ```
 

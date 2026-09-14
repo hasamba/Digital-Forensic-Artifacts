@@ -7,7 +7,6 @@ The 19-day timeline preserves the cloud ZIP/ISO/LNK IcedID lure, hourly task, di
 The impact phase creates six generated host trees with untouched source canaries, inert payload/service names, extension markers, and ransom-note canaries. It does not modify or encrypt the sources. The mandatory gate refuses domain controllers; no malware, RMM install, LSASS access, AD exploit, remote service/share action, SMB propagation, ransomware execution, IOC contact, or exfiltration occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\Conti19Sim-Complete.ps1 -LabConfirmed
 ```
 

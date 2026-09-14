@@ -20,7 +20,6 @@ Explicit lab confirmation is required and domain controllers are refused. The sc
 ## Run and cleanup
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\BlackSuitSim-Complete.ps1 -LabConfirmed
 ```
 

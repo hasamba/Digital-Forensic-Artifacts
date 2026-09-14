@@ -7,7 +7,6 @@ This source is a defender guide, not one incident, so the three-hour axis is exp
 No Cobalt Strike or exploit code is included. Tools and aggressor files are inert text; executable names are signed `cmd.exe` decoys with fixed benign arguments. Pipe and event artifacts are ordinary files/JSON, not real named pipes or event-log writes. All network attempts are loopback-only. No injection, credential access, service/registry/token/authentication action, remote movement, Zerologon, or external C2 occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\CSGuide1Sim-Complete.ps1 -LabConfirmed
 ```
 

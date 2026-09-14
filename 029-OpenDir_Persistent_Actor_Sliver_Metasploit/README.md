@@ -7,7 +7,6 @@ Unlike a single intrusion, the source profiles more than a year of activity reco
 The scenario requires the explicit lab gate and refuses domain controllers. It never scans or exploits real targets, runs public exploits or malware, creates a web shell/service/task/cron job, changes Defender/UFW, reads SAM/NTDS/credentials/private keys, performs DCSync, forges tickets, propagates over SSH, mines cryptocurrency, proxies traffic, or exfiltrates data. All reported commands are escaped echo-only telemetry using a signed `cmd.exe` copy; network markers are literal loopback with zero bytes transferred.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\OpenDirActorSim-Complete.ps1 -LabConfirmed
 ```
 

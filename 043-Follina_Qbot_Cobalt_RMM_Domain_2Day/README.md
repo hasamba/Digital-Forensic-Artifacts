@@ -7,7 +7,6 @@ The two-day sequence preserves the weaponized Word/HTML relationship, `ms-msdt`/
 The mandatory gate refuses domain controllers. No exploit, live payload, task/registry/Defender modification, injection, credential/browser/LSASS access, directory/share query, remote action, RMM install, scan packet, real document access, or exfiltration occurs. All socket markers are loopback-only and artifacts remain for investigation.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\FollinaQbotSim-Complete.ps1 -LabConfirmed
 ```
 

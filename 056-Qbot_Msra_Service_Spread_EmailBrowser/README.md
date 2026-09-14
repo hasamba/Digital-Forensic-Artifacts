@@ -7,7 +7,6 @@ The generated timeline preserves the assessed XLS 4.0 macro delivery, HTML-disgu
 Executable names are signed `cmd.exe` copies with fixed benign executed arguments; reported commands are metadata. Collection and deletion are retained as canaries so evidence remains until separate cleanup. Network attempts terminate on `127.0.0.1` with no proxy and zero bytes transferred. No macro, malware, system change, credential/user-data access, deletion, remote service/copy, server access, IOC contact, or exfiltration occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\QbotMoveSim-Complete.ps1 -LabConfirmed
 ```
 

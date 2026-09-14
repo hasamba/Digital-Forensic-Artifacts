@@ -5,7 +5,6 @@ Lab-safe companion to The DFIR Report's [WebLogic RCE Leads to XMRig](https://th
 No exploit request is sent. Executables are signed `cmd.exe` decoys with fixed benign arguments. No malware, download, task, registry/firewall change, process kill, driver, mining, pool/C2 traffic, or resource hijacking occurs. Network attempts are loopback-only with zero bytes; real DC execution is refused.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\WebXMRSim-Complete.ps1 -LabConfirmed
 ```
 

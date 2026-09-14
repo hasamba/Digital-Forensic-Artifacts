@@ -7,7 +7,6 @@ The scenario retains the roughly five-day sequence: `3488164.iso`, `6570872.lnk`
 The gate refuses domain controllers. No ISO is mounted; no live payload, registry change, compilation, injection, LSASS/credential access, BITS transfer, directory query, remote WMI/SMB/RDP action, RMM install, backup-console interaction, real collection, or exfiltration occurs. Executables are signed `cmd.exe` stand-ins, remote/network actions are loopback-only with zero bytes, and all published IOCs are metadata. The report's 51-character `vnc64.rar` SHA-256 value is preserved and marked malformed.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\UrsnifGiftSim-Complete.ps1 -LabConfirmed
 ```
 

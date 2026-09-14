@@ -7,7 +7,6 @@ The generated chronology preserves the initial Qbot DLL, first activity five min
 The mandatory gate refuses domain controllers. All executable names are signed `cmd.exe` copies with fixed benign executed arguments; reported commands are metadata. DCs, file servers, services, RDP sessions, registry keys, tasks, named pipes, and documents are generated canaries. Network attempts terminate on `127.0.0.1` with no proxy and zero bytes transferred. No exploit, password/hash/credential/Kerberos access, remote action, collection, or exfiltration occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\ZeroQbotSim-Complete.ps1 -LabConfirmed
 ```
 

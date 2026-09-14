@@ -5,7 +5,6 @@ Lab-safe companion to The DFIR Report's [From Word to Lateral Movement in 1 Hour
 Executables are signed `cmd.exe` decoys with fixed benign arguments. No malware, macro, task, injection, credential/LSASS access, AD query, token/authentication, SMB/service/RDP action, named pipe, external C2, exfiltration, impact, or actor cleanup occurs. Network attempts are loopback-only with zero bytes. Generated DC paths are canary-only and real DCs are refused.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\IcedMoveSim-Complete.ps1 -LabConfirmed
 ```
 

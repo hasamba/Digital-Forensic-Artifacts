@@ -5,7 +5,6 @@ Lab-safe companion to The DFIR Report's [Conti Ransomware](https://thedfirreport
 Executables are signed `cmd.exe` decoys with fixed benign arguments. No malware, injection, credential/LSASS access, account/GPO/SYSVOL/service/registry/firewall action, authentication, scan, SMB/PsExec/RDP/proxy, external C2, user-data encryption, or host impairment occurs. DC paths and impact files are generated canaries only; real DCs are refused.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\IcedContiSim-Complete.ps1 -LabConfirmed
 ```
 

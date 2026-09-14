@@ -7,7 +7,6 @@ Lab-safe companion to The DFIR Report's [Bazar Drops the Anchor](https://thedfir
 From an elevated PowerShell prompt on a disposable Windows member workstation or member server—not a domain controller:
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\BazarAnchorSim-Complete.ps1 -LabConfirmed
 ```
 

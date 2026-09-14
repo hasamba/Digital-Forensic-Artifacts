@@ -7,7 +7,6 @@ The two-day timeline preserves the Bing SEO query, ZIP/JavaScript Gootloader lur
 The mandatory gate refuses domain controllers. No search/download, JavaScript or malware execution, registry/task change, assembly load, injection, credential/directory access, Defender change, remote action, Restricted Admin setting, real share/document access, network scan, IOC contact, or impact occurs. Executable decoys are signed `cmd.exe` copies and all socket markers target loopback with zero bytes transferred.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\GootRdpSim-Complete.ps1 -LabConfirmed
 ```
 

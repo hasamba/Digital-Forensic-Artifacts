@@ -21,7 +21,6 @@ The scripts require explicit lab confirmation and refuse domain controllers. The
 ## Run and cleanup
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\NitrogenSim-Complete.ps1 -LabConfirmed
 ```
 

@@ -7,7 +7,6 @@ The scenario preserves the 24,000 SQL `sa` failures over 27 hours, synthetic SQL
 The mandatory lab gate refuses domain controllers. No SQL connection or password attempt, xp_cmdshell, process termination, account/registry/security change, privilege escalation, WMI subscription, scheduled task, archive extraction, driver/miner execution, deletion, or IOC contact occurs. Executable decoys are signed `cmd.exe` copies; sockets are loopback-only with zero bytes transferred.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\SqlMinerSim-Complete.ps1 -LabConfirmed
 ```
 

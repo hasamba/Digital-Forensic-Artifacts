@@ -7,7 +7,6 @@ The scripts retain the just-over-78-hour sequence: malspam ZIP/ISO and `document
 The mandatory gate refuses domain controllers. No ISO is mounted; no live payload or IOC is contacted; no task, exploit, credential/DCSync/LSASS action, Defender/GPO/SYSVOL change, remote execution, account reset, real collection, exfiltration, or encryption occurs. All originals remain intact beside `.Quantum.marker` files; network attempts use loopback only.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\ISOQuantumSim-Complete.ps1 -LabConfirmed
 ```
 

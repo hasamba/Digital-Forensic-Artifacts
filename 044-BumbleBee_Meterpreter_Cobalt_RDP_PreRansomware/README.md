@@ -7,7 +7,6 @@ The scenario preserves `document.iso`, `documents.lnk`, `tamirlan.dll`, rundll32
 The mandatory gate refuses domain controllers. No ISO is mounted; no live payload, injection, credential access, account/service change, remote action, real archive/collection/exfiltration, backup/mail access, or impact occurs. All socket markers are loopback-only with zero bytes transferred.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\BeeRound2Sim-Complete.ps1 -LabConfirmed
 ```
 

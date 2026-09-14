@@ -5,7 +5,7 @@ $ErrorActionPreference = 'Stop'
 function Assert-DFIRLabSafety {
     param([switch]$LabConfirmed)
     if ($env:OS -ne 'Windows_NT') { throw 'Windows only' }
-    if (-not $LabConfirmed -or $env:DFIR_LAB_CONFIRMATION -ne 'I_UNDERSTAND_THIS_IS_A_LAB') { throw 'Lab gate refused' }
+    if (-not $LabConfirmed) { throw 'Lab gate refused. Pass -LabConfirmed to confirm this is a dedicated lab.' }
     $system = Get-CimInstance Win32_ComputerSystem -ErrorAction Stop
     if ([int]$system.DomainRole -in 4,5 -or (Get-Service NTDS -ErrorAction SilentlyContinue)) { throw 'Domain-controller refusal' }
 }

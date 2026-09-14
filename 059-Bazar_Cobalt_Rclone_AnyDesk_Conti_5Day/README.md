@@ -7,7 +7,6 @@ The generated five-day chronology preserves the password ZIP/Word macro/HTA Baza
 No domain-controller lane exists because the report observed no DC interaction. Executable names are signed `cmd.exe` copies with fixed benign arguments; reported commands are metadata. No malware, remote action, credential access, collection, exfiltration, admin-share mount, ransomware execution, or encryption occurs.
 
 ```powershell
-$env:DFIR_LAB_CONFIRMATION = 'I_UNDERSTAND_THIS_IS_A_LAB'
 .\ContiBazarSim-Complete.ps1 -LabConfirmed
 ```
 
