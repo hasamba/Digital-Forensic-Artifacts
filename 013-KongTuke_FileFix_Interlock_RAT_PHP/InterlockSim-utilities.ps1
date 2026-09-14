@@ -80,7 +80,14 @@ function Initialize-InterlockEnvironment {
     $phpWasOwned = if (Test-Path -LiteralPath $paths.PhpOwner) {
         (Get-Content -LiteralPath $paths.PhpOwner -Raw).Trim() -eq $script:InterlockScenarioId
     } else { $false }
-    $existingRun = Get-ItemPropertyValue -LiteralPath $paths.RunKey -Name $script:InterlockRunValue -ErrorAction SilentlyContinue
+    $existingRun = $null
+    if (Test-Path -LiteralPath $paths.RunKey) {
+        $runProperties = Get-ItemProperty -LiteralPath $paths.RunKey -ErrorAction Stop
+        $runProperty = $runProperties.PSObject.Properties[$script:InterlockRunValue]
+        if ($null -ne $runProperty) {
+            $existingRun = $runProperty.Value
+        }
+    }
     if ($null -ne $existingRun) {
         $expectedRun = Get-InterlockExpectedRunCommand
         if (-not $phpWasOwned -or $existingRun -ne $expectedRun) {
@@ -157,8 +164,8 @@ function New-InterlockBinaryDecoy {
 
 function Invoke-InterlockDecoyProcess {
     param([Parameter(Mandatory)][string]$FilePath, [Parameter(Mandatory)][string]$ReportedCommandLine)
-    $safeEcho = $ReportedCommandLine.Replace('^', '^^').Replace('&', '^&').Replace('|', '^|').Replace('<', '^<').Replace('>', '^>').Replace('(', '^(').Replace(')', '^)')
-    $arguments = @('/d', '/v:off', '/c', 'echo', 'INTERLOCK-CANARY', $safeEcho)
+    # Keep attacker-shaped commands as evidence, never as actual process arguments.
+    $arguments = @('/d', '/v:off', '/c', 'echo', 'INTERLOCK-CANARY')
     $paths = Get-InterlockPaths
     $script:InterlockLaunchCounter++
     $shortcutPath = Join-Path $paths.Evidence ('launch-{0:d3}-{1}.lnk' -f $script:InterlockLaunchCounter, ([IO.Path]::GetFileName($FilePath)))
@@ -179,7 +186,7 @@ function Invoke-InterlockDecoyProcess {
         $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
         $null = $process.ExitCode
     }
-    Add-InterlockManifestEntry -Type 'process' -Path $FilePath -Action 'executed-signed-decoy' -Details @{ reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); cmdMetacharactersEscaped = $true; launchMethod = $launchMethod }
+    Add-InterlockManifestEntry -Type 'process' -Path $FilePath -Action 'executed-signed-decoy' -Details @{ reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); reportedCommandLineIsMetadataOnly = $true; launchMethod = $launchMethod }
 }
 
 function Invoke-InterlockLoopbackEndpoint {

@@ -23,7 +23,7 @@ The report describes an Interlock RAT campaign, not a completed ransomware incid
 - Refuses systems with domain-controller roles or an `NTDS` service.
 - Refuses an existing non-scenario `%APPDATA%\php` directory or pre-existing canary Run value.
 - Copies no PHP runtime and contains no executable PHP, live malware, shellcode, downloader, or attacker command.
-- Escapes CMD metacharacters before placing report commands into `echo`-only decoy launches.
+- Uses fixed inert `echo INTERLOCK-CANARY` decoy arguments. Report commands remain investigation metadata in the manifest and shortcut descriptions, not actual process command lines; security controls remain enabled.
 - Uses `curl --resolve` for domains and `curl --connect-to` for IPs, always to `127.0.0.1`, with `--noproxy *`, no redirect following, and a two-second maximum.
 - Performs no real AD query, remote authentication, C2, RDP, credential access, scheduled-task operation, security-control impairment, or destructive impact.
 - Leaves all evidence in place. Cleanup is a separate fixed-target action with ownership and value checks.
