@@ -140,6 +140,20 @@ function Invoke-RansomHubDecoyProcess {
     Add-RansomHubManifestEntry -Type 'process' -Path $FilePath -Action 'executed-signed-decoy' -Details @{ reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); cmdMetacharactersEscaped = $true; launchMethod = $launchMethod }
 }
 
+function Remove-RansomHubGeneratedFile {
+    param([Parameter(Mandatory)][string]$Path, [int]$MaxAttempts = 10, [int]$DelayMilliseconds = 500)
+    if (-not (Test-Path -LiteralPath $Path)) { return }
+    for ($attempt = 1; $attempt -le $MaxAttempts; $attempt++) {
+        try {
+            Remove-Item -LiteralPath $Path -Force -ErrorAction Stop
+            return
+        } catch {
+            if ($attempt -eq $MaxAttempts) { throw }
+            Start-Sleep -Milliseconds $DelayMilliseconds
+        }
+    }
+}
+
 function Invoke-RansomHubLoopbackPort {
     param([ValidateRange(1, 65535)][int]$Port, [Parameter(Mandatory)][string]$ReportedTarget)
     $client = New-Object Net.Sockets.TcpClient

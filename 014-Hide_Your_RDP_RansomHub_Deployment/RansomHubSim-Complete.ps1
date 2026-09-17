@@ -16,10 +16,22 @@ $scriptDirectory = Split-Path -Parent $MyInvocation.MyCommand.Path
 Assert-RansomHubLabSafety -LabConfirmed:$LabConfirmed
 $paths = Initialize-RansomHubEnvironment
 
+Write-Host '[Phase 1/4] Initial Access & Discovery - starting...' -ForegroundColor Yellow
 Invoke-RansomHubInitialAccessDiscovery -Paths $paths
+Write-Host '[Phase 1/4] Initial Access & Discovery - complete.' -ForegroundColor Green
+
+Write-Host '[Phase 2/4] Credential Access, Persistence & Lateral Movement - starting...' -ForegroundColor Yellow
 Invoke-RansomHubCredentialPersistenceLateral -Paths $paths
+Write-Host '[Phase 2/4] Credential Access, Persistence & Lateral Movement - complete.' -ForegroundColor Green
+
+Write-Host '[Phase 3/4] Rclone Exfiltration - starting...' -ForegroundColor Yellow
 Invoke-RansomHubRcloneExfiltration -Paths $paths
+Write-Host '[Phase 3/4] Rclone Exfiltration - complete.' -ForegroundColor Green
+
+Write-Host '[Phase 4/4] Impact - starting...' -ForegroundColor Yellow
 Invoke-RansomHubImpact -Paths $paths
+Write-Host '[Phase 4/4] Impact - complete.' -ForegroundColor Green
+
 Write-RansomHubSummary -Paths $paths
 
 Write-Host 'RansomHub RDP simulation complete. Artifacts remain for investigation.' -ForegroundColor Cyan
