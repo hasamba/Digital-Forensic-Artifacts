@@ -62,6 +62,7 @@ function Add-RansomHubManifestEntry {
         action = $Action
         details = $Details
     } | ConvertTo-Json -Depth 8 -Compress | Add-Content -LiteralPath $paths.Manifest -Encoding UTF8
+    Write-Host ("  [{0}] {1}: {2}" -f $Type, $Action, $Path) -ForegroundColor DarkGray
 }
 
 function Initialize-RansomHubEnvironment {
@@ -141,15 +142,22 @@ function Invoke-RansomHubDecoyProcess {
 }
 
 function Remove-RansomHubGeneratedFile {
-    param([Parameter(Mandatory)][string]$Path, [int]$MaxAttempts = 10, [int]$DelayMilliseconds = 500)
+    param([Parameter(Mandatory)][string]$Path, [int]$MaxAttempts = 20, [int]$DelayMilliseconds = 500, [switch]$WarnOnFailure)
     if (-not (Test-Path -LiteralPath $Path)) { return }
     for ($attempt = 1; $attempt -le $MaxAttempts; $attempt++) {
         try {
             Remove-Item -LiteralPath $Path -Force -ErrorAction Stop
+            Write-Host "  [file] deleted: $Path" -ForegroundColor DarkGray
             return
         } catch {
-            if ($attempt -eq $MaxAttempts) { throw }
-            Start-Sleep -Milliseconds $DelayMilliseconds
+            if ($attempt -eq $MaxAttempts) {
+                if ($WarnOnFailure) {
+                    Write-Warning "Could not delete $Path after $MaxAttempts attempts (likely still held by antivirus real-time scanning of the renamed decoy binary). Leaving it for Cleanup-RansomHubSim.ps1 to remove later."
+                    return
+                }
+                throw
+            }
+            Start-Sleep -Milliseconds ([Math]::Min($DelayMilliseconds * $attempt, 2000))
         }
     }
 }
@@ -169,6 +177,7 @@ function Add-RansomHubTimelineEvent {
     $paths = Get-RansomHubPaths
     [ordered]@{ timestampUtc = $Timestamp.ToUniversalTime().ToString('o'); phase = $Phase; event = $Event; details = $Details } |
         ConvertTo-Json -Depth 7 -Compress | Add-Content -LiteralPath $paths.Timeline -Encoding UTF8
+    Write-Host ("  [timeline] {0}: {1}" -f $Phase, $Event) -ForegroundColor Cyan
 }
 
 function Write-RansomHubSummary {

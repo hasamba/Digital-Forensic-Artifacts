@@ -20,7 +20,7 @@ if (Test-Path -LiteralPath $paths.DesktopOwner) {
         foreach ($name in @('setup.msi', 'Advanced_IP_Scanner.exe', 'netscan.exe', 'CredentialsFileView.exe', 'mimikatz.exe', '.RansomHubRdpSim.owner')) {
             $target = Join-Path $paths.DesktopRoot $name
             if (Test-Path -LiteralPath $target) {
-                if ($PSCmdlet.ShouldProcess($target, 'Remove RansomHub scenario-owned Desktop artifact')) { Remove-RansomHubGeneratedFile -Path $target }
+                if ($PSCmdlet.ShouldProcess($target, 'Remove RansomHub scenario-owned Desktop artifact')) { Remove-RansomHubGeneratedFile -Path $target -WarnOnFailure }
             }
         }
         if ((Test-Path -LiteralPath $paths.DesktopRoot) -and -not (Get-ChildItem -LiteralPath $paths.DesktopRoot -Force)) {

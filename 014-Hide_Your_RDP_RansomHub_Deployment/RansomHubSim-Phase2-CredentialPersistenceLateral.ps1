@@ -41,7 +41,7 @@ function Invoke-RansomHubCredentialPersistenceLateral {
     Invoke-RansomHubDecoyProcess -FilePath $advancedScanner -ReportedCommandLine 'Advanced_IP_Scanner.exe second execution /range LAB-SUBNET (actual scope 127.0.0.1 only)'
     Invoke-RansomHubDecoyProcess -FilePath $advancedScanner -ReportedCommandLine 'Advanced_IP_Scanner.exe third execution /range LAB-SUBNET (actual scope 127.0.0.1 only)'
     Add-RansomHubManifestEntry -Type 'file' -Path $advancedScanner -Action 'deleted-generated-canary' -Details @{ reason = 'represent reported post-scan binary deletion'; userFile = $false }
-    Remove-RansomHubGeneratedFile -Path $advancedScanner
+    Remove-RansomHubGeneratedFile -Path $advancedScanner -WarnOnFailure
     Write-RansomHubEvidenceFile -Path (Join-Path $Paths.Evidence 'Advanced_IP_Scanner.exe.tombstone.json') -Content '{"executions":3,"reportedAction":"deleted","actualUserFile":false}' -Purpose 'portable scanner-deletion tombstone' -Timestamp $time.Day2.AddMinutes(10)
     $atera = Join-Path $Paths.Rmm 'AteraAgent.exe'
     $splashtop = Join-Path $Paths.Rmm 'SplashtopRemoteService.exe'
