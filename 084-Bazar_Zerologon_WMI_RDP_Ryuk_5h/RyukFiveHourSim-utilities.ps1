@@ -21,7 +21,7 @@ function Assert-R5Safety {
 function Add-R5Manifest {
     param([string]$Type,[string]$Path,[string]$Action,[hashtable]$Details=@{})
     $p = Get-R5Paths
-    [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:R5Id;type=$Type;path=$Path;action=$Action;details=$Details} | ConvertTo-Json -Depth 12 -Compress | Add-Content -LiteralPath $p.Manifest -Encoding UTF8
+    [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:R5Id;type=$Type;path=$Path;action=$Action;details=$Details} | ConvertTo-Json -Depth 12 -Compress | Add-Content -LiteralPath $p.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 
 function Initialize-R5Environment {
@@ -72,7 +72,7 @@ function Invoke-R5Loopback {
 function Add-R5Timeline {
     param([double]$Minutes,[string]$Phase,[string]$Event,[hashtable]$Details=@{})
     $p = Get-R5Paths
-    [ordered]@{timestampUtc=$script:R5Anchor.AddMinutes($Minutes).ToString('o');offsetMinutes=$Minutes;phase=$Phase;event=$Event;details=$Details} | ConvertTo-Json -Depth 12 -Compress | Add-Content -LiteralPath $p.Timeline -Encoding UTF8
+    [ordered]@{timestampUtc=$script:R5Anchor.AddMinutes($Minutes).ToString('o');offsetMinutes=$Minutes;phase=$Phase;event=$Event;details=$Details} | ConvertTo-Json -Depth 12 -Compress | Add-Content -LiteralPath $p.Timeline -Encoding UTF8;Write-Host ("  [timeline] {0}: {1}" -f $Phase,$Event) -ForegroundColor Cyan
 }
 
 function New-R5HostTree {

@@ -35,7 +35,7 @@ function Add-GraceWipeManifest {
     param([string]$Type,[string]$Path,[string]$Action,[hashtable]$Details=@{})
     $paths = Get-GraceWipePaths
     [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:GraceWipeId;type=$Type;path=$Path;action=$Action;details=$Details} |
-        ConvertTo-Json -Depth 9 -Compress | Add-Content -LiteralPath $paths.Manifest -Encoding UTF8
+        ConvertTo-Json -Depth 9 -Compress | Add-Content -LiteralPath $paths.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 
 function Initialize-GraceWipeEnvironment {
@@ -90,7 +90,7 @@ function Add-GraceWipeTimeline {
     param([double]$OffsetHours,[string]$Phase,[string]$Event,[hashtable]$Details=@{})
     $paths = Get-GraceWipePaths
     [ordered]@{timestampUtc=$script:GraceWipeAnchor.AddHours($OffsetHours).ToString('o');offsetHours=$OffsetHours;phase=$Phase;event=$Event;details=$Details} |
-        ConvertTo-Json -Depth 9 -Compress | Add-Content -LiteralPath $paths.Timeline -Encoding UTF8
+        ConvertTo-Json -Depth 9 -Compress | Add-Content -LiteralPath $paths.Timeline -Encoding UTF8;Write-Host ("  [timeline] {0}: {1}" -f $Phase,$Event) -ForegroundColor Cyan
 }
 
 function Write-GraceWipeSummary {

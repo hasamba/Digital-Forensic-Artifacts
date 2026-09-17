@@ -19,7 +19,7 @@ function Assert-GootSagaSafety {
 function Add-GootSagaManifest {
     param([string]$Type,[string]$Path,[string]$Action,[hashtable]$Details=@{})
     $p=Get-GootSagaPaths
-    [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:GootSagaId;type=$Type;path=$Path;action=$Action;details=$Details}|ConvertTo-Json -Depth 9 -Compress|Add-Content $p.Manifest -Encoding UTF8
+    [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:GootSagaId;type=$Type;path=$Path;action=$Action;details=$Details}|ConvertTo-Json -Depth 9 -Compress|Add-Content $p.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 function Initialize-GootSagaEnvironment {
     $p=Get-GootSagaPaths
@@ -58,7 +58,7 @@ function Invoke-GootSagaLoopback {
 function Add-GootSagaTimeline {
     param([int]$OffsetMinutes,[string]$Phase,[string]$Event,[hashtable]$Details=@{})
     $p=Get-GootSagaPaths
-    [ordered]@{timestampUtc=$script:GootSagaAnchor.AddMinutes($OffsetMinutes).ToString('o');offsetMinutes=$OffsetMinutes;phase=$Phase;event=$Event;details=$Details}|ConvertTo-Json -Depth 9 -Compress|Add-Content $p.Timeline -Encoding UTF8
+    [ordered]@{timestampUtc=$script:GootSagaAnchor.AddMinutes($OffsetMinutes).ToString('o');offsetMinutes=$OffsetMinutes;phase=$Phase;event=$Event;details=$Details}|ConvertTo-Json -Depth 9 -Compress|Add-Content $p.Timeline -Encoding UTF8;Write-Host ("  [timeline] {0}: {1}" -f $Phase,$Event) -ForegroundColor Cyan
 }
 function Write-GootSagaSummary {
     param($Paths)

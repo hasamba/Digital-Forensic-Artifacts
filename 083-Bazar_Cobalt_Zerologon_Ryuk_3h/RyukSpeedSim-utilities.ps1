@@ -33,7 +33,7 @@ function Add-RSManifest {
     param([string]$Type,[string]$Path,[string]$Action,[hashtable]$Details = @{})
     $p = Get-RSPaths
     [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:RSId;type=$Type;path=$Path;action=$Action;details=$Details} |
-        ConvertTo-Json -Depth 12 -Compress | Add-Content -LiteralPath $p.Manifest -Encoding UTF8
+        ConvertTo-Json -Depth 12 -Compress | Add-Content -LiteralPath $p.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 
 function Initialize-RSEnvironment {
@@ -90,7 +90,7 @@ function Add-RSTimeline {
     param([double]$Minutes,[string]$Phase,[string]$Event,[hashtable]$Details = @{})
     $p = Get-RSPaths
     [ordered]@{timestampUtc=$script:RSAnchor.AddMinutes($Minutes).ToString('o');offsetMinutes=$Minutes;phase=$Phase;event=$Event;details=$Details} |
-        ConvertTo-Json -Depth 12 -Compress | Add-Content -LiteralPath $p.Timeline -Encoding UTF8
+        ConvertTo-Json -Depth 12 -Compress | Add-Content -LiteralPath $p.Timeline -Encoding UTF8;Write-Host ("  [timeline] {0}: {1}" -f $Phase,$Event) -ForegroundColor Cyan
 }
 
 function New-RSHostTree {

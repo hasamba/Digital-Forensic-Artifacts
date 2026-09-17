@@ -43,7 +43,7 @@ function Add-WordPressGodzillaManifest {
         path = $Path
         action = $Action
         details = $Details
-    } | ConvertTo-Json -Depth 9 -Compress | Add-Content $paths.Manifest -Encoding UTF8
+    } | ConvertTo-Json -Depth 9 -Compress | Add-Content $paths.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 
 function Initialize-WordPressGodzillaEnvironment {
@@ -108,7 +108,7 @@ function Add-WordPressGodzillaTimeline {
         phase = $Phase
         event = $Event
         details = $Details
-    } | ConvertTo-Json -Depth 9 -Compress | Add-Content $paths.Timeline -Encoding UTF8
+    } | ConvertTo-Json -Depth 9 -Compress | Add-Content $paths.Timeline -Encoding UTF8;Write-Host ("  [timeline] {0}: {1}" -f $Phase,$Event) -ForegroundColor Cyan
 }
 
 function Write-WordPressGodzillaSummary {

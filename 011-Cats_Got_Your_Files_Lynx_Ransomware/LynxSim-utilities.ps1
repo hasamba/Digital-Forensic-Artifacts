@@ -72,7 +72,7 @@ function Add-LynxManifestEntry {
         path         = $Path
         action       = $Action
         details      = $Details
-    } | ConvertTo-Json -Depth 7 -Compress | Add-Content -LiteralPath $paths.Manifest -Encoding UTF8
+    } | ConvertTo-Json -Depth 7 -Compress | Add-Content -LiteralPath $paths.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 
 function Initialize-LynxEnvironment {
@@ -246,7 +246,7 @@ function Add-LynxTimelineEvent {
         phase = $Phase
         event = $Event
         details = $Details
-    } | ConvertTo-Json -Depth 6 -Compress | Add-Content -LiteralPath $paths.Timeline -Encoding UTF8
+    } | ConvertTo-Json -Depth 6 -Compress | Add-Content -LiteralPath $paths.Timeline -Encoding UTF8;Write-Host ("  [timeline] {0}: {1}" -f $Phase,$Event) -ForegroundColor Cyan
 }
 
 function Write-LynxSummary {

@@ -35,7 +35,7 @@ function Add-EmotetRcloneManifest {
     param([string]$Type,[string]$Path,[string]$Action,[hashtable]$Details=@{})
     $p = Get-EmotetRclonePaths
     [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:EmotetRcloneId;type=$Type;path=$Path;action=$Action;details=$Details} |
-        ConvertTo-Json -Depth 10 -Compress | Add-Content -LiteralPath $p.Manifest -Encoding UTF8
+        ConvertTo-Json -Depth 10 -Compress | Add-Content -LiteralPath $p.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 
 function Initialize-EmotetRcloneEnvironment {
@@ -85,7 +85,7 @@ function Add-EmotetRcloneTimeline {
     param([double]$OffsetHours,[string]$Phase,[string]$Event,[hashtable]$Details=@{})
     $p = Get-EmotetRclonePaths
     [ordered]@{timestampUtc=$script:EmotetRcloneAnchor.AddHours($OffsetHours).ToString('o');offsetHours=$OffsetHours;phase=$Phase;event=$Event;details=$Details} |
-        ConvertTo-Json -Depth 10 -Compress | Add-Content -LiteralPath $p.Timeline -Encoding UTF8
+        ConvertTo-Json -Depth 10 -Compress | Add-Content -LiteralPath $p.Timeline -Encoding UTF8;Write-Host ("  [timeline] {0}: {1}" -f $Phase,$Event) -ForegroundColor Cyan
 }
 
 function Write-EmotetRcloneSummary {

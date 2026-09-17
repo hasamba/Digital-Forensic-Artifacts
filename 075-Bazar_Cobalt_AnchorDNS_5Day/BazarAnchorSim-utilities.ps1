@@ -21,7 +21,7 @@ function Assert-BASafety {
 function Add-BAManifest {
     param([string]$Type,[string]$Path,[string]$Action,[hashtable]$Details=@{})
     $paths = Get-BAPaths
-    [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:BAId;type=$Type;path=$Path;action=$Action;details=$Details} | ConvertTo-Json -Depth 10 -Compress | Add-Content -LiteralPath $paths.Manifest -Encoding UTF8
+    [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:BAId;type=$Type;path=$Path;action=$Action;details=$Details} | ConvertTo-Json -Depth 10 -Compress | Add-Content -LiteralPath $paths.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 
 function Initialize-BAEnvironment {
@@ -69,7 +69,7 @@ function Invoke-BALoopback {
 function Add-BATimeline {
     param([double]$Hours,[string]$Phase,[string]$Event,[hashtable]$Details=@{})
     $paths = Get-BAPaths
-    [ordered]@{timestampUtc=$script:BAAnchor.AddHours($Hours).ToString('o');offsetHours=$Hours;phase=$Phase;event=$Event;details=$Details} | ConvertTo-Json -Depth 10 -Compress | Add-Content -LiteralPath $paths.Timeline -Encoding UTF8
+    [ordered]@{timestampUtc=$script:BAAnchor.AddHours($Hours).ToString('o');offsetHours=$Hours;phase=$Phase;event=$Event;details=$Details} | ConvertTo-Json -Depth 10 -Compress | Add-Content -LiteralPath $paths.Timeline -Encoding UTF8;Write-Host ("  [timeline] {0}: {1}" -f $Phase,$Event) -ForegroundColor Cyan
 }
 
 function Write-BASummary {

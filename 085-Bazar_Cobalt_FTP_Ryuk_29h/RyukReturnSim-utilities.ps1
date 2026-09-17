@@ -19,7 +19,7 @@ function Assert-RRSafety {
 function Add-RRManifest {
     param([string]$Type,[string]$Path,[string]$Action,[hashtable]$Details=@{})
     $p=Get-RRPaths
-    [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:RRId;type=$Type;path=$Path;action=$Action;details=$Details}|ConvertTo-Json -Depth 12 -Compress|Add-Content -LiteralPath $p.Manifest -Encoding UTF8
+    [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$script:RRId;type=$Type;path=$Path;action=$Action;details=$Details}|ConvertTo-Json -Depth 12 -Compress|Add-Content -LiteralPath $p.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 function Initialize-RREnvironment {
     $p=Get-RRPaths
@@ -60,7 +60,7 @@ function Invoke-RRLoopback {
 function Add-RRTimeline {
     param([double]$Minutes,[string]$Phase,[string]$Event,[hashtable]$Details=@{})
     $p=Get-RRPaths
-    [ordered]@{timestampUtc=$script:RRAnchor.AddMinutes($Minutes).ToString('o');offsetMinutes=$Minutes;phase=$Phase;event=$Event;details=$Details}|ConvertTo-Json -Depth 12 -Compress|Add-Content -LiteralPath $p.Timeline -Encoding UTF8
+    [ordered]@{timestampUtc=$script:RRAnchor.AddMinutes($Minutes).ToString('o');offsetMinutes=$Minutes;phase=$Phase;event=$Event;details=$Details}|ConvertTo-Json -Depth 12 -Compress|Add-Content -LiteralPath $p.Timeline -Encoding UTF8;Write-Host ("  [timeline] {0}: {1}" -f $Phase,$Event) -ForegroundColor Cyan
 }
 function New-RRHostTree {
     param([string]$Name,[string]$Role)

@@ -55,7 +55,7 @@ function Add-BengalManifestEntry {
         action       = $Action
         details      = $Details
     }
-    $entry | ConvertTo-Json -Depth 6 -Compress | Add-Content -LiteralPath $paths.Manifest -Encoding UTF8
+    $entry | ConvertTo-Json -Depth 6 -Compress | Add-Content -LiteralPath $paths.Manifest -Encoding UTF8;Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 
 function Initialize-BengalEnvironment {

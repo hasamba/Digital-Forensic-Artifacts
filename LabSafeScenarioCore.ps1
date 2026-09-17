@@ -29,6 +29,7 @@ function Add-DFIRLabManifest {
     param([object]$Config,[object]$Paths,[string]$Type,[string]$Path,[string]$Action,[hashtable]$Details=@{})
     [ordered]@{timestampUtc=(Get-Date).ToUniversalTime().ToString('o');scenarioId=$Config.Id;type=$Type;path=$Path;action=$Action;details=$Details} |
         ConvertTo-Json -Depth 15 -Compress | Add-Content -LiteralPath $Paths.Manifest -Encoding UTF8
+    Write-Host ("  [{0}] {1}: {2}" -f $Type,$Action,$Path) -ForegroundColor DarkGray
 }
 
 function Initialize-DFIRLabEnvironment {
@@ -91,14 +92,20 @@ function Invoke-DFIRLabScenario {
     param([Parameter(Mandatory)][object]$Config,[switch]$LabConfirmed)
     Assert-DFIRLabSafety -LabConfirmed:$LabConfirmed
     $paths = Initialize-DFIRLabEnvironment $Config
+    Write-Host "[1/5] Decoy files ($($Config.Files.Count))..." -ForegroundColor Yellow
     foreach ($file in $Config.Files) { $null = New-DFIRLabDecoy $Config $paths $file.path $file.role $file.publishedHash }
+    Write-Host "[2/5] Evidence artifacts ($($Config.Artifacts.Count))..." -ForegroundColor Yellow
     foreach ($artifact in $Config.Artifacts) { Write-DFIRLabFile $Config $paths (Join-Path $paths.Root $artifact.path) $artifact.content $artifact.purpose }
+    Write-Host "[3/5] Decoy command executions ($($Config.Commands.Count))..." -ForegroundColor Yellow
     foreach ($command in $Config.Commands) { Invoke-DFIRLabDecoy $Config $paths $command.file $command.reported $command.parent }
+    Write-Host "[4/5] Network telemetry probes ($($Config.Network.Count))..." -ForegroundColor Yellow
     foreach ($network in $Config.Network) { Invoke-DFIRLabLoopback $Config $paths $network.port $network.target $network.role }
+    Write-Host "[5/5] Timeline events ($($Config.Timeline.Count))..." -ForegroundColor Yellow
     $anchor = (Get-Date).ToUniversalTime().AddMinutes(-[double]$Config.DurationMinutes)
     foreach ($event in $Config.Timeline) {
         [ordered]@{timestampUtc=$anchor.AddMinutes([double]$event.offset).ToString('o');offsetMinutes=$event.offset;phase=$event.phase;event=$event.event;details=$event.details} |
             ConvertTo-Json -Depth 15 -Compress | Add-Content -LiteralPath $paths.Timeline -Encoding UTF8
+        Write-Host ("  [timeline] {0}: {1}" -f $event.phase,$event.event) -ForegroundColor Cyan
     }
     Write-DFIRLabJson $Config $paths (Join-Path $paths.Evidence 'scenario-source-and-safety.json') ([ordered]@{
         source=$Config.Source;reportTitle=$Config.Title;timelineNote=$Config.TimelineNote;publishedIOCs=$Config.IOCs
