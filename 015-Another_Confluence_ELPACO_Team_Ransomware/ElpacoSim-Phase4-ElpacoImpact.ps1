@@ -68,11 +68,11 @@ This note exists only to reproduce the report's filename and analyst workflow.
 '@ -Purpose 'inert ransom-note canary' -Timestamp $time.Impact.AddMinutes(5)
 
     $impactEvents = @(
-        @{ source = 'Confluence'; destination = 'BACKUP01'; method = 'RDP copy to D:\Admin'; actualRemoteAccess = false },
-        @{ source = 'Confluence'; destination = 'FILE01'; method = 'RDP and SMB'; actualRemoteAccess = false },
-        @{ EventId = 10; source = 'svhostss.exe'; target = 'lsass.exe'; GrantedAccess = '0x40'; count = 9000; actualAccess = false },
-        @{ EventId = 10; source = 'svhostss.exe'; target = 'svchost.exe'; GrantedAccess = @('0x40', '0x121411'); count = 3000; actualAccess = false },
-        @{ exfiltration = 'none observed'; reportedAnyDeskBidirectionalBytes = 70000000; dataTransferred = false }
+        @{ source = 'Confluence'; destination = 'BACKUP01'; method = 'RDP copy to D:\Admin'; actualRemoteAccess = $false },
+        @{ source = 'Confluence'; destination = 'FILE01'; method = 'RDP and SMB'; actualRemoteAccess = $false },
+        @{ EventId = 10; source = 'svhostss.exe'; target = 'lsass.exe'; GrantedAccess = '0x40'; count = 9000; actualAccess = $false },
+        @{ EventId = 10; source = 'svhostss.exe'; target = 'svchost.exe'; GrantedAccess = @('0x40', '0x121411'); count = 3000; actualAccess = $false },
+        @{ exfiltration = 'none observed'; reportedAnyDeskBidirectionalBytes = 70000000; dataTransferred = $false }
     )
     Write-ElpacoEvidenceFile -Path (Join-Path $Paths.Evidence 'synthetic-impact-events.json') -Content ($impactEvents | ConvertTo-Json -Depth 6) -Purpose 'impact and no-exfiltration evidence canaries' -Timestamp $time.Impact
 

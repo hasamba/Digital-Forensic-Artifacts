@@ -25,9 +25,9 @@ NOTICE: generated values only; no credential source or LSASS was opened.
 '@ -Purpose 'synthetic Mimikatz output' -Timestamp $time.Credential.AddMinutes(1)
 
     $processAccess = @()
-    1..4 | ForEach-Object { $processAccess += @{ EventId = 10; SourceImage = 'mimikatz.exe'; TargetImage = 'lsass.exe'; GrantedAccess = '0x1010'; actualAccess = false } }
-    $processAccess += @{ EventId = 10; SourceImage = 'ProcessHacker.exe'; TargetImage = 'lsass.exe'; GrantedAccess = '0x1010'; actualAccess = false; host = 'BACKUP01' }
-    $processAccess += @{ EventId = 10; SourceImage = 'ProcessHacker.exe'; TargetImage = 'lsass.exe'; GrantedAccess = '0x1010'; actualAccess = false; host = 'FILE01' }
+    1..4 | ForEach-Object { $processAccess += @{ EventId = 10; SourceImage = 'mimikatz.exe'; TargetImage = 'lsass.exe'; GrantedAccess = '0x1010'; actualAccess = $false } }
+    $processAccess += @{ EventId = 10; SourceImage = 'ProcessHacker.exe'; TargetImage = 'lsass.exe'; GrantedAccess = '0x1010'; actualAccess = $false; host = 'BACKUP01' }
+    $processAccess += @{ EventId = 10; SourceImage = 'ProcessHacker.exe'; TargetImage = 'lsass.exe'; GrantedAccess = '0x1010'; actualAccess = $false; host = 'FILE01' }
     Write-ElpacoEvidenceFile -Path (Join-Path $Paths.Evidence 'synthetic-sysmon-process-access.json') -Content ($processAccess | ConvertTo-Json -Depth 5) -Purpose 'credential-access detection canaries' -Timestamp $time.Credential
 
     $secretsdump = Join-Path $Paths.Tools 'secretsdump.exe'
@@ -65,10 +65,10 @@ echo ELPACO-CANARY: 473 synthetic endpoints; MS-RPRN/MS-PAR absent
         'NET1 GROUP "ENTERPRISE ADMINS" NONAME /DOMAIN /ADD'
     )) { Invoke-ElpacoDecoyProcess -FilePath $wmiexec -ReportedCommandLine $command }
     Write-ElpacoEvidenceFile -Path (Join-Path $Paths.Evidence 'synthetic-wmi-rdp-share-events.json') -Content ((@(
-        @{ parent = 'wmiprvse.exe'; child = 'cmd.exe /Q /c whoami > C:\Windows\__1719000000 2>&1'; remoteExecution = false },
-        @{ EventId = 5142; shareName = 'share'; localPath = $Paths.Share; realShare = false },
-        @{ parent = 'netscan.exe'; child = 'mstsc.exe /v:BACKUP01'; actualTarget = '127.0.0.1'; realRdp = false },
-        @{ source = 'Confluence'; destination = @('BACKUP01', 'FILE01'); protocol = @('WMI', 'RDP', 'SMB'); remoteActivity = false }
+        @{ parent = 'wmiprvse.exe'; child = 'cmd.exe /Q /c whoami > C:\Windows\__1719000000 2>&1'; remoteExecution = $false },
+        @{ EventId = 5142; shareName = 'share'; localPath = $Paths.Share; realShare = $false },
+        @{ parent = 'netscan.exe'; child = 'mstsc.exe /v:BACKUP01'; actualTarget = '127.0.0.1'; realRdp = $false },
+        @{ source = 'Confluence'; destination = @('BACKUP01', 'FILE01'); protocol = @('WMI', 'RDP', 'SMB'); remoteActivity = $false }
     ) | ConvertTo-Json -Depth 6)) -Purpose 'lateral movement event canaries' -Timestamp $time.Lateral
 
     Add-ElpacoTimelineEvent -Timestamp $time.Credential -Phase 'Credential Access' -Event 'Mimikatz, ProcessHacker, and eight secretsdump executions were represented using signed decoys and generated credentials.' -Details @{ lsassOpened = $false; ntdsAccessed = $false; remoteRegistryUsed = $false }

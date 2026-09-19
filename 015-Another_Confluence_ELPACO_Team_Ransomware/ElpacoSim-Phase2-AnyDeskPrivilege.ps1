@@ -45,10 +45,10 @@ echo ELPACO-CANARY: account operations intentionally disabled
     New-ElpacoBinaryDecoy -Path (Join-Path $Paths.Tools 'spider_32.dll') -Role 'spider 32-bit DLL filename canary' -ReportedSha256 '4f4864a1d5f19a3c5552d80483526f3413497835549dce8c61fef116b666fa09'
 
     $privilege = @(
-        @{ technique = 'ELEVATE_TECHNIQUE_SERVICE_NAMEDPIPE2'; result = 'failed'; implemented = false },
-        @{ technique = 'token duplication / SeDebug against services and lsass'; result = 'failed'; implemented = false },
-        @{ technique = 'RPCSS named-pipe impersonation'; result = 'reported success to SYSTEM'; implemented = false; syntheticSystemChildren = 2 },
-        @{ technique = 'Zerologon CVE-2020-1472'; command = 'zero.exe [DC] [DC$] administrator -c "whoami"'; result = 'failed'; implemented = false }
+        @{ technique = 'ELEVATE_TECHNIQUE_SERVICE_NAMEDPIPE2'; result = 'failed'; implemented = $false },
+        @{ technique = 'token duplication / SeDebug against services and lsass'; result = 'failed'; implemented = $false },
+        @{ technique = 'RPCSS named-pipe impersonation'; result = 'reported success to SYSTEM'; implemented = $false; syntheticSystemChildren = 2 },
+        @{ technique = 'Zerologon CVE-2020-1472'; command = 'zero.exe [DC] [DC$] administrator -c "whoami"'; result = 'failed'; implemented = $false }
     )
     Write-ElpacoEvidenceFile -Path (Join-Path $Paths.Evidence 'privilege-escalation-attempts.json') -Content ($privilege | ConvertTo-Json -Depth 6) -Purpose 'non-executed privilege-escalation telemetry' -Timestamp $time.Day3
     Write-ElpacoEvidenceFile -Path (Join-Path $Paths.Evidence 'defense-evasion-commands.txt') -Content @'
