@@ -3,6 +3,7 @@ function Invoke-FogOpenDirectoryInitialAccess {
     $observed = $script:FogAnchor.AddDays(-263)
     $names = @('.bash_history', '.bashrc', '.cache', '.config', '.gnupg', '.local', '.nxc', '.profile', '.sliver', '.sliver-client', '.ssh', '.wget-hsts', '.Xauthority', '.xorgxrdp.10.log', '.xsession-errors', '20241121150831_Certipy.zip', 'any.ps1', 'AnyDesk.exe', 'Certipy', 'Desktop', 'Documents', 'DonPAPI-1.0.0', 'Downloads', 'Music', 'noPac', 'orpheus', 'ouroverde.net.br', 'Pachine', 'Pictures', 'powercat.ps1', 'Public', 'sliver-client_linux', 'sliver-client_linux.sig', 'sliver-server', 'sliver-server_linux.sig', 'slv.bin', 'snap', 'sonic_scan', 'sonic_scan.zip', 'Templates', 'thinclient_drives', 'v1.0.0.zip', 'Videos', 'zer0dump')
     foreach ($name in $names) {
+        if ($name -in @('.nxc', 'DonPAPI-1.0.0', '.sliver', '.config', 'sliver-client_linux', 'sliver-server')) { continue }
         $path = Join-Path $Paths.OpenDirectory $name
         if ([IO.Path]::GetExtension($name) -or $name.StartsWith('.')) {
             Write-FogEvidenceFile -Path $path -Content "FOG OPEN-DIRECTORY CANARY: $name" -Purpose 'reported open-directory listing artifact' -Timestamp $observed

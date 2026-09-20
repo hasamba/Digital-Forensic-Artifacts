@@ -58,6 +58,7 @@ function Initialize-FogEnvironment {
 function Write-FogEvidenceFile {
     param([Parameter(Mandatory)][string]$Path, [Parameter(Mandatory)][AllowEmptyString()][string]$Content, [string]$Purpose = 'forensic artifact', [datetime]$Timestamp = $script:FogAnchor)
     $parent = Split-Path -Parent $Path
+    if ((Test-Path -LiteralPath $parent) -and -not (Get-Item -LiteralPath $parent -Force).PSIsContainer) { Remove-Item -LiteralPath $parent -Force }
     if (-not (Test-Path -LiteralPath $parent)) { New-Item -Path $parent -ItemType Directory -Force | Out-Null }
     Set-Content -LiteralPath $Path -Value $Content -Encoding UTF8
     $item = Get-Item -LiteralPath $Path -Force
@@ -68,7 +69,10 @@ function Write-FogEvidenceFile {
 
 function New-FogBinaryDecoy {
     param([Parameter(Mandatory)][string]$Path, [Parameter(Mandatory)][string]$Role)
-    New-Item -Path (Split-Path -Parent $Path) -ItemType Directory -Force | Out-Null
+    $parent = Split-Path -Parent $Path
+    if ((Test-Path -LiteralPath $parent) -and -not (Get-Item -LiteralPath $parent -Force).PSIsContainer) { Remove-Item -LiteralPath $parent -Force }
+    New-Item -Path $parent -ItemType Directory -Force | Out-Null
+    if ((Test-Path -LiteralPath $Path) -and (Get-Item -LiteralPath $Path -Force).PSIsContainer) { Remove-Item -LiteralPath $Path -Recurse -Force }
     Copy-Item -LiteralPath (Join-Path $env:SystemRoot 'System32\cmd.exe') -Destination $Path -Force
     Add-FogManifestEntry -Type 'executable-decoy' -Path $Path -Action 'copied-signed-cmd' -Details @{ role = $Role; actualSha256 = (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash; liveTool = $false }
 }
@@ -77,7 +81,7 @@ function Invoke-FogDecoyProcess {
     param([Parameter(Mandatory)][string]$FilePath, [Parameter(Mandatory)][string]$ReportedCommandLine)
     $safe = $ReportedCommandLine.Replace('^', '^^').Replace('&', '^&').Replace('|', '^|').Replace('<', '^<').Replace('>', '^>').Replace('(', '^(').Replace(')', '^)')
     $arguments = @('/d', '/v:off', '/c', 'echo', 'FOG-CANARY', $safe)
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-FogManifestEntry -Type 'process' -Path $FilePath -Action 'executed-signed-decoy' -Details @{ reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); metacharactersEscaped = $true }
 }
