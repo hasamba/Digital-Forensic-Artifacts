@@ -75,7 +75,7 @@ function Invoke-DFIRLabDecoy {
     $path = Join-Path $Paths.Root $RelativePath
     if (-not (Test-Path $path)) { $null = New-DFIRLabDecoy $Config $Paths $RelativePath 'command stand-in' }
     $arguments = @('/d','/v:off','/c','echo','DFIR-LAB-SAFE-CANARY')
-    $process = Start-Process -FilePath $path -ArgumentList $arguments -Wait -PassThru -WindowStyle Hidden
+    $process = Start-Process -FilePath $path -ArgumentList $arguments -Wait -PassThru -NoNewWindow
     $null = $process.ExitCode
     Add-DFIRLabManifest $Config $Paths process $path executed-signed-decoy @{reportedCommandLine=$Reported;reportedParent=$Parent;actualArguments=($arguments -join ' ');reportedOnly=$true}
 }

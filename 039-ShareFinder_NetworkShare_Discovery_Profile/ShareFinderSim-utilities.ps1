@@ -63,7 +63,7 @@ function Invoke-ShareFinderDecoy {
     param([string]$FilePath,[string]$ReportedCommandLine,[string]$Parent='beacon.exe')
     $safe=$ReportedCommandLine.Replace('^','^^').Replace('&','^&').Replace('|','^|').Replace('<','^<').Replace('>','^>').Replace('(','^(').Replace(')','^)')
     $arguments=@('/d','/v:off','/c','echo','SHAREFINDER-CANARY',$safe)
-    $process=Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process=Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null=$process.ExitCode
     Add-ShareFinderManifest process $FilePath executed-signed-decoy @{reportedParent=$Parent;reportedCommandLine=$ReportedCommandLine;actualArguments=($arguments-join' ');shareEnumerationExecuted=$false}
 }

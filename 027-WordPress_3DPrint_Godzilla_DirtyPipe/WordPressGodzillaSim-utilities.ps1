@@ -81,7 +81,7 @@ function Invoke-WordPressGodzillaDecoy {
     param([string]$FilePath, [string]$ReportedCommandLine)
     $escaped = $ReportedCommandLine.Replace('^', '^^').Replace('&', '^&').Replace('|', '^|').Replace('<', '^<').Replace('>', '^>').Replace('(', '^(').Replace(')', '^)')
     $arguments = @('/d', '/v:off', '/c', 'echo', 'WORDPRESS-GODZILLA-CANARY', $escaped)
-    $process = Start-Process $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-WordPressGodzillaManifest process $FilePath executed-signed-decoy @{ reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); escaped = $true }
 }

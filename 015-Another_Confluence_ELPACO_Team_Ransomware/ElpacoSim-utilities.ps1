@@ -117,7 +117,7 @@ function Invoke-ElpacoDecoyProcess {
     param([Parameter(Mandatory)][string]$FilePath, [Parameter(Mandatory)][string]$ReportedCommandLine)
     $safeEcho = $ReportedCommandLine.Replace('^', '^^').Replace('&', '^&').Replace('|', '^|').Replace('<', '^<').Replace('>', '^>').Replace('(', '^(').Replace(')', '^)')
     $arguments = @('/d', '/v:off', '/c', 'echo', 'ELPACO-CANARY', $safeEcho)
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     $script:ElpacoLaunchCounter++
     Add-ElpacoManifestEntry -Type 'process' -Path $FilePath -Action 'executed-signed-decoy' -Details @{ sequence = $script:ElpacoLaunchCounter; reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); metacharactersEscaped = $true }

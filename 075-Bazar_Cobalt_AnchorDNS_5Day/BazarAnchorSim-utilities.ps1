@@ -54,7 +54,7 @@ function New-BADecoy {
 function Invoke-BADecoy {
     param([string]$FilePath,[string]$Reported,[string]$Parent)
     $arguments = @('/d','/v:off','/c','echo','BAZAR-ANCHOR-CANARY')
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-BAManifest process $FilePath executed-signed-decoy @{reportedCommandLine=$Reported;reportedParent=$Parent;actualArguments=($arguments -join ' ');reportedOnly=$true}
 }

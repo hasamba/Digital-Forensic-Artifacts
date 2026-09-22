@@ -183,7 +183,7 @@ function Invoke-InterlockDecoyProcess {
         $launchMethod = 'shell-shortcut-explorer-brokered'
         Add-InterlockManifestEntry -Type 'file' -Path $shortcutPath -Action 'created' -Details @{ purpose = 'ShellExecute process-ancestry artifact'; target = $FilePath }
     } catch {
-        $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+        $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
         $null = $process.ExitCode
     }
     Add-InterlockManifestEntry -Type 'process' -Path $FilePath -Action 'executed-signed-decoy' -Details @{ reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); reportedCommandLineIsMetadataOnly = $true; launchMethod = $launchMethod }

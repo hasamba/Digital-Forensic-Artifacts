@@ -173,7 +173,7 @@ function Invoke-LynxDecoyProcess {
         $launchMethod = 'shell-shortcut-explorer-brokered'
         Add-LynxManifestEntry -Type 'file' -Path $shortcutPath -Action 'created' -Details @{ purpose = 'ShellExecute process-ancestry artifact'; target = $FilePath }
     } catch {
-        $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+        $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
         $null = $process.ExitCode
     }
     Add-LynxManifestEntry -Type 'process' -Path $FilePath -Action 'executed-signed-decoy' -Details @{
@@ -188,7 +188,7 @@ function Invoke-LynxNativeCommand {
     param([Parameter(Mandatory)][string]$FilePath, [string[]]$ArgumentList = @(), [string]$Label = 'discovery')
     if (-not (Get-Command $FilePath -ErrorAction SilentlyContinue)) { return }
     try {
-        $process = Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -PassThru -Wait -WindowStyle Hidden
+        $process = Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -PassThru -Wait -NoNewWindow
         Add-LynxManifestEntry -Type 'process' -Path $FilePath -Action 'executed-local-read-only' -Details @{ label = $Label; arguments = ($ArgumentList -join ' '); exitCode = $process.ExitCode }
     } catch {
         Add-LynxManifestEntry -Type 'process' -Path $FilePath -Action 'attempted-local-read-only' -Details @{ label = $Label; error = $_.Exception.Message }

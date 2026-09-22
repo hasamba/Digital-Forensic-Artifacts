@@ -71,7 +71,7 @@ function Invoke-GraceWipeDecoy {
     param([string]$FilePath,[string]$ReportedCommandLine)
     $safe = $ReportedCommandLine.Replace('^','^^').Replace('&','^&').Replace('|','^|').Replace('<','^<').Replace('>','^>').Replace('(','^(').Replace(')','^)')
     $arguments = @('/d','/v:off','/c','echo','GRACE-WIPE-CANARY',$safe)
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-GraceWipeManifest process $FilePath executed-signed-decoy @{reportedCommandLine=$ReportedCommandLine;actualArguments=($arguments -join ' ');escaped=$true}
 }

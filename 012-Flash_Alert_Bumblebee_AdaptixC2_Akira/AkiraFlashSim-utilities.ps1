@@ -143,7 +143,7 @@ function Invoke-AkiraFlashDecoyProcess {
         $launchMethod = 'shell-shortcut-explorer-brokered'
         Add-AkiraFlashManifestEntry -Type 'file' -Path $shortcutPath -Action 'created' -Details @{ purpose = 'ShellExecute process-ancestry artifact'; target = $FilePath }
     } catch {
-        $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+        $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
         $null = $process.ExitCode
     }
     Add-AkiraFlashManifestEntry -Type 'process' -Path $FilePath -Action 'executed-signed-decoy' -Details @{ reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); launchMethod = $launchMethod }

@@ -67,7 +67,7 @@ function New-ZeroQbotSimDecoy {
 function Invoke-ZeroQbotSimDecoy {
     param([string]$FilePath, [string]$ReportedCommandLine, [string]$ReportedParent = 'explorer.exe')
     $arguments = @('/d', '/v:off', '/c', 'echo', 'ZERO-QBOT-CANARY')
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-ZeroQbotSimManifest process $FilePath executed-signed-decoy @{ reportedParent = $ReportedParent; reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); reportedOnly = $true }
 }

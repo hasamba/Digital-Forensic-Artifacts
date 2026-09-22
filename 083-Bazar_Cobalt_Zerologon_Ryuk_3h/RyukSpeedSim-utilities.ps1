@@ -71,7 +71,7 @@ function New-RSDecoy {
 function Invoke-RSDecoy {
     param([string]$FilePath,[string]$Reported,[string]$Parent,[string]$Label = 'RYUK-SPEED-CANARY')
     $arguments = @('/d','/v:off','/c','echo',$Label)
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-RSManifest process $FilePath executed-signed-decoy @{reportedCommandLine=$Reported;reportedParent=$Parent;actualArguments=($arguments -join ' ');reportedOnly=$true}
 }

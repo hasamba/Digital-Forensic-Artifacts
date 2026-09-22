@@ -74,7 +74,7 @@ function New-Year2021SimDecoy {
 function Invoke-Year2021SimDecoy {
     param([string]$FilePath, [string]$ReportedCommandLine, [string]$ReportedParent = 'beacon.exe')
     $arguments = @('/d', '/v:off', '/c', 'echo', 'YEAR-2021-CANARY')
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-Year2021SimManifest process $FilePath executed-signed-decoy @{ reportedParent = $ReportedParent; reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); reportedOnly = $true }
 }

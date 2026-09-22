@@ -46,7 +46,7 @@ function Invoke-GootSagaDecoy {
     param([string]$FilePath,[string]$ReportedCommandLine)
     $safe=$ReportedCommandLine.Replace('^','^^').Replace('&','^&').Replace('|','^|').Replace('<','^<').Replace('>','^>').Replace('(','^(').Replace(')','^)')
     $args=@('/d','/v:off','/c','echo','GOOT-SAGA-CANARY',$safe)
-    $proc=Start-Process $FilePath -ArgumentList $args -PassThru -Wait -WindowStyle Hidden;$null=$proc.ExitCode
+    $proc=Start-Process $FilePath -ArgumentList $args -PassThru -Wait -NoNewWindow;$null=$proc.ExitCode
     Add-GootSagaManifest process $FilePath executed-signed-decoy @{reportedCommandLine=$ReportedCommandLine;actualArguments=($args-join' ');escaped=$true}
 }
 function Invoke-GootSagaLoopback {

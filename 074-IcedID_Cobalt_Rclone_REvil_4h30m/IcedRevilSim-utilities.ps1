@@ -74,7 +74,7 @@ function New-IRDecoy {
 function Invoke-IRDecoy {
     param([string]$FilePath,[string]$Reported,[string]$Parent)
     $arguments = @('/d','/v:off','/c','echo','ICED-REVIL-CANARY')
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-IRManifest process $FilePath executed-signed-decoy @{reportedCommandLine=$Reported;reportedParent=$Parent;actualArguments=($arguments -join ' ');reportedOnly=$true}
 }

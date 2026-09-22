@@ -67,7 +67,7 @@ function Invoke-SummitDetectDecoy {
     param([string]$FilePath,[string]$ReportedCommandLine,[string]$Parent='explorer.exe')
     $safe = $ReportedCommandLine.Replace('^','^^').Replace('&','^&').Replace('|','^|').Replace('<','^<').Replace('>','^>').Replace('(','^(').Replace(')','^)')
     $arguments = @('/d','/v:off','/c','echo','SUMMIT-DETECTION-CANARY',$safe)
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-SummitDetectManifest process $FilePath executed-signed-decoy @{reportedParent=$Parent;reportedCommandLine=$ReportedCommandLine;actualArguments=($arguments -join ' ');escaped=$true}
 }

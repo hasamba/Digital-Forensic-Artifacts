@@ -75,7 +75,7 @@ function New-PhosphorusSimDecoy {
 function Invoke-PhosphorusSimDecoy {
     param([string]$FilePath, [string]$ReportedCommandLine, [string]$ReportedParent = 'w3wp.exe')
     $arguments = @('/d', '/v:off', '/c', 'echo', 'PHOSPHORUS-CANARY')
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-PhosphorusSimManifest process $FilePath executed-signed-decoy @{ reportedParent = $ReportedParent; reportedCommandLine = $ReportedCommandLine; actualArguments = ($arguments -join ' '); reportedOnly = $true }
 }

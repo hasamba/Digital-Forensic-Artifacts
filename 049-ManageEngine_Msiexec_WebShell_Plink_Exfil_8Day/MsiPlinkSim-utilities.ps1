@@ -68,7 +68,7 @@ function Invoke-MsiPlinkDecoy {
     param([string]$FilePath,[string]$ReportedCommandLine,[string]$Parent='java.exe')
     $safe = $ReportedCommandLine.Replace('^','^^').Replace('&','^&').Replace('|','^|').Replace('<','^<').Replace('>','^>').Replace('(','^(').Replace(')','^)')
     $arguments = @('/d','/v:off','/c','echo','MSI-PLINK-CANARY',$safe)
-    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -WindowStyle Hidden
+    $process = Start-Process -FilePath $FilePath -ArgumentList $arguments -PassThru -Wait -NoNewWindow
     $null = $process.ExitCode
     Add-MsiPlinkManifest process $FilePath executed-signed-decoy @{reportedParent=$Parent;reportedCommandLine=$ReportedCommandLine;actualArguments=($arguments -join ' ');escaped=$true}
 }
