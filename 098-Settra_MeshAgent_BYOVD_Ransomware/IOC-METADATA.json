@@ -1,0 +1,44 @@
+{
+  "source": "https://www.huntress.com/blog/new-settra-ransomware-variant",
+  "handling": "Report-published IOC metadata only. No malware or RMM is retrieved or installed, the C2 addresses are never contacted (loopback 127.0.0.1 only, zero bytes), and no hash describes the signed cmd.exe decoys used as stand-ins.",
+  "variant": "Settra",
+  "firstObserved": "2026-06",
+  "network": [
+    {"indicator": "45.13.122[.]7", "type": "ipv4", "description": "MeshAgent C2 in the July incident; MeshAgent renamed to mvtcs.exe"},
+    {"indicator": "193.5.65[.]114", "type": "ipv4", "description": "MeshAgent C2 in the September incident; also present in MeshAgent certificate info and active network connections"}
+  ],
+  "host": [
+    {"indicator": "WIN-LIVFRVQFMKO", "type": "workstation-name", "description": "Malicious workstation linked to the September incident and previous incidents (associated with 193.5.65[.]114 since 2024-12-24)"},
+    {"indicator": "mvtcs.exe", "type": "filename", "description": "MeshAgent RMM renamed (July incident)"},
+    {"indicator": "gdrv.sys", "type": "filename", "description": "BYOVD (vulnerable driver) filename observed in the September incident"},
+    {"indicator": "RESTORE_FILES.txt", "type": "filename", "description": "Ransom note created in both incidents"},
+    {"indicator": "<victim-domain>_win64.exe", "type": "filename-pattern", "description": "Ransomware executable named for the impacted organization's domain, appended with _win64.exe"},
+    {"indicator": ".locked", "type": "file-extension", "description": "Encrypted file extension in the July incident"},
+    {"indicator": ".locked_wip", "type": "file-extension", "description": "Encrypted file extension in the September incident"}
+  ],
+  "reportedCommands": [
+    "cmd.exe /c cipher /w:D:\\ >nul 2>&1",
+    "reagentc.exe /disable",
+    "ipconfig /flushdns",
+    "diskpart.exe /s <script> (recovery-partition removal; script not recovered)"
+  ],
+  "reportedClearedEventLogs": [
+    "Application", "Security", "System", "Setup", "ForwardedEvents",
+    "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational",
+    "Microsoft-Windows-TerminalServices-RDPClient/Operational",
+    "Microsoft-Windows-Sysmon/Operational",
+    "Microsoft-Windows-PowerShell/Operational",
+    "Microsoft-Windows-WinRM/Operational",
+    "Microsoft-Windows-TaskScheduler/Operational"
+  ],
+  "reportedFailedEventLogClear": {
+    "attempted": "Microsoft-Windows-Defender/Operational",
+    "correctName": "Microsoft-Windows-Windows-Defender/Operational",
+    "reason": "threat-actor misspelling; the specified log name does not exist, so the clear failed and the Defender Operational log was not cleared"
+  },
+  "publicReporting": {
+    "initialAccess": ["compromised VPNs", "previously-obtained valid credentials"],
+    "attributedSources": ["MoxFive (2026-07-22)", "SOCRadar"],
+    "raasModel": "not publicly established as of report publication"
+  }
+}

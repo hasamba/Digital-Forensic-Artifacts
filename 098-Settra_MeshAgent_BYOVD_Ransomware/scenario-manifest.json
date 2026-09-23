@@ -1,0 +1,42 @@
+{
+  "scenarioId": "098-Settra_MeshAgent_BYOVD_Ransomware",
+  "report": {
+    "title": "Ready, Settra, Go: New Settra Ransomware Variant Deploys MeshAgent RMM",
+    "vendor": "Huntress",
+    "authors": ["Harlan Carvey", "Lindsey O'Donnell-Welch"],
+    "published": "2026-09-17",
+    "url": "https://www.huntress.com/blog/new-settra-ransomware-variant"
+  },
+  "entryPoint": "SettraSim-Complete.ps1",
+  "cleanup": "Cleanup-SettraSim.ps1",
+  "artifactRoot": "%PUBLIC%\\SettraSim",
+  "targetOs": "Windows PowerShell 5.1+",
+  "incidentsRepresented": [
+    {"name": "July", "sector": "consumer services / retail", "meshAgentBinary": "mvtcs.exe (renamed)", "c2": "45.13.122[.]7", "launchPath": "C:\\Perflogs", "extension": ".locked", "byovd": false, "cipherWipe": true},
+    {"name": "September", "sector": "manufacturing", "meshAgentBinary": "MeshAgent.exe (not renamed)", "c2": "193.5.65[.]114", "launchPath": "user Documents folder", "extension": ".locked_wip", "byovd": true, "workstation": "WIN-LIVFRVQFMKO"}
+  ],
+  "phases": [
+    {"order": 1, "script": "SettraSim-Phase1-Access-MeshAgent-Persistence.ps1", "name": "Reported (unconfirmed) initial access and MeshAgent RMM persistence for both incidents, with C2 and workstation attribution artifacts"},
+    {"order": 2, "script": "SettraSim-Phase2-DefenseEvasion-BYOVD.ps1", "name": "September BYOVD gdrv.sys staging to impair security tooling"},
+    {"order": 3, "script": "SettraSim-Phase3-Impact-Ransomware.ps1", "name": "Domain-named _win64.exe ransomware, RESTORE_FILES.txt, .locked/.locked_wip sidecars, event-log clear list with the misspelled Defender log, and recovery inhibition"}
+  ],
+  "techniques": ["T1133", "T1078", "T1219", "T1543.003", "T1211", "T1562.001", "T1070.001", "T1490", "T1485", "T1070.004", "T1486", "T1657"],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only; zero bytes; report IOC addresses never contacted",
+    "rmmInstalled": false,
+    "vulnerableDriverLoaded": false,
+    "securityToolsImpaired": false,
+    "eventLogsCleared": false,
+    "recoveryOptionsDisabled": false,
+    "recoveryPartitionsRemoved": false,
+    "freeSpaceWiped": false,
+    "credentialOrLsassAccess": false,
+    "userDataEncryption": false,
+    "originalFilesModified": false,
+    "runtimeArtifactManifest": true,
+    "artifactsLeftForInvestigation": true,
+    "separateCleanup": true
+  }
+}

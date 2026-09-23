@@ -1,0 +1,28 @@
+{
+  "source": "https://cloud.google.com/security/resources/ai-risk-and-resilience-2026",
+  "caseStudy": "Case Study 1: Weaponizing active developer AI sessions to deploy the Shai-Hulud worm",
+  "handling": "The Mandiant report does not publish concrete indicators (no hashes, IPs, or domains) for this case study. All host indicators below are logically consistent SYNTHESIZED canaries used only to generate realistic-looking artifacts for detection engineering. Nothing is installed, contacted, or exfiltrated; every network action is loopback with zero bytes.",
+  "synthesizedBehavioralIndicators": {
+    "poisonedPyPiPackage": "json-fastparse (synthesized)",
+    "infostealerFile": "setup_helper.exe (synthesized, signed cmd.exe decoy)",
+    "wormDroppedWorkflow": ".github/workflows/shai-hulud-workflow.yml (synthesized)",
+    "wormMarkerFile": "data.json (synthesized)",
+    "poisonedInternalNamespacePackage": "@acme-internal/utils@4.2.1 (synthesized)",
+    "harvestedCredentialStore": "github-oauth-tokens.txt with [NOT COLLECTED] values"
+  },
+  "reportedTtps": [
+    "compromise SaaS provider to hijack an active AI coding-assistant session",
+    "AI assistant recommends attacker-poisoned external dependency",
+    "poisoned PyPI package installs an infostealer",
+    "harvest GitHub OAuth tokens from the active session",
+    "self-propagating Shai-Hulud worm across ~100 internal repositories",
+    "repository-secret theft and proprietary source-code exfiltration to attacker repo",
+    "poison a package in the organization's official namespace causing a downstream secondary infection"
+  ],
+  "reportedDefensiveControls": [
+    "enforce IDE/CLI verification hooks validating AI-recommended dependencies against cryptographic checksums and approved allowlists",
+    "isolate local credentials so extensions cannot access raw API keys, long-lived OAuth tokens, or secrets",
+    "restrict workstation network egress to route dependency traffic through secure internal repositories (e.g. Artifact Registry)",
+    "continuous secrets scanning across workspaces"
+  ]
+}

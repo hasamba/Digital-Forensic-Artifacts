@@ -1,0 +1,36 @@
+{
+  "scenarioId": "099-ShaiHulud_AICodingAssistant_SupplyChain",
+  "report": {
+    "title": "AI Risk and Resilience 2026 (Case Study 1: Weaponizing active developer AI sessions to deploy the Shai-Hulud worm)",
+    "vendor": "Mandiant / Google Cloud",
+    "published": "2026-09",
+    "url": "https://cloud.google.com/security/resources/ai-risk-and-resilience-2026"
+  },
+  "entryPoint": "ShaiHuludSim-Complete.ps1",
+  "cleanup": "Cleanup-ShaiHuludSim.ps1",
+  "artifactRoot": "%PUBLIC%\\ShaiHuludSim",
+  "targetOs": "Windows PowerShell 5.1+",
+  "note": "The report gives no concrete hashes/IPs/domains for this case study; host artifacts (package names, namespace, file names) are logically consistent synthesized canaries, clearly labelled as GENERATED CANARY.",
+  "phases": [
+    {"order": 1, "script": "ShaiHuludSim-Phase1-Session-Hijack-Poisoned-Package.ps1", "name": "Hijacked active AI coding-assistant session, AI-recommended poisoned PyPI package, and infostealer delivery"},
+    {"order": 2, "script": "ShaiHuludSim-Phase2-Token-Theft-Worm-Propagation.ps1", "name": "GitHub OAuth token harvest, Shai-Hulud worm propagation across generated repos, secret theft, and source exfiltration"},
+    {"order": 3, "script": "ShaiHuludSim-Phase3-Namespace-Poisoning-Downstream.ps1", "name": "Official-namespace package poisoning and downstream secondary infection"}
+  ],
+  "techniques": ["T1195.001", "T1195.002", "T1059", "T1528", "T1552.001", "T1567", "T1041", "T1080"],
+  "safety": {
+    "labGate": true,
+    "domainControllerRefusal": true,
+    "network": "127.0.0.1 only; zero bytes; no repository or registry contacted",
+    "aiSessionHijacked": false,
+    "packagesInstalled": false,
+    "infostealerExecuted": false,
+    "tokensOrSecretsCollected": false,
+    "credentialValuesRead": false,
+    "sourceExfiltrated": false,
+    "namespacePackagesPoisoned": false,
+    "codeExecuted": false,
+    "runtimeArtifactManifest": true,
+    "artifactsLeftForInvestigation": true,
+    "separateCleanup": true
+  }
+}
